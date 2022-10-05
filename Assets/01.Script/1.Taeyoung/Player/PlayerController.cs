@@ -21,10 +21,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("[ป๓ลย]")]
     private int curHp;
+    private Vector3 moveDir;
     private bool isDead = false;
 
     private Animator playerAnim;
-    private Rigidbody playerRb;
+    private CharacterController controller;
     private LayerMask mouseCheckLayer;
     private Camera cam;
 
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerAnim = GetComponentInChildren<Animator>();
-        playerRb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
 
         rollingAudioSource = GetComponent<AudioSource>();
 
@@ -75,9 +76,9 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        Vector3 dir = new Vector3(h, 0, v);
+        moveDir = new Vector3(h * speed, moveDir.y, v * speed);
 
-        if (dir.magnitude == 0)
+        if (moveDir.x == 0 && moveDir.z == 0)
         {
             playerAnim.SetBool(moveHash, false);
             rollingSoundGoal = 0;
@@ -89,11 +90,16 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool(moveHash, true);
             rollingSoundGoal = 1;
 
-            Quaternion rot = Quaternion.LookRotation(dir);
+            Quaternion rot = Quaternion.LookRotation(new Vector3(h, 0, v));
             playerAnim.transform.rotation = rot;
         }
 
-        playerRb.velocity = dir.normalized * speed;
+        if (!controller.isGrounded)
+            moveDir.y -= Time.deltaTime * 9.8f;
+        else
+            moveDir.y = 0;
+
+        controller.Move(moveDir * Time.deltaTime);
     }
 
     private void Rotate()
