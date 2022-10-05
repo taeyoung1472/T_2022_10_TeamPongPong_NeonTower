@@ -17,7 +17,7 @@ public class Background : MonoBehaviour
     public void FloorChange()
     {
         Sequence seq = DOTween.Sequence();
-        CameraManager.Instance.ZoomCamera(120f, 3f);
+        CameraManager.Instance.ZoomCamera(150f, 3f);
         seq.AppendInterval(3f);
         seq.AppendCallback(() =>
         {
@@ -30,7 +30,7 @@ public class Background : MonoBehaviour
     {
         meshRenderer.material.mainTextureOffset = Vector2.zero;
         Sequence seq = DOTween.Sequence();
-        seq.Append(DOTween.To(() => meshRenderer.material.mainTextureOffset, x => meshRenderer.material.mainTextureOffset = x, new Vector2(0, 30), 4f));
+        seq.Append(DOTween.To(() => meshRenderer.material.mainTextureOffset, x => meshRenderer.material.mainTextureOffset = x, new Vector2(0, -30), 4f));
         seq.AppendCallback(() =>
         {
             CameraManager.Instance.ZoomCamera(60f, 1f);

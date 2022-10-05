@@ -91,7 +91,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
     [Header("[Data]")]
     [SerializeField] private int wavePerTime = 30;
     [SerializeField] private int waveChangeTime = 8;
-    private int curWave = 1;
+    private int curWave = 0;
     private int curFloor = 1;
     private float waveTimer = 0;
 
@@ -131,14 +131,6 @@ public class WaveManager : MonoSingleTon<WaveManager>
             curWave++;
             curFloor = (curWave / 3) + 1;
 
-            #region Dotween 贸府
-            Sequence seqWave = DOTween.Sequence();
-            seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
-            seqWave.AppendInterval(1f);
-            seqWave.Join(waveText.rectTransform.DOShakeAnchorPos(1, 50, 100));
-            seqWave.Append(waveText.rectTransform.DOAnchorPosY(700, 1f));
-            #endregion
-
             if (curWave % 3 == 0)
             {
                 if (curFloor == 6)
@@ -164,6 +156,16 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 #endregion
 
                 floorText.text = $"{curFloor} 摸";
+            }
+            else
+            {
+                #region Dotween 贸府
+                Sequence seqWave = DOTween.Sequence();
+                seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
+                seqWave.AppendInterval(2f);
+                seqWave.Join(waveText.rectTransform.DOShakeAnchorPos(1.5f, 50, 100));
+                seqWave.Append(waveText.rectTransform.DOAnchorPosY(700, 1f));
+                #endregion
             }
         }
     }
