@@ -40,6 +40,10 @@ public static class Utility
     {
         mb.StartCoroutine(InvokeRoutine(ac, delay));
     }
+    public static void DrawRay(Vector3 originPos, Vector3 dir, float distance = 10f, float duration = 1f, Color color = default(Color))
+    {
+        Debug.DrawRay(originPos, dir * distance, color, duration);
+    }
     private static IEnumerator InvokeRoutine(Action ac, float delay)
     {
         yield return new WaitForSeconds(delay);

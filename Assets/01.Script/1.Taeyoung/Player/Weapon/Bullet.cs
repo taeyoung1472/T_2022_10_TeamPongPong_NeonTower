@@ -62,6 +62,13 @@ public class Bullet : PoolAbleObject
                 dir.y = 0;
                 dir = dir.normalized;
                 rb.velocity = dir * Speed;
+
+                /*
+                Utility.DrawRay(collision.contacts[0].point - inDir * 10, inDir, 10, 1, Color.blue);
+                Utility.DrawRay(collision.contacts[0].point, collision.contacts[0].normal, 10, 1, Color.red);
+                Utility.DrawRay(collision.contacts[0].point, dir, 10, 1, Color.yellow);
+                */
+
                 inDir = dir;
                 #endregion
                 bounceChance--;

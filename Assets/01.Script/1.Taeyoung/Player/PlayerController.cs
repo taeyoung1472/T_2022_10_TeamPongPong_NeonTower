@@ -16,6 +16,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int maxHp = 5;
     [SerializeField] private float speed = 10f;
 
+    [Header("[성능 <상수> ]")]
+    [SerializeField] private float dashSpeed = 5f;
+    [SerializeField] private float dashDuration = 0.1f;
+    [SerializeField] private float dashDelay = 0.25f;
+
+    // [Header("[GetSet 프로퍼티]")]
+    public float CurSpeed { get 
+        { 
+            return speed * (isDashing ? dashSpeed : 1); 
+        } 
+    }
+
     [Header("[타이머]")]
     [SerializeField] private float damageIgnoreTime = 0.2f;
 
@@ -23,6 +35,10 @@ public class PlayerController : MonoBehaviour
     private int curHp;
     private Vector3 moveDir;
     private bool isDead = false;
+    private bool isDashing = false;
+
+    [Header("[사운드]")]
+    [SerializeField] private AudioClip dashClip;
 
     private Animator playerAnim;
     private CharacterController controller;
@@ -47,6 +63,7 @@ public class PlayerController : MonoBehaviour
         InitData();
 
         StartCoroutine(DamageSystem());
+        StartCoroutine(DashSystem());
     }
 
     private void InitData()
@@ -76,7 +93,11 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        moveDir = new Vector3(h * speed, moveDir.y, v * speed);
+        Vector3 inputDir = new Vector3(h, 0, v).normalized;
+        h = inputDir.x;
+        v = inputDir.z;
+
+        moveDir = new Vector3(h * CurSpeed, moveDir.y, v * CurSpeed);
 
         if (moveDir.x == 0 && moveDir.z == 0)
         {
@@ -146,6 +167,23 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(damageIgnoreTime);
             isDamaged = false;
+        }
+    }
+
+    IEnumerator DashSystem()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift));
+
+            isDashing = true;
+            AudioManager.PlayAudio(dashClip);
+
+            yield return new WaitForSeconds(dashDuration);
+
+            isDashing = false;
+
+            yield return new WaitForSeconds(dashDelay);
         }
     }
 }
