@@ -2519,15 +2519,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfe829ef665f1f419c38775235945c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _digitalGlitchFeature: {fileID: 6274622047083885868, guid: bf53d832cd3d8e048950e26c0c96e1f3, type: 2}
-  _analogGlitchFeature: {fileID: -7781856633383133533, guid: bf53d832cd3d8e048950e26c0c96e1f3, type: 2}
+  volume: {fileID: 1882471762}
   _intensity: 0.01
   _scanLineJitter: 0.025
   _verticalJump: 0.025
   _horizontalShake: 0.025
   _colorDrift: 0.05
   cantDoZero: 0
-  additionalCameraData: {fileID: 0}
+  additionalCameraData: {fileID: 963194229}
 --- !u!1 &463718923
 GameObject:
   m_ObjectHideFlags: 0
