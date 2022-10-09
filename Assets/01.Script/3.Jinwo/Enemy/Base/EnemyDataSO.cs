@@ -20,7 +20,7 @@ public class EnemyDataSO : ScriptableObject
     [Header("公葫 包访")]
     //公葫 包访 单捞磐
     [Range(1, 10)]
-    public float maxSpeed = 3;
+    public float speed = 3;
     [Range(1f, 10f)]
     public float stoppingDistance = 5f;
     //public float knockbackPower = 5f;
@@ -31,7 +31,7 @@ public class EnemyDataSO : ScriptableObject
     public float dashDistance = 3.5f;
     public float dashSpeed = 4f;
     public float dashDamage = 3f;
-
+    public float dashTime = 0.5f;
 
     [Header("气惯 包访")]
     //气惯 包访

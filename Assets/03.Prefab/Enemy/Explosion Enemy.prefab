@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 2130471020164515848}
   - component: {fileID: 2130471020164515851}
   - component: {fileID: 2130471020164515850}
+  - component: {fileID: 5825812818787214351}
   m_Layer: 8
   m_Name: Explosion Enemy
   m_TagString: Enemy
@@ -207,6 +208,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5825812818787214351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130471020164515853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edbfe54f3e0c3a74d80e79317b36c13b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4994411965713825450
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a2d5ae44c6d3554a97991a7055f665b, type: 2}
+  - {fileID: 2100000, guid: 17485e6b01475ad4199f4fdb0ce99754, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -351,7 +364,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a2d5ae44c6d3554a97991a7055f665b, type: 2}
+  - {fileID: 2100000, guid: 17485e6b01475ad4199f4fdb0ce99754, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

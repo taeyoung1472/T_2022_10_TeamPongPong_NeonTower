@@ -3,49 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class StateMove<T> : State<T> where T : EnemyBase
+public class StateMove<T> : State<T> where T : EnemyBase<T> 
 {
     private Animator animator;
     
     private NavMeshAgent agent;
 
     private int hashMove = Animator.StringToHash("Move");
+    Coroutine updatePath;
 
-    
     // 등록시 초기화
     public override void OnAwake()
     {
+        //Debug.Log(typeof(T).Name);
+
         animator = stateMachineOwnerClass.GetComponent<Animator>();
 
         agent = stateMachineOwnerClass.GetComponent<NavMeshAgent>();
 
         agent.stoppingDistance = stateMachineOwnerClass.EnemyData.stoppingDistance;
 
-        agent.speed = stateMachineOwnerClass.EnemyData.maxSpeed;
+        agent.speed = stateMachineOwnerClass.EnemyData.speed;
     }
 
     public override void Enter()
-    {
+    {   
         animator?.SetBool(hashMove, true);
-        agent?.SetDestination(stateMachineOwnerClass.Target.transform.position);
-
+        //updatePath = CoroutineHelper.StartCoroutine(UpdatePath());
+        
     }
     public override void Execute()
     {
-        if(stateMachineOwnerClass.Health <= 0)
-        {
+        Transform target = stateMachineOwnerClass.Target.transform;
 
+        if (stateMachineOwnerClass.EnemyData.dashDistance != 0)
+        {
+            if (Vector3.Distance(target.position, agent.transform.position) <=
+               stateMachineOwnerClass.EnemyData.dashDistance)
+            {
+                //stateMachine.ChangeState<StateMeleeAttack<T>>();
+                stateMachineOwnerClass.ChangeAttack();
+            }
+            else
+            {
+                agent?.SetDestination(target.position);
+            }
         }
         else
         {
-            if (agent.remainingDistance > agent.stoppingDistance)
+            if (Vector3.Distance(target.position, agent.transform.position) <=
+               stateMachineOwnerClass.EnemyData.attackDistance)
             {
+                //stateMachine.ChangeState<StateMeleeAttack<T>>();
+                stateMachineOwnerClass.ChangeAttack();
 
+            }
+            else
+            {
+                agent?.SetDestination(target.position);
             }
         }
         
+        
+        
     }
-
+    public IEnumerator UpdatePath()
+    {
+        while(!stateMachineOwnerClass.Dead)
+        {
+            agent?.SetDestination(stateMachineOwnerClass.Target.transform.position);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+    //사망햇을 때 코루틴 멈추기
+    public void StopUpdatePath()
+    {
+        CoroutineHelper.StopCoroutine(updatePath);
+    }
     public override void Exit()
     {
         animator?.SetBool(hashMove, false);
