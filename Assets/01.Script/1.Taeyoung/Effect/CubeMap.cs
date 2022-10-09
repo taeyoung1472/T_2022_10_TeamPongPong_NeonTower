@@ -7,15 +7,15 @@ using Random = UnityEngine.Random;
 
 public class CubeMap : MonoBehaviour
 {
-    List<Transform> prevPattern = new List<Transform>();
+    protected List<Transform> prevPattern = new List<Transform>();
 
-    [SerializeField] private Pattern[] pattern;
-    int prevIdx = -1;
-    public void Start()
+    [SerializeField] protected Pattern[] pattern;
+    protected int prevIdx = -1;
+    protected virtual void Start()
     {
         StartCoroutine(MapCycle());
     }
-    IEnumerator MapCycle()
+    protected virtual IEnumerator MapCycle()
     {
         while (true)
         {
@@ -52,14 +52,14 @@ public class CubeMap : MonoBehaviour
         }
     }
 #if UNITY_EDITOR
-    public void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, new Vector3(15, 5, 15));
     }
 #endif
     [Serializable]
-    class Pattern
+    protected class Pattern
     {
         public Transform[] pattern;
     }

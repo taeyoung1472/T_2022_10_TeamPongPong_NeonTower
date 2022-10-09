@@ -6,48 +6,34 @@ using UnityEngine.Events;
 
 public class Background : MonoBehaviour
 {
-    [SerializeField] private Material mat;
     [SerializeField] private float speed;
-    [SerializeField] private AudioClip clip;
+    private MeshRenderer meshRenderer;
 
-    [field: SerializeField]
-    private UnityEvent OnEnemyDie = null;
-    [field: SerializeField]
-    private UnityEvent OnStart = null;
-    [field: SerializeField]
-    private UnityEvent OnExit = null;
+    public void Start()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
 
     public void FloorChange()
     {
-        OnStart?.Invoke();
         Sequence seq = DOTween.Sequence();
-        CameraManager.Instance.ZoomCamera(120f, 3f);
+        CameraManager.Instance.ZoomCamera(150f, 3f);
         seq.AppendInterval(3f);
         seq.AppendCallback(() =>
         {
             CameraManager.Instance.CameraShake(4f, 4f, 4f);
             FloorMove();
-            OnEnemyDie?.Invoke();
         });
     }
 
     private void FloorMove()
     {
-        mat.mainTextureOffset = Vector2.zero;
+        meshRenderer.material.mainTextureOffset = Vector2.zero;
         Sequence seq = DOTween.Sequence();
-        seq.Append(DOTween.To(() => mat.mainTextureOffset, x => mat.mainTextureOffset = x, new Vector2(0, 30), 4f));
+        seq.Append(DOTween.To(() => meshRenderer.material.mainTextureOffset, x => meshRenderer.material.mainTextureOffset = x, new Vector2(0, -30), 4f));
         seq.AppendCallback(() =>
         {
             CameraManager.Instance.ZoomCamera(60f, 1f);
-            LevelUpCallback();
-            OnExit?.Invoke();
-
         });
-        PoolManager.Instance.Pop(PoolType.Sound).GetComponent<AudioPoolObject>().Play(clip, 1, 1);
-    }
-
-    void LevelUpCallback()
-    {
-
     }
 }
