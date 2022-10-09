@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9028040593989628967}
   - component: {fileID: 7882909999786021196}
   - component: {fileID: 3504217577886293677}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6437738305936765590}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AttackRoot
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -128,7 +128,8 @@ GameObject:
   - component: {fileID: 6437738306033802305}
   - component: {fileID: 6437738306033802307}
   - component: {fileID: 159637254020327886}
-  m_Layer: 8
+  - component: {fileID: 820603428}
+  m_Layer: 11
   m_Name: CommonEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -212,7 +213,7 @@ Animator:
   m_GameObject: {fileID: 6437738306033802312}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 76d59a09ae09d0944ac73809dbaee4d2, type: 2}
+  m_Controller: {fileID: 9100000, guid: e389b8991215d8747b3e490115100af4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -257,6 +258,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &820603428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437738306033802312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3459a7bbe837932488f104d9d5f9cbad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  enemyData: {fileID: 11400000, guid: d82175dbec19bc840a9e22a79d927759, type: 2}
+  target: {fileID: 0}
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 256
+  attackRoot: {fileID: 6437738305936765590}
+  isAttack: 0
+  turnSmoothTime: 0.1
 --- !u!1 &8307508235505547878
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +292,7 @@ GameObject:
   - component: {fileID: 1371914608359713652}
   - component: {fileID: 8002341945001751444}
   - component: {fileID: 605740099964286875}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2293937130721735439}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}

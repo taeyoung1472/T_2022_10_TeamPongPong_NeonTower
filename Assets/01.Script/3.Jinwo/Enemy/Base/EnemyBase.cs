@@ -48,6 +48,21 @@ public class EnemyBase<T> : MonoBehaviour
     public StateMachine<T> FsmManager => fsmManager;
 
 
+    private const float minTimeBetDamaged = 0.1f;
+    private float lastDamagedTime;
+
+    // 잠깐 무적 시간
+    protected bool IsInvulnerable
+    {
+        get
+        {
+            if (Time.time >= lastDamagedTime + minTimeBetDamaged) return false;
+
+            return true;
+        }
+    }
+
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -125,7 +140,6 @@ public class EnemyBase<T> : MonoBehaviour
     {
         // onDeath 이벤트에 등록된 메서드가 있다면 실행
         if (OnDeath != null) OnDeath?.Invoke();
-
 
         dead = true;
     }
