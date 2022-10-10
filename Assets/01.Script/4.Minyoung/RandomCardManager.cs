@@ -25,15 +25,15 @@ public class RandomCardManager : MonoBehaviour
     }
     public void Make()
     {
-        for (int i = 0; i < cardTrm.childCount; i++)
+        for (int i = 0; i < cardOneTrm.childCount; i++)
         {
-            Destroy(cardTrm.GetChild(i).gameObject);
+            Destroy(cardOneTrm.GetChild(i).gameObject);
         }
 
         AbilitySO[] so = RandomPickSO();
         for (int i = 0; i < so.Length; i++)
         {
-            CardImage slot = Instantiate(cardImagePrefab, cardTrm) as CardImage;
+            CardImage slot = Instantiate(cardImagePrefab, cardOneTrm) as CardImage;
 
             slot.SetData(so[i]);
             RectTransform rectTrm = slot.GetComponent<RectTransform>();
