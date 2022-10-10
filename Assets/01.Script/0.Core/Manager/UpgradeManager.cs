@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class UpgradeManager : MonoSingleTon<UpgradeManager>
 {
     [SerializeField] private UpgradeDataSO UpgradeDataSO;
-    private Dictionary<UpgradeType, int> upgradeCountDic;
+    private Dictionary<UpgradeType, int> upgradeCountDic = new();
 
     public void Start()
     {
@@ -19,10 +17,29 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
     public void Upgrade(UpgradeType upgradeType)
     {
-        upgradeCountDic[upgradeType]--;
         if(upgradeCountDic[upgradeType] == 0)
+        {
+            Debug.LogError($"{upgradeType} 의 업그레이드 한도를  넘겼습니다.");
+
+            return;
+        }
+        upgradeCountDic[upgradeType]--;
+        if (upgradeCountDic[upgradeType] < 0)
         {
             upgradeCountDic.Remove(upgradeType);
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G)){
+            Upgrade(UpgradeType.BulletSpeed);
+        }
+    }
+
+    public float GetUpgradeValue(UpgradeType type)
+    {
+        print((int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]);
+        return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]];
     }
 }

@@ -12,24 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73afbb4828c2e06429097a9e29b60a27, type: 3}
   m_Name: Upgrade
   m_EditorClassIdentifier: 
-  upgradeDatas:
+  upgradeDataTableList:
+  - {fileID: 11400000, guid: c88e5866c1a1ebd44bf5cb2aad0a42ed, type: 2}
+  - {fileID: 11400000, guid: 9b453f2f80c64c641963918fff436c96, type: 2}
+  - {fileID: 11400000, guid: dbe94043d2c7e654cb78f3ef39d6c350, type: 2}
+  - {fileID: 11400000, guid: 818d9210b310a2e43a69b781e681ee22, type: 2}
+  upgradeDataList:
   - upgradeType: 0
-    upgradeAbleCount: 1
-    upgradeName: 
-    upgradeDesc: 
+    upgradeAbleCount: 3
+    upgradeName: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC774\uB984"
+    upgradeDesc: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC124\uBA85"
   - upgradeType: 1
     upgradeAbleCount: 2
-    upgradeName: 
-    upgradeDesc: 
+    upgradeName: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC774\uB984"
+    upgradeDesc: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC124\uBA85"
   - upgradeType: 2
+    upgradeAbleCount: 1
+    upgradeName: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC774\uB984"
+    upgradeDesc: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC124\uBA85"
+  - upgradeType: 3
     upgradeAbleCount: 4
-    upgradeName: 
-    upgradeDesc: 
-  - upgradeType: 0
-    upgradeAbleCount: 0
-    upgradeName: 
-    upgradeDesc: 
-  - upgradeType: 0
-    upgradeAbleCount: 0
-    upgradeName: 
-    upgradeDesc: 
+    upgradeName: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC774\uB984"
+    upgradeDesc: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC124\uBA85"

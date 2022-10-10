@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Unity.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Timeline;
 
 public class CubeMapBoss : CubeMap
 {
@@ -21,7 +22,12 @@ public class CubeMapBoss : CubeMap
     }
     public void DeActive()
     {
-
+        foreach (var cube in stadium.pattern)
+        {
+            DeActiveCube(cube);
+            cube.GetComponent<PerinNoiseCube>().enabled = false;
+        }
+        this.Invoke(() => gameObject.SetActive(false), 5);
     }
 
     public void ActivePattern(int index)
@@ -54,4 +60,11 @@ public class CubeMapBoss : CubeMap
             meshRenderer.material.color = Color.Lerp(Color.white, Color.black, perinValue);
         }
     }
+
+#if UNITY_EDITOR
+    protected override void OnDrawGizmos()
+    {
+        // Do Nothing
+    }
+#endif
 }
