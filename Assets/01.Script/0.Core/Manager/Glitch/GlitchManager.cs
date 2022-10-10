@@ -1,15 +1,21 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal.Glitch;
+using URPGlitch.Runtime.DigitalGlitch;
+using URPGlitch.Runtime.AnalogGlitch;
 using static DefineCamera;
-
+using UnityEngine.Rendering;
 
 namespace Glitch
 {
     sealed class GlitchManager : MonoSingleTon<GlitchManager>
     {
-        [SerializeField] DigitalGlitchFeature _digitalGlitchFeature = default;
-        [SerializeField] AnalogGlitchFeature _analogGlitchFeature = default;
+        //[SerializeField] DigitalGlitchFeature _digitalGlitchFeature = default;
+        //[SerializeField] AnalogGlitchFeature _analogGlitchFeature = default;
+
+        [SerializeField] Volume volume;
+
+        private DigitalGlitchVolume _digitalGlitchFeature;
+        private AnalogGlitchVolume _analogGlitchFeature;
 
         [Header("Digital")]
         [SerializeField, Range(0f, 1f)] public float _intensity = default;
@@ -29,37 +35,43 @@ namespace Glitch
             additionalCameraData =
                 MainCam.transform.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
         }
+        private void Start()
+        {
+            volume.profile.TryGet<DigitalGlitchVolume>(out _digitalGlitchFeature);
+            volume.profile.TryGet<AnalogGlitchVolume>(out _analogGlitchFeature);
+        }
         void Update()
         {
-            _digitalGlitchFeature.Intensity = _intensity;
+            
+            _digitalGlitchFeature.intensity.value = _intensity;
         }
         public void ZeroValue()
         {
             if (cantDoZero) return;
-            _digitalGlitchFeature.Intensity = 0;
+            _digitalGlitchFeature.intensity.value = 0;
 
-            _analogGlitchFeature.ScanLineJitter = 0;
-            _analogGlitchFeature.VerticalJump = 0;
-            _analogGlitchFeature.HorizontalShake = 0;
-            _analogGlitchFeature.ColorDrift = 0;
+            _analogGlitchFeature.scanLineJitter.value = 0;
+            _analogGlitchFeature.verticalJump.value = 0;
+            _analogGlitchFeature.horizontalShake.value = 0;
+            _analogGlitchFeature.colorDrift.value = 0;
         }
         public void StartSceneValue()
         {
-            _digitalGlitchFeature.Intensity = _intensity;
+            _digitalGlitchFeature.intensity.value = _intensity;
 
-            _analogGlitchFeature.ScanLineJitter = _scanLineJitter;
-            _analogGlitchFeature.VerticalJump = _verticalJump;
-            _analogGlitchFeature.HorizontalShake = _horizontalShake;
-            _analogGlitchFeature.ColorDrift = _colorDrift;
+            _analogGlitchFeature.scanLineJitter.value = _scanLineJitter;
+            _analogGlitchFeature.verticalJump.value = _verticalJump;
+            _analogGlitchFeature.horizontalShake.value = _horizontalShake;
+            _analogGlitchFeature.colorDrift.value = _colorDrift;
         }
         public void GraySceneValue()
         {
-            _digitalGlitchFeature.Intensity = _intensity;
+            _digitalGlitchFeature.intensity.value = _intensity;
 
-            _analogGlitchFeature.ScanLineJitter = _scanLineJitter;
-            _analogGlitchFeature.VerticalJump = _verticalJump;
-            _analogGlitchFeature.HorizontalShake = _horizontalShake;
-            _analogGlitchFeature.ColorDrift = _colorDrift;
+            _analogGlitchFeature.scanLineJitter.value = _scanLineJitter;
+            _analogGlitchFeature.verticalJump.value = _verticalJump;
+            _analogGlitchFeature.horizontalShake.value = _horizontalShake;
+            _analogGlitchFeature.colorDrift.value = _colorDrift;
         }
         public void LoadGameCutScene()
         {
