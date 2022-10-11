@@ -4,31 +4,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-public class CardImage : MonoBehaviour, IPointerEnterHandler
+public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public AbilitySO abilitySO;
-    public AbilitySO asdf;
+    private AbilitySO abilitySO;
 
-    public Image _image;
+    public TextMeshProUGUI ablityNameText;
 
-    private TextMeshPro _desTxt;
+    public Image profileImage;
 
-    public Text s;
+    public TextMeshProUGUI _descTxt;
 
     public Button _btn;
 
     public void SetData(AbilitySO so)
     {
         abilitySO = so;
-        _image.sprite = so.sprite;
-        s.text = so.decString;
-        Debug.Log("셋데이타 잘실행됨");
+        profileImage.sprite = so.sprite;
+        _descTxt.text = so.decString;
+        ablityNameText.text = "업그레이드 이히";
+        _btn.onClick.RemoveAllListeners();
+        _btn.onClick.AddListener(() => Debug.Log("눌림"));
+       // Debug.Log("셋데이타 잘실행됨");
     }
 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         //강조효과
-        Debug.Log("Sexymin");
+        Debug.Log("Enter");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Exit");
     }
 }
