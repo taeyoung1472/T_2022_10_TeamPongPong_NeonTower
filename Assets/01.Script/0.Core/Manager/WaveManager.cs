@@ -91,23 +91,26 @@ public class WaveManager : MonoSingleTon<WaveManager>
     [Header("[Data]")]
     [SerializeField] private int wavePerTime = 30;
     [SerializeField] private int waveChangeTime = 8;
-    private int curWave = 1;
+    private int curWave = 0;
     private int curFloor = 1;
     private float waveTimer = 0;
 
     public int CurWave { get { return curWave; } }
 
     [Header("[Ref]")]
-    Background background;
+    Background[] backgrounds;
 
     [Header("[TMP]")]
     [SerializeField] private TextMeshProUGUI nextWaveText;
     [SerializeField] private TextMeshProUGUI floorText;
     [SerializeField] private TextMeshProUGUI waveText;
 
+    [Header("[Audio]")]
+    [SerializeField] private AudioClip floorChangeClip;
+
     public void Start()
     {
-        background = FindObjectOfType<Background>();
+        backgrounds = FindObjectsOfType<Background>();
         StartCoroutine(WaveSystem());
     }
 
@@ -119,44 +122,51 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
     public IEnumerator WaveSystem()
     {
-        floorText.text = $"{curFloor} 摸";
-        yield return new WaitUntil(() => waveTimer > wavePerTime);
-
-        waveTimer = 0;
-        curWave++;
-        curFloor = curWave / 3;
-
-        #region Dotween 贸府
-        Sequence seqWave = DOTween.Sequence();
-        seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
-        seqWave.AppendInterval(1f);
-        seqWave.Join(waveText.rectTransform.DOShakeAnchorPos(1, 50, 100));
-        seqWave.Append(waveText.rectTransform.DOAnchorPosY(700, 1f));
-        #endregion
-
-        if (curWave % 3 == 0)
+        while (true)
         {
-            if (curFloor == 6)
-            {
-                //Ending 肺爹
-            }
-
-            background.FloorChange();
-            EnemySubject.instance.NotifyObserver();
-            CameraManager.Instance.CameraShake(1, 1, 4);
-
-            #region Dotween 贸府
-            Sequence seq = DOTween.Sequence();
-
-            // Define.Instance.playerController.公利窃荐;
-            seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = false);
-            seq.AppendCallback(() => EnemyGenerator.Instance.isCanGenerated = false);
-            seq.AppendInterval(waveChangeTime);
-            seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = true);
-            seq.AppendCallback(() => EnemyGenerator.Instance.isCanGenerated = true);
-            #endregion
-
             floorText.text = $"{curFloor} 摸";
+            yield return new WaitUntil(() => waveTimer > wavePerTime);
+
+            waveTimer = 0;
+            curWave++;
+            curFloor = (curWave / 3) + 1;
+
+            if (curWave % 3 == 0)
+            {
+                if (curFloor == 6)
+                {
+                    //Ending 肺爹
+                }
+
+                foreach (Background bg in backgrounds) { bg.FloorChange(); }
+                //EnemySubject.instance.NotifyObserver();
+                CameraManager.Instance.CameraShake(1, 1, 4);
+
+                #region Dotween 贸府
+                Sequence seq = DOTween.Sequence();
+
+                // Define.Instance.playerController.公利窃荐;
+                seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = false);
+                seq.AppendCallback(() => EnemyGenerator.Instance.isCanGenerated = false);
+                seq.AppendInterval(waveChangeTime);
+                seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = true);
+                seq.AppendCallback(() => EnemyGenerator.Instance.isCanGenerated = true);
+
+                AudioManager.PlayAudio(floorChangeClip);
+                #endregion
+
+                floorText.text = $"{curFloor} 摸";
+            }
+            else
+            {
+                #region Dotween 贸府
+                Sequence seqWave = DOTween.Sequence();
+                seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
+                seqWave.AppendInterval(2f);
+                seqWave.Join(waveText.rectTransform.DOShakeAnchorPos(1.5f, 50, 100));
+                seqWave.Append(waveText.rectTransform.DOAnchorPosY(700, 1f));
+                #endregion
+            }
         }
     }
 }
