@@ -71,6 +71,7 @@ public class Bullet : PoolAbleObject
 
                 inDir = dir;
                 #endregion
+
                 bounceChance--;
             }
 
