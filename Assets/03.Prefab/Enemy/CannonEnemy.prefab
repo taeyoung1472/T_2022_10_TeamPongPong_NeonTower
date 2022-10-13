@@ -445,6 +445,7 @@ MonoBehaviour:
   attackRoot: {fileID: 4242152533226489575}
   isAttack: 0
   turnSmoothTime: 0.1
+  muzzle: {fileID: 0}
 --- !u!1 &8502297328691468496
 GameObject:
   m_ObjectHideFlags: 0

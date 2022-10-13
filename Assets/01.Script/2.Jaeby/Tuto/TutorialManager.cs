@@ -29,6 +29,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _test3Boundarys = null;
     [SerializeField]
+    private GameObject _spawnEffectPrefab = null;
+    [SerializeField]
     private GameObject[] _enemyPrefabs = null;
 
     [SerializeField]
@@ -192,6 +194,9 @@ public class TutorialManager : MonoBehaviour
         TextPop("Ω√¿€!!");
         for (int i = 0; i < _enemyPrefabs.Length; i++)
         {
+            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPrefabs[i].transform.position, Quaternion.identity);
+            effect.transform.localScale = Vector3.one * 0.05f;
+            yield return new WaitForSeconds(1f);
             _enemyPrefabs[i].SetActive(true);
             yield return new WaitForSeconds(1.5f);
         }
@@ -288,4 +293,12 @@ public class TutorialManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            CameraManager.Instance.TargetingCameraAnimation(transform);
+        }
+    }
 }

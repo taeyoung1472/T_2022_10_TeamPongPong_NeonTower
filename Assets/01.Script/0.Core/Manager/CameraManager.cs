@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -70,14 +71,14 @@ public class CameraManager : MonoSingleTon<CameraManager>
         CompletePrevFeedBack();
     }
 
-    public void ZoomCamera(float maxValue, float time)
+    public void ZoomCamera(float maxValue, float time, Action Callback = null)
     {
         CameraReset();
 
-        _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time));
+        _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time, Callback));
     }
 
-    private IEnumerator ZoomCoroutine(float maxValue, float duration)
+    private IEnumerator ZoomCoroutine(float maxValue, float duration, Action Callback = null)
     {
         float time = 0f;
         float nextLens = 0f;
@@ -90,7 +91,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
             yield return null;
             time += Time.deltaTime;
         }
+        Callback?.Invoke();
     }
+
 
     public void CameraReset()
     {
@@ -100,5 +103,23 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
+    public void TargetingCameraAnimation(Transform target)
+    {
+        Transform lastTarget = _cmVCam.Follow;
+        _cmVCam.Follow = target;
+        float last = _cmVCam.m_Lens.FieldOfView;
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 1f, () =>
+        {
+            StartCoroutine(TargetingCameraCoroutine(last, lastTarget));
+        });
+    }
 
+    private IEnumerator TargetingCameraCoroutine(float last, Transform lastTarget)
+    {
+        yield return new WaitForSeconds(2f);
+        ZoomCamera(last, 1f, () =>
+        {
+            _cmVCam.Follow = lastTarget;
+        });
+    }
 }
