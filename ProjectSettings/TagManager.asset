@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - CannonBall
   - Circle
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Enemy
   - CannonBall
   - Circle
-  - 
+  - Boss
   - 
   - 
   - 
