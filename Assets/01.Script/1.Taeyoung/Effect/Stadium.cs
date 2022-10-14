@@ -1,33 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-using Unity.Collections;
 using Unity.VisualScripting;
-using UnityEditor.Timeline;
+using UnityEngine;
 
-public class CubeMapBoss : CubeMap
+public class Stadium : CubeMap
 {
     [SerializeField] private Pattern stadium;
 
-    [ContextMenu("¿¢Æ¼ºê")]
-    public void Active()
+    protected override void Start()
     {
-        gameObject.SetActive(true);
-        foreach (var cube in stadium.pattern)
-        {
-            ActiveCube(cube);
-            cube.AddComponent<PerinNoiseCube>();
-        }
-    }
-    public void DeActive()
-    {
-        foreach (var cube in stadium.pattern)
-        {
-            DeActiveCube(cube);
-            cube.GetComponent<PerinNoiseCube>().enabled = false;
-        }
-        this.Invoke(() => gameObject.SetActive(false), 5);
+
     }
 
     public void ActivePattern(int index)
@@ -39,10 +20,19 @@ public class CubeMapBoss : CubeMap
 
         prevPattern.Clear();
 
-        foreach (var cube in pattern[index].pattern)
+        foreach (var cube in pattern[index].Cubes)
         {
             ActiveCube(cube);
         }
+    }
+    public void DeActive()
+    {
+        foreach (var cube in stadium.Cubes)
+        {
+            DeActiveCube(cube);
+            cube.GetComponent<PerinNoiseCube>().enabled = false;
+        }
+        this.Invoke(() => gameObject.SetActive(false), 5);
     }
     class PerinNoiseCube : MonoBehaviour
     {
