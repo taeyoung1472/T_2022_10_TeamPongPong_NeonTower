@@ -33,6 +33,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _enemyPrefabs = null;
 
+    private Sequence _seq = null;
+
     [SerializeField]
     private Color _impactColor = Color.white;
 
@@ -68,20 +70,14 @@ public class TutorialManager : MonoBehaviour
 
     private void TextPop(string text)
     {
-        _tutorialText.DOKill();
+        if (_seq != null)
+            _seq.Kill();
 
         _tutorialText.SetText(text);
         _tutorialText.rectTransform.anchoredPosition = _initPos;
-
-        /*_tutorialText.transform.DOMove(_tutorialTextPos.position, 0.5f).OnComplete(()=>
-        {
-            _tutorialText.transform.DOShakePosition(150f);
-        });*/
-
-        _tutorialText.transform.DOLocalMoveY(400f, 0.5f).OnComplete(() =>
-        {
-            _tutorialText.transform.DOShakePosition(150f);
-        });
+        _seq = DOTween.Sequence();
+        _seq.Append(_tutorialText.transform.DOLocalMoveY(400f, 0.5f));
+        _seq.Append(_tutorialText.transform.DOShakePosition(150f));
     }
 
     private IEnumerator StartTutorial()
