@@ -36,12 +36,11 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     {
         Transform target = stateMachineOwnerClass.Target.transform;
 
-        if (stateMachineOwnerClass.EnemyData.dashDistance != 0)
+        if (stateMachineOwnerClass.EnemyData.dashDistance != 0) //대쉬 적일떄만
         {
             if (Vector3.Distance(target.position, agent.transform.position) <=
                stateMachineOwnerClass.EnemyData.dashDistance)
             {
-                //stateMachine.ChangeState<StateMeleeAttack<T>>();
                 stateMachineOwnerClass.ChangeAttack();
             }
             else
@@ -54,7 +53,6 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
             if (Vector3.Distance(target.position, agent.transform.position) <=
                stateMachineOwnerClass.EnemyData.attackDistance)
             {
-                //stateMachine.ChangeState<StateMeleeAttack<T>>();
                 stateMachineOwnerClass.ChangeAttack();
 
             }

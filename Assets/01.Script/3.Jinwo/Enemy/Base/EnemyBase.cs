@@ -92,7 +92,7 @@ public class EnemyBase<T> : MonoBehaviour
         if (dead) return;
 
         var lookRotation =
-                Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);
+                Quaternion.LookRotation((target.transform.position - transform.position).normalized, Vector3.up);
         var targetAngleY = lookRotation.eulerAngles.y;
 
         transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngleY,
