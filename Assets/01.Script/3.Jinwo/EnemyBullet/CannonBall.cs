@@ -5,7 +5,7 @@ using UnityEngine;
 public class CannonBall : MonoBehaviour
 {
     [SerializeField]
-    private Transform target = null;
+    private Vector3 targetPos;
 
     [SerializeField]
     private LayerMask targetLayer;
@@ -18,69 +18,71 @@ public class CannonBall : MonoBehaviour
     [SerializeField]
     private GameObject bombEffect;
 
-    [SerializeField]
-    private Transform childTrm;
+    private Collider col;
 
-    private Vector3 prevPos;
-    private Vector3 dir;
+    [SerializeField]
+    private float CircleSize = 3.5f;
     private void Awake()
     {
-        childTrm = GetComponentInChildren<Transform>();
+        col = GetComponent<Collider>();
         maxSpeed = 5f;
         curSpeed = 1f;
         rigid = GetComponent<Rigidbody>();
-    }
-    private void FixedUpdate()
-    {
-        dir = childTrm.position - prevPos;
-        dir.Normalize();
-        prevPos = childTrm.position;
-
+        col.enabled = false;
     }
     private void Update()
     {
         if (rigid.velocity.y <= 0f)
         {
+            if (!col.enabled)
+            {
+                col.enabled = true;
+            }
             if (curSpeed <= maxSpeed)
             {
                 curSpeed += maxSpeed * Time.deltaTime;
             }
-            Debug.Log("최고");
-            transform.position += (target.position - transform.position).normalized * curSpeed * Time.deltaTime;
+            transform.position += transform.up * curSpeed * Time.deltaTime;
 
-            childTrm.rotation = Quaternion.LookRotation(dir);
 
-            //Vector3 dir = (target.position - transform.position).normalized;
+            Vector3 dir = (targetPos - transform.position).normalized + new Vector3(0,0.6f, 0);
 
-            //transform.up = Vector3.Lerp(transform.up, dir, 0.5f);
-        }
-        else
-        {
-            childTrm.rotation = Quaternion.LookRotation(rigid.velocity);
+            transform.up = Vector3.Slerp(transform.up, dir, 0.25f);
         }
 
     }
-    public void SetTargetPos(Transform pos, float bulletSpeedData)
+    public void SetTargetPos(Vector3 pos, float bulletSpeedData)
     {
-        target = pos;
+        targetPos = pos;
         maxSpeed = bulletSpeedData;
 
     }
-    private void OnCollisionEnter(Collision collision)
+    public void AttackDamage()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("박격포 공격 성공");
-        }
-        else if(collision.gameObject.CompareTag("Wall"))
-        {
-            GameObject go = Instantiate(bombEffect, transform);
-            gameObject.SetActive(false);
-            //gameObject.SetActive(false);
-        }
+        Collider[] cols = Physics.OverlapSphere(transform.position, CircleSize, targetLayer);
 
-        
+        if (cols.Length > 0)
+        {
+            Debug.Log("Player맞음");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
 
+        AttackDamage();
+
+        //이쯤 어딘가에서 풀 푸쉬하고 플레이어 공격 받는 함수 모시깽 넣으면 될듯?
+        GameObject go = Instantiate(bombEffect, targetPos + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        gameObject.SetActive(false);
     }
 
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+
+        Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
+        Gizmos.DrawSphere(transform.position, CircleSize);
+
+    }
+#endif
 }

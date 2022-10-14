@@ -7,6 +7,8 @@ TagManager:
   - Wall
   - Bullet
   - Enemy
+  - CannonBall
+  - Circle
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - MouseCheck
   - Bullet
   - Enemy
-  - 
-  - 
+  - CannonBall
+  - Circle
   - 
   - 
   - 

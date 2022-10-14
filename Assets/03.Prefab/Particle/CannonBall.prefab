@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3864542250235844408}
   - component: {fileID: 704852060}
   - component: {fileID: 704852059}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CannonBall
-  m_TagString: Untagged
+  m_TagString: CannonBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f5d8687edb6eb438c85d0c69ddb540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4210989286462169569}
+  targetPos: {x: 0, y: 0, z: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 0
   curSpeed: 0
   bombEffect: {fileID: 3911229923933492915, guid: bc3c258167c7fd842a16e1c8e8b4a6c1, type: 3}
-  childTrm: {fileID: 435907603450555088}
+  CircleSize: 2.5
 --- !u!54 &704852060
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79,10 +79,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2865604331731452011}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3322696232710472610
 PrefabInstance:
@@ -109,23 +109,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641586, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641586, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641586, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641586, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641586, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641586, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -135,13 +135,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2886861483733641587, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641613, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_Name
       value: Cannon_01_projectile
       objectReference: {fileID: 0}
     - target: {fileID: 2886861483733641613, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886861483733641613, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374407224247288840, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751210546413400309, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975262740817645915, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2109192554191426399, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}

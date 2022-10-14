@@ -32,7 +32,7 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
     void Update()
     {
         fsmManager.Execute();
-        Debug.Log(fsmManager.getNowState.ToString());
+        //Debug.Log(fsmManager.getNowState.ToString());
 
     }
     public override void FixedUpdate()
@@ -67,9 +67,10 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
 
         missile.GetComponent<Rigidbody>().velocity = Vector3.up * 15f;
 
-        missile.SetTargetPos(targetPos, EnemyData.bulletSpeed);
+        missile.SetTargetPos(targetPos.position, EnemyData.bulletSpeed);
 
-        StartCoroutine(SpawnCircle());
+        
+        StartCoroutine(SpawnCircle(targetPos.position));
 
     }
     public override void DisableAttack()
@@ -78,12 +79,15 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
         muzzle.SetActive(false);
     }
 
-    public IEnumerator SpawnCircle()
+    public IEnumerator SpawnCircle(Vector3 spawnPos)
     {
 
-        yield return new WaitForSeconds(0.7f);
-        CircleController circle = Instantiate(cir, targetPos.position, Quaternion.Euler(new Vector3(-90, 0 , 0)) );
-        
+        yield return new WaitForSeconds(0.5f);
+        DangerZone.DrawCircle(spawnPos, 5f, 2.6f);
+        //CircleController circle = Instantiate(cir, spawnPos, Quaternion.Euler(new Vector3(-90, 0 , 0)) );
+
+        //circle.GetComponent<MeshRenderer>().material.color = Color.red;
+        //Destroy(circle, 5f);
     }
 
 }
