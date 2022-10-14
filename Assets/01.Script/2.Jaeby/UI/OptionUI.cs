@@ -94,7 +94,7 @@ public class OptionUI : MonoBehaviour, IUserInterface
         for (int i = 0; i < _directerNames.Length; i++)
         {
             _directerNames[i].SetActive(true);
-            _directerNames[i].transform.position += Vector3.up * 130f;
+            //_directerNames[i].transform.position += Vector3.up * 130f;
         }
     }
 
@@ -104,7 +104,7 @@ public class OptionUI : MonoBehaviour, IUserInterface
         for (int i = _directerNames.Length - 1; i >= 0; i--)
         {
             _directerNames[i].SetActive(false);
-            _directerNames[i].transform.position += Vector3.up * -130f;
+            //_directerNames[i].transform.position += Vector3.up * -130f;
         }
     }
 
