@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
     private Coroutine _shakeCoroutine = null;
 
     private float _currentShakeAmount = 0f;
+
+    [SerializeField]
+    private BossUI _bossUI = null;
 
     private void OnEnable()
     {
@@ -70,14 +74,14 @@ public class CameraManager : MonoSingleTon<CameraManager>
         CompletePrevFeedBack();
     }
 
-    public void ZoomCamera(float maxValue, float time)
+    public void ZoomCamera(float maxValue, float time, Action Callback = null)
     {
         CameraReset();
 
-        _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time));
+        _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time, Callback));
     }
 
-    private IEnumerator ZoomCoroutine(float maxValue, float duration)
+    private IEnumerator ZoomCoroutine(float maxValue, float duration, Action Callback = null)
     {
         float time = 0f;
         float nextLens = 0f;
@@ -90,7 +94,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
             yield return null;
             time += Time.deltaTime;
         }
+        Callback?.Invoke();
     }
+
 
     public void CameraReset()
     {
@@ -100,5 +106,27 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
+    public void TargetingCameraAnimation(bool isBoss, Transform target)
+    {
+        Transform lastTarget = _cmVCam.Follow;
+        _cmVCam.Follow = target;
+        float last = _cmVCam.m_Lens.FieldOfView;
+        StartCoroutine(TargetingCameraCoroutine(isBoss, last, lastTarget));
+    }
 
+    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (isBoss)
+        {
+            _bossUI?.DangerAnimation();
+        }
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 0.5f);
+
+        yield return new WaitForSeconds(5f);
+        ZoomCamera(last, 0.3f, () =>
+        {
+            _cmVCam.Follow = lastTarget;
+        });
+    }
 }
