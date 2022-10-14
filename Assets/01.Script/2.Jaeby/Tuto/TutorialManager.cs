@@ -68,7 +68,7 @@ public class TutorialManager : MonoBehaviour
 
     private void TextPop(string text)
     {
-        DOTween.KillAll();
+        _tutorialText.DOKill();
 
         _tutorialText.SetText(text);
         _tutorialText.rectTransform.anchoredPosition = _initPos;
@@ -296,9 +296,9 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Alpha0))
         {
-            CameraManager.Instance.TargetingCameraAnimation(transform);
+            CameraManager.Instance.TargetingCameraAnimation(true, transform);
         }
     }
 }

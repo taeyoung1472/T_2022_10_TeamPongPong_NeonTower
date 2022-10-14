@@ -15,6 +15,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private float _currentShakeAmount = 0f;
 
+    [SerializeField]
+    private BossUI _bossUI = null;
+
     private void OnEnable()
     {
         if (_cmVCam == null)
@@ -103,21 +106,27 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
-    public void TargetingCameraAnimation(Transform target)
+    public void TargetingCameraAnimation(bool isBoss, Transform target)
     {
         Transform lastTarget = _cmVCam.Follow;
         _cmVCam.Follow = target;
         float last = _cmVCam.m_Lens.FieldOfView;
-        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 1f, () =>
-        {
-            StartCoroutine(TargetingCameraCoroutine(last, lastTarget));
-        });
+        StartCoroutine(TargetingCameraCoroutine(isBoss, last, lastTarget));
     }
 
-    private IEnumerator TargetingCameraCoroutine(float last, Transform lastTarget)
+    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget)
     {
-        yield return new WaitForSeconds(2f);
-        ZoomCamera(last, 1f, () =>
+        yield return new WaitForSeconds(0.5f);
+        if (isBoss)
+        {
+            _bossUI?.DangerAnimation();
+        }
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 1f, () =>
+        {
+        });
+
+        yield return new WaitForSeconds(5f);
+        ZoomCamera(last, 0.3f, () =>
         {
             _cmVCam.Follow = lastTarget;
         });
