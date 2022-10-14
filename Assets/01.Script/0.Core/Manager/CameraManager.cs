@@ -121,9 +121,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
         {
             _bossUI?.DangerAnimation();
         }
-        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 1f, () =>
-        {
-        });
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 0.5f);
 
         yield return new WaitForSeconds(5f);
         ZoomCamera(last, 0.3f, () =>

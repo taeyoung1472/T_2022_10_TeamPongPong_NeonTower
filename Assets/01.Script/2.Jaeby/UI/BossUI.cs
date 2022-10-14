@@ -13,8 +13,6 @@ public class BossUI : MonoBehaviour
 
     private Sequence _seq = null;
 
-    private Coroutine _dangerCoroutine = null;
-
     private void Start()
     {
         _dangerUI = GameObject.Find("BossDangerText")?.GetComponent<RectTransform>();
@@ -37,7 +35,6 @@ public class BossUI : MonoBehaviour
         if (_seq != null)
         {
             _seq.Kill();
-            _bossNameUI.DOKill();
         }
 
         _dangerUI.anchoredPosition = _dangerOriginPosition;
@@ -55,9 +52,9 @@ public class BossUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_dangerCoroutine != null)
+        if (_seq != null)
         {
-            StopCoroutine(_dangerCoroutine);
+            _seq.Kill();
         }
     }
 }
