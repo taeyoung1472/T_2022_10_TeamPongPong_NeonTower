@@ -9,6 +9,8 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         JsonManager.Load();
         JsonManager.DisplayData();
+        GameObject obj = new GameObject("@MonoHelper");
+        obj.AddComponent<MonoHelper>();
     }
 
     public void OnApplicationQuit()

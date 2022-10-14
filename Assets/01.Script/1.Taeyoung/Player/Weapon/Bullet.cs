@@ -5,7 +5,7 @@ using UnityEngine.Assertions.Must;
 public class Bullet : PoolAbleObject
 {
     // [Get Set 프로퍼티]
-    private float Speed { get { return data.bulletSpeed; } }
+    private float Speed { get { return data.bulletSpeed * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletSpeed); } }
     private AudioClip FireClip { get { return data.fireClip; } }
     private AudioClip CollisionClip { get { return data.collisionClip; } }
 
@@ -71,6 +71,7 @@ public class Bullet : PoolAbleObject
 
                 inDir = dir;
                 #endregion
+
                 bounceChance--;
             }
 

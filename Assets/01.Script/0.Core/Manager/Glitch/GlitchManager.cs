@@ -4,6 +4,7 @@ using URPGlitch.Runtime.DigitalGlitch;
 using URPGlitch.Runtime.AnalogGlitch;
 using static DefineCamera;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 namespace Glitch
 {
