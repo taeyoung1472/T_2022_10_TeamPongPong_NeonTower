@@ -106,25 +106,36 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
-    public void TargetingCameraAnimation(bool isBoss, Transform target)
+    public void TargetingBossCameraAnimation(Transform bossTrm, float idleTime, float dangerIdleTime, float zoomAmount = 12f)
+    {
+        Transform lastTarget = _cmVCam.Follow;
+        _cmVCam.Follow = bossTrm;
+        float last = _cmVCam.m_Lens.FieldOfView;
+
+        if (dangerIdleTime == 0f)
+            dangerIdleTime = 3f;
+        StartCoroutine(TargetingCameraCoroutine(true, last, lastTarget, idleTime, dangerIdleTime, zoomAmount));
+    }
+
+    public void TargetingCameraAnimation(Transform target, float idleTime, float zoomAmount = 12f)
     {
         Transform lastTarget = _cmVCam.Follow;
         _cmVCam.Follow = target;
         float last = _cmVCam.m_Lens.FieldOfView;
-        StartCoroutine(TargetingCameraCoroutine(isBoss, last, lastTarget));
+        StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime,0f, zoomAmount));
     }
 
-    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget)
+    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount)
     {
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
         {
-            _bossUI?.DangerAnimation();
+            _bossUI?.DangerAnimation(dangerIdleTime);
         }
-        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 0.5f);
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
 
-        yield return new WaitForSeconds(5f);
-        ZoomCamera(last, 0.3f, () =>
+        yield return new WaitForSeconds(idleTime);
+        ZoomCamera(last, 0.2f, () =>
         {
             _cmVCam.Follow = lastTarget;
         });

@@ -294,7 +294,7 @@ public class TutorialManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha0))
         {
-            CameraManager.Instance.TargetingCameraAnimation(true, transform);
+            CameraManager.Instance.TargetingBossCameraAnimation(transform, 5f, 3f);
         }
     }
 }
