@@ -480,6 +480,8 @@ MonoBehaviour:
   muzzle: {fileID: 5602045334834115670}
   cannonBall: {fileID: 2109192554191426399, guid: cf88463e1f5cace48ad6aaaa6e58bb30, type: 3}
   attackPos: {fileID: 955578578}
+  cir: {fileID: 473077153, guid: 7e60b11f932a8da44aa96645234aa66c, type: 3}
+  targetPos: {fileID: 0}
 --- !u!1 &8502297328691468496
 GameObject:
   m_ObjectHideFlags: 0
