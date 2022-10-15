@@ -10,6 +10,7 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     Transform transform;
     public override void Enter()
     {
+        stateMachineOwnerClass.MovementGoal = 1;
         stateMachineOwnerClass.Agent.enabled = true;
         goalPoint = stateMachineOwnerClass.Target.position;
         transform = stateMachineOwnerClass.transform;
