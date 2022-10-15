@@ -18,4 +18,4 @@ MonoBehaviour:
   damage: 1
   maxHp: 100
   attackRange: 10
-  patternCoolTime: 4
+  patternCoolTime: 5

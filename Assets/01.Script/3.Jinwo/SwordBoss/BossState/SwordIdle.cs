@@ -12,9 +12,9 @@ public class SwordIdle<T> : BossState<T> where T : Sword
     private int hashMove = Animator.StringToHash("Move");
     public override void OnAwake()
     {
-        animator = stateMachineOwnerClass.GetComponentInChildren<Animator>();
+        animator = stateMachineOwnerClass.Animator;
 
-        agent = stateMachineOwnerClass.GetComponent<NavMeshAgent>();
+        agent = stateMachineOwnerClass.Agent;
 
         agent.isStopped = true;
 

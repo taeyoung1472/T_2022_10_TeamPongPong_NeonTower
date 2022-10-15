@@ -17,19 +17,21 @@ public class SwordMove<T> : BossState<T> where T : Sword
 
     public override void OnAwake()
     {
-        animator = stateMachineOwnerClass.GetComponentInChildren<Animator>();
+        animator = stateMachineOwnerClass.Animator;
 
-        agent = stateMachineOwnerClass.GetComponent<NavMeshAgent>();
+        agent = stateMachineOwnerClass.Agent;
 
         //agent.stoppingDistance = 7f;
 
-        agent.speed = stateMachineOwnerClass.Data.speed;
     }
     public override void Enter()
     {
+        agent.speed = stateMachineOwnerClass.Data.speed;
+        agent.isStopped = false;
         animator?.SetBool(hashMove, true);
         target = stateMachineOwnerClass.Target.transform;
         stateMachineOwnerClass.attackCoolTime = 0;
+        stateMachineOwnerClass.motionTrail.isMotionTrail = true;
     }
 
     public override void Execute()
@@ -42,6 +44,8 @@ public class SwordMove<T> : BossState<T> where T : Sword
                stateMachineOwnerClass.Data.attackRange && stateMachineOwnerClass.attackCoolTime >= stateMachineOwnerClass.Data.patternCoolTime) 
                // 만약 플레이어가 쿨타임이 다 됐고 공격 범위안에 들어 왔을시
         {
+            agent.speed = 0;
+            agent.isStopped = true;
             stateMachineOwnerClass.ChangeAttack();
 
         }
@@ -51,7 +55,8 @@ public class SwordMove<T> : BossState<T> where T : Sword
     {
         animator?.SetBool(hashMove, false);
 
-        agent.ResetPath();
+        //stateMachineOwnerClass.motionTrail.isMotionTrail = false;
+        //agent.ResetPath();
     }
 
     
