@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
+public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
+        throw new NotImplementedException();
     }
 
     public override void Execute()
     {
-        if (stateMachine.GetStateDurationTime > 5)
-        {
-            stateMachine.ChangeState<Move_RushBoss<RushBoss>>();
-        }
+        throw new NotImplementedException();
     }
 
     public override void Exit()
     {
+        throw new NotImplementedException();
     }
 }

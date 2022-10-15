@@ -1,11 +1,16 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.AI;
 
 public abstract class BossBase<T> : Boss
 {
     [Header("[FSM]")]
     protected BossStateMachine<T> bossFsm;
     public BossStateMachine<T> BossFsm => bossFsm;
+
+    protected virtual void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     public void LookTarget()
     {

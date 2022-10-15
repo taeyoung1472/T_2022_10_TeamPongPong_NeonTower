@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Boss : MonoBehaviour
@@ -15,6 +16,8 @@ public class Boss : MonoBehaviour
     protected Transform target;
     public Transform Target { get { if (target == null) { target = FindObjectOfType<PlayerController>().transform; } return target; } }
     public BossDataSO Data { get { return data; } }
+    protected NavMeshAgent agent;
+    public NavMeshAgent Agent { get { return agent; } }
 
     [Header("[Event]")]
     public UnityEvent OnDeathEvent;
