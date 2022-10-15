@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,7 +9,10 @@ public class Stadium : CubeMap
 
     protected override void Start()
     {
+        for (int i = 0; i < 10; i++)
+        {
 
+        }
     }
 
     public void ActivePattern(int index)
