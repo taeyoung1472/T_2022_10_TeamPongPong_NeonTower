@@ -31,7 +31,7 @@ public class SummonerWalk : BossState<SummonerBoss>
 
             _targetPos = _agent.destination;
             _targetPos.y = stateMachineOwnerClass.transform.position.y;
-            if(Vector3.Distance(stateMachineOwnerClass.transform.position, _targetPos) < 1.5f)
+            if(Vector3.Distance(stateMachineOwnerClass.transform.position, _targetPos) < 2f)
             {
                 stateMachine.ChangeState<SummonerIdle>();
             }
@@ -40,6 +40,7 @@ public class SummonerWalk : BossState<SummonerBoss>
 
     public override void Exit()
     {
+        _agent.ResetPath();
     }
 
 }

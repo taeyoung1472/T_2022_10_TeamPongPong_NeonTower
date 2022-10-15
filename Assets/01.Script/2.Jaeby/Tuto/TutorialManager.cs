@@ -302,7 +302,7 @@ public class TutorialManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha0))
         {
             GameObject obj = Instantiate(_testBoss, new Vector3(-9.78f,0,9.25f), Quaternion.identity);
-            CameraManager.Instance.TargetingBossCameraAnimation(obj.GetComponent<Boss>(), 5f, 3f);
+            CameraManager.Instance.TargetingBossCameraAnimation(obj.GetComponent<Boss>(), 5f);
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {

@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class SummonerBoss : BossBase<SummonerBoss>
 {
+    private Animator _animator = null;
+    private readonly string _startAnim = "StartAnimation";
     private void Start()
     {
-        bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
-        bossFsm.AddStateList(new SummonerWalk());
-
+        _animator = GetComponent<Animator>();
         CurHp = Data.maxHp;
+
+        StartCoroutine(StartAnimationCoroutine());
     }
 
-    public void Instan(GameObject obj)
+    private IEnumerator StartAnimationCoroutine()
     {
-        Instantiate(obj);
+        _animator.Play(_startAnim);
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName(_startAnim) == false);
+
+        bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
+        bossFsm.AddStateList(new SummonerWalk());
     }
 
     public override void ApplyDamage(int dmg)
@@ -22,7 +28,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
         DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
         CurHp -= (float)dmg;
         BossUIManager.BossDamaged();
-        if(CurHp <= 0)
+        if (CurHp <= 0)
         {
             Debug.Log("»ç¸Á !!");
             OnDeathEvent?.Invoke();
