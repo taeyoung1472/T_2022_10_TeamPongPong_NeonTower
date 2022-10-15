@@ -49,7 +49,7 @@ public class Bullet : PoolAbleObject
                 }
             }
 
-            collision.gameObject.GetComponent<Enemy>().ApplyDamage(data.damage);
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(data.damage);
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);
         }
