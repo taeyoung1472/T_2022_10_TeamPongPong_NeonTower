@@ -2,30 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordTakeDownAttack<T> : BossState<T> where T : BossBase<T>
+public class SwordTakeDownAttack<T> : BossState<T> where T : Sword
 {
+    //2¹øÀÓ
+    private Animator animator;
+    private Transform characterTransform;
+
+
+    private int hashAttack = Animator.StringToHash("Attack");
+
+    public override void OnAwake()
+    {
+        animator = stateMachineOwnerClass.GetComponentInChildren<Animator>();
+        characterTransform = stateMachineOwnerClass.GetComponent<Transform>();
+        
+    }
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        animator.SetInteger(hashAttack, 2);
     }
 
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
