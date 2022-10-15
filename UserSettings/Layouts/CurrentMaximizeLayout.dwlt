@@ -26,7 +26,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 70493
+  controlID: -1
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 1
+  m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 70486
+  controlID: -1
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -597,7 +597,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 3254852
+  m_LastSelectedObjectID: -3196480
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 70494
+  controlID: 70730
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -682,7 +682,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c039cfff02b2d2ff3246d3ff0ed8d3ffe886d4ff5a2fd5ff38f0d5ff1a9fd6ffd6b1d6ffc84ed7ffbc50d7ffe2e2d7ff9e75ddff340cdeff466edfff7e36e0ffe275e5ff660ee6ff4ab0e6ffd089e8fff61be9ffd0ade9fff0b3e9ffc8c7e9ff602feaff642feaff682feaff0edfeaff1adfeaff1edfeaff22dfeaffda70ebfffc69ecff0edbeeff1adbeefff874efffe896efff7c3af0ffae3cf0fff23ef0ff0e42f0ff06d3f0ffa26cf1ff0c0af2ffb09cf2ffbc9cf2ff6ca0f2ff763af3ffccacf3ffc2b8f3fff654f4fffe3df5ff12d1f5ff2664f6ff2600f7ff9c9af7ff669bf7ff189cf7fff69cf7ff8e39f8ff16cff8ffb835fcffc235fcffc4bcfcff6a50fdff7450fdffce68ffffd268fffff068fffff468ffff2c6bffffc0faffff6c750000007600006a760000d6760000f27600002878000058831200fa83120016851200b6422900224329003e43290058432900b0432900744429000e3c2c00a23c2c00323e2c00683e2c00ea3e2c00e2c72f0044673000207930005e7d3000448230005c823000a8823000f88230005083300092a93000cca9300044aa30006aac300030be3000a4e9300072eb300010ee3000baf13000c4f1300046f2300028f630002afc3000cc953100dc963100e896310070973100e0973100a498310060a33100caa3310086a5310030a9310024aa3100
+      m_ExpandedIDs: b60cc6ff8cb3c6ff6845c7ff5cf4c7ff9a8dc8ffc039cfff02b2d2ff3246d3ff0ed8d3ffe886d4ff5a2fd5ff38f0d5ff1a9fd6ffd6b1d6ffc84ed7ffbc50d7ffe2e2d7ff9e75ddff340cdeff466edfff7e36e0ffe275e5ff660ee6ff4ab0e6ffd089e8fff61be9ffd0ade9fff0b3e9ffc8c7e9ff602feaff642feaff682feaff0edfeaff1adfeaff1edfeaff22dfeaffda70ebfffc69ecff0edbeeff1adbeefff874efffe896efff7c3af0ffae3cf0fff23ef0ff0e42f0ff06d3f0ffa26cf1ff0c0af2ffb09cf2ffbc9cf2ff6ca0f2ff763af3ffccacf3ffc2b8f3fff654f4fffe3df5ff12d1f5ff2664f6ff2600f7ff9c9af7ff669bf7ff189cf7fff69cf7ff8e39f8ff16cff8ffb835fcffc235fcffc4bcfcff6a50fdff7450fdffce68ffffd268fffff068fffff468ffff2c6bffffc0faffff6c750000007600006a760000d6760000f27600002878000058831200fa83120016851200b6422900224329003e43290058432900b0432900744429000e3c2c00a23c2c00323e2c00683e2c00ea3e2c00e2c72f0044673000207930005e7d3000448230005c823000a8823000f88230005083300092a93000cca9300044aa30006aac300030be3000a4e9300072eb300010ee3000baf13000c4f1300046f2300028f630002afc3000cc953100dc963100e896310070973100e0973100a498310060a33100caa3310086a5310030a9310024aa310022f631008cf6310048f831000806320080063200ea063200a6083200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -779,8 +779,8 @@ MonoBehaviour:
     y: 0
     width: 417
     height: 939
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -827,21 +827,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/01.Script/2.Jaeby/Menu
+    - Assets/00.Scenes/Dev/Jinwo/Jinwo
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/01.Script/2.Jaeby/Menu
+  - Assets/00.Scenes/Dev/Jinwo/Jinwo
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\USER\Documents\T_2022_10_TeamPongPong_NeonTower
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 687}
-    m_SelectedIDs: d0ac0000
-    m_LastClickedID: 44240
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: aeac0000
+    m_LastClickedID: 44206
     m_ExpandedIDs: 00000000d4ab0000d6ab0000d8ab0000daab0000dcab0000deab0000e0ab0000e2ab0000e4ab0000e6ab0000e8ab0000eaab0000ecab0000eeab0000f4ab0000f6ab0000f8ab0000faab0000fcab0000feab000000ac000002ac000004ac000006ac000008ac00000aac00000cac00000eac000010ac000014ac000016ac000018ac000020ac00003aac00003cac00004cac00006aac0000c8ac000028c7000042c70000108a0200128a0200148a02005e8b0200f68c02002a8d02008a8d0200548f0200989a0200c09a0200329b0200fe1b1300021c13009a442900f6c43100fac43100fec4310000c5310000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -901,18 +901,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 503600006ccafaff3ca52f000000000076b500001cc70000d6780000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Game
+      m_OriginalName: Game
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 43372
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 14}
     m_CreateAssetUtility:
