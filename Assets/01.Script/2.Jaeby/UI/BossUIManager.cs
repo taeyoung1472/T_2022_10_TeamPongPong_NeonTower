@@ -16,6 +16,8 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     private Image _bossImage = null;
     private TextMeshProUGUI _bossNameText = null;
 
+    private Boss _currentBoss = null;
+
     private Vector3 _dangerOriginPosition = Vector3.zero;
     private Vector3 _bossNameOriginPosition = Vector3.zero;
 
@@ -45,22 +47,40 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         }
     }
 
-    public void SetBoss()
+    public void SetBoss(Boss boss)
     {
+        _currentBoss = boss;
+        if (_currentBoss == null || _bossHpSlider == null || _bossImage == null) return;
 
+        _bossHpSlider.gameObject.SetActive(true);
+        _bossImage.gameObject.SetActive(true);
+        _bossNameText.gameObject.SetActive(true);
+
+        _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
+        _bossImage.sprite = _currentBoss.Data.bossProfile;
+        _bossNameText?.SetText(_currentBoss.Data.bossName);
     }
 
     public void BossDamaged()
     {
-
+        if (_currentBoss == null) return;
+        _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
     }
 
-    public void UIReset()
+    public void ExitBoss()
     {
+        _currentBoss = null;
+        if (_bossHpSlider == null || _bossImage == null) return;
+        _bossHpSlider.value = 0f;
+        _bossImage.sprite = null;
+        _bossNameText?.SetText("");
 
+        _bossHpSlider.gameObject.SetActive(false);
+        _bossImage.gameObject.SetActive(false);
+        _bossNameText.gameObject.SetActive(false);
     }
 
-    public void DangerAnimation(float dangerIdleTime)
+    public void DangerAnimation(float dangerIdleTime, Boss boss)
     {
         if (_dangerUI == null || _bossNameUI == null) return;
         if (_seq != null)
@@ -84,6 +104,11 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _seq.Join(_bossNameUI.DOAnchorPosX(_bossNameOriginPosition.x, 0.5f));
         _seq.Join(_upImageUI.DOAnchorPosY(-130f, 0.5f));
         _seq.Join(_downImageUI.DOAnchorPosY(130f, 0.5f));
+        _seq.AppendInterval(0.2f);
+        _seq.AppendCallback(() =>
+        {
+            SetBoss(boss);
+        });
         //_seq.Join();
     }
 
