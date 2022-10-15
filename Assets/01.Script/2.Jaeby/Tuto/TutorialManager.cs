@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject _player = null;
     [SerializeField]
     private TextMeshProUGUI _tutorialText = null;
     [SerializeField]
@@ -194,6 +197,7 @@ public class TutorialManager : MonoBehaviour
             effect.transform.localScale = Vector3.one * 0.05f;
             yield return new WaitForSeconds(1f);
             _enemyPrefabs[i].SetActive(true);
+            _enemyPrefabs[i].GetComponent<CommonEnemy>().Target = _player;
             yield return new WaitForSeconds(1.5f);
         }
     }
