@@ -198,6 +198,8 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
             enemy.Init(_enemyPos[i].position, _player);
+            if (i == _enemyPos.Length - 1)
+                enemy.OnDeath.AddListener(Test3Clear);
             yield return new WaitForSeconds(1.5f);
         }
     }
