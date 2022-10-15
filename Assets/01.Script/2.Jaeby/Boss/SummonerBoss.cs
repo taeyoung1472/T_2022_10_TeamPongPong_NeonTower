@@ -7,6 +7,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
     private void Start()
     {
         bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
+        bossFsm.AddStateList(new SummonerWalk());
 
         CurHp = Data.maxHp;
     }
@@ -16,67 +17,16 @@ public class SummonerBoss : BossBase<SummonerBoss>
         Instantiate(obj);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        ApplyDamage(1);
-    }
-
     public override void ApplyDamage(int dmg)
     {
-        DamagePopup.PopupDamage(transform.position + Vector3.up * 0.7f, dmg);
+        DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
         CurHp -= (float)dmg;
         BossUIManager.BossDamaged();
         if(CurHp <= 0)
         {
-            Debug.Log("ªÁ∏¡");
+            Debug.Log("ªÁ∏¡ !!");
+            OnDeathEvent?.Invoke();
+            Destroy(gameObject);
         }
     }
 }
-
-/*public class SummonerIdle : BossState<SummonerBoss>
-{
-    public override void Enter()
-    {
-        Debug.Log("æ∆¿ÃµÈ");
-        stateMachineOwnerClass.StartCoroutine(DDD());
-    }
-
-    private IEnumerator DDD()
-    {
-        yield return new WaitForSeconds(2f);
-        stateMachineOwnerClass.Instan(new GameObject());
-        stateMachine.ChangeState<SummonerWalk>();
-    }
-
-    public override void Execute()
-    {
-    }
-
-    public override void Exit()
-    {
-    }
-}
-
-public class SummonerWalk : BossState<SummonerBoss>
-{
-    public override void Enter()
-    {
-        Debug.Log("∑±");
-        stateMachineOwnerClass.StartCoroutine(DDD());
-    }
-
-    private IEnumerator DDD()
-    {
-        yield return new WaitForSeconds(2f);
-        stateMachine.ChangeState<SummonerIdle>();
-    }
-
-    public override void Execute()
-    {
-    }
-
-    public override void Exit()
-    {
-    }
-}
-*/
