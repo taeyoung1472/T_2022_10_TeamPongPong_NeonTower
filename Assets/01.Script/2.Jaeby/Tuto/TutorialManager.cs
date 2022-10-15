@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject _player = null;
     [SerializeField]
     private TextMeshProUGUI _tutorialText = null;
     [SerializeField]
@@ -31,7 +34,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject _spawnEffectPrefab = null;
     [SerializeField]
-    private GameObject[] _enemyPrefabs = null;
+    private Transform[] _enemyPos = null;
+
+    private Sequence _seq = null;
 
     [SerializeField]
     private Color _impactColor = Color.white;
@@ -68,20 +73,14 @@ public class TutorialManager : MonoBehaviour
 
     private void TextPop(string text)
     {
-        _tutorialText.DOKill();
+        if (_seq != null)
+            _seq.Kill();
 
         _tutorialText.SetText(text);
         _tutorialText.rectTransform.anchoredPosition = _initPos;
-
-        /*_tutorialText.transform.DOMove(_tutorialTextPos.position, 0.5f).OnComplete(()=>
-        {
-            _tutorialText.transform.DOShakePosition(150f);
-        });*/
-
-        _tutorialText.transform.DOLocalMoveY(400f, 0.5f).OnComplete(() =>
-        {
-            _tutorialText.transform.DOShakePosition(150f);
-        });
+        _seq = DOTween.Sequence();
+        _seq.Append(_tutorialText.transform.DOLocalMoveY(400f, 0.5f));
+        _seq.Append(_tutorialText.transform.DOShakePosition(150f));
     }
 
     private IEnumerator StartTutorial()
@@ -192,12 +191,13 @@ public class TutorialManager : MonoBehaviour
         TextPop("1");
         yield return new WaitForSeconds(0.5f);
         TextPop("Ω√¿€!!");
-        for (int i = 0; i < _enemyPrefabs.Length; i++)
+        for (int i = 0; i < _enemyPos.Length; i++)
         {
-            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPrefabs[i].transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPos[i].transform.position, Quaternion.identity);
             effect.transform.localScale = Vector3.one * 0.05f;
             yield return new WaitForSeconds(1f);
-            _enemyPrefabs[i].SetActive(true);
+            Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
+            enemy.Init(_enemyPos[i].position, _player);
             yield return new WaitForSeconds(1.5f);
         }
     }
@@ -298,7 +298,11 @@ public class TutorialManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha0))
         {
-            CameraManager.Instance.TargetingCameraAnimation(true, transform);
+            CameraManager.Instance.TargetingBossCameraAnimation(GameObject.Find("Boss_Summoner").GetComponent<Boss>(), 5f, 3f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            DamagePopup.PopupDamage(transform.position, 10);
         }
     }
 }

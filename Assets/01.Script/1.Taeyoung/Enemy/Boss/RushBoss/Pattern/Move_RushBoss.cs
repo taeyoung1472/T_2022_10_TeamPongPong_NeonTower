@@ -1,24 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using DG.Tweening;
 
-public class Move_RushBoss<T> : BossState<RushBoss> where T : BossState<T>
+public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
-    Vector3 goalPoint;
+    //Vector3 goalPoint;
+    Transform transform;
+    Transform target;
     public override void Enter()
     {
-        goalPoint = stateMachineOwnerClass.Target.position;
+        target = stateMachineOwnerClass.Target;
+
+        stateMachineOwnerClass.MovementGoal = 1;
+        stateMachineOwnerClass.Agent.enabled = true;
+        transform = stateMachineOwnerClass.transform;
     }
 
     public override void Execute()
     {
-        //if()
+        stateMachineOwnerClass.Agent.SetDestination(target.position);
+        if (Vector3.Distance(transform.position, target.position) < 1)
+        {
+            stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
+        }
     }
 
     public override void Exit()
     {
-
+        stateMachineOwnerClass.Agent.enabled = false;
     }
 }

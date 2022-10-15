@@ -15,9 +15,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private float _currentShakeAmount = 0f;
 
-    [SerializeField]
-    private BossUI _bossUI = null;
-
     private void OnEnable()
     {
         if (_cmVCam == null)
@@ -106,25 +103,43 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
-    public void TargetingCameraAnimation(bool isBoss, Transform target)
+    /// <summary>
+    /// 보스 UI 시작 애니메이션입니다
+    /// </summary>
+    /// <param name="쫒아갈 target"></param>
+    /// <param name="다 쫒아가고 얼마나 기다릴 건지"></param>
+    /// <param name="Danger가 얼마나 지속될 것인지"></param>
+    /// <param name="얼마나 줌인할 것인지"></param>
+    public void TargetingBossCameraAnimation(Boss boss, float idleTime, float dangerIdleTime, float zoomAmount = 12f)
+    {
+        Transform lastTarget = _cmVCam.Follow;
+        _cmVCam.Follow = boss.transform;
+        float last = _cmVCam.m_Lens.FieldOfView;
+
+        if (dangerIdleTime == 0f)
+            dangerIdleTime = 3f;
+        StartCoroutine(TargetingCameraCoroutine(true, last, lastTarget, idleTime, dangerIdleTime, zoomAmount, boss));
+    }
+
+    public void TargetingCameraAnimation(Transform target, float idleTime, float zoomAmount = 12f)
     {
         Transform lastTarget = _cmVCam.Follow;
         _cmVCam.Follow = target;
         float last = _cmVCam.m_Lens.FieldOfView;
-        StartCoroutine(TargetingCameraCoroutine(isBoss, last, lastTarget));
+        StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime,0f, zoomAmount));
     }
 
-    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget)
+    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
     {
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
         {
-            _bossUI?.DangerAnimation();
+            BossUIManager.Instance?.DangerAnimation(dangerIdleTime, boss);
         }
-        ZoomCamera(_cmVCam.m_Lens.FieldOfView - 12f, 0.5f);
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
 
-        yield return new WaitForSeconds(5f);
-        ZoomCamera(last, 0.3f, () =>
+        yield return new WaitForSeconds(idleTime);
+        ZoomCamera(last, 0.2f, () =>
         {
             _cmVCam.Follow = lastTarget;
         });

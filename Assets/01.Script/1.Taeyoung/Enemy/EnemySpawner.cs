@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static EnemySpawnData;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -32,9 +31,8 @@ public class EnemySpawner : MonoBehaviour
 
             PoolType generatedType = GenerateEnemy();
 
-            GameObject obj = PoolManager.Instance.Pop(generatedType).gameObject;
-            obj.transform.position = spawnPosList[spawPosIndex].position;
-            obj.GetComponent<Enemy>().Target = playerTrans.gameObject;
+            Enemy enemy = PoolManager.Instance.Pop(generatedType) as Enemy;
+            enemy.Init(spawnPosList[spawPosIndex].position, playerTrans.gameObject);
 
             spawPosIndex = (spawPosIndex + 1) % spawnPosList.Count;
 
