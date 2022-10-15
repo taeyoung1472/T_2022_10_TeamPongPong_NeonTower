@@ -1,6 +1,11 @@
 fileFormatVersion: 2
-guid: 8f0cf8c685305e84f9188a632ccdb90e
+<<<<<<<< HEAD:Assets/03.Prefab/Boss/Boss_Summoner.prefab.meta
+guid: 389583bf85b6cd1448a9a17b3edfdfbb
 PrefabImporter:
+========
+guid: dbb762d9e9eb76343b2843640c4ede68
+DefaultImporter:
+>>>>>>>> 737738110045d1272289b292bf5c5e967f17ac60:Assets/02.Asset/Hovl Studio/Render Pipelines support/Unity 2019.3+ HDRP.unitypackage.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

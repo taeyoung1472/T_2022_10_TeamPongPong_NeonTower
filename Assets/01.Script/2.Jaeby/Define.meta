@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: 9a42b4c89300c954ca1ae38c8acfa5bb
+<<<<<<<< HEAD:Assets/01.Script/2.Jaeby/Define.meta
+guid: 3f22e2fdc0b43da429e47b768a6e2cc9
 folderAsset: yes
+========
+guid: d3b0d4375975afb4abf9fc745a5c788b
+>>>>>>>> 737738110045d1272289b292bf5c5e967f17ac60:Assets/02.Asset/Hovl Studio/Render Pipelines support/Unity 2019.2+ HDRP.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
