@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     public virtual void ApplyDamage(int dmg)
     {
+        DamagePopup.PopupDamage(transform.position, dmg);
         Debug.Log("나 아야 했어");
     }
     #endregion
