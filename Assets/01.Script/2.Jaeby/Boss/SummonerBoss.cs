@@ -4,61 +4,35 @@ using UnityEngine;
 
 public class SummonerBoss : BossBase<SummonerBoss>
 {
+    private Animator _animator = null;
+    private readonly string _startAnim = "StartAnimation";
     private void Start()
     {
+        _animator = GetComponent<Animator>();
+        CurHp = Data.maxHp;
+
+        StartCoroutine(StartAnimationCoroutine());
+    }
+
+    private IEnumerator StartAnimationCoroutine()
+    {
+        _animator.Play(_startAnim);
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName(_startAnim) == false);
+
         bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
-        BossFsm.AddStateList(new SummonerRun());
+        bossFsm.AddStateList(new SummonerWalk());
     }
 
-    public void Instan(GameObject obj)
+    public override void ApplyDamage(int dmg)
     {
-        Instantiate(obj);
-    }
-}
-
-public class SummonerIdle : BossState<SummonerBoss>
-{
-    public override void Enter()
-    {
-        Debug.Log("아이들");
-        stateMachineOwnerClass.StartCoroutine(DDD());
-    }
-
-    private IEnumerator DDD()
-    {
-        yield return new WaitForSeconds(2f);
-        stateMachineOwnerClass.Instan(new GameObject());
-        stateMachine.ChangeState<SummonerRun>();
-    }
-
-    public override void Execute()
-    {
-    }
-
-    public override void Exit()
-    {
-    }
-}
-
-public class SummonerRun : BossState<SummonerBoss>
-{
-    public override void Enter()
-    {
-        Debug.Log("런");
-        stateMachineOwnerClass.StartCoroutine(DDD());
-    }
-
-    private IEnumerator DDD()
-    {
-        yield return new WaitForSeconds(2f);
-        stateMachine.ChangeState<SummonerIdle>();
-    }
-
-    public override void Execute()
-    {
-    }
-
-    public override void Exit()
-    {
+        DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
+        CurHp -= (float)dmg;
+        BossUIManager.BossDamaged();
+        if (CurHp <= 0)
+        {
+            Debug.Log("사망 !!");
+            OnDeathEvent?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

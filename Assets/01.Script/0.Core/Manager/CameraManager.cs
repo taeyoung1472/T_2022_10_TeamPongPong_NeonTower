@@ -110,14 +110,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
     /// <param name="다 쫒아가고 얼마나 기다릴 건지"></param>
     /// <param name="Danger가 얼마나 지속될 것인지"></param>
     /// <param name="얼마나 줌인할 것인지"></param>
-    public void TargetingBossCameraAnimation(Boss boss, float idleTime, float dangerIdleTime, float zoomAmount = 12f)
+    public void TargetingBossCameraAnimation(Boss boss, float idleTime, float zoomAmount = 12f)
     {
         Transform lastTarget = _cmVCam.Follow;
         _cmVCam.Follow = boss.transform;
         float last = _cmVCam.m_Lens.FieldOfView;
-
-        if (dangerIdleTime == 0f)
-            dangerIdleTime = 3f;
+        float dangerIdleTime = idleTime - 2f;
         StartCoroutine(TargetingCameraCoroutine(true, last, lastTarget, idleTime, dangerIdleTime, zoomAmount, boss));
     }
 
