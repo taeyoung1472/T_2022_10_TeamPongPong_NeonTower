@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Boss : MonoBehaviour
@@ -12,9 +13,16 @@ public class Boss : MonoBehaviour
 
     [Header("[Ref]")]
     [SerializeField] protected BossDataSO data;
+    public BossDataSO Data { get { return data; } }
+
     protected Transform target;
     public Transform Target { get { if (target == null) { target = FindObjectOfType<PlayerController>().transform; } return target; } }
-    public BossDataSO Data { get { return data; } }
+
+    protected NavMeshAgent agent;
+    public NavMeshAgent Agent { get { return agent; } }
+
+    protected Animator animator;
+    public Animator Animator { get { return animator; } }
 
     [Header("[Event]")]
     public UnityEvent OnDeathEvent;

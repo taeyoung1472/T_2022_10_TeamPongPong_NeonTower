@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using System.ComponentModel.Design;
+using UnityEngine.AI;
 
 public class Enemy : PoolAbleObject, IDamageable
 {
@@ -59,6 +60,14 @@ public class Enemy : PoolAbleObject, IDamageable
 
         // onDeath 이벤트에 등록된 메서드가 있다면 실행
         if (OnDeath != null) OnDeath?.Invoke();
+    }
+
+    public void Init(Vector3 initPos, GameObject target)
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+        transform.position = initPos;
+        Target = target.gameObject;
+        GetComponent<NavMeshAgent>().enabled = true;
     }
 
     #region PoolAble
