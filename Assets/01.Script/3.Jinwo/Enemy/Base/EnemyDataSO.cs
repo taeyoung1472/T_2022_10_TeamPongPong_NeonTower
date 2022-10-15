@@ -24,7 +24,8 @@ public class EnemyDataSO : ScriptableObject
     [Range(1f, 10f)]
     public float stoppingDistance = 5f;
     //public float knockbackPower = 5f;
-
+    [Range(0.01f, 2f)] public float turnSmoothTime = 0.1f;
+    public float turnSmoothVelocity;
 
     [Header("[대시 관련]")]
     //대쉬 관련

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     #region Animator Hash
     readonly private int moveHash = Animator.StringToHash("Move");
@@ -82,10 +82,6 @@ public class PlayerController : MonoBehaviour
         Rotate();
         Audio();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isDamaged = true;
-        }
         if (Input.GetKeyDown(KeyCode.L))
         {
             DangerZone.DrawArc(transform.position, transform.forward, 2, new Vector3(2, 1, 5), 3);
@@ -187,6 +183,17 @@ public class PlayerController : MonoBehaviour
             isDashing = false;
 
             yield return new WaitForSeconds(dashDelay);
+        }
+    }
+
+    public void ApplyDamage(int dmg)
+    {
+        if (isDead) return;
+        Debug.Log("¾Æ¾ß");
+        isDamaged = true;
+        if(curHp <= 0)
+        {
+            Dead();
         }
     }
 }

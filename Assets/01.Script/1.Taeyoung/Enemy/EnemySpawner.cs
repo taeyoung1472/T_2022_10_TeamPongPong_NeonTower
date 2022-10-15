@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using static EnemySpawnData;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float[] spawnDelay;
+    [SerializeField] private EnemySpawnData spawnData;
 
     private List<Transform> spawnPosList = new();
-    private int spawPosIndex;
+    private int spawPosIndex = 0;
+    private Transform playerTrans;
 
     private bool isCanSpawn = true;
     public bool IsCanSpawn { get { return isCanSpawn; } set { isCanSpawn = value; } }
@@ -19,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnPosList.Add(transform.GetChild(i));
         }
+        playerTrans = FindObjectOfType<PlayerController>().transform;
         StartCoroutine(SpawnSystem());
     }
 
@@ -27,9 +29,40 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => IsCanSpawn);
-            Debug.Log($"EnemySpawn At {spawnPosList[spawPosIndex].position}");
+
+            PoolType generatedType = GenerateEnemy();
+
+            GameObject obj = PoolManager.Instance.Pop(generatedType).gameObject;
+            obj.transform.position = spawnPosList[spawPosIndex].position;
+            obj.GetComponent<Enemy>().Target = playerTrans.gameObject;
+
             spawPosIndex = (spawPosIndex + 1) % spawnPosList.Count;
-            yield return new WaitForSeconds(spawnDelay[WaveManager.Instance.CurWave]);
+
+            yield return new WaitForSeconds(spawnData.spawnDelay[WaveManager.Instance.CurWave]);
         }
+    }
+
+    private PoolType GenerateEnemy()
+    {
+        PoolType returnType = PoolType.ComonEnemy;
+        int maxRand = 0;
+
+        foreach (var table in spawnData.spawnTable)
+        {
+            maxRand += table.spawnChance[WaveManager.Instance.CurWave];
+        }
+
+        int rand = Random.Range(0, maxRand);
+        int stack = 0;
+        foreach (var spawn in spawnData.spawnTable)
+        {
+            stack += spawn.spawnChance[WaveManager.Instance.CurWave];
+            if (rand < stack)
+            {
+                returnType = spawn.enemyType;
+                break;
+            }
+        }
+        return returnType;
     }
 }
