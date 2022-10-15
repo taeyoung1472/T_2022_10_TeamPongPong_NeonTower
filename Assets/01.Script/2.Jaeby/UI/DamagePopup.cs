@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamagePopup : MonoBehaviour
+public static class DamagePopup
 {
-    // Start is called before the first frame update
-    void Start()
+    public static void PopupDamage(Vector3 startPos, string text)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PopupPoolObject popupPoolObj = PoolManager.Instance.Pop(PoolType.PopupText) as PopupPoolObject;
+        popupPoolObj.PopupTextCritical(startPos, text);
     }
 }

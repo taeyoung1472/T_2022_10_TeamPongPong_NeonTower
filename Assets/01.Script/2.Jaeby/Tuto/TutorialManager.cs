@@ -296,5 +296,9 @@ public class TutorialManager : MonoBehaviour
         {
             CameraManager.Instance.TargetingBossCameraAnimation(GameObject.Find("Boss_Summoner").GetComponent<Boss>(), 5f, 3f);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            DamagePopup.PopupDamage(transform.position + Vector3.up * 0.5f, "10");
+        }
     }
 }
