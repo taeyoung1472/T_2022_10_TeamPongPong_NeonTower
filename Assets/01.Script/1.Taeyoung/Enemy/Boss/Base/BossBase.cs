@@ -10,6 +10,7 @@ public abstract class BossBase<T> : Boss
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void LookTarget()
