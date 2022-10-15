@@ -61,9 +61,14 @@ public class CannonBall : MonoBehaviour
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, CircleSize, targetLayer);
 
-        if (cols.Length > 0)
+        foreach (var col in cols)
         {
-            Debug.Log("Player¸ÂÀ½");
+            IDamageable damageable = col.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.ApplyDamage(1);
+                break;
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

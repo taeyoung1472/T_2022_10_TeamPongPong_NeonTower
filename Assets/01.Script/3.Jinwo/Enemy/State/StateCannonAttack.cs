@@ -43,7 +43,7 @@ public class StateCannonAttack<T> : State<T> where T : EnemyBase<T>
         {
             //´ëÆ÷ ½î±â
             animator?.SetTrigger(hashAttack);
-            stateMachineOwnerClass.isAttack = true;
+            stateMachineOwnerClass.IsAttack = true;
 
             timer = 0;
         }

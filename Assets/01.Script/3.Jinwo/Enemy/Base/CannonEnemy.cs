@@ -44,7 +44,7 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
         var targetAngleY = lookRotation.eulerAngles.y;
 
         transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngleY,
-                                    ref turnSmoothVelocity, turnSmoothTime);
+                                    ref EnemyData.turnSmoothVelocity, EnemyData.turnSmoothTime);
     }
     private void OnEnable()
     {
