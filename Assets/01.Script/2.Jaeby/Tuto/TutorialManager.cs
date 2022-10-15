@@ -298,7 +298,7 @@ public class TutorialManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            DamagePopup.PopupDamage(transform.position + Vector3.up * 0.5f, "10");
+            DamagePopup.PopupDamage(transform.position, 10);
         }
     }
 }
