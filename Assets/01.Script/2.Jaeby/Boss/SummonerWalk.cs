@@ -19,6 +19,7 @@ public class SummonerWalk : BossState<SummonerBoss>
     public override void Enter()
     {
         Debug.Log("Walk State");
+        BossUIManager.Instance.BossPopupText("보스가 움직입니다 씨댄", 0.5f);
         _agent.SetDestination(stateMachineOwnerClass.Target.position);
     }
 
