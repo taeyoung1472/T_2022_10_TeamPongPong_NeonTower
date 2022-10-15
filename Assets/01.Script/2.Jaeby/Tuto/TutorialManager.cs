@@ -34,7 +34,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject _spawnEffectPrefab = null;
     [SerializeField]
-    private GameObject[] _enemyPrefabs = null;
+    private Transform[] _enemyPos = null;
 
     private Sequence _seq = null;
 
@@ -191,13 +191,13 @@ public class TutorialManager : MonoBehaviour
         TextPop("1");
         yield return new WaitForSeconds(0.5f);
         TextPop("Ω√¿€!!");
-        for (int i = 0; i < _enemyPrefabs.Length; i++)
+        for (int i = 0; i < _enemyPos.Length; i++)
         {
-            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPrefabs[i].transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPos[i].transform.position, Quaternion.identity);
             effect.transform.localScale = Vector3.one * 0.05f;
             yield return new WaitForSeconds(1f);
-            _enemyPrefabs[i].SetActive(true);
-            _enemyPrefabs[i].GetComponent<CommonEnemy>().Target = _player;
+            Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
+            enemy.Init(_enemyPos[i].position, _player);
             yield return new WaitForSeconds(1.5f);
         }
     }
