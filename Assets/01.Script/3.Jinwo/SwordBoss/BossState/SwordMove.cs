@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordMove : MonoBehaviour
+public class SwordMove<T> : BossState<T> where T : BossBase<T>
 {
-    void Start()
+    public override void Enter()
     {
         
     }
 
-    void Update()
+    public override void Execute()
     {
-        
     }
+
+    public override void Exit()
+    {
+
+    }
+
+    
 }

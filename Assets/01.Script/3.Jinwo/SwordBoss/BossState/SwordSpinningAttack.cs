@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordSpinningAttack : MonoBehaviour
+public class SwordSpinningAttack<T> : BossState<T> where T : BossBase<T>
 {
-    void Start()
+    public override void Enter()
     {
-        
     }
 
-    void Update()
+    public override void Execute()
     {
-        
+        //var size = Physics.SphereCastNonAlloc(attackRoot.position, attackRadius, direction, hits, deltaDistance,
+        //       whatIsTarget);
     }
+
+    public override void Exit()
+    {
+    }
+
 }

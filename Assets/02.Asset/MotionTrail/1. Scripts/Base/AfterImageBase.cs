@@ -46,8 +46,8 @@ public abstract class AfterImageBase : MonoBehaviour
     protected Queue<AfterImageFaderBase> FaderWaitQueue { get; set; }   // 사용 가능한 목록
     protected Queue<AfterImageFaderBase> FaderRunningQueue { get; set; } // 현재 활성화된 잔상 목록
     protected int AvailableCount => FaderWaitQueue.Count;
-    [SerializeField]
-    protected bool isMotionTrail = false; //모션트레일을 켯는지
+
+    public bool isMotionTrail = false; //모션트레일을 켯는지
 
     /***********************************************************************
     *                               Public Methods

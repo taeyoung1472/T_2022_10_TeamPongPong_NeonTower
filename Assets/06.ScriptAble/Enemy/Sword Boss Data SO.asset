@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3957f29e6d8ba4b8256bcb6d31da96, type: 3}
   m_Name: Sword Boss Data SO
   m_EditorClassIdentifier: Assembly-CSharp::BossDataSO
+  bossProfile: {fileID: 0}
+  bossName: SwordBoss
   speed: 5
   damage: 1
   maxHp: 100
