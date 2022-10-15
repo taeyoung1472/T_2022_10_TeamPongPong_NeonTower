@@ -43,7 +43,7 @@ public class EnemyDataSO : ScriptableObject
     [Header("[박격포 관련]")]
     //박격포 관련
     public int bulletSpeed;
-    public GameObject bulletPrefab;
+    public CannonBall bulletPrefab;
 
 
     [Header("[오디오 관련]")]
