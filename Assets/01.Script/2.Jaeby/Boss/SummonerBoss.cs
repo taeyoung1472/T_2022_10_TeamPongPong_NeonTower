@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class SummonerBoss : BossBase<SummonerBoss>
 {
+
+
     private void Start()
     {
-        bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
-        BossFsm.AddStateList(new SummonerRun());
+        //bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
+        //BossFsm.AddStateList(new SummonerWalk());
+
+
     }
 
     public void Instan(GameObject obj)
@@ -16,7 +20,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
     }
 }
 
-public class SummonerIdle : BossState<SummonerBoss>
+/*public class SummonerIdle : BossState<SummonerBoss>
 {
     public override void Enter()
     {
@@ -28,7 +32,7 @@ public class SummonerIdle : BossState<SummonerBoss>
     {
         yield return new WaitForSeconds(2f);
         stateMachineOwnerClass.Instan(new GameObject());
-        stateMachine.ChangeState<SummonerRun>();
+        stateMachine.ChangeState<SummonerWalk>();
     }
 
     public override void Execute()
@@ -40,7 +44,7 @@ public class SummonerIdle : BossState<SummonerBoss>
     }
 }
 
-public class SummonerRun : BossState<SummonerBoss>
+public class SummonerWalk : BossState<SummonerBoss>
 {
     public override void Enter()
     {
@@ -62,3 +66,4 @@ public class SummonerRun : BossState<SummonerBoss>
     {
     }
 }
+*/
