@@ -45,10 +45,11 @@ public class Bullet : PoolAbleObject
 
                 foreach (var col in cols)
                 {
-                    print(col.name);
+                    //Ã³¸®
                 }
             }
 
+            collision.gameObject.GetComponent<Enemy>().ApplyDamage(data.damage);
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);
         }

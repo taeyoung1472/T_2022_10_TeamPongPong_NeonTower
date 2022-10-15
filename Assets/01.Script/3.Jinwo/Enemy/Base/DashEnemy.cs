@@ -21,7 +21,6 @@ public class DashEnemy : EnemyBase<DashEnemy>
     void Update()
     {
         fsmManager.Execute();
-        Debug.Log(fsmManager.getNowState);
     }
     public override void ChangeAttack()
     {
