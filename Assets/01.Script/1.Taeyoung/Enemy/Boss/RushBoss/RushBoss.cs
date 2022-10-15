@@ -11,13 +11,14 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
-        //StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Acti
         bossFsm = new BossStateMachine<RushBoss>(this, new Idle_RushBoss<RushBoss>());
         bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>());
         bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>());
         bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>());
         bossFsm.AddStateList(new JumpAttack_RushBoss<RushBoss>());
         bossFsm.AddStateList(new Move_RushBoss<RushBoss>());
+
+        StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
     }
 
     protected override void Update()
