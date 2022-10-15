@@ -33,7 +33,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _downImageUI = perent?.GetChild(3).GetComponent<RectTransform>();
 
         _bossHpSlider = perent?.GetChild(4).GetComponent<Slider>();
-        _bossImage = perent?.GetChild(5).GetComponent<Image>();
+        _bossImage = perent?.GetChild(5).Find("Image").GetComponent<Image>();
         _bossNameText = perent?.GetChild(6).GetComponent<TextMeshProUGUI>();
 
         if (_dangerUI != null && _bossNameUI != null)
@@ -53,7 +53,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         if (_currentBoss == null || _bossHpSlider == null || _bossImage == null) return;
 
         _bossHpSlider.gameObject.SetActive(true);
-        _bossImage.gameObject.SetActive(true);
+        _bossImage.transform.parent.gameObject.SetActive(true);
         _bossNameText.gameObject.SetActive(true);
 
         _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
@@ -76,7 +76,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossNameText?.SetText("");
 
         _bossHpSlider.gameObject.SetActive(false);
-        _bossImage.gameObject.SetActive(false);
+        _bossImage.transform.parent.gameObject.SetActive(false);
         _bossNameText.gameObject.SetActive(false);
     }
 
