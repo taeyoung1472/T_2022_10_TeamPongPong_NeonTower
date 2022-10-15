@@ -15,9 +15,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private float _currentShakeAmount = 0f;
 
-    [SerializeField]
-    private BossUI _bossUI = null;
-
     private void OnEnable()
     {
         if (_cmVCam == null)
@@ -106,6 +103,13 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
+    /// <summary>
+    /// 보스 UI 시작 애니메이션입니다
+    /// </summary>
+    /// <param name="쫒아갈 target"></param>
+    /// <param name="다 쫒아가고 얼마나 기다릴 건지"></param>
+    /// <param name="Danger가 얼마나 지속될 것인지"></param>
+    /// <param name="얼마나 줌인할 것인지"></param>
     public void TargetingBossCameraAnimation(Transform bossTrm, float idleTime, float dangerIdleTime, float zoomAmount = 12f)
     {
         Transform lastTarget = _cmVCam.Follow;
@@ -130,7 +134,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
         {
-            _bossUI?.DangerAnimation(dangerIdleTime);
+            BossUIManager.Instance?.DangerAnimation(dangerIdleTime);
         }
         ZoomCamera(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
 

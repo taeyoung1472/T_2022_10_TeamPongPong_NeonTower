@@ -1,19 +1,26 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.UI;
 
-public class BossUI : MonoBehaviour
+public class BossUIManager : MonoSingleTon<BossUIManager>
 {
     private RectTransform _dangerUI = null;
     private RectTransform _bossNameUI = null;
     private RectTransform _upImageUI = null;
     private RectTransform _downImageUI = null;
 
+    private Slider _bossHpSlider = null;
+    private Image _bossImage = null;
+    private TextMeshProUGUI _bossNameText = null;
+
     private Vector3 _dangerOriginPosition = Vector3.zero;
     private Vector3 _bossNameOriginPosition = Vector3.zero;
 
     private Sequence _seq = null;
+
 
     private void Start()
     {
@@ -22,6 +29,10 @@ public class BossUI : MonoBehaviour
         _bossNameUI = perent?.GetChild(1).GetComponent<RectTransform>();
         _upImageUI = perent?.GetChild(2).GetComponent<RectTransform>();
         _downImageUI = perent?.GetChild(3).GetComponent<RectTransform>();
+
+        _bossHpSlider = perent?.GetChild(4).GetComponent<Slider>();
+        _bossImage = perent?.GetChild(5).GetComponent<Image>();
+        _bossNameText = perent?.GetChild(6).GetComponent<TextMeshProUGUI>();
 
         if (_dangerUI != null && _bossNameUI != null)
         {
@@ -32,6 +43,21 @@ public class BossUI : MonoBehaviour
         {
             Debug.Log("¤¸µÊ");
         }
+    }
+
+    public void SetBoss()
+    {
+
+    }
+
+    public void BossDamaged()
+    {
+
+    }
+
+    public void UIReset()
+    {
+
     }
 
     public void DangerAnimation(float dangerIdleTime)
