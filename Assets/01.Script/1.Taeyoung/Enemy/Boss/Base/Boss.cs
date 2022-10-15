@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IDamageable
 {
     #region 변수
     [Header("상태변수")]
@@ -26,5 +26,10 @@ public class Boss : MonoBehaviour
 
     [Header("[Event]")]
     public UnityEvent OnDeathEvent;
+
+    public virtual void ApplyDamage(int dmg)
+    {
+        Debug.Log("나 아야 했어");
+    }
     #endregion
 }
