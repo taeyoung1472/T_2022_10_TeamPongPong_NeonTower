@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossDataSO
   bossProfile: {fileID: 0}
   bossName: SwordBoss
-  speed: 5
+  speed: 3
   damage: 1
   maxHp: 100
   attackRange: 10
