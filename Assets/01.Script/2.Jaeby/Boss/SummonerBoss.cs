@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class SummonerBoss : BossBase<SummonerBoss>
 {
-
-
     private void Start()
     {
-        //bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
-        //BossFsm.AddStateList(new SummonerWalk());
+        bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerIdle());
 
-
+        CurHp = Data.maxHp;
     }
 
     public void Instan(GameObject obj)
     {
         Instantiate(obj);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ApplyDamage(1);
+    }
+
+    public override void ApplyDamage(int dmg)
+    {
+        DamagePopup.PopupDamage(transform.position + Vector3.up * 0.7f, dmg);
+        CurHp -= (float)dmg;
+        BossUIManager.BossDamaged();
+        if(CurHp <= 0)
+        {
+            Debug.Log("»ç¸Á");
+        }
     }
 }
 

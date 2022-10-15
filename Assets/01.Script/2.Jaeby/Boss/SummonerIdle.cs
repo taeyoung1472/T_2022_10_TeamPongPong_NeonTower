@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonerIdle : MonoBehaviour
+public class SummonerIdle : BossState<SummonerBoss>
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Enter()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Execute()
     {
-        
+    }
+
+    public override void Exit()
+    {
     }
 }

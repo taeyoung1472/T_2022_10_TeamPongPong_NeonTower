@@ -60,6 +60,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossNameText.gameObject.SetActive(true);
 
         _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
+        _bossHPText?.SetText($"{Instance._currentBoss.CurHp} / {Instance._currentBoss.Data.maxHp}");
         _bossImage.sprite = _currentBoss.Data.bossProfile;
         _bossNameText?.SetText(_currentBoss.Data.bossName);
     }
