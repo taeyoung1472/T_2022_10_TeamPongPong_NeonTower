@@ -10,8 +10,6 @@ using UnityEngine.SceneManagement;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _testBoss = null;
-    [SerializeField]
     private GameObject _player = null;
     [SerializeField]
     private TextMeshProUGUI _tutorialText = null;
@@ -296,17 +294,4 @@ public class TutorialManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            GameObject obj = Instantiate(_testBoss, new Vector3(-9.78f,0,9.25f), Quaternion.identity);
-            CameraManager.Instance.TargetingBossCameraAnimation(obj.GetComponent<Boss>(), 5f);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            DamagePopup.PopupDamage(transform.position, 10);
-        }
-    }
 }
