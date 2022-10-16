@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
-    //Vector3 goalPoint;
     Transform transform;
     Transform target;
     public override void Enter()
@@ -10,7 +9,6 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         target = stateMachineOwnerClass.Target;
 
         stateMachineOwnerClass.MovementGoal = 1;
-        stateMachineOwnerClass.Agent.enabled = true;
         transform = stateMachineOwnerClass.transform;
     }
 
@@ -25,6 +23,6 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Exit()
     {
-        stateMachineOwnerClass.Agent.enabled = false;
+
     }
 }
