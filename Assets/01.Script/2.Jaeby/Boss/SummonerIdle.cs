@@ -11,12 +11,18 @@ public class SummonerIdle : BossState<SummonerBoss>
     public override void Enter()
     {
         Debug.Log("Idle State");
-        _randomIdleTime = Random.Range(1f, 2f);
+        _randomIdleTime = Random.Range(0.3f, 0.5f);
+        stateMachineOwnerClass.TargetLook();
+        //stateMachineOwnerClass.Animator.transform.rotation =
+        //    Quaternion.LookRotation((stateMachineOwnerClass.transform.position -
+        //    stateMachineOwnerClass.Target.position).normalized);
     }
 
 
     public override void Execute()
     {
+        stateMachineOwnerClass.TargetLook();
+
         if (stateMachine.GetStateDurationTime > _randomIdleTime)
         {
             if (stateMachineOwnerClass.Target != null)
@@ -25,7 +31,7 @@ public class SummonerIdle : BossState<SummonerBoss>
                 _targetPos.y = stateMachineOwnerClass.transform.position.y;
                 if (Vector3.Distance(stateMachineOwnerClass.transform.position, _targetPos) < _patternRange)
                 {
-
+                    stateMachine.ChangeState<SummonerWalk>();
                 }
                 else
                 {

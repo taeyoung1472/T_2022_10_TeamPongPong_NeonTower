@@ -114,6 +114,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
         _dangerUI.anchoredPosition = _dangerOriginPosition;
         _bossNameUI.anchoredPosition = _bossNameOriginPosition;
+        _bossNameUI.GetComponent<TextMeshProUGUI>()?.SetText(boss.Data.bossName);
         _upImageUI.anchoredPosition = Vector2.up * -130f;
         _downImageUI.anchoredPosition = Vector2.up * 130f;
         float x = Screen.currentResolution.width;
