@@ -12,6 +12,7 @@ public class BulletBoss : BossBase<BulletBoss>
         bossFsm.AddStateList(new CircleBullet());
         bossFsm.AddStateList(new StraightBullet());
         bossFsm.AddStateList(new FirecrackerBullet());
+        bossFsm.AddStateList(new Motar());
     }
     public GameObject InstantiateObj(GameObject obj, Transform trm, Quaternion rot)
     {
