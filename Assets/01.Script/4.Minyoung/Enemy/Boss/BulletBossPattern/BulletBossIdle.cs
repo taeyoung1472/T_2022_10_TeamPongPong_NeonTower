@@ -13,9 +13,9 @@ public class BulletBossIdle : BossState<BulletBoss>
 
     public override void Execute()
     {
-        if (stateMachine.GetStateDurationTime > 5)
+        if (stateMachine.GetStateDurationTime > 3f)
         {
-            stateMachine.ChangeState<StraightBullet>();
+            stateMachine.ChangeState<PlayerMotar>();
         }
     }
 

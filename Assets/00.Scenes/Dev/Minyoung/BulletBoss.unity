@@ -2525,8 +2525,8 @@ MonoBehaviour:
   _verticalJump: 0.025
   _horizontalShake: 0.025
   _colorDrift: 0.05
-  cantDoZero: 0
-  additionalCameraData: {fileID: 0}
+  fadeOutImage: {fileID: 0}
+  gameUi: {fileID: 0}
 --- !u!1 &463718923
 GameObject:
   m_ObjectHideFlags: 0
@@ -11207,7 +11207,7 @@ GameObject:
   - component: {fileID: 1991987568}
   - component: {fileID: 1991987569}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BulletBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11247,6 +11247,7 @@ MonoBehaviour:
       m_Calls: []
   bullet: {fileID: 6274670234408716251, guid: 99b1588aa9cc9b547b502ed9910ee146, type: 3}
   firecrackerBullet: {fileID: 6274670234408716251, guid: bc5df0670e49d914aa2360d2331ae334, type: 3}
+  backBullet: {fileID: 3716398474997527372, guid: 74ea67c8698e4db479b951ee1f18527c, type: 3}
 --- !u!1001 &1996971419
 PrefabInstance:
   m_ObjectHideFlags: 0

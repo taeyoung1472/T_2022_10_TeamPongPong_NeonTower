@@ -21,7 +21,8 @@ public class CircleBullet : BossState<BulletBoss>
         int count = 15; //36 10  
         for (int i = 0; i < count; i++)
         {
-            GameObject newBullet = stateMachineOwnerClass.InstantiateObj(bulletBoss.bullet, stateMachineOwnerClass.transform, Quaternion.identity);
+            GameObject newBullet = stateMachineOwnerClass.InstantiateObj
+                (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
 
             Rigidbody rid = newBullet.GetComponent<Rigidbody>();
             //Vector3 dirVec = new Vector3(Mathf.Cos(Mathf.PI * 2 * i) / count, 0f, Mathf.Sin(Mathf.PI * 2 * i) / count);

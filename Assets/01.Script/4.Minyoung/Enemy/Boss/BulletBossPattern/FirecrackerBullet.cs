@@ -22,7 +22,7 @@ public class FirecrackerBullet : BossState<BulletBoss>
         List<Transform> bullets = new List<Transform>();
 
         GameObject newBullet = stateMachineOwnerClass.InstantiateObj(
-            bulletBoss.firecrackerBullet, stateMachineOwnerClass.transform, Quaternion.identity);
+            bulletBoss.firecrackerBullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
         //ÅÍÁö´Â ÆøÁ× ÆÄÆ¼Å¬
         //»õ·Î¿î ÃÑ¾Ë
         yield return new WaitForSeconds(1f);
@@ -31,7 +31,8 @@ public class FirecrackerBullet : BossState<BulletBoss>
         GameObject circleBullet = null;
         for (int i = 0; i < count; i++)
         {
-             circleBullet = stateMachineOwnerClass.InstantiateObj(bulletBoss.bullet, stateMachineOwnerClass.transform, Quaternion.identity);
+             circleBullet = stateMachineOwnerClass.InstantiateObj(
+                 bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
 
             Rigidbody rid = circleBullet.GetComponent<Rigidbody>();
             circleBullet.transform.rotation = Quaternion.AngleAxis(i * (360 / count), Vector3.up);
@@ -47,12 +48,13 @@ public class FirecrackerBullet : BossState<BulletBoss>
             for (int i = 0; i < 5; i++)
             {
                 GameObject copyBullet = stateMachineOwnerClass.InstantiateObj(
-                    bulletTrm.gameObject, bulletTrm, bulletTrm.rotation);
+                    bulletTrm.gameObject, bulletTrm.position, bulletTrm.rotation);
                 SetBulletInfo(copyBullet, copyBullet.transform);
             }
             SetBulletInfo(circleBullet, bulletTrm);
         }
         yield return new WaitForSeconds(1f);
+        stateMachine.ChangeState<PlayerMotar>();
     }
     private void SetBulletInfo(GameObject circleBullet, Transform bulletTrm)
     {
@@ -66,7 +68,7 @@ public class FirecrackerBullet : BossState<BulletBoss>
         Rigidbody rid = circleBullet.GetComponent<Rigidbody>();
         rid.velocity = Vector3.zero;
         bulletTrm.rotation *= Quaternion.Euler(new Vector3(0, Random.Range(-50f, 50f), 0));
-        rid.AddForce(circleBullet.transform.forward * 3f, ForceMode.Impulse);
+        rid.AddForce(circleBullet.transform.forward * 7f, ForceMode.Impulse);
     }
 
     public override void Exit()

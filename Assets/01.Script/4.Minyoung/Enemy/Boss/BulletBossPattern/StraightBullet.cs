@@ -28,7 +28,7 @@ public class StraightBullet : BossState<BulletBoss>
             {
                 bulletBoss.LookTarget(); //보스가 플레이어를 바라본다
                 GameObject newbullet = stateMachineOwnerClass.InstantiateObj
-                    (bulletBoss.bullet, stateMachineOwnerClass.transform, Quaternion.identity);
+                    (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
 
                 newbullet.transform.rotation = Quaternion.LookRotation
                     (stateMachineOwnerClass.Target.position - stateMachineOwnerClass.transform.position);
