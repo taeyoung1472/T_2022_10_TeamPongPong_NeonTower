@@ -2,15 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordSpinningAttack : MonoBehaviour
+public class SwordSpinningAttack<T> : BossState<T> where T : Sword
 {
-    void Start()
+    //2¹øÀÓ
+    private Animator animator;
+    private Transform characterTransform;
+
+
+    private int hashAttack = Animator.StringToHash("Attack");
+
+    public override void OnAwake()
     {
-        
+        animator = stateMachineOwnerClass.GetComponentInChildren<Animator>();
+        characterTransform = stateMachineOwnerClass.GetComponent<Transform>();
+
+    }
+    public override void Enter()
+    {
+        animator.SetInteger(hashAttack, 2);
     }
 
-    void Update()
+
+    public override void Execute()
     {
-        
+        //var size = Physics.SphereCastNonAlloc(attackRoot.position, attackRadius, direction, hits, deltaDistance,
+        //       whatIsTarget);
     }
+
+    public override void Exit()
+    {
+    }
+
 }

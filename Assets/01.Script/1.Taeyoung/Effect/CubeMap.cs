@@ -9,13 +9,13 @@ public class CubeMap : MonoBehaviour
 {
     protected List<Transform> prevPattern = new();
 
-    protected List<Pattern> pattern = new();
+    protected List<Pattern> patternList = new();
     protected int prevIdx = -1;
     protected virtual void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            pattern.Add(new Pattern(transform.GetChild(i)));
+            patternList.Add(new Pattern(transform.GetChild(i)));
         }
 
         StartCoroutine(MapCycle());
@@ -24,10 +24,10 @@ public class CubeMap : MonoBehaviour
     {
         while (true)
         {
-            int randIdx = Random.Range(0, pattern.Count);
+            int randIdx = Random.Range(0, patternList.Count);
             while (randIdx == prevIdx)
             {
-                randIdx = Random.Range(0, pattern.Count);
+                randIdx = Random.Range(0, patternList.Count);
             }
             prevIdx = randIdx;
 
@@ -38,7 +38,7 @@ public class CubeMap : MonoBehaviour
 
             prevPattern.Clear();
 
-            foreach (Transform cube in pattern[randIdx].Cubes)
+            foreach (Transform cube in patternList[randIdx].Cubes)
             {
                 ActiveCube(cube);
                 prevPattern.Add(cube);

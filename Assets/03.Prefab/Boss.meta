@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: 64cd506af2153764290e74e1800919c7
+<<<<<<<< HEAD:Assets/03.Prefab/Boss.meta
+guid: 7266454131e4b3a428a90f79e0305955
 folderAsset: yes
+========
+guid: f84b1a03ad7e89847a42377fdc96d921
+>>>>>>>> 737738110045d1272289b292bf5c5e967f17ac60:Assets/02.Asset/Hovl Studio/Render Pipelines support/Unity 2019.2+ URP.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

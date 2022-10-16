@@ -85,6 +85,7 @@ public class Enemy : PoolAbleObject, IDamageable
     public void ApplyDamage(int dmg)
     {
         health -= dmg;
+        DamagePopup.PopupDamage(transform.position, dmg);
         if(health <= 0)
         {
             Die();
