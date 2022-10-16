@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 using System.ComponentModel.Design;
+using UnityEngine.AI;
 
 public class Enemy : PoolAbleObject, IDamageable
 {
@@ -61,6 +62,14 @@ public class Enemy : PoolAbleObject, IDamageable
         if (OnDeath != null) OnDeath?.Invoke();
     }
 
+    public void Init(Vector3 initPos, GameObject target)
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+        transform.position = initPos;
+        Target = target.gameObject;
+        GetComponent<NavMeshAgent>().enabled = true;
+    }
+
     #region PoolAble
     public override void Init_Pop()
     {
@@ -76,6 +85,7 @@ public class Enemy : PoolAbleObject, IDamageable
     public void ApplyDamage(int dmg)
     {
         health -= dmg;
+        DamagePopup.PopupDamage(transform.position, dmg);
         if(health <= 0)
         {
             Die();

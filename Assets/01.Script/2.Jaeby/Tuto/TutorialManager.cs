@@ -10,6 +10,10 @@ using UnityEngine.SceneManagement;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject _testBoss = null;
+    [SerializeField]
+    private GameObject _player = null;
+    [SerializeField]
     private TextMeshProUGUI _tutorialText = null;
     [SerializeField]
     private Transform _tutorialTextPos = null;
@@ -31,7 +35,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject _spawnEffectPrefab = null;
     [SerializeField]
-    private GameObject[] _enemyPrefabs = null;
+    private Transform[] _enemyPos = null;
 
     private Sequence _seq = null;
 
@@ -188,12 +192,15 @@ public class TutorialManager : MonoBehaviour
         TextPop("1");
         yield return new WaitForSeconds(0.5f);
         TextPop("Ω√¿€!!");
-        for (int i = 0; i < _enemyPrefabs.Length; i++)
+        for (int i = 0; i < _enemyPos.Length; i++)
         {
-            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPrefabs[i].transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPos[i].transform.position, Quaternion.identity);
             effect.transform.localScale = Vector3.one * 0.05f;
             yield return new WaitForSeconds(1f);
-            _enemyPrefabs[i].SetActive(true);
+            Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
+            enemy.Init(_enemyPos[i].position, _player);
+            if (i == _enemyPos.Length - 1)
+                enemy.OnDeath.AddListener(Test3Clear);
             yield return new WaitForSeconds(1.5f);
         }
     }
@@ -294,7 +301,12 @@ public class TutorialManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha0))
         {
-            CameraManager.Instance.TargetingBossCameraAnimation(transform, 5f, 3f);
+            GameObject obj = Instantiate(_testBoss, new Vector3(-9.78f,0,9.25f), Quaternion.identity);
+            CameraManager.Instance.TargetingBossCameraAnimation(obj.GetComponent<Boss>(), 5f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            DamagePopup.PopupDamage(transform.position, 10);
         }
     }
 }

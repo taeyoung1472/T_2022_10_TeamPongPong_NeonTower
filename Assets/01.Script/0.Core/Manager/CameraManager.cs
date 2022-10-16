@@ -110,15 +110,13 @@ public class CameraManager : MonoSingleTon<CameraManager>
     /// <param name="다 쫒아가고 얼마나 기다릴 건지"></param>
     /// <param name="Danger가 얼마나 지속될 것인지"></param>
     /// <param name="얼마나 줌인할 것인지"></param>
-    public void TargetingBossCameraAnimation(Transform bossTrm, float idleTime, float dangerIdleTime, float zoomAmount = 12f)
+    public void TargetingBossCameraAnimation(Boss boss, float idleTime, float zoomAmount = 12f)
     {
         Transform lastTarget = _cmVCam.Follow;
-        _cmVCam.Follow = bossTrm;
+        _cmVCam.Follow = boss.transform;
         float last = _cmVCam.m_Lens.FieldOfView;
-
-        if (dangerIdleTime == 0f)
-            dangerIdleTime = 3f;
-        StartCoroutine(TargetingCameraCoroutine(true, last, lastTarget, idleTime, dangerIdleTime, zoomAmount));
+        float dangerIdleTime = idleTime - 2f;
+        StartCoroutine(TargetingCameraCoroutine(true, last, lastTarget, idleTime, dangerIdleTime, zoomAmount, boss));
     }
 
     public void TargetingCameraAnimation(Transform target, float idleTime, float zoomAmount = 12f)
@@ -129,12 +127,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
         StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime,0f, zoomAmount));
     }
 
-    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount)
+    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
     {
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
         {
-            BossUIManager.Instance?.DangerAnimation(dangerIdleTime);
+            BossUIManager.Instance?.DangerAnimation(dangerIdleTime, boss);
         }
         ZoomCamera(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
 

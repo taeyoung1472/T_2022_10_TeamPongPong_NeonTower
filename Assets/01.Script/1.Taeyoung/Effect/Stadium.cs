@@ -1,16 +1,39 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stadium : CubeMap
 {
-    [SerializeField] private Pattern stadium;
+    private Pattern stadium;
 
     protected override void Start()
     {
-
+        // DoNothing
     }
 
+    public void Active()
+    {
+        gameObject.SetActive(true);
+        if (stadium == null)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (i == 0)
+                {
+                    stadium = new Pattern(transform.GetChild(i));
+                }
+                else
+                {
+                    patternList.Add(new Pattern(transform.GetChild(i)));
+                }
+            }
+        }
+        foreach (var cube in stadium.Cubes)
+        {
+            ActiveCube(cube);
+        }
+    }
     public void ActivePattern(int index)
     {
         foreach (var cube in prevPattern)
@@ -20,7 +43,7 @@ public class Stadium : CubeMap
 
         prevPattern.Clear();
 
-        foreach (var cube in pattern[index].Cubes)
+        foreach (var cube in patternList[index].Cubes)
         {
             ActiveCube(cube);
         }
@@ -30,11 +53,10 @@ public class Stadium : CubeMap
         foreach (var cube in stadium.Cubes)
         {
             DeActiveCube(cube);
-            cube.GetComponent<PerinNoiseCube>().enabled = false;
         }
         this.Invoke(() => gameObject.SetActive(false), 5);
     }
-    class PerinNoiseCube : MonoBehaviour
+    /*class PerinNoiseCube : MonoBehaviour
     {
         MeshRenderer meshRenderer;
         float perinValue;
@@ -49,7 +71,7 @@ public class Stadium : CubeMap
             transform.localScale = new Vector3(1, Mathf.Lerp(transform.localScale.y, 3 + perinValue * 2.5f, Time.deltaTime * 5), 1);
             meshRenderer.material.color = Color.Lerp(Color.white, Color.black, perinValue);
         }
-    }
+    }*/
 
 #if UNITY_EDITOR
     protected override void OnDrawGizmos()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class RushAttack_RushBoss<T> : BossState<RushBoss> where T : BossState<T>
+public class RushAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
