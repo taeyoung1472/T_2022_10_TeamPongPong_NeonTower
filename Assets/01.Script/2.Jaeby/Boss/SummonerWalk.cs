@@ -19,13 +19,10 @@ public class SummonerWalk : BossState<SummonerBoss>
     public override void Enter()
     {
         Debug.Log("Walk State");
-        BossUIManager.Instance.BossPopupText("보스가 움직입니다", 0.5f);
+        BossUIManager.Instance.BossPopupText("보스가 움직입니다", 0.5f, 0);
         stateMachineOwnerClass.Animator.SetBool(_walkHash, true);
         _agent.SetDestination(stateMachineOwnerClass.Target.position);
         stateMachineOwnerClass.TargetLook();
-        //stateMachineOwnerClass.Animator.transform.rotation =
-        //    Quaternion.LookRotation((stateMachineOwnerClass.transform.position -
-        //    stateMachineOwnerClass.Target.position).normalized);
     }
 
     public override void Execute()
@@ -37,7 +34,7 @@ public class SummonerWalk : BossState<SummonerBoss>
 
             _targetPos = _agent.destination;
             _targetPos.y = stateMachineOwnerClass.transform.position.y;
-            if(Vector3.Distance(stateMachineOwnerClass.transform.position, _targetPos) < 2f)
+            if(Vector3.Distance(stateMachineOwnerClass.transform.position, _targetPos) < stateMachineOwnerClass.AttackDataSO.keepDistance)
             {
                 stateMachine.ChangeState<SummonerIdle>();
             }
@@ -47,13 +44,10 @@ public class SummonerWalk : BossState<SummonerBoss>
     public override void Exit()
     {
         stateMachineOwnerClass.Animator.SetBool(_walkHash, false);
-        Vector3 eu = stateMachineOwnerClass.Animator.transform.rotation.eulerAngles;
-        stateMachineOwnerClass.Animator.transform.rotation = Quaternion.Euler(eu.x, eu.y, 0f);
+        //Vector3 eu = stateMachineOwnerClass.Animator.transform.rotation.eulerAngles;
+        //stateMachineOwnerClass.Animator.transform.rotation = Quaternion.Euler(eu.x, eu.y, 0f);
+        stateMachineOwnerClass.ModelReset();
 
-        //stateMachineOwnerClass.TargetLook();
-        //stateMachineOwnerClass.Animator.transform.rotation = 
-        //    Quaternion.LookRotation((stateMachineOwnerClass.transform.position - 
-        //    stateMachineOwnerClass.Target.position).normalized);
         _agent.ResetPath();
     }
 

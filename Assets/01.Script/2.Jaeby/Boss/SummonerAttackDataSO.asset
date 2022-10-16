@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f8edecfc044584fb400ff8606efed1, type: 3}
   m_Name: SummonerAttackDataSO
   m_EditorClassIdentifier: 
-  _laserAttackDistance: 9
-  _summonAttackDistance: 55
-  _slowAttackDistance: 55
+  keepDistance: 4
+  randomIdleTime: {x: 0.2, y: 0.5}
+  laserAttackDistance: 5
+  laserAttackDangerInterval: 0.3
+  summonAttackCooltime: 10
+  spawnerRandomCircle: 5
+  slowAttackCololtime: 16
+  slowRandomCircle: 4
+  spawner: {fileID: 0}
+  slowClrcle: {fileID: 0}

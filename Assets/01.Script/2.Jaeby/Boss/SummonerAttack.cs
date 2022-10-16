@@ -11,29 +11,23 @@ public class SummonerAttack : BossState<SummonerBoss>
 
     public override void Execute()
     {
-        if (stateMachineOwnerClass.SlowCooltime > stateMachineOwnerClass.AttackDataSO._slowAttackCololtime)
-        {
-            stateMachine.ChangeState<SummonerSkillSlow>();
-        }
-        else if (stateMachineOwnerClass.SlowCooltime > stateMachineOwnerClass.AttackDataSO._summonAttackCooltime)
-        {
-            stateMachine.ChangeState<SummonerSkillSummon>();
-        }
+        stateMachineOwnerClass.TargetLook();
 
         Vector3 targetPos = stateMachineOwnerClass.Target.position;
         targetPos.y = stateMachineOwnerClass.transform.position.y;
-        if (Vector3.Distance(targetPos, stateMachineOwnerClass.transform.position) < stateMachineOwnerClass.AttackDataSO._laserAttackDistance)
-        {
-            stateMachine.ChangeState<SummonerSkillLaser>();
-        }
-        /*else if (Vector3.Distance(targetPos, stateMachineOwnerClass.transform.position) < stateMachineOwnerClass.AttackDataSO._slowAttackDistance)
+
+        if (stateMachineOwnerClass.SlowCooltime > stateMachineOwnerClass.AttackDataSO.slowAttackCololtime)
         {
             stateMachine.ChangeState<SummonerSkillSlow>();
         }
-        else if (Vector3.Distance(targetPos, stateMachineOwnerClass.transform.position) < stateMachineOwnerClass.AttackDataSO._summonAttackDistance)
+        else if (stateMachineOwnerClass.SummonCooltime > stateMachineOwnerClass.AttackDataSO.summonAttackCooltime)
         {
             stateMachine.ChangeState<SummonerSkillSummon>();
-        }*/
+        }
+        else if (Vector3.Distance(targetPos, stateMachineOwnerClass.transform.position) < stateMachineOwnerClass.AttackDataSO.laserAttackDistance)
+        {
+            stateMachine.ChangeState<SummonerSkillLaser>();
+        }
     }
 
     public override void Exit()

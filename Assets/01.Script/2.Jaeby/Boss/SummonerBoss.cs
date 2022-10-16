@@ -87,6 +87,17 @@ public class SummonerBoss : BossBase<SummonerBoss>
     {
         bossFsm.ChangeState<SummonerIdle>();
     }
+
+    public GameObject MonoInstantiate(GameObject obj, Vector3 position, Quaternion rotation)
+    {
+        GameObject gameObject = Instantiate(obj, position, rotation);
+        return gameObject;
+    }
+
+    public void ModelReset()
+    {
+        Animator.transform.localRotation = Quaternion.identity;
+    }
 }
 
 public class SummonerStartState : BossState<SummonerBoss>
