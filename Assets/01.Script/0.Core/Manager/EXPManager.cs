@@ -56,7 +56,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
         {
             curExp = 0;
             curLevel++;
-            Glitch.GlitchManager.Instance.ZeroValue();
+            //Glitch.GlitchManager.Instance.ZeroValue();
             LevelUdateText();
             //slotMachineManager.Make();
             //slotMachine.StartRolling();
