@@ -9716,6 +9716,7 @@ MonoBehaviour:
       m_Calls: []
   _laserModel: {fileID: 1841665401534506315}
   _summonerAttackDataSO: {fileID: 11400000, guid: a9c6808140046f146adf9230867bdd82, type: 2}
+  _sameSkillCooltime: 4
 --- !u!195 &1840284044957577921
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -14973,11 +14974,11 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 4.57}
+  - {x: 0, y: 0, z: 4.61}
   - {x: 0, y: 0, z: 6.6}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.8
     widthCurve:
       serializedVersion: 2
       m_Curve:

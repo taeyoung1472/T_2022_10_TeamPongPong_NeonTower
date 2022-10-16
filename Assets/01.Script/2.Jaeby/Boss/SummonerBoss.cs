@@ -8,6 +8,8 @@ public class SummonerBoss : BossBase<SummonerBoss>
     private readonly string _startAnim = "StartAnimation";
     public string StartAnim => _startAnim;
     [SerializeField]
+    private float _speed = 8f;
+    [SerializeField]
     private GameObject _laserModel = null;
     public GameObject LaserModel => _laserModel;
 
@@ -15,8 +17,19 @@ public class SummonerBoss : BossBase<SummonerBoss>
     private SummonerAttackDataSO _summonerAttackDataSO = null;
     public SummonerAttackDataSO AttackDataSO => _summonerAttackDataSO;
 
-    [SerializeField]
-    private float _sameSkillCooltime = 4f;
+    private float _slowCooltime = 0f;
+    private float _summonCooltime = 0f;
+
+    public float SlowCooltime
+    {
+        get => _slowCooltime;
+        set => _slowCooltime = value;
+    }
+    public float SummonCooltime
+    {
+        get => _summonCooltime;
+        set => _summonCooltime = value;
+    }
 
     private Collider _col = null;
     public Collider Col => _col;
@@ -31,6 +44,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
         agent.updatePosition = true;
         agent.updateRotation = false;
         _col.enabled = false;
+        agent.speed = _speed;
 
         bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerStartState());
         bossFsm.AddStateList(new SummonerAttack());
@@ -41,6 +55,12 @@ public class SummonerBoss : BossBase<SummonerBoss>
         bossFsm.AddStateList(new SummonerWalk());
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        _slowCooltime += Time.deltaTime;
+        _summonCooltime += Time.deltaTime;  
+    }
 
     public override void ApplyDamage(int dmg)
     {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class SummonerAttackDataSO : ScriptableObject
 {
     public float _laserAttackDistance = 5f;
-    public float _summonAttackDistance = 4f;
-    public float _slowAttackDistance = 6f;
+    public float _laserAttackDangerInterval = 0.2f;
+    public float _summonAttackCooltime = 4f;
+    public float _slowAttackCololtime = 6f;
 }

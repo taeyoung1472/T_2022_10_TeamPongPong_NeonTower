@@ -6,16 +6,16 @@ public class SummonerSkillSummon : BossState<SummonerBoss>
 {
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        BossUIManager.Instance.BossPopupText("스포너를 소환합니다. 스포너를 찾아 부수세요", 1f);
+        stateMachineOwnerClass.SummonCooltime = 0f;
+        stateMachine.ChangeState<SummonerIdle>();
     }
 
     public override void Execute()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
     }
 }
