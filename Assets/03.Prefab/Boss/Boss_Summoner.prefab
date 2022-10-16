@@ -9715,6 +9715,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _laserModel: {fileID: 1841665401534506315}
+  _summonerAttackDataSO: {fileID: 11400000, guid: a9c6808140046f146adf9230867bdd82, type: 2}
 --- !u!195 &1840284044957577921
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -14912,7 +14913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1839045322470358899
 Transform:
   m_ObjectHideFlags: 0
@@ -14972,7 +14973,8 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 9.02}
+  - {x: 0, y: 0, z: 4.57}
+  - {x: 0, y: 0, z: 6.6}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5
@@ -15010,7 +15012,7 @@ LineRenderer:
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 17348
+      ctime0: 48766
       ctime1: 65535
       ctime2: 0
       ctime3: 0

@@ -11,16 +11,32 @@ public class SummonerBoss : BossBase<SummonerBoss>
     private GameObject _laserModel = null;
     public GameObject LaserModel => _laserModel;
 
+    [SerializeField]
+    private SummonerAttackDataSO _summonerAttackDataSO = null;
+    public SummonerAttackDataSO AttackDataSO => _summonerAttackDataSO;
+
+    [SerializeField]
+    private float _sameSkillCooltime = 4f;
+
+    private Collider _col = null;
+    public Collider Col => _col;
+
     private void Start()
     {
+        _col = GetComponent<Collider>();
         animator = transform.GetChild(0).Find("Model").GetComponent<Animator>();
         CurHp = Data.maxHp;
         _laserModel.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;
         agent.updateRotation = false;
+        _col.enabled = false;
 
         bossFsm = new BossStateMachine<SummonerBoss>(this, new SummonerStartState());
+        bossFsm.AddStateList(new SummonerAttack());
+        bossFsm.AddStateList(new SummonerSkillLaser());
+        bossFsm.AddStateList(new SummonerSkillSlow());
+        bossFsm.AddStateList(new SummonerSkillSummon());
         bossFsm.AddStateList(new SummonerIdle());
         bossFsm.AddStateList(new SummonerWalk());
     }
@@ -46,6 +62,11 @@ public class SummonerBoss : BossBase<SummonerBoss>
         Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(distance.normalized), Time.deltaTime * 20f);
         transform.rotation = rot;
     }
+
+    public void GoIdleState()
+    {
+        bossFsm.ChangeState<SummonerIdle>();
+    }
 }
 
 public class SummonerStartState : BossState<SummonerBoss>
@@ -59,6 +80,7 @@ public class SummonerStartState : BossState<SummonerBoss>
         stateMachineOwnerClass.Animator.Play(stateMachineOwnerClass.StartAnim);
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName(stateMachineOwnerClass.StartAnim) == false);
+        stateMachineOwnerClass.Col.enabled = true;
         stateMachine.ChangeState<SummonerIdle>();
     }
 

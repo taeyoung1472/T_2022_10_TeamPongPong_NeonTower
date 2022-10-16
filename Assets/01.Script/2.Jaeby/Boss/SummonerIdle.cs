@@ -31,7 +31,7 @@ public class SummonerIdle : BossState<SummonerBoss>
                 _targetPos.y = stateMachineOwnerClass.transform.position.y;
                 if (Vector3.Distance(stateMachineOwnerClass.transform.position, _targetPos) < _patternRange)
                 {
-                    stateMachine.ChangeState<SummonerWalk>();
+                    stateMachine.ChangeState<SummonerAttack>();
                 }
                 else
                 {
@@ -43,5 +43,6 @@ public class SummonerIdle : BossState<SummonerBoss>
 
     public override void Exit()
     {
+        stateMachineOwnerClass.TargetLook();
     }
 }
