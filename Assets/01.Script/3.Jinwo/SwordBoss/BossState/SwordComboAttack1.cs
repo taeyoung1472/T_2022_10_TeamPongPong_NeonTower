@@ -26,7 +26,7 @@ public class SwordComboAttack1<T> : BossState<T> where T : Sword
     {
         if (!stateMachineOwnerClass.isAttacking)
         {
-            stateMachineOwnerClass.BossFsm.ChangeState<SwordMove<Sword>>();
+            stateMachineOwnerClass.BossFsm.ChangeState<SwordIdle<Sword>>();
         }
     }
 

@@ -21,17 +21,26 @@ public class SwordIdle<T> : BossState<T> where T : Sword
     }
     public override void Enter()
     {
-        stateMachineOwnerClass.attackCoolTime = stateMachineOwnerClass.Data.patternCoolTime;
+        agent.speed = 0;
+        stateMachineOwnerClass.attackCoolTime = 0;
     }
 
     public override void Execute()
     {
 
+        stateMachineOwnerClass.attackCoolTime += Time.deltaTime;
+        if (stateMachineOwnerClass.attackCoolTime >= stateMachineOwnerClass.Data.patternCoolTime)
+        // ÄðÅ¸ÀÓ ´Ùµ¼
+        {
+            agent.isStopped = false;
+            stateMachineOwnerClass.BossFsm.ChangeState<SwordMove<Sword>>();
+            //stateMachineOwnerClass.ChangeAttack();
+        }
     }
 
     public override void Exit()
     {
-        agent.isStopped = true;
+        
     }
 
 }

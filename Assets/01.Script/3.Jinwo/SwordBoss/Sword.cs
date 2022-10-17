@@ -18,6 +18,7 @@ public class Sword : BossBase<Sword>
     public float dashspeed = 10f;
     public float dashTime = 0;
 
+    public float[] radius;
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
@@ -30,9 +31,9 @@ public class Sword : BossBase<Sword>
     {
         base.Awake();
 
-        bossFsm = new BossStateMachine<Sword>(this, new SwordMove<Sword>());
+        bossFsm = new BossStateMachine<Sword>(this, new SwordIdle<Sword>());
 
-        //bossFsm.AddStateList(new SwordMove<Sword>());
+        bossFsm.AddStateList(new SwordMove<Sword>());
 
         bossFsm.AddStateList(new SwordSpinningAttack<Sword>());
         bossFsm.AddStateList(new SwordTakeDownAttack<Sword>());
@@ -44,6 +45,8 @@ public class Sword : BossBase<Sword>
 
         attackCoolTime = data.patternCoolTime;
         currentAttackType = 0;
+
+       // motionTrail._data.
     }
     private void Start()
     {
@@ -71,21 +74,25 @@ public class Sword : BossBase<Sword>
             yield return null;
         }
     }
-    public void ChangeAttack()
+    public int SelectAttackType()
     {
         int attackType = Random.Range(1, 8);
         currentAttackType = attackType - 1;
 
-        switch (attackType)
+        
+
+        return attackType;
+    }
+    public void ChangeAttack()
+    {
+       
+
+        switch (currentAttackType+1)
         {
             case 1:
-                
-                //StartCoroutine(SwordDash());
                 bossFsm.ChangeState<SwordDistortionSlash<Sword>>(); // 외곡 찍기
-                
                 break;
             case 2:
-               // StartCoroutine(SwordDash());
                 bossFsm.ChangeState<SwordTakeDownAttack<Sword>>(); // 내려찍기
                 break;
             case 3:
@@ -98,11 +105,9 @@ public class Sword : BossBase<Sword>
                 bossFsm.ChangeState<SwordComboAttack2<Sword>>();  //연속베기 (콤보2)
                 break;
             case 6:
-                //StartCoroutine(SwordDash());
                 bossFsm.ChangeState<SwordCircleRangeAttack<Sword>>();  //원 범위 공격 ( 텔, 대쉬해서 공격)
                 break;
             case 7:
-               // StartCoroutine(SwordDash());
                 bossFsm.ChangeState<SwordBaldoAttack<Sword>>();  //발도 기술
                 break;
         }

@@ -28,7 +28,7 @@ public class SwordBaldoAttack<T> : BossState<T> where T : Sword
         //       whatIsTarget);
         if (!stateMachineOwnerClass.isAttacking)
         {
-            stateMachineOwnerClass.BossFsm.ChangeState<SwordMove<Sword>>();
+            stateMachineOwnerClass.BossFsm.ChangeState<SwordIdle<Sword>>();
         }
     }
 

@@ -27,9 +27,10 @@ public class SwordSpinningAttack<T> : BossState<T> where T : Sword
         //var size = Physics.SphereCastNonAlloc(attackRoot.position, attackRadius, direction, hits, deltaDistance,
         //       whatIsTarget);
 
+
         if (!stateMachineOwnerClass.isAttacking)
         {
-            stateMachineOwnerClass.BossFsm.ChangeState<SwordMove<Sword>>();
+            stateMachineOwnerClass.BossFsm.ChangeState<SwordIdle<Sword>>();
         }
     }
 

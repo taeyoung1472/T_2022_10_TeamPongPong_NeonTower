@@ -11,6 +11,7 @@ public abstract class AfterImageBase : MonoBehaviour
     /***********************************************************************
     *                               Public Fields
     ***********************************************************************/
+    public MeshRenderer myMesh;
     public Material _afterImageMaterial;
     public Gradient _afterImageGradient = new Gradient()
     {
@@ -75,6 +76,7 @@ public abstract class AfterImageBase : MonoBehaviour
     protected void UpdateColor()
     {
         _currentColor = _afterImageGradient.Evaluate(_currentElapsedColorUpdateTime);
+
     }
     protected void BakeImage()
     {
@@ -99,6 +101,11 @@ public abstract class AfterImageBase : MonoBehaviour
     *                               Unity Events
     ***********************************************************************/
     #region .
+    private void Awake()
+    {
+        myMesh = GetComponent<MeshRenderer>();
+        myMesh.material.SetFloat(_data.shaderAlphaName, 0.3f);
+    }
     protected void Start()
     {
         Init();

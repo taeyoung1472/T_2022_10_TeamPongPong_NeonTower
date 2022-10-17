@@ -22,6 +22,7 @@ public sealed class MeshAfterImage : AfterImageBase
     #region .
     protected override void Init()
     {
+        
         // 1. Target Meshes
         if (_containChildrenMeshes)
             TargetMeshFilterArray = GetComponentsInChildren<MeshFilter>();
@@ -38,8 +39,9 @@ public sealed class MeshAfterImage : AfterImageBase
         _faderContainer.transform.localScale = transform.localScale;
 
         _data.Mat = _afterImageMaterial;
-
+        //_data.Mat.color = new Vector4(_data.Mat.color.r, _data.Mat.color.g, _data.Mat.color.b, 0.4f);
         isMotionTrail = false;
+        
     }
 
     protected override void SetupFader(out AfterImageFaderBase fader)
@@ -49,6 +51,7 @@ public sealed class MeshAfterImage : AfterImageBase
 
         fader = faderGo.AddComponent<MeshAfterImageFader>();
         fader.Setup(TargetMeshFilterArray, _data, this);
+
     }
 
     #endregion
