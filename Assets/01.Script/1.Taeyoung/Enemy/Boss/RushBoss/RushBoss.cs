@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -62,5 +63,27 @@ public class RushBoss : BossBase<RushBoss>
     public void ModelReset()
     {
         Animator.transform.localRotation = Quaternion.identity;
+    }
+
+    public void GoIdleState()
+    {
+        bossFsm.ChangeState<Idle_RushBoss<RushBoss>>();
+    }
+
+
+    public void DoPunch(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                StartCoroutine(PunchCoroutine());
+                break;
+        }
+    }
+
+    private IEnumerator PunchCoroutine()
+    {
+        DangerZone.DrawArc(transform.position, transform.forward, 180f, new Vector3(4f, 0f, 4f), 0.2f);
+        yield return new WaitForSeconds(0.2f);
     }
 }

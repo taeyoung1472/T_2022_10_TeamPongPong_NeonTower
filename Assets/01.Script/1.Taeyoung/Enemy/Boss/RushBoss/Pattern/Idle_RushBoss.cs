@@ -21,7 +21,7 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         tar.y = stateMachineOwnerClass.transform.position.y;
         if(Vector3.Distance(stateMachineOwnerClass.transform.position, tar) < stateMachineOwnerClass.AttackDataSO.attackDistance)
         {
-
+            stateMachine.ChangeState<MeleeAttack_RushBoss<RushBoss>>();
         }
 
         if (stateMachine.GetStateDurationTime > _randomTime)
