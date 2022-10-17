@@ -18,26 +18,21 @@ public class CircleBullet : BossState<BulletBoss>
     }
     IEnumerator CircleAtk()
     {
-        int count = 15; //36 10  
-        for (int i = 0; i < count; i++)
+
+        for (int i = 0; i < bulletBoss.FireCircleCnt; i++)
         {
             GameObject newBullet = stateMachineOwnerClass.InstantiateObj
                 (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
 
             Rigidbody rid = newBullet.GetComponent<Rigidbody>();
-            //Vector3 dirVec = new Vector3(Mathf.Cos(Mathf.PI * 2 * i) / count, 0f, Mathf.Sin(Mathf.PI * 2 * i) / count);
-            //rid.AddForce(dirVec.normalized * 3, ForceMode.Impulse);
 
-            newBullet.transform.rotation = Quaternion.AngleAxis(i * (360 / count), Vector3.up);
+            newBullet.transform.rotation = Quaternion.AngleAxis(i * (360 / bulletBoss.FireCircleCnt), Vector3.up);
             Debug.Log(newBullet.transform.eulerAngles.y);
-            rid.AddForce(newBullet.transform.forward * 3f, ForceMode.Impulse);
-
-            //Vector3 rotVec = Vector3.forward * 360 * i / count + Vector3.forward * 90;
-            //newBullet.transform.Rotate(rotVec);
+            rid.AddForce(newBullet.transform.forward * bulletBoss.CirclePower, ForceMode.Impulse);
         }
+
         yield return new WaitForSeconds(1f);
         stateMachine.ChangeState<FirecrackerBullet>();
-        Debug.Log("けけいし");
     }
     public override void Exit()
     {

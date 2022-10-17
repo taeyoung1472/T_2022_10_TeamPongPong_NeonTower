@@ -30,8 +30,8 @@ public class PlayerMotar : BossState<BulletBoss>
             obj.transform.DOScale(new Vector3(1.5f, 1f, 1.5f), 1f);
             obj.transform.DOMoveY(1f, 1f);
             yield return new WaitForSeconds(0.05f);
-            stateMachineOwnerClass.InstantiateObj(bulletBoss.backBullet, dir, Quaternion.identity);
-
+           GameObject bullet = stateMachineOwnerClass.InstantiateObj(bulletBoss.backBullet, dir, Quaternion.identity);
+            bullet.transform.position = new Vector3(bullet.transform.position.x, 3f, bullet.transform.position.z);
         }
        // stateMachine.ChangeState<StraightMotar>();
 

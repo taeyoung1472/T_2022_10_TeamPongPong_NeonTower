@@ -15,7 +15,7 @@ public class BulletBossIdle : BossState<BulletBoss>
     {
         if (stateMachine.GetStateDurationTime > 3f)
         {
-            stateMachine.ChangeState<PlayerMotar>();
+            stateMachine.ChangeState<StraightBullet>();
         }
     }
 
