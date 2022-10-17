@@ -49,18 +49,20 @@ public class UpgradeDataSO : ScriptableObject
             }
         }
     }
+}
 
-    [Serializable]
-    public class UpgradeData
-    {
-        [Header("[Enum]")]
-        public UpgradeType upgradeType;
-        public UpgradeAbleCount upgradeAbleCount;
+[Serializable]
+public class UpgradeData
+{
+    [Header("[Enum]")]
+    public UpgradeType upgradeType;
+    public UpgradeAbleCount upgradeAbleCount;
 
-        [Header("[정보]")]
-        public string upgradeName = "업그레이드 이름";
-        [Multiline(5)] public string upgradeDesc = "업그레이드 설명";
-    }
+    [Header("[정보]")]
+    public Sprite upgradeProfile;
+    public Color color = Color.white;
+    public string upgradeName = "업그레이드 이름";
+    [Multiline(5)] public string upgradeDesc = "업그레이드 설명";
 }
 
 public enum UpgradeAbleCount

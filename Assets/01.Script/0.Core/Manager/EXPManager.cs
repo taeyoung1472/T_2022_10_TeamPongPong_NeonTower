@@ -49,21 +49,15 @@ public class EXPManager : MonoSingleTon<EXPManager>
         ExpPercent();
     }
 
-    public void AddExp()
+    public void AddExp(int amount = 1)
     {
-        curExp++;
+        curExp += amount;
         if (curExp >= expTable[curLevel] && isCanLevelup)
         {
             curExp = 0;
             curLevel++;
-            //Glitch.GlitchManager.Instance.ZeroValue();
             LevelUdateText();
-            //slotMachineManager.Make();
-            //slotMachine.StartRolling();
-            //slotMachine.gardImage.raycastTarget = true;
             StartCoroutine(RaycastCotroll());
-            //han.OpenLevelMenu();
-
 
             Sequence seq = DOTween.Sequence();
 

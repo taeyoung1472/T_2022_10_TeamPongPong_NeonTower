@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("[성능]")]
     [SerializeField] private int maxHp = 5;
     [SerializeField] private float speed = 10f;
+    private float speedFixValue = 1;
 
     [Header("[성능 <상수> ]")]
     [SerializeField] private float dashSpeed = 5f;
@@ -24,8 +25,19 @@ public class PlayerController : MonoBehaviour, IDamageable
     // [Header("[GetSet 프로퍼티]")]
     public float CurSpeed { get 
         { 
-            return speed * (isDashing ? dashSpeed : 1); 
+            return speed * (isDashing ? dashSpeed : 1) * speedFixValue; 
         } 
+    }
+    public float SpeedFixValue
+    {
+        get
+        {
+            return speedFixValue;
+        }
+        set
+        {
+            speedFixValue = value;
+        }
     }
 
     [Header("[타이머]")]
