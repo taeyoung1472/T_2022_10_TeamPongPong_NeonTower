@@ -9,6 +9,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
     //public UIManagerHan han;
     //public SlotMachineManager slotMachineManager;
     public bool isCanLevelup = true;
+    [SerializeField] private GameObject upgradeUI;
 
     [SerializeField] private GameObject levelUpEffect;
 
@@ -26,7 +27,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
     public void Init()
     {
         expTable = new int[40];
-        int dif = 20;
+        int dif = 3;
         for (int i = 0; i < expTable.Length; i++)
         {
             if (i == 39)
@@ -35,7 +36,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
                 return;
             }
             expTable[i] = dif;
-            dif += 15;
+            dif += 3;
         }
     }
 
@@ -58,6 +59,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
             curLevel++;
             LevelUdateText();
             StartCoroutine(RaycastCotroll());
+            UIManager.Instance.ActiveUI(upgradeUI);
 
             Sequence seq = DOTween.Sequence();
 
