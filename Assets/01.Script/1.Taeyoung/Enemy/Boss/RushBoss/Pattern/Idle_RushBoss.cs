@@ -14,7 +14,7 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     {
         if (stateMachine.GetStateDurationTime > 5)
         {
-            stateMachine.ChangeState<Move_RushBoss<RushBoss>>();
+            stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
         }
     }
 

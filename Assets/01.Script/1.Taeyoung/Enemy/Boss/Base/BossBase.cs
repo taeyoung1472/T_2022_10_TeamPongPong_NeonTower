@@ -18,6 +18,11 @@ public abstract class BossBase<T> : Boss
         transform.rotation = Quaternion.LookRotation(Target.position - transform.position);
     }
 
+    public Vector3 GetDirToTarget()
+    {
+        return (Target.position - transform.position).normalized;
+    }
+
     protected virtual void Update()
     {
         bossFsm.Execute();

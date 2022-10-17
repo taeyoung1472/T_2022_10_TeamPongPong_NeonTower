@@ -73,7 +73,9 @@ public class CubeMap : MonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position, new Vector3(15, 5, 15));
+        Gizmos.DrawWireCube(transform.position, new Vector3(25, 5, 25));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(21, 5, 21));
     }
 #endif
 

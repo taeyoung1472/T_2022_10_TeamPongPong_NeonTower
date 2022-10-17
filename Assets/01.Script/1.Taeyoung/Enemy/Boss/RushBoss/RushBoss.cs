@@ -1,13 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class RushBoss : BossBase<RushBoss>
 {
+    [Header("[RushBoss]")]
+    public float defaultSpeed;
+    public float rushSpeed;
+
     private float movement;
     private float movementGoal = 0;
     public float MovementGoal { get { return movementGoal; } set { movementGoal = value; } }
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     private void Start()
     {
@@ -24,7 +30,7 @@ public class RushBoss : BossBase<RushBoss>
     protected override void Update()
     {
         base.Update();
-        movement = Mathf.Lerp(movement, movementGoal, Time.deltaTime);
+        movement = Mathf.Lerp(movement, movementGoal, Time.deltaTime * 2.5f);
         animator.SetFloat("Movement", movement);
     }
 }
