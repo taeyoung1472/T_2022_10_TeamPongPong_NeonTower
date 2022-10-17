@@ -98,6 +98,11 @@ public class SummonerBoss : BossBase<SummonerBoss>
     {
         Animator.transform.localRotation = Quaternion.identity;
     }
+
+    public void MonoDestroy(GameObject obj, float time)
+    {
+        Destroy(obj, time);
+    }
 }
 
 public class SummonerStartState : BossState<SummonerBoss>

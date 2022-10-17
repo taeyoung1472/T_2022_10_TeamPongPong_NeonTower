@@ -30,6 +30,15 @@ public class SummonerWalk : BossState<SummonerBoss>
         stateMachineOwnerClass.TargetLook();
         if (stateMachineOwnerClass.Target != null)
         {
+            if (stateMachineOwnerClass.SlowCooltime > stateMachineOwnerClass.AttackDataSO.slowAttackCololtime)
+            {
+                stateMachine.ChangeState<SummonerSkillSlow>();
+            }
+            else if (stateMachineOwnerClass.SummonCooltime > stateMachineOwnerClass.AttackDataSO.summonAttackCooltime)
+            {
+                stateMachine.ChangeState<SummonerSkillSummon>();
+            }
+
             _agent.SetDestination(stateMachineOwnerClass.Target.position);
 
             _targetPos = _agent.destination;
@@ -44,8 +53,6 @@ public class SummonerWalk : BossState<SummonerBoss>
     public override void Exit()
     {
         stateMachineOwnerClass.Animator.SetBool(_walkHash, false);
-        //Vector3 eu = stateMachineOwnerClass.Animator.transform.rotation.eulerAngles;
-        //stateMachineOwnerClass.Animator.transform.rotation = Quaternion.Euler(eu.x, eu.y, 0f);
         stateMachineOwnerClass.ModelReset();
 
         _agent.ResetPath();

@@ -24,6 +24,8 @@ public class SummonerIdle : BossState<SummonerBoss>
 
         if (stateMachine.GetStateDurationTime > _randomIdleTime)
         {
+
+
             if (stateMachineOwnerClass.Target != null)
             {
                 _targetPos = stateMachineOwnerClass.Target.position;

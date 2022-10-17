@@ -14,8 +14,6 @@ public class SummonerAttackDataSO : ScriptableObject
     public float laserAttackDistance = 5f;
     [Header("레이저 전조 기간")]
     public float laserAttackDangerInterval = 0.2f;
-    [Header("레이저 길이")]
-    public float laserLength = 5f;
 
     [Header("스폰 패턴 쿨타임")]
     public float summonAttackCooltime = 4f;
@@ -23,11 +21,23 @@ public class SummonerAttackDataSO : ScriptableObject
     public float spawnerRandomCircle = 5f;
     [Header("장판 패턴 쿨타임")]
     public float slowAttackCololtime = 6f;
+    [Header("장판 지속시간")]
+    public float slowAttackDuration = 6f;
+    [Header("장판이 플레이어한테 바로 꽃히게 할 것인지")]
+    public bool immPlayer = false;
     [Header("장판 생성 최대 거리")]
     public float slowRandomCircle = 4f;
+    [Header("장판 크기")]
+    public float slowScale = 8f;
+
+    [Header("적 생성 개수")]
+    public int enemySpawnCount = 5;
+    [Header("적 스폰 딜레이")]
+    public float enemySpawnDelay = 1f;
 
     [Space(30)]
     [Header("오브젝트")]
-    public GameObject spawner = null;
     public GameObject slowClrcle = null;
+    public GameObject enemySpawner = null;
+    public List<PoolType> spawnableEnemys = null;
 }
