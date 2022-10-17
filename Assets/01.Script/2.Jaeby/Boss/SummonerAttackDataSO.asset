@@ -16,14 +16,14 @@ MonoBehaviour:
   randomIdleTime: {x: 0.2, y: 0.5}
   laserAttackDistance: 5
   laserAttackDangerInterval: 0.3
-  laserLength: 5
   summonAttackCooltime: 15
   spawnerRandomCircle: 5
   slowAttackCololtime: 8
   slowAttackDuration: 6
+  slowIntensity: 0.5
   immPlayer: 1
   slowRandomCircle: 4
-  slowScale: 8
+  slowScale: 5
   enemySpawnCount: 5
   enemySpawnDelay: 1
   slowClrcle: {fileID: 4862623612679371982, guid: abf2d489e450c77448874486fabd26af, type: 3}
