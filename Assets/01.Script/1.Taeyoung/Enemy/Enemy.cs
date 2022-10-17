@@ -59,6 +59,10 @@ public class Enemy : PoolAbleObject, IDamageable
         dead = true;
 
         // onDeath 이벤트에 등록된 메서드가 있다면 실행
+        GameObject obj = PoolManager.Instance.Pop(PoolType.EXPBall).gameObject;
+        GameObject dieEffect = PoolManager.Instance.Pop(PoolType.EnemyDeadEffect).gameObject;
+        dieEffect.transform.position = transform.position;
+        obj.transform.position = transform.position;
         if (OnDeath != null) OnDeath?.Invoke();
     }
 
