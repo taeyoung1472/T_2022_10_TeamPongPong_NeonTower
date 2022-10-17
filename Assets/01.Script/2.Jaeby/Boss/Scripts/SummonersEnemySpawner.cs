@@ -30,8 +30,7 @@ public class SummonersEnemySpawner : MonoBehaviour
         if(NavMesh.SamplePosition(transform.position, out hit, Mathf.Infinity, 1))
         {
             Enemy obj = PoolManager.Instance.Pop(SpawnObj).GetComponent<Enemy>();
-            obj.transform.position = new Vector3(hit.position.x, 1f, hit.position.z);
-            obj.Target = _target;
+            obj.Init(new Vector3(hit.position.x, 0f, hit.position.z), _target);
         }
         Debug.Log(hit.position);
         Destroy(gameObject);
