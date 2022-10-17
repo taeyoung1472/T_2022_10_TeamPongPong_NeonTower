@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -70,14 +71,14 @@ public class CameraManager : MonoSingleTon<CameraManager>
         CompletePrevFeedBack();
     }
 
-    public void ZoomCamera(float maxValue, float time)
+    public void ZoomCamera(float maxValue, float time, Action Callback = null)
     {
         CameraReset();
 
-        _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time));
+        _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time, Callback));
     }
 
-    private IEnumerator ZoomCoroutine(float maxValue, float duration)
+    private IEnumerator ZoomCoroutine(float maxValue, float duration, Action Callback = null)
     {
         float time = 0f;
         float nextLens = 0f;
@@ -90,7 +91,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
             yield return null;
             time += Time.deltaTime;
         }
+        Callback?.Invoke();
     }
+
 
     public void CameraReset()
     {
@@ -100,5 +103,43 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
+    /// <summary>
+    /// 보스 UI 시작 애니메이션입니다
+    /// </summary>
+    /// <param name="쫒아갈 target"></param>
+    /// <param name="다 쫒아가고 얼마나 기다릴 건지"></param>
+    /// <param name="Danger가 얼마나 지속될 것인지"></param>
+    /// <param name="얼마나 줌인할 것인지"></param>
+    public void TargetingBossCameraAnimation(Boss boss, float idleTime, float zoomAmount = 12f)
+    {
+        Transform lastTarget = _cmVCam.Follow;
+        _cmVCam.Follow = boss.transform;
+        float last = _cmVCam.m_Lens.FieldOfView;
+        float dangerIdleTime = idleTime - 2f;
+        StartCoroutine(TargetingCameraCoroutine(true, last, lastTarget, idleTime, dangerIdleTime, zoomAmount, boss));
+    }
 
+    public void TargetingCameraAnimation(Transform target, float idleTime, float zoomAmount = 12f)
+    {
+        Transform lastTarget = _cmVCam.Follow;
+        _cmVCam.Follow = target;
+        float last = _cmVCam.m_Lens.FieldOfView;
+        StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime,0f, zoomAmount));
+    }
+
+    private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (isBoss)
+        {
+            BossUIManager.Instance?.DangerAnimation(dangerIdleTime, boss);
+        }
+        ZoomCamera(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
+
+        yield return new WaitForSeconds(idleTime);
+        ZoomCamera(last, 0.2f, () =>
+        {
+            _cmVCam.Follow = lastTarget;
+        });
+    }
 }

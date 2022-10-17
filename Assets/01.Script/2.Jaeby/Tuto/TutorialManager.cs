@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject _player = null;
+    [SerializeField]
     private TextMeshProUGUI _tutorialText = null;
     [SerializeField]
     private Transform _tutorialTextPos = null;
@@ -29,7 +31,11 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _test3Boundarys = null;
     [SerializeField]
-    private GameObject[] _enemyPrefabs = null;
+    private GameObject _spawnEffectPrefab = null;
+    [SerializeField]
+    private Transform[] _enemyPos = null;
+
+    private Sequence _seq = null;
 
     [SerializeField]
     private Color _impactColor = Color.white;
@@ -66,20 +72,14 @@ public class TutorialManager : MonoBehaviour
 
     private void TextPop(string text)
     {
-        DOTween.KillAll();
+        if (_seq != null)
+            _seq.Kill();
 
         _tutorialText.SetText(text);
         _tutorialText.rectTransform.anchoredPosition = _initPos;
-
-        /*_tutorialText.transform.DOMove(_tutorialTextPos.position, 0.5f).OnComplete(()=>
-        {
-            _tutorialText.transform.DOShakePosition(150f);
-        });*/
-
-        _tutorialText.transform.DOLocalMoveY(400f, 0.5f).OnComplete(() =>
-        {
-            _tutorialText.transform.DOShakePosition(150f);
-        });
+        _seq = DOTween.Sequence();
+        _seq.Append(_tutorialText.transform.DOLocalMoveY(400f, 0.5f));
+        _seq.Append(_tutorialText.transform.DOShakePosition(150f));
     }
 
     private IEnumerator StartTutorial()
@@ -190,9 +190,15 @@ public class TutorialManager : MonoBehaviour
         TextPop("1");
         yield return new WaitForSeconds(0.5f);
         TextPop("Ω√¿€!!");
-        for (int i = 0; i < _enemyPrefabs.Length; i++)
+        for (int i = 0; i < _enemyPos.Length; i++)
         {
-            _enemyPrefabs[i].SetActive(true);
+            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPos[i].transform.position, Quaternion.identity);
+            effect.transform.localScale = Vector3.one * 0.05f;
+            yield return new WaitForSeconds(1f);
+            Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
+            enemy.Init(_enemyPos[i].position, _player);
+            if (i == _enemyPos.Length - 1)
+                enemy.OnDeath.AddListener(Test3Clear);
             yield return new WaitForSeconds(1.5f);
         }
     }

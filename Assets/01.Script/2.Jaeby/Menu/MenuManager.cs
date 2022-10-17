@@ -85,12 +85,13 @@ public class MenuManager : MonoSingleTon<MenuManager>
 
             CameraManager.Instance.ZoomCamera(45f, 0.5f);
             _fadeUI.gameObject.SetActive(true);
-            _fadeUI.DOFade(1f, 1f);
+            _fadeUI.DOFade(1f, 2f);
         });
-        seq.AppendInterval(0.8f);
+        seq.AppendInterval(1.5f);
+        
         seq.AppendCallback(() =>
         {
-            Glitch.GlitchManager.Instance.StartSceneValue();
+            //Glitch.GlitchManager.Instance.StartSceneValue();
             SceneManager.LoadScene(1);
         });
     }
@@ -99,7 +100,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
     {
         Sequence seq = DOTween.Sequence();
         _fadeUI.gameObject.SetActive(true);
-        seq.Append(_fadeUI.DOFade(1f, 1f));
+        seq.Append(_fadeUI.DOFade(1f, 3f));
         seq.AppendCallback(() =>
         {
             SceneManager.LoadScene(3);

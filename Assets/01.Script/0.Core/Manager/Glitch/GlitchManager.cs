@@ -1,65 +1,119 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal.Glitch;
+using URPGlitch.Runtime.DigitalGlitch;
+using URPGlitch.Runtime.AnalogGlitch;
 using static DefineCamera;
-
+using UnityEngine.Rendering;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 namespace Glitch
 {
     sealed class GlitchManager : MonoSingleTon<GlitchManager>
     {
-        [SerializeField] DigitalGlitchFeature _digitalGlitchFeature = default;
-        [SerializeField] AnalogGlitchFeature _analogGlitchFeature = default;
+        //[SerializeField] DigitalGlitchFeature _digitalGlitchFeature = default;
+        //[SerializeField] AnalogGlitchFeature _analogGlitchFeature = default;
+
+        [SerializeField] Volume volume;
+
+        private DigitalGlitchVolume _digitalGlitchFeature;
+        private AnalogGlitchVolume _analogGlitchFeature;
 
         [Header("Digital")]
         [SerializeField, Range(0f, 1f)] public float _intensity = default;
 
         [Header("Analog")]
-        [SerializeField, Range(0f, 1f)] float _scanLineJitter = default;
-        [SerializeField, Range(0f, 1f)] float _verticalJump = default;
-        [SerializeField, Range(0f, 1f)] float _horizontalShake = default;
-        [SerializeField, Range(0f, 1f)] float _colorDrift = default;
+        [SerializeField, Range(0f, 1f)] public float _scanLineJitter = default;
+        [SerializeField, Range(0f, 1f)] public float _verticalJump = default;
+        [SerializeField, Range(0f, 1f)] public float _horizontalShake = default;
+        [SerializeField, Range(0f, 1f)] public float _colorDrift = default;
 
-        public bool cantDoZero = false;
+        public Image fadeOutImage = null;
 
-
-        public UnityEngine.Rendering.Universal.UniversalAdditionalCameraData additionalCameraData;
+        public GameObject gameUi = null;
         private void Awake()
         {
-            additionalCameraData =
-                MainCam.transform.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+            
+        }
+        private void Start()
+        {
+            volume.profile.TryGet<DigitalGlitchVolume>(out _digitalGlitchFeature);
+            volume.profile.TryGet<AnalogGlitchVolume>(out _analogGlitchFeature);
+
+            Scene scene = SceneManager.GetActiveScene();
+
+            if(scene.name == "Game")
+            {
+                Debug.Log("Game¾À ÀüÈ¯");
+                gameUi?.SetActive(false);
+                StartGameCutScene();
+            }
+
         }
         void Update()
         {
-            _digitalGlitchFeature.Intensity = _intensity;
+
+            //_digitalGlitchFeature.intensity.value = _intensity;
+
+            _digitalGlitchFeature.intensity.value = _intensity;
+
+            _analogGlitchFeature.scanLineJitter.value = _scanLineJitter;
+            _analogGlitchFeature.verticalJump.value = _verticalJump;
+            _analogGlitchFeature.horizontalShake.value = _horizontalShake;
+            _analogGlitchFeature.colorDrift.value = _colorDrift;
+
+            if(Input.GetKeyDown(KeyCode.H))
+            {
+                GrayValue();
+            }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                ZeroValue();
+            }
         }
         public void ZeroValue()
         {
-            if (cantDoZero) return;
-            _digitalGlitchFeature.Intensity = 0;
+            //if (cantDoZero) return;
+            //_digitalGlitchFeature.intensity.value = 0;
 
-            _analogGlitchFeature.ScanLineJitter = 0;
-            _analogGlitchFeature.VerticalJump = 0;
-            _analogGlitchFeature.HorizontalShake = 0;
-            _analogGlitchFeature.ColorDrift = 0;
+            //_analogGlitchFeature.scanLineJitter.value = 0;
+            //_analogGlitchFeature.verticalJump.value = 0;
+            //_analogGlitchFeature.horizontalShake.value = 0;
+            //_analogGlitchFeature.colorDrift.value = 0;
+
+            _intensity = 0;
+
+            _scanLineJitter = 0;
+            _verticalJump = 0;
+            _horizontalShake = 0;
+            _colorDrift = 0;
         }
         public void StartSceneValue()
         {
-            _digitalGlitchFeature.Intensity = _intensity;
+            _intensity = 0.01f;
 
-            _analogGlitchFeature.ScanLineJitter = _scanLineJitter;
-            _analogGlitchFeature.VerticalJump = _verticalJump;
-            _analogGlitchFeature.HorizontalShake = _horizontalShake;
-            _analogGlitchFeature.ColorDrift = _colorDrift;
+            _scanLineJitter = 0.025f;
+            _verticalJump = 0.025f;
+            _horizontalShake = 0.025f;
+            _colorDrift = 0.025f;
+
+            //_digitalGlitchFeature.intensity.value = _intensity;
+
+            //_analogGlitchFeature.scanLineJitter.value = _scanLineJitter;
+            //_analogGlitchFeature.verticalJump.value = _verticalJump;
+            //_analogGlitchFeature.horizontalShake.value = _horizontalShake;
+            //_analogGlitchFeature.colorDrift.value = _colorDrift;
         }
-        public void GraySceneValue()
+        public void GrayValue()
         {
-            _digitalGlitchFeature.Intensity = _intensity;
+            _intensity = 0.05f;
 
-            _analogGlitchFeature.ScanLineJitter = _scanLineJitter;
-            _analogGlitchFeature.VerticalJump = _verticalJump;
-            _analogGlitchFeature.HorizontalShake = _horizontalShake;
-            _analogGlitchFeature.ColorDrift = _colorDrift;
+            _scanLineJitter = 0.025f;
+            _verticalJump = 0.025f;
+            _horizontalShake = 0.025f;
+            _colorDrift = 0.025f;
         }
         public void LoadGameCutScene()
         {
@@ -68,38 +122,52 @@ namespace Glitch
         public void StartGameCutScene()
         {
             _intensity = 0.8f;
+            _scanLineJitter = 0.8f;
+            _verticalJump = 0.8f;
+            _horizontalShake = 0.8f;
+            _colorDrift = 0.8f;
             StartCoroutine(GameStartCutScene());
         }
 
         IEnumerator GameStartCutScene()
         {
-            cantDoZero = true;
             while (_intensity > 0.01f)
             {
-                _intensity -= 0.05f;
+                //if(_intensity < 0.4f)
+                //{
+
+                //}
+                fadeOutImage?.DOFade(0f, 3f);
+                _intensity -= 0.02f;
+
+                _scanLineJitter -= 0.02f;
+                _verticalJump -= 0.02f;
+                _horizontalShake -= 0.02f;
+                _colorDrift -= 0.02f;
 
                 yield return new WaitForSeconds(0.05f);
             }
-            cantDoZero = false;
-            _intensity = 0.001f;
+            gameUi?.SetActive(true);
+            ZeroValue();
         }
         IEnumerator StartCutScene()
         {
             while (_intensity < 1f)
             {
-                _intensity += 0.05f;
+                if(_scanLineJitter > 0.3f)
+                {
+                    _intensity += 0.05f;
+                }
+
+                _scanLineJitter += 0.05f;
+                _verticalJump += 0.05f;
+                _horizontalShake += 0.05f;
+                _colorDrift += 0.05f;
 
                 yield return new WaitForSeconds(0.05f);
             }
-            _intensity = 0.001f;
+            //_intensity = 0.001f;
         }
-        public void ChangeRenderModeOne()
-        {
-            additionalCameraData.SetRenderer(1);
-        }
-        public void ChangeRenderModeZero()
-        {
-            additionalCameraData.SetRenderer(0);
-        }
+        
     }
 }

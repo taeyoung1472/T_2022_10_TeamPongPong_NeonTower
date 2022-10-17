@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73afbb4828c2e06429097a9e29b60a27, type: 3}
+  m_Name: Upgrade
+  m_EditorClassIdentifier: 
+  upgradeDataTableList:
+  - {fileID: 11400000, guid: c88e5866c1a1ebd44bf5cb2aad0a42ed, type: 2}
+  - {fileID: 11400000, guid: 9b453f2f80c64c641963918fff436c96, type: 2}
+  - {fileID: 11400000, guid: dbe94043d2c7e654cb78f3ef39d6c350, type: 2}
+  - {fileID: 11400000, guid: 818d9210b310a2e43a69b781e681ee22, type: 2}
+  upgradeDataList:
+  - upgradeType: 0
+    upgradeAbleCount: 3
+    upgradeProfile: {fileID: 21300000, guid: fea4100eaa7c1564e837f810cc9ba27a, type: 3}
+    color: {r: 0.65092486, g: 1, b: 0.4669811, a: 1}
+    upgradeName: Hp
+    upgradeDesc: "Hp\uB97C \uB298\uB824\uC90C"
+  - upgradeType: 1
+    upgradeAbleCount: 2
+    upgradeProfile: {fileID: 21300000, guid: f2c452127c76dab439f0c5902ad311a4, type: 3}
+    color: {r: 0.39215684, g: 1, b: 0.9570826, a: 1}
+    upgradeName: "\uACF5\uACA9\uC18D\uB3C4"
+    upgradeDesc: "\uACF5\uACA9\uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+  - upgradeType: 2
+    upgradeAbleCount: 1
+    upgradeProfile: {fileID: 21300000, guid: 7d22db7217af8aa4fabae41784d9a439, type: 3}
+    color: {r: 0.9124925, g: 1, b: 0.3726415, a: 1}
+    upgradeName: "\uC790\uB3D9\uD68C\uBCF5"
+    upgradeDesc: "HP\uAC00 \uC790\uB3D9\uC73C\uB85C \uD68C\uBCF5\uD569\uB2C8\uB2E4"
+  - upgradeType: 3
+    upgradeAbleCount: 4
+    upgradeProfile: {fileID: 21300000, guid: d600e2ece84bc2a48b452b1551ca6952, type: 3}
+    color: {r: 1, g: 0.55425537, b: 0.33490568, a: 1}
+    upgradeName: "\uCD1D\uC54C\uC18D\uB3C4"
+    upgradeDesc: "\uCD1D\uC54C\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9D1\uB2C8\uB2E4"

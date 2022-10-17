@@ -28,3 +28,24 @@ MonoBehaviour:
   - poolType: 3
     initCount: 10
     poolAbleObject: {fileID: 2372333315034069018, guid: 1dff63cd5a320f7479df75cf61d93c3c, type: 3}
+  - poolType: 8
+    initCount: 10
+    poolAbleObject: {fileID: 820603428, guid: ba813ee6eb956e54eb0a76da88c99786, type: 3}
+  - poolType: 9
+    initCount: 10
+    poolAbleObject: {fileID: 5633076486948610481, guid: cc1af5971b08ffe4fbe6f64d8cc4fe8a, type: 3}
+  - poolType: 10
+    initCount: 10
+    poolAbleObject: {fileID: 442708313467447190, guid: b11695ab6f1ddd446bc28446015c8b6b, type: 3}
+  - poolType: 11
+    initCount: 10
+    poolAbleObject: {fileID: 5825812818787214351, guid: fa76b39734d49ee4cbd095895618abe1, type: 3}
+  - poolType: 5
+    initCount: 10
+    poolAbleObject: {fileID: 9009372924661237160, guid: 03369e7c3e4e0ed40bd2a1580ce19f0f, type: 3}
+  - poolType: 6
+    initCount: 10
+    poolAbleObject: {fileID: 1164412413914030986, guid: d2978713312bc4647b08694f31c70fbb, type: 3}
+  - poolType: 7
+    initCount: 10
+    poolAbleObject: {fileID: 1251657419289243018, guid: 83b7246f2a7bf674580b458112efe780, type: 3}

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     #region Animator Hash
     readonly private int moveHash = Animator.StringToHash("Move");
@@ -15,16 +15,45 @@ public class PlayerController : MonoBehaviour
     [Header("[성능]")]
     [SerializeField] private int maxHp = 5;
     [SerializeField] private float speed = 10f;
+    private float speedFixValue = 1;
+
+    [Header("[성능 <상수> ]")]
+    [SerializeField] private float dashSpeed = 5f;
+    [SerializeField] private float dashDuration = 0.1f;
+    [SerializeField] private float dashDelay = 0.25f;
+
+    // [Header("[GetSet 프로퍼티]")]
+    public float CurSpeed { get 
+        { 
+            return speed * (isDashing ? dashSpeed : 1) * speedFixValue; 
+        } 
+    }
+    public float SpeedFixValue
+    {
+        get
+        {
+            return speedFixValue;
+        }
+        set
+        {
+            speedFixValue = value;
+        }
+    }
 
     [Header("[타이머]")]
     [SerializeField] private float damageIgnoreTime = 0.2f;
 
     [Header("[상태]")]
     private int curHp;
+    private Vector3 moveDir;
     private bool isDead = false;
+    private bool isDashing = false;
+
+    [Header("[사운드]")]
+    [SerializeField] private AudioClip dashClip;
 
     private Animator playerAnim;
-    private Rigidbody playerRb;
+    private CharacterController controller;
     private LayerMask mouseCheckLayer;
     private Camera cam;
 
@@ -33,7 +62,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerAnim = GetComponentInChildren<Animator>();
-        playerRb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
 
         rollingAudioSource = GetComponent<AudioSource>();
 
@@ -46,6 +75,7 @@ public class PlayerController : MonoBehaviour
         InitData();
 
         StartCoroutine(DamageSystem());
+        StartCoroutine(DashSystem());
     }
 
     private void InitData()
@@ -64,9 +94,9 @@ public class PlayerController : MonoBehaviour
         Rotate();
         Audio();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            isDamaged = true;
+            DangerZone.DrawArc(transform.position, transform.forward, 2, new Vector3(2, 1, 5), 3);
         }
     }
 
@@ -75,9 +105,13 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        Vector3 dir = new Vector3(h, 0, v);
+        Vector3 inputDir = new Vector3(h, 0, v).normalized;
+        h = inputDir.x;
+        v = inputDir.z;
 
-        if (dir.magnitude == 0)
+        moveDir = new Vector3(h * CurSpeed, moveDir.y, v * CurSpeed);
+
+        if (moveDir.x == 0 && moveDir.z == 0)
         {
             playerAnim.SetBool(moveHash, false);
             rollingSoundGoal = 0;
@@ -89,11 +123,16 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool(moveHash, true);
             rollingSoundGoal = 1;
 
-            Quaternion rot = Quaternion.LookRotation(dir);
+            Quaternion rot = Quaternion.LookRotation(new Vector3(h, 0, v));
             playerAnim.transform.rotation = rot;
         }
 
-        playerRb.velocity = dir.normalized * speed;
+        if (!controller.isGrounded)
+            moveDir.y -= Time.deltaTime * 9.8f;
+        else
+            moveDir.y = 0;
+
+        controller.Move(moveDir * Time.deltaTime);
     }
 
     private void Rotate()
@@ -111,7 +150,6 @@ public class PlayerController : MonoBehaviour
 
     private void Dead()
     {
-        Debug.Log("나 죽었어");
         isDead = true;
     }
 
@@ -140,6 +178,34 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(damageIgnoreTime);
             isDamaged = false;
+        }
+    }
+
+    IEnumerator DashSystem()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift));
+
+            isDashing = true;
+            AudioManager.PlayAudio(dashClip);
+
+            yield return new WaitForSeconds(dashDuration);
+
+            isDashing = false;
+
+            yield return new WaitForSeconds(dashDelay);
+        }
+    }
+
+    public void ApplyDamage(int dmg)
+    {
+        if (isDead) return;
+        Debug.Log("아야");
+        isDamaged = true;
+        if(curHp <= 0)
+        {
+            Dead();
         }
     }
 }

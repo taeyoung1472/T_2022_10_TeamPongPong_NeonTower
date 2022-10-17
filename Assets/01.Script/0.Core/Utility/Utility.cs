@@ -40,10 +40,22 @@ public static class Utility
     {
         mb.StartCoroutine(InvokeRoutine(ac, delay));
     }
+    public static void DrawRay(Vector3 originPos, Vector3 dir, float distance = 10f, float duration = 1f, Color color = default(Color))
+    {
+        Debug.DrawRay(originPos, dir * distance, color, duration);
+    }
     private static IEnumerator InvokeRoutine(Action ac, float delay)
     {
         yield return new WaitForSeconds(delay);
         ac();
+    }
+    public static Vector3 GetVecByAngle(float degrees, bool isLocalAngle = false, Transform refTrans = null) 
+    { 
+        if (isLocalAngle)
+        { 
+            degrees += refTrans.eulerAngles.y; 
+        }
+        return new Vector3(Mathf.Sin(degrees * Mathf.Deg2Rad), 0, Mathf.Cos(degrees * Mathf.Deg2Rad)); 
     }
     private static void Error(string errorString)
     {
