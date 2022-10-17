@@ -19,13 +19,10 @@ public class RushAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     {
         if(stateMachine.GetStateDurationTime > 1)
         {
-            stateMachineOwnerClass.MovementGoal = 1;
-            stateMachineOwnerClass.Agent.speed = stateMachineOwnerClass.rushSpeed;
         }
 
         if (stateMachine.GetStateDurationTime > 1 && stateMachine.GetStateDurationTime > 4)
         {
-            stateMachineOwnerClass.Agent.speed = stateMachineOwnerClass.defaultSpeed;
             stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
         }
     }

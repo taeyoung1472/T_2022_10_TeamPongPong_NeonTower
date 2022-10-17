@@ -8,7 +8,6 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     {
         target = stateMachineOwnerClass.Target;
 
-        stateMachineOwnerClass.MovementGoal = 1;
         transform = stateMachineOwnerClass.transform;
     }
 

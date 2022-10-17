@@ -4247,9 +4247,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _escUI: {fileID: 1033785076}
-  _lightClick: {fileID: 0}
-  _middleClick: {fileID: 0}
-  _HardClick: {fileID: 0}
+  _continueUI: {fileID: 0}
+  _upgradeUI: {fileID: 0}
+  ClickClip: {fileID: 0}
+  isActiveContinue: 0
   _damagedColor: {r: 1, g: 0.3764706, b: 0.3764706, a: 1}
   _normalColor: {r: 0.3764706, g: 1, b: 0.37647057, a: 1}
   _hpText: {fileID: 72857676}
@@ -14925,7 +14926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1255037296
 Transform:
   m_ObjectHideFlags: 0

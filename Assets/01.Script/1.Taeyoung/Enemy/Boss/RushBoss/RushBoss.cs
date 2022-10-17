@@ -1,14 +1,11 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RushBoss : BossBase<RushBoss>
 {
-    [Header("[RushBoss]")]
-    public float defaultSpeed;
-    public float rushSpeed;
-
-    private float movement;
-    private float movementGoal = 0;
-    public float MovementGoal { get { return movementGoal; } set { movementGoal = value; } }
+    [SerializeField]
+    private RushBossAttackDataSO _attackDataSO = null;
+    public RushBossAttackDataSO AttackDataSO => _attackDataSO;
 
     protected override void Awake()
     {
@@ -17,6 +14,12 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
+        CurHp = Data.maxHp;
+        agent = GetComponent<NavMeshAgent>();
+        agent.updatePosition = true;
+        agent.updateRotation = true;
+        agent.speed = Data.speed;
+
         bossFsm = new BossStateMachine<RushBoss>(this, new Idle_RushBoss<RushBoss>());
         bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>());
         bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>());
@@ -30,7 +33,19 @@ public class RushBoss : BossBase<RushBoss>
     protected override void Update()
     {
         base.Update();
-        movement = Mathf.Lerp(movement, movementGoal, Time.deltaTime * 2.5f);
-        animator.SetFloat("Movement", movement);
+    }
+
+    public override void ApplyDamage(int dmg)
+    {
+        DamagePopup.PopupDamage(transform.position + Vector3.up, dmg);
+        CurHp -= (float)dmg;
+        BossUIManager.BossDamaged();
+        if (CurHp <= 0)
+        {
+            Debug.Log("»ç¸Á !!");
+            StopAllCoroutines();
+            OnDeathEvent?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }
