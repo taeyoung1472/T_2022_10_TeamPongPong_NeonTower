@@ -8,6 +8,7 @@ public class UIManager : MonoSingleTon<UIManager>
     [Header("[UI Canvas]")]
     [SerializeField] private GameObject _escUI = null;
     [SerializeField] private GameObject _continueUI = null;
+    [SerializeField] private GameObject _upgradeUI = null;
 
     [SerializeField]
     private AudioClip ClickClip = null;
