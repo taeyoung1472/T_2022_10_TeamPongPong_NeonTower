@@ -32,6 +32,7 @@ public class SummonerSkillSlow : BossState<SummonerBoss>
             Quaternion.identity
             );
         obj.transform.localScale = new Vector3(stateMachineOwnerClass.AttackDataSO.slowScale, 0.1f, stateMachineOwnerClass.AttackDataSO.slowScale);
+        obj.GetComponent<SlowField>().SlowIntensity = stateMachineOwnerClass.AttackDataSO.slowIntensity;
         stateMachineOwnerClass.MonoDestroy(obj, stateMachineOwnerClass.AttackDataSO.slowAttackDuration);
 
         stateMachineOwnerClass.Animator.Play("Slow");

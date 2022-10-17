@@ -23,6 +23,9 @@ public class SummonerAttackDataSO : ScriptableObject
     public float slowAttackCololtime = 6f;
     [Header("장판 지속시간")]
     public float slowAttackDuration = 6f;
+    [Header("장판 슬로우 비율")]
+    [Range(0.1f, 1f)]
+    public float slowIntensity = 0.5f;
     [Header("장판이 플레이어한테 바로 꽃히게 할 것인지")]
     public bool immPlayer = false;
     [Header("장판 생성 최대 거리")]

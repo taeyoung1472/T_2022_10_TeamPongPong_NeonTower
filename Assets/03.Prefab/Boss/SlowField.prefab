@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4862623612679371987}
   - component: {fileID: 4862623612679371980}
   - component: {fileID: 4862623612679371981}
+  - component: {fileID: -7098020031610542983}
   m_Layer: 0
   m_Name: SlowField
   m_TagString: Untagged
@@ -97,3 +98,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7098020031610542983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4862623612679371982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5996e4ae2ba6c6468c60ac13d283c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
