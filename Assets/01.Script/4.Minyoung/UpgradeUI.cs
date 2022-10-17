@@ -19,13 +19,8 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        initPos = new Vector2(-Screen.width, 0f);
+        initPos = new Vector2(0, Screen.height);
         transform.localPosition = initPos;
-    }
-
-    public void DisplayCard()
-    {
-        Make();
     }
 
     public void Make()
@@ -38,7 +33,10 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
     public void OpenUI()
     {
+        UIManager.Instance.IsDisplayContinue = false;
         Time.timeScale = 0f;
+
+        Make();
 
         if (_seq != null)
             _seq.Kill();
@@ -52,7 +50,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         });
-        OnOpenUI?.Invoke();
     }
 
     public void CloseUI()
@@ -62,9 +59,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         _seq = DOTween.Sequence();
         _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
-        _seq.AppendCallback(() =>
-        {
-            OnCloseUI?.Invoke();
-        });
+        Time.timeScale = 1f;
     }
 }

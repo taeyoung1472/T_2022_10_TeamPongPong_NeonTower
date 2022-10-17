@@ -13,6 +13,8 @@ public class UIManager : MonoSingleTon<UIManager>
     [SerializeField]
     private AudioClip ClickClip = null;
     [HideInInspector] public bool isActiveContinue;
+    private bool isDisplayContinue = true;
+    public bool IsDisplayContinue { get { return isDisplayContinue; } set { isDisplayContinue = value; } }
 
     [Header("HPUI ฐüทร")]
     [SerializeField]
@@ -37,7 +39,9 @@ public class UIManager : MonoSingleTon<UIManager>
 
     public void ActiveUI(GameObject targetUI)
     {
-        if(_popupStack.Count > 0)
+        IsDisplayContinue = true;
+
+        if (_popupStack.Count > 0)
         {
             _popupStack.Peek().CloseUI();
         }
@@ -56,12 +60,18 @@ public class UIManager : MonoSingleTon<UIManager>
         else if(_popupStack.Count == 1)
         {
             _popupStack.Pop().CloseUI();
-            _continueUI.GetComponent<IUserInterface>().OpenUI();
+            if (isDisplayContinue)
+            {
+                _continueUI.GetComponent<IUserInterface>().OpenUI();
+            }
             isActiveContinue = true;
         }
         else if(_popupStack.Count == 0)
         {
-            _continueUI.GetComponent<IUserInterface>().CloseUI();
+            if (isDisplayContinue)
+            {
+                _continueUI.GetComponent<IUserInterface>().CloseUI();
+            }
         }
     }
 

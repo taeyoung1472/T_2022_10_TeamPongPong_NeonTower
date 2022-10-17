@@ -48,4 +48,4 @@ MonoBehaviour:
     poolAbleObject: {fileID: 1164412413914030986, guid: d2978713312bc4647b08694f31c70fbb, type: 3}
   - poolType: 7
     initCount: 10
-    poolAbleObject: {fileID: 1164412413914030986, guid: d2978713312bc4647b08694f31c70fbb, type: 3}
+    poolAbleObject: {fileID: 1251657419289243018, guid: 83b7246f2a7bf674580b458112efe780, type: 3}
