@@ -7,16 +7,21 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
-        throw new NotImplementedException();
+        stateMachineOwnerClass.ModelReset();
+        stateMachineOwnerClass.TargetLook();
+        stateMachineOwnerClass.Agent.ResetPath();
+        stateMachineOwnerClass.Agent.isStopped = true;
+        stateMachineOwnerClass.Animator.SetTrigger("Punch");
     }
 
     public override void Execute()
     {
-        throw new NotImplementedException();
+
     }
 
     public override void Exit()
     {
-        throw new NotImplementedException();
+        stateMachineOwnerClass.Agent.isStopped = false;
+        stateMachineOwnerClass.ModelReset();
     }
 }

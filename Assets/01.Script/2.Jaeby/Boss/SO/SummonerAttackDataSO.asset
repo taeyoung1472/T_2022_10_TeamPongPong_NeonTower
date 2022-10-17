@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f8edecfc044584fb400ff8606efed1, type: 3}
+  m_Name: SummonerAttackDataSO
+  m_EditorClassIdentifier: 
+  keepDistance: 4
+  randomIdleTime: {x: 0.2, y: 0.5}
+  laserAttackDistance: 5
+  laserAttackDangerInterval: 0.3
+  summonAttackCooltime: 15
+  spawnerRandomCircle: 5
+  slowAttackCololtime: 8
+  slowAttackDuration: 6
+  slowIntensity: 0.5
+  immPlayer: 1
+  slowRandomCircle: 4
+  slowScale: 5
+  enemySpawnCount: 5
+  enemySpawnDelay: 1
+  slowClrcle: {fileID: 4862623612679371982, guid: abf2d489e450c77448874486fabd26af, type: 3}
+  enemySpawner: {fileID: 7778619392561482217, guid: bfb23abb38a900445ad9d61b1ba99b5e, type: 3}
+  spawnableEnemys: 0800000009000000
