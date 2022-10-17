@@ -710,7 +710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &188348495
 Transform:
   m_ObjectHideFlags: 0
@@ -2443,7 +2443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &485918002
 Transform:
   m_ObjectHideFlags: 0
@@ -5848,75 +5848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62b1d0885ce116439d1cef04fa84adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1253633210
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6602998735807061905, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_Name
-      value: RushBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602998735807061911, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
 --- !u!1 &1255343674
 GameObject:
   m_ObjectHideFlags: 0
@@ -7603,7 +7534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1864225063
 Transform:
   m_ObjectHideFlags: 0

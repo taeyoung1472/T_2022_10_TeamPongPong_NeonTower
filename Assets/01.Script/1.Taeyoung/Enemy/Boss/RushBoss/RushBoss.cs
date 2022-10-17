@@ -6,6 +6,9 @@ public class RushBoss : BossBase<RushBoss>
     [SerializeField]
     private RushBossAttackDataSO _attackDataSO = null;
     public RushBossAttackDataSO AttackDataSO => _attackDataSO;
+    [SerializeField]
+    private GameObject _model = null;
+    public GameObject Model => _model;
 
     protected override void Awake()
     {
@@ -17,7 +20,7 @@ public class RushBoss : BossBase<RushBoss>
         CurHp = Data.maxHp;
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;
-        agent.updateRotation = true;
+        agent.updateRotation = false;
         agent.speed = Data.speed;
 
         bossFsm = new BossStateMachine<RushBoss>(this, new Idle_RushBoss<RushBoss>());
@@ -27,11 +30,12 @@ public class RushBoss : BossBase<RushBoss>
         bossFsm.AddStateList(new JumpAttack_RushBoss<RushBoss>());
         bossFsm.AddStateList(new Move_RushBoss<RushBoss>());
 
-        StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
+        //StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
     }
 
     protected override void Update()
     {
+        TargetLook();
         base.Update();
     }
 
@@ -47,5 +51,16 @@ public class RushBoss : BossBase<RushBoss>
             OnDeathEvent?.Invoke();
             Destroy(gameObject);
         }
+    }
+
+    public void TargetLook()
+    {
+        Vector3 distance = Target.position - transform.position;
+        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(distance.normalized), Time.deltaTime * 20f);
+        transform.rotation = rot;
+    }
+    public void ModelReset()
+    {
+        Animator.transform.localRotation = Quaternion.identity;
     }
 }
