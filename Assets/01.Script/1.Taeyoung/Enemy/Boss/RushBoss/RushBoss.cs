@@ -25,18 +25,17 @@ public class RushBoss : BossBase<RushBoss>
         agent.speed = Data.speed;
 
         bossFsm = new BossStateMachine<RushBoss>(this, new Idle_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new JumpAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new Move_RushBoss<RushBoss>());
+        bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>()); // 3대 때리기
+        bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>()); // 원형 타격
+        bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>()); 
+        bossFsm.AddStateList(new JumpAttack_RushBoss<RushBoss>()); 
+        bossFsm.AddStateList(new Move_RushBoss<RushBoss>()); // 그저 움직이기
 
         //StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
     }
 
     protected override void Update()
     {
-        TargetLook();
         base.Update();
     }
 
@@ -68,22 +67,5 @@ public class RushBoss : BossBase<RushBoss>
     public void GoIdleState()
     {
         bossFsm.ChangeState<Idle_RushBoss<RushBoss>>();
-    }
-
-
-    public void DoPunch(int index)
-    {
-        switch (index)
-        {
-            case 1:
-                StartCoroutine(PunchCoroutine());
-                break;
-        }
-    }
-
-    private IEnumerator PunchCoroutine()
-    {
-        DangerZone.DrawArc(transform.position, transform.forward, 180f, new Vector3(4f, 0f, 4f), 0.2f);
-        yield return new WaitForSeconds(0.2f);
     }
 }

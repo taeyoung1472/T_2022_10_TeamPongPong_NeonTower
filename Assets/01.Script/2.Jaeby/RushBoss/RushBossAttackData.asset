@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe29023ac0a2cff44924ad4640a46e67, type: 3}
   m_Name: RushBossAttackData
   m_EditorClassIdentifier: 
-  randomIdleTime: {x: 2, y: 3}
+  randomIdleTime: {x: 0.2, y: 0.5}
   normalSpeed: 8
   rushSpeed: 16
+  attackDistance: 5
+  punchDelays:
+  - 0.5
+  - 0.5
+  - 0.5

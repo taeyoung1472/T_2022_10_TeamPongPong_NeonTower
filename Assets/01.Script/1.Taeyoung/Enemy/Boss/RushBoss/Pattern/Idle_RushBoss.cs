@@ -10,6 +10,7 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Enter()
     {
+        Debug.Log("æ∆¿ÃµÈ");
         stateMachineOwnerClass.ModelReset();
         _randomTime = Random.Range(stateMachineOwnerClass.AttackDataSO.randomIdleTime.x,
             stateMachineOwnerClass.AttackDataSO.randomIdleTime.y);
@@ -17,6 +18,7 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Execute()
     {
+        stateMachineOwnerClass.TargetLook();
         Vector3 tar = stateMachineOwnerClass.Target.position;
         tar.y = stateMachineOwnerClass.transform.position.y;
         if(Vector3.Distance(stateMachineOwnerClass.transform.position, tar) < stateMachineOwnerClass.AttackDataSO.attackDistance)

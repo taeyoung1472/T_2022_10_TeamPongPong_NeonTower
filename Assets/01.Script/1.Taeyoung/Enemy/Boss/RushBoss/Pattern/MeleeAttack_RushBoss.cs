@@ -8,10 +8,44 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     public override void Enter()
     {
         stateMachineOwnerClass.ModelReset();
-        stateMachineOwnerClass.TargetLook();
         stateMachineOwnerClass.Agent.ResetPath();
         stateMachineOwnerClass.Agent.isStopped = true;
+        stateMachineOwnerClass.Agent.velocity = Vector3.zero;
+        stateMachineOwnerClass.StartCoroutine(PunchCoroutine());
+    }
+
+    private IEnumerator PunchCoroutine()
+    {
+        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 3f, stateMachineOwnerClass.transform.rotation, 
+            new Vector3(3.5f, 0.1f, 6.5f), stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
+
+        yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
+        stateMachineOwnerClass.LookTarget();
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
+        stateMachineOwnerClass.Animator.Update(0);
+        CameraManager.Instance.CameraShake(5f, 20f, 0.2f);
+
+
+        DangerZone.DrawArc(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.forward, 180f, 
+            new Vector3(6.5f, 0.1f, 8.5f), stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
+
+        yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
+        stateMachineOwnerClass.LookTarget();
+        stateMachineOwnerClass.Animator.SetTrigger("Punch");
+        stateMachineOwnerClass.Animator.Update(0);
+        CameraManager.Instance.CameraShake(7f, 20f, 0.3f);
+
+
+        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 6f, stateMachineOwnerClass.transform.rotation, 
+            new Vector3(4f, 0.1f, 12f), stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
+
+        yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
+        stateMachineOwnerClass.LookTarget();
+        stateMachineOwnerClass.Animator.SetTrigger("Punch");
+        stateMachineOwnerClass.Animator.Update(0);
+        CameraManager.Instance.CameraShake(10f, 30f, 0.23f);
+        yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Punch2") == false);
+        stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
     }
 
     public override void Execute()

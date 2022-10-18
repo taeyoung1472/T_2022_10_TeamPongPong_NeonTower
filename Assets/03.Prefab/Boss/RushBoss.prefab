@@ -646,6 +646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4144664309777456906}
   - component: {fileID: 4144664309773979178}
+  - component: {fileID: 922303784}
   m_Layer: 11
   m_Name: Arm1
   m_TagString: Untagged
@@ -778,6 +779,14 @@ SkinnedMeshRenderer:
     m_Center: {x: -58.594677, y: 13.632675, z: 0.00010681152}
     m_Extent: {x: 29.436275, y: 28.906914, z: 140.37485}
   m_DirtyAABB: 0
+--- !u!33 &922303784
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4144664309777154858}
+  m_Mesh: {fileID: 4300006, guid: d406f8f3cbe268f4e9d0234d45cca60c, type: 3}
 --- !u!1 &4144664309777154860
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4144664309777456920}
   - component: {fileID: 4144664309773979180}
+  - component: {fileID: 1010952067}
   m_Layer: 11
   m_Name: Body1
   m_TagString: Untagged
@@ -1115,6 +1125,14 @@ SkinnedMeshRenderer:
     m_Center: {x: -31.982391, y: 2.5145874, z: 0.0000019073486}
     m_Extent: {x: 51.12609, y: 46.604404, z: 27.749142}
   m_DirtyAABB: 0
+--- !u!33 &1010952067
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4144664309777154872}
+  m_Mesh: {fileID: 4300002, guid: 860793eb3324391468f1c120a75ec049, type: 3}
 --- !u!1 &4144664309777154874
 GameObject:
   m_ObjectHideFlags: 0

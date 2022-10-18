@@ -12,7 +12,6 @@ public sealed class SkinnedMeshAfterImage : AfterImageBase
     *                               Fields
     ***********************************************************************/
     #region .
-
     private SkinnedMeshRenderer[] TargetSmrArray { get; set; }
 
     #endregion
