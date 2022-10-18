@@ -31,7 +31,7 @@ public class SwordMove<T> : BossState<T> where T : Sword
     {
         animator?.SetBool(hashMove, true);
 
-        agent.speed = 30f;
+        agent.speed = stateMachineOwnerClass.dashspeed;
         agent.isStopped = false;
         isTeleport = false;
         agent.stoppingDistance = 1f;
@@ -132,7 +132,7 @@ public class SwordMove<T> : BossState<T> where T : Sword
 
         }
         //CoroutineHelper.StartCoroutine(SpawnDangerZome(a));
-        while (Time.time < startTime + 1.25f)
+        while (Time.time < startTime + stateMachineOwnerClass.dashTime)
         {
             agent?.SetDestination(target);
 

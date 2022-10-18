@@ -20,6 +20,13 @@ public class Sword : BossBase<Sword>
 
     public float[] radius;
 
+    public LayerMask playerLayer;
+
+    public List<IDamageable> lastAttackedTargets = new List<IDamageable>();
+
+
+
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -62,23 +69,17 @@ public class Sword : BossBase<Sword>
         Debug.Log(bossFsm.GetNowState);
 
     }
-    public IEnumerator SwordDash()
+    protected void FixedUpdate()
     {
-        float startTime = Time.time;
-        Vector3 dir = target.position - transform.position;
-
-        while (Time.time < startTime + dashTime)
+        if(isAttacking)
         {
-            transform.Translate(dir.normalized * dashspeed * Time.deltaTime);
-
-            yield return null;
+            AttackDamageArc();
         }
     }
     public int SelectAttackType()
     {
         int attackType = Random.Range(1, 8);
         currentAttackType = attackType - 1;
-
         
 
         return attackType;
@@ -113,13 +114,57 @@ public class Sword : BossBase<Sword>
         }
         animator.SetTrigger("Attack");
     }
+    
+    public void AttakDamageCircle()
+    {
+        Collider[] col = Physics.OverlapSphere(transform.position, radius[currentAttackType], playerLayer);
+    }
+    public void AttackDamageArc()
+    {
+        Vector3 dir = target.position - transform.position;
+        dir.Normalize();
+        dir.y = 0;
+        RaycastHit[] hits = null;
+        var col = Physics.SphereCastNonAlloc(transform.position, radius[currentAttackType], dir, hits, radius[currentAttackType], playerLayer);
 
+
+        for (var i = 0; i < col; i++)
+        {
+            var attackTargetEntity = hits[i].collider.GetComponent<IDamageable>();
+
+            if (attackTargetEntity != null && !lastAttackedTargets.Contains(attackTargetEntity))
+            {
+                // 공격이 들어간 지점
+                //if (hits[i].distance <= 0f)
+                //{
+                //    message.hitPoint = attackRoot.position;
+                //}
+                //else
+                //{
+                //    message.hitPoint = hits[i].point;
+                //}
+
+                // 공격이 들어가는 방향
+                //message.hitNormal = hits[i].normal;
+
+                attackTargetEntity.ApplyDamage((int)data.damage);
+
+                // 이미 공격을 가한 상대방이라는 뜻에서
+                lastAttackedTargets.Add(attackTargetEntity);
+
+                Debug.Log("일단 실행은 함");
+
+                break;  // 공격 대상을 찾았으니 for문 종료
+            }
+        }
+    }
     public void EnableEffect()
     {
         motionTrail.isMotionTrail = false;
         attackEffect[currentAttackType].gameObject.SetActive(true);
         attackEffect[currentAttackType].Play();
         isAttacking = true;
+        lastAttackedTargets.Clear();
     }
 
     public void DisableEffect()
@@ -127,6 +172,7 @@ public class Sword : BossBase<Sword>
         motionTrail.isMotionTrail = true;
         attackEffect[currentAttackType].gameObject.SetActive(false);
         isAttacking = false;
+        
     }
 
 }
