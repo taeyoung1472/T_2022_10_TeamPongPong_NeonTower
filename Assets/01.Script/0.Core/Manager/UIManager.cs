@@ -10,7 +10,7 @@ public class UIManager : MonoSingleTon<UIManager>
 
     [SerializeField]
     private AudioClip ClickClip = null;
-    [HideInInspector] public bool isActiveContinue;
+    public bool isActiveContinue;
     private bool isDisplayContinue = true;
     public bool IsDisplayContinue { get { return isDisplayContinue; } set { isDisplayContinue = value; } }
 
@@ -21,6 +21,8 @@ public class UIManager : MonoSingleTon<UIManager>
     private Color _normalColor = Color.white;
     [SerializeField]
     private TextMeshProUGUI _hpText = null;
+
+    private int stackCount;
 
     Stack<IUserInterface> _popupStack = new();
 
@@ -33,6 +35,7 @@ public class UIManager : MonoSingleTon<UIManager>
                 ActiveUI(_escUI);
             }
         }
+        stackCount = _popupStack.Count;
     }
 
     public void ActiveUI(GameObject targetUI)

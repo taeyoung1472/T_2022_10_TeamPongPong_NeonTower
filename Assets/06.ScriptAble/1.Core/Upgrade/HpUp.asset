@@ -10,7 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222f43c82912acd4a8a436a02b6bf7bb, type: 3}
-  m_Name: Hp
+  m_Name: HpUp
   m_EditorClassIdentifier: 
-  upgradeType: 0
-  datas: []
+  upgradeType: 9
+  datas:
+  - 0
+  - 10
+  - 20
+  - 30
+  - 40
+  - 50
+  - 60
+  - 70
+  - 80
+  - 90
+  - 100

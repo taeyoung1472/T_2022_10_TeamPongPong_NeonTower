@@ -25,6 +25,31 @@ MonoBehaviour:
   clamp:
     m_OverrideState: 0
     m_Value: 0.05
+--- !u!114 &-575936272370482344
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc41a673cc36074fb7854328feb9319, type: 3}
+  m_Name: AnalogGlitchVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  scanLineJitter:
+    m_OverrideState: 0
+    m_Value: 0
+  verticalJump:
+    m_OverrideState: 0
+    m_Value: 0
+  horizontalShake:
+    m_OverrideState: 0
+    m_Value: 0
+  colorDrift:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,8 +66,8 @@ MonoBehaviour:
   - {fileID: 1168107248340590997}
   - {fileID: 6521647760809495071}
   - {fileID: -3025948963786647463}
-  - {fileID: 4739243405790149499}
-  - {fileID: 2180477320385087899}
+  - {fileID: -575936272370482344}
+  - {fileID: 7342179306602174720}
 --- !u!114 &1168107248340590997
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -150,5 +175,21 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.2
   rounded:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &7342179306602174720
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34863ecc375359e4c85a3f1c7fea62a3, type: 3}
+  m_Name: DigitalGlitchVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
     m_OverrideState: 0
     m_Value: 0

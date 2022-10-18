@@ -32,6 +32,10 @@ public class EnemyBase<T> : Enemy
         attackRoot = transform.Find("AttackRoot");
         OnDeath.AddListener(() => { PoolManager.Instance.Push(PoolType, gameObject); });
     }
+    protected virtual void Start()
+    {
+        EnemySubject.Instance.RegisterObserver(this);
+    }
     public virtual void FixedUpdate()
     {
         if (dead) return;

@@ -62,10 +62,10 @@ public class SummonerBoss : BossBase<SummonerBoss>
         _summonCooltime += Time.deltaTime;  
     }
 
-    public override void ApplyDamage(int dmg)
+    public override void ApplyDamage(float dmg)
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
-        CurHp -= (float)dmg;
+        CurHp -= dmg;
         BossUIManager.BossDamaged();
         if (CurHp <= 0)
         {

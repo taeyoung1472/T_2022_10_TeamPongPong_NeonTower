@@ -13,32 +13,76 @@ MonoBehaviour:
   m_Name: Upgrade
   m_EditorClassIdentifier: 
   upgradeDataTableList:
-  - {fileID: 11400000, guid: c88e5866c1a1ebd44bf5cb2aad0a42ed, type: 2}
   - {fileID: 11400000, guid: 9b453f2f80c64c641963918fff436c96, type: 2}
-  - {fileID: 11400000, guid: dbe94043d2c7e654cb78f3ef39d6c350, type: 2}
+  - {fileID: 11400000, guid: ab6c7712afb49f74e935a6907767a4bd, type: 2}
   - {fileID: 11400000, guid: 818d9210b310a2e43a69b781e681ee22, type: 2}
+  - {fileID: 11400000, guid: c88e5866c1a1ebd44bf5cb2aad0a42ed, type: 2}
+  - {fileID: 11400000, guid: f9ec0c7ad4b29b64da925f3f0603ac4b, type: 2}
+  - {fileID: 11400000, guid: 11d692edb704f364e803fc03953579d0, type: 2}
+  - {fileID: 11400000, guid: 26b115a405dfa5e4582ed2ae7be702ce, type: 2}
+  - {fileID: 11400000, guid: 39f41213e4a1e544fa8a5747679d14fa, type: 2}
+  - {fileID: 11400000, guid: 22231357a19007147903ea2ea1b24fae, type: 2}
+  - {fileID: 11400000, guid: 2363c9d2d31d16e40bc2aa5c371b812c, type: 2}
   upgradeDataList:
   - upgradeType: 0
     upgradeAbleCount: 3
-    upgradeProfile: {fileID: 21300000, guid: fea4100eaa7c1564e837f810cc9ba27a, type: 3}
-    color: {r: 0.65092486, g: 1, b: 0.4669811, a: 1}
-    upgradeName: Hp
-    upgradeDesc: "Hp\uB97C \uB298\uB824\uC90C"
+    upgradeProfile: {fileID: 21300000, guid: 02704493379768547b2e157e87803af0, type: 3}
+    color: {r: 0.8597595, g: 0.4666667, b: 1, a: 1}
+    upgradeName: "\uCD1D\uC54C \uBC18\uC0AC"
+    upgradeDesc: "\uBC18\uC0AC \uD683\uC218\uB97C \uB298\uB824\uC90C"
   - upgradeType: 1
-    upgradeAbleCount: 2
-    upgradeProfile: {fileID: 21300000, guid: f2c452127c76dab439f0c5902ad311a4, type: 3}
-    color: {r: 0.39215684, g: 1, b: 0.9570826, a: 1}
-    upgradeName: "\uC774\uB3D9 \uC18D\uB3C4"
-    upgradeDesc: "\uC774\uB3D9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+    upgradeAbleCount: 5
+    upgradeProfile: {fileID: 21300000, guid: c28094a7a9c0d0b4d968202b30f5a6c2, type: 3}
+    color: {r: 1, g: 0.47743908, b: 0.39215684, a: 1}
+    upgradeName: "\uD3ED\uD314\uD0C4"
+    upgradeDesc: "\uAD11\uBC94\uC704\uB85C \uB370\uBBF8\uC9C0\uB97C \uC785\uD798"
   - upgradeType: 2
-    upgradeAbleCount: 1
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: 7d22db7217af8aa4fabae41784d9a439, type: 3}
-    color: {r: 0.9124925, g: 1, b: 0.3726415, a: 1}
-    upgradeName: "\uC790\uB3D9\uD68C\uBCF5"
-    upgradeDesc: "HP\uAC00 \uC790\uB3D9\uC73C\uB85C \uD68C\uBCF5\uD569\uB2C8\uB2E4"
+    color: {r: 1, g: 0.37254906, b: 0.98451203, a: 1}
+    upgradeName: "\uCD1D\uC54C \uB109\uBCA1"
+    upgradeDesc: "\uCD1D\uC54C\uC774 \uC801\uC744 \uB109\uBCA1 \uC2DC\uD0B4"
   - upgradeType: 3
-    upgradeAbleCount: 4
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: d600e2ece84bc2a48b452b1551ca6952, type: 3}
-    color: {r: 1, g: 0.55425537, b: 0.33490568, a: 1}
+    color: {r: 0.99412775, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCD1D\uC54C\uC18D\uB3C4"
-    upgradeDesc: "\uCD1D\uC54C\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9D1\uB2C8\uB2E4"
+    upgradeDesc: "\uCC3D\uC54C\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9D0"
+  - upgradeType: 4
+    upgradeAbleCount: 3
+    upgradeProfile: {fileID: 21300000, guid: 6c0934af22d97b0479ea0c5f8393e2aa, type: 3}
+    color: {r: 1, g: 0.41450846, b: 0.33333337, a: 1}
+    upgradeName: "\uB2E4\uBC29\uBA74 \uBC1C\uC0AC"
+    upgradeDesc: "\uCD1D\uC54C\uC744 \uD55C\uBC88\uC5D0 \uC5EC\uB7EC\uBC1C \uBC1C\uC0AC\uD568"
+  - upgradeType: 5
+    upgradeAbleCount: 10
+    upgradeProfile: {fileID: 21300000, guid: 6bee52cd35d845a4fb39461e3e50921d, type: 3}
+    color: {r: 1, g: 0.33333337, b: 0.3576667, a: 1}
+    upgradeName: "\uB370\uBBF8\uC9C0"
+    upgradeDesc: "\uCD1D\uC54C\uC774 \uB354\uC6B1 \uAC15\uB825\uD574\uC9D1\uB2C8\uB2E4"
+  - upgradeType: 6
+    upgradeAbleCount: 5
+    upgradeProfile: {fileID: 21300000, guid: f2c452127c76dab439f0c5902ad311a4, type: 3}
+    color: {r: 1, g: 0.33333337, b: 0.339421, a: 1}
+    upgradeName: "\uBC1C\uC0AC\uC18D\uB3C4 \uC99D\uAC00"
+    upgradeDesc: "\uCD1D\uC54C\uC744 \uBC1C\uC0AC\uD558\uB294 \uC18D\uB3C4\uAC00
+      \uBE68\uB77C\uC9D1\uB2C8\uB2E4"
+  - upgradeType: 7
+    upgradeAbleCount: 5
+    upgradeProfile: {fileID: 21300000, guid: 1a3a3104b8a58394faad7b5aaaccd6f3, type: 3}
+    color: {r: 0.50969887, g: 1, b: 0.33333337, a: 1}
+    upgradeName: "\uCCB4\uB825 \uD761\uC218"
+    upgradeDesc: "\uC801\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD569\uB2C8\uB2E4"
+  - upgradeType: 8
+    upgradeAbleCount: 10
+    upgradeProfile: {fileID: 21300000, guid: 7d22db7217af8aa4fabae41784d9a439, type: 3}
+    color: {r: 0.53842545, g: 1, b: 0.33333337, a: 1}
+    upgradeName: "\uC790\uB3D9\uD68C\uBCF5"
+    upgradeDesc: "\uC77C\uC815\uD55C \uC2DC\uAC04\uB9C8\uB2E4 \uCCB4\uB825\uC774
+      \uD68C\uBCF5\uB429\uB2C8\uB2E4"
+  - upgradeType: 9
+    upgradeAbleCount: 10
+    upgradeProfile: {fileID: 21300000, guid: d600e2ece84bc2a48b452b1551ca6952, type: 3}
+    color: {r: 0.35835263, g: 1, b: 0.33333337, a: 1}
+    upgradeName: "\uCCB4\uB825 \uC99D\uAC00"
+    upgradeDesc: "\uCD5C\uB300 \uCC44\uB825\uC774 1 \uC99D\uAC00\uD569\uB2C8\uB2E4"

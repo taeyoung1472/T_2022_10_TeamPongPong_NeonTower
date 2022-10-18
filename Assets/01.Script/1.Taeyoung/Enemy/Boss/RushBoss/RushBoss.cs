@@ -40,10 +40,10 @@ public class RushBoss : BossBase<RushBoss>
         base.Update();
     }
 
-    public override void ApplyDamage(int dmg)
+    public override void ApplyDamage(float dmg)
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up, dmg);
-        CurHp -= (float)dmg;
+        CurHp -= dmg;
         BossUIManager.BossDamaged();
         if (CurHp <= 0)
         {

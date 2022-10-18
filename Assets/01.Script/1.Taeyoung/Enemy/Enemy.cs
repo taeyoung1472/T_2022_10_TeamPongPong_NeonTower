@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class Enemy : PoolAbleObject, IDamageable
+public class Enemy : PoolAbleObject, IDamageable, IObserver
 {
     protected float health;// 현재 체력
     protected bool dead = false; // 사망 상태
@@ -83,7 +83,7 @@ public class Enemy : PoolAbleObject, IDamageable
 
     }
 
-    public void ApplyDamage(int dmg)
+    public void ApplyDamage(float dmg)
     {
         health -= dmg;
         AudioManager.PlayAudioRandPitch(enemyData.hitClip);
@@ -92,6 +92,11 @@ public class Enemy : PoolAbleObject, IDamageable
         {
             Die();
         }
+    }
+
+    public void ObserverUpdate()
+    {
+        Die();
     }
     #endregion
 }

@@ -71,15 +71,29 @@ public enum UpgradeAbleCount
     Two = 2,
     Three = 3,
     Four = 4,
-    End = 5
+    Five = 5,
+    Six = 6,
+    Seven = 7,
+    Eight = 8,
+    Nine = 9,
+    Ten = 10,
+    End = 11,
 }
 
 public enum UpgradeType
 {
-    Hp,
-    Speed,
-    AutoHeal,
+    BulletBounce,
+    BulletExplosion,
+    BulletKnockback,
     BulletSpeed,
+    BulletMultiShoot,
+    BulletDamage,
+
+    FireRate,
+
+    StealHp,
+    GenerateHp,
+    HpUp,
 
     End
 }

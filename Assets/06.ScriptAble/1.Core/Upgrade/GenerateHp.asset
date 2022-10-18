@@ -10,9 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222f43c82912acd4a8a436a02b6bf7bb, type: 3}
-  m_Name: AutoHeal
+  m_Name: GenerateHp
   m_EditorClassIdentifier: 
-  upgradeType: 2
+  upgradeType: 8
   datas:
-  - 77
   - 0
+  - 15
+  - 14
+  - 13
+  - 12
+  - 11
+  - 10
+  - 9
+  - 8
+  - 7
+  - 6
