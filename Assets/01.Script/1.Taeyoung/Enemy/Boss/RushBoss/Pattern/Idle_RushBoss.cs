@@ -10,6 +10,9 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Enter()
     {
+        stateMachineOwnerClass.After.isMotionTrail = false;
+
+
         Debug.Log("พฦภฬต้");
         stateMachineOwnerClass.ModelReset();
         _randomTime = Random.Range(stateMachineOwnerClass.AttackDataSO.randomIdleTime.x,

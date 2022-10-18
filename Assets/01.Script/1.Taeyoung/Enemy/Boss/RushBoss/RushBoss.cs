@@ -11,6 +11,9 @@ public class RushBoss : BossBase<RushBoss>
     private GameObject _model = null;
     public GameObject Model => _model;
 
+    private SkinnedMeshAfterImage _after = null;
+    public SkinnedMeshAfterImage After => _after;
+
     protected override void Awake()
     {
         base.Awake();
@@ -19,6 +22,7 @@ public class RushBoss : BossBase<RushBoss>
     private void Start()
     {
         CurHp = Data.maxHp;
+        _after = GetComponent<SkinnedMeshAfterImage>();
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;
         agent.updateRotation = false;
@@ -30,6 +34,7 @@ public class RushBoss : BossBase<RushBoss>
         bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>()); // 겁내 달리기
         bossFsm.AddStateList(new GroundPoundAttack_RushBoss<RushBoss>()); // 바닥 쩜프하며 때리기
         bossFsm.AddStateList(new Move_RushBoss<RushBoss>()); // 그저 움직이기
+        bossFsm.AddStateList(new Die_RushBoss<RushBoss>());
 
         //StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
     }
@@ -49,7 +54,7 @@ public class RushBoss : BossBase<RushBoss>
             Debug.Log("사망 !!");
             StopAllCoroutines();
             OnDeathEvent?.Invoke();
-            Destroy(gameObject);
+            bossFsm.ChangeState<Die_RushBoss<RushBoss>>();
         }
     }
 

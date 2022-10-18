@@ -61,7 +61,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _currentBoss = boss;
         if (_currentBoss == null || _bossHpSlider == null || _bossImage == null) return;
 
-        _currentBoss.OnDeathEvent.AddListener(ExitBoss);
+        _currentBoss.OnDeathEvent.AddListener(BossDieEvent);
         _bossHpSlider.gameObject.SetActive(true);
         _bossImage.transform.parent.gameObject.SetActive(true);
         _bossNameText.gameObject.SetActive(true);
@@ -110,6 +110,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
     public void ExitBoss()
     {
+        Destroy(_currentBoss.gameObject);
         _currentBoss = null;
         if (_bossHpSlider == null || _bossImage == null) return;
         _bossHpSlider.value = 0f;
@@ -152,6 +153,23 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
             SetBoss(boss);
         });
         //_seq.Join();
+    }
+
+    public void BossDieEvent()
+    {
+        StartCoroutine(BossDieEventCoroutine());
+    }
+
+    private IEnumerator BossDieEventCoroutine()
+    {
+        Time.timeScale = 0.2f;
+        CameraManager.Instance.TargetingCameraAnimation(_currentBoss.transform, 3f, 2f);
+        _currentBoss.Animator.Play("Die");
+        _currentBoss.Animator.Update(0);
+        yield return new WaitUntil(() => _currentBoss.Animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
+
+        Time.timeScale = 1f;
+        ExitBoss();
     }
 
     private void OnDestroy()

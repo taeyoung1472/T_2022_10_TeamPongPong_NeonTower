@@ -4,6 +4,8 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
+        stateMachineOwnerClass.After.isMotionTrail = true;
+
         stateMachineOwnerClass.ModelReset();
         stateMachineOwnerClass.Agent.ResetPath();
         BossUIManager.Instance.BossPopupText("보스가 움직입니다", 0.5f, 0);
@@ -27,6 +29,8 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Exit()
     {
+        stateMachineOwnerClass.After.isMotionTrail = false;
+
         stateMachineOwnerClass.ModelReset();
         stateMachineOwnerClass.Agent.ResetPath();
         stateMachineOwnerClass.Animator.SetBool("Run", false);
