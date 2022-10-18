@@ -14,6 +14,9 @@ public class RushBoss : BossBase<RushBoss>
     private SkinnedMeshAfterImage _after = null;
     public SkinnedMeshAfterImage After => _after;
 
+    private Collider _col = null;
+    public Collider Col => _col;
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +26,7 @@ public class RushBoss : BossBase<RushBoss>
     {
         CurHp = Data.maxHp;
         _after = GetComponent<SkinnedMeshAfterImage>();
+        _col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;
         agent.updateRotation = false;

@@ -112,6 +112,11 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     {
         Destroy(_currentBoss.gameObject);
         _currentBoss = null;
+        if(_popupSeq != null)
+        {
+            _popupSeq.Kill();
+            _popupText.rectTransform.position = new Vector2(_popupText.rectTransform.position.x, _initPos.y);
+        }
         if (_bossHpSlider == null || _bossImage == null) return;
         _bossHpSlider.value = 0f;
         _bossImage.sprite = null;
@@ -163,7 +168,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     private IEnumerator BossDieEventCoroutine()
     {
         Time.timeScale = 0.2f;
-        CameraManager.Instance.TargetingCameraAnimation(_currentBoss.transform, 3f, 2f);
+        CameraManager.Instance.TargetingCameraAnimation(_currentBoss.transform, 3f, 1f);
         _currentBoss.Animator.Play("Die");
         _currentBoss.Animator.Update(0);
         yield return new WaitUntil(() => _currentBoss.Animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);

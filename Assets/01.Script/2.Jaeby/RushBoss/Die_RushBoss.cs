@@ -6,6 +6,7 @@ public class Die_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
+        stateMachineOwnerClass.Col.enabled = false;
         stateMachineOwnerClass.Agent.enabled = false;
     }
 
