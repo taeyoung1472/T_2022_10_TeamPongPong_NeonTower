@@ -9,6 +9,8 @@ public class SwordAnimeEvent : MonoBehaviour
     public delegate void AnimationEndEvent();
     public AnimationStartEvent startAnime;
     public AnimationEndEvent endAnime;
+    public delegate void StartApplyDamageEvent();
+    public StartApplyDamageEvent damageEvent;
 
     public void EnableEffect()
     {
@@ -18,4 +20,14 @@ public class SwordAnimeEvent : MonoBehaviour
     {
         endAnime();
     }
+    public void DamageEvent()
+    {
+        damageEvent();
+    }
+
+    public void CameraEffect()
+    {
+        CameraManager.Instance.CameraShake(25f, 30f, 0.2f);
+    }
+
 }

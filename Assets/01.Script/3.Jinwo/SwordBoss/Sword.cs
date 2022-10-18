@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Sword : BossBase<Sword>
@@ -24,14 +25,29 @@ public class Sword : BossBase<Sword>
 
     public List<IDamageable> lastAttackedTargets = new List<IDamageable>();
 
+    public bool isApplyDamage = false;
+    public Vector3 attackDir = Vector3.zero;
+
+    public float arcDistance = 0;
+
+    public float arcwidth = 0;
+
+    public float arcangle = 0;
 
 
+    [Header("카메라 관련")]
+    public float amplitude = 0;
+    public float intensity = 0;
+    public float duration = 0;
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    public void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-        Gizmos.DrawSphere(transform.position, data.attackRange);
+        //Gizmos.DrawSphere(transform.position, data.attackRange);
+
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, arcangle / 2, arcwidth);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, - arcangle / 2, arcwidth);
     }
 #endif
     protected override void Awake()
@@ -61,6 +77,7 @@ public class Sword : BossBase<Sword>
         //motionTrail.isMotionTrail = true;
         animeEvent.startAnime = EnableEffect;
         animeEvent.endAnime = DisableEffect;
+        animeEvent.damageEvent = StartApplyDamage;
     }
     protected override void Update()
     {
@@ -71,9 +88,12 @@ public class Sword : BossBase<Sword>
     }
     protected void FixedUpdate()
     {
-        if(isAttacking)
+        if(isApplyDamage && isAttacking)
         {
-            AttackDamageArc();
+            if (currentAttackType == 1 || currentAttackType == 2 || currentAttackType == 6)
+                AttackDamageArc();
+            else
+                AttakDamageCircle();
         }
     }
     public int SelectAttackType()
@@ -86,30 +106,49 @@ public class Sword : BossBase<Sword>
     }
     public void ChangeAttack()
     {
-       
-
         switch (currentAttackType+1)
         {
             case 1:
                 bossFsm.ChangeState<SwordDistortionSlash<Sword>>(); // 외곡 찍기
+                amplitude = 25f;
+                intensity = 50f;
+                duration = 0.5f;
                 break;
             case 2:
                 bossFsm.ChangeState<SwordTakeDownAttack<Sword>>(); // 내려찍기
+                amplitude = 30f;
+                intensity = 40f;
+                duration = 0.25f;
                 break;
             case 3:
                 bossFsm.ChangeState<SwordSpinningAttack<Sword>>(); //회오리 참격베기
+                amplitude = 30f;
+                intensity = 30f;
+                duration = 0.35f;
                 break;
             case 4:
                 bossFsm.ChangeState<SwordComboAttack1<Sword>>();  //연속베기 (콤보1)
+                amplitude = 0;
+                intensity = 0;
+                duration = 0;
                 break;
             case 5:
                 bossFsm.ChangeState<SwordComboAttack2<Sword>>();  //연속베기 (콤보2)
+                amplitude = 0;
+                intensity = 0;
+                duration = 0;
                 break;
             case 6:
                 bossFsm.ChangeState<SwordCircleRangeAttack<Sword>>();  //원 범위 공격 ( 텔, 대쉬해서 공격)
+                amplitude = 25f;
+                intensity = 30f;
+                duration = 0.2f;
                 break;
             case 7:
                 bossFsm.ChangeState<SwordBaldoAttack<Sword>>();  //발도 기술
+                amplitude = 25f;
+                intensity = 30f;
+                duration = 0.45f;
                 break;
         }
         animator.SetTrigger("Attack");
@@ -118,44 +157,58 @@ public class Sword : BossBase<Sword>
     public void AttakDamageCircle()
     {
         Collider[] col = Physics.OverlapSphere(transform.position, radius[currentAttackType], playerLayer);
+
+        if (col.Length > 0 )
+        {
+            Debug.Log("서클 범위 처맞음");
+            var attackTargetEntity = col[0].GetComponent<IDamageable>();
+
+            if(!lastAttackedTargets.Contains(attackTargetEntity))
+            {
+                lastAttackedTargets.Add(attackTargetEntity);
+
+                attackTargetEntity.ApplyDamage((int)data.damage);
+            }
+            
+        }
     }
     public void AttackDamageArc()
     {
-        Vector3 dir = target.position - transform.position;
-        dir.Normalize();
-        dir.y = 0;
-        RaycastHit[] hits = null;
-        var col = Physics.SphereCastNonAlloc(transform.position, radius[currentAttackType], dir, hits, radius[currentAttackType], playerLayer);
 
-
-        for (var i = 0; i < col; i++)
+        // target과 나 사이의 거리가 radius 보다 작다면
+        if (attackDir.magnitude <= radius[currentAttackType])
         {
-            var attackTargetEntity = hits[i].collider.GetComponent<IDamageable>();
+            // '타겟-나 벡터'와 '내 정면 벡터'를 내적
+            float dot = Vector3.Dot(attackDir.normalized, transform.forward);
+            // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
+            float theta = Mathf.Acos(dot);
+            // angleRange와 비교하기 위해 degree로 변환
+            float degree = Mathf.Rad2Deg * theta;
 
-            if (attackTargetEntity != null && !lastAttackedTargets.Contains(attackTargetEntity))
+            // 시야각 판별
+            if (degree <= arcangle / 2f)
             {
-                // 공격이 들어간 지점
-                //if (hits[i].distance <= 0f)
-                //{
-                //    message.hitPoint = attackRoot.position;
-                //}
-                //else
-                //{
-                //    message.hitPoint = hits[i].point;
-                //}
+                Debug.Log("시야각에 있고 처맞은거임");
+                Collider[] col = Physics.OverlapSphere(transform.position, radius[currentAttackType], playerLayer);
 
-                // 공격이 들어가는 방향
-                //message.hitNormal = hits[i].normal;
-
-                attackTargetEntity.ApplyDamage((int)data.damage);
-
-                // 이미 공격을 가한 상대방이라는 뜻에서
-                lastAttackedTargets.Add(attackTargetEntity);
-
-                Debug.Log("일단 실행은 함");
-
-                break;  // 공격 대상을 찾았으니 for문 종료
+                if (col.Length > 0)
+                {
+                    var attackTargetEntity = col[0].GetComponent<IDamageable>();
+                    if (!lastAttackedTargets.Contains(attackTargetEntity))
+                    {
+                        lastAttackedTargets.Add(attackTargetEntity);
+                        attackTargetEntity.ApplyDamage((int)data.damage);
+                    }
+                }
             }
+            else
+            {
+                Debug.Log("안 처맞음");
+            }
+        }
+        else
+        {
+            Debug.Log("애초에 거리에 안들음");
         }
     }
     public void EnableEffect()
@@ -164,15 +217,26 @@ public class Sword : BossBase<Sword>
         attackEffect[currentAttackType].gameObject.SetActive(true);
         attackEffect[currentAttackType].Play();
         isAttacking = true;
-        lastAttackedTargets.Clear();
+        //lastAttackedTargets.Clear();
     }
 
     public void DisableEffect()
     {
+        EndApplyDamage();
         motionTrail.isMotionTrail = true;
         attackEffect[currentAttackType].gameObject.SetActive(false);
         isAttacking = false;
-        
+    }
+
+    public void StartApplyDamage()
+    {
+        CameraManager.Instance.CameraShake(amplitude, intensity, duration);
+        isApplyDamage = true;
+    }
+    public void EndApplyDamage()
+    {
+        lastAttackedTargets.Clear();
+        isApplyDamage = false;
     }
 
 }

@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissolve: 0
-    - _DissolveBeginOffset: 5
+    - _DissolveBeginOffset: 3.32
     - _DissolveEndOffset: -5
     - _EdgeThickness: 0.1
     - _EdgeThicknessA: 0.1
@@ -63,7 +63,7 @@ Material:
     m_Colors:
     - _Color: {r: 1.9309767, g: 0, b: 3.9999995, a: 0}
     - _ColorA: {r: 0.3281879, g: 3.9999995, b: 0, a: 0}
-    - _ColorB: {r: 6.6817975, g: 6.456695, b: 2.4899151, a: 0}
+    - _ColorB: {r: 8.920724, g: 5.1776614, b: 0, a: 0}
     - _DissolveDirection: {r: 0, g: 1, b: 0, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
