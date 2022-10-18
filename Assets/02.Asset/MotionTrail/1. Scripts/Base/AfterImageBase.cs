@@ -101,7 +101,7 @@ public abstract class AfterImageBase : MonoBehaviour
     *                               Unity Events
     ***********************************************************************/
     #region .
-    private void Awake()
+    protected virtual void Awake()
     {
         myMesh = GetComponent<MeshRenderer>();
         myMesh.material.SetFloat(_data.shaderAlphaName, 0.3f);

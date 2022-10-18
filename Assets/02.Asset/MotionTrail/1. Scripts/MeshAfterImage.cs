@@ -20,6 +20,10 @@ public sealed class MeshAfterImage : AfterImageBase
     *                               Methods
     ***********************************************************************/
     #region .
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     protected override void Init()
     {
         

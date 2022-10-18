@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2081829484235636356
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,12 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Force Field
-  m_Shader: {fileID: 4800000, guid: 2bffc50af4b1ff34cb151aa15bb9edb4, type: 3}
+  m_Name: RushBossMat
+  m_Shader: {fileID: -6465566751694194690, guid: 1a2dc0f136cbdd445b1e3efdd46d23a0, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -41,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1d557bc533f5684438d25d03042b1025, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -56,28 +69,51 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 0.5
     - _BumpScale: 1
-    - _Cull: 2
+    - _ColorFactor: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelPower: 2.54
+    - _FresnelInvert: 0
+    - _FresnelPower: 8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Intensity: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _RimLightMul: 1
+    - _RimLightPow: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 1.4290932, b: 7.3772106, a: 1}
+    - _BaseColor: {r: 0, g: 0.44520938, b: 2.1189713, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0.4}
+    - _ColorA: {r: 3.5648696, g: 3.0591402, b: 0, a: 1}
+    - _ColorB: {r: 3.6992393, g: 0, b: 4.759381, a: 1}
+    - _ColorC: {r: 0, g: 1, b: 0.49451518, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ScrollDirection: {r: 0.09, g: 0.09, b: 0.09, a: 0}
+    - _FresnelColor: {r: 0, g: 5.3403134, b: 4.2364984, a: 0}
   m_BuildTextureStacks: []

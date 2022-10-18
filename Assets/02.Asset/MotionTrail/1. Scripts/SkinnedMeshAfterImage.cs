@@ -12,7 +12,7 @@ public sealed class SkinnedMeshAfterImage : AfterImageBase
     *                               Fields
     ***********************************************************************/
     #region .
-
+    [field:SerializeField]
     private SkinnedMeshRenderer[] TargetSmrArray { get; set; }
 
     #endregion
@@ -20,6 +20,10 @@ public sealed class SkinnedMeshAfterImage : AfterImageBase
     *                               Methods
     ***********************************************************************/
     #region .
+    protected override void Awake()
+    {
+
+    }
     protected override void Init()
     {
         // 1. Target Meshes
