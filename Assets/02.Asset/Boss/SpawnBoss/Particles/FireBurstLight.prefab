@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4940666242561434}
   - component: {fileID: 108140824657497560}
-  - component: {fileID: 3299549297870360977}
+  - component: {fileID: -3416051086628252981}
   m_Layer: 0
   m_Name: FireBurstLight
   m_TagString: Untagged
@@ -95,7 +95,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &3299549297870360977
+--- !u!114 &-3416051086628252981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

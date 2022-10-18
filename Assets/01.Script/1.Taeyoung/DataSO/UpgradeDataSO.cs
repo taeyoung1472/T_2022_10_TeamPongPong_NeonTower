@@ -49,18 +49,20 @@ public class UpgradeDataSO : ScriptableObject
             }
         }
     }
+}
 
-    [Serializable]
-    public class UpgradeData
-    {
-        [Header("[Enum]")]
-        public UpgradeType upgradeType;
-        public UpgradeAbleCount upgradeAbleCount;
+[Serializable]
+public class UpgradeData
+{
+    [Header("[Enum]")]
+    public UpgradeType upgradeType;
+    public UpgradeAbleCount upgradeAbleCount;
 
-        [Header("[정보]")]
-        public string upgradeName = "업그레이드 이름";
-        [Multiline(5)] public string upgradeDesc = "업그레이드 설명";
-    }
+    [Header("[정보]")]
+    public Sprite upgradeProfile;
+    public Color color = Color.white;
+    public string upgradeName = "업그레이드 이름";
+    [Multiline(5)] public string upgradeDesc = "업그레이드 설명";
 }
 
 public enum UpgradeAbleCount
@@ -69,15 +71,29 @@ public enum UpgradeAbleCount
     Two = 2,
     Three = 3,
     Four = 4,
-    End = 5
+    Five = 5,
+    Six = 6,
+    Seven = 7,
+    Eight = 8,
+    Nine = 9,
+    Ten = 10,
+    End = 11,
 }
 
 public enum UpgradeType
 {
-    Hp,
-    Speed,
-    AutoHeal,
+    BulletBounce,
+    BulletExplosion,
+    BulletKnockback,
     BulletSpeed,
+    BulletMultiShoot,
+    BulletDamage,
+
+    FireRate,
+
+    StealHp,
+    GenerateHp,
+    HpUp,
 
     End
 }

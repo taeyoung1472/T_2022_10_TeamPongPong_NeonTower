@@ -7,8 +7,7 @@ public class WeaponController : MonoBehaviour
     [Header("[세팅]")]
     [SerializeField] private FirePos[] firePosList;
     // 테스트 코드
-    [Range(0, 3)] public int firePosLevel = 0;
-    public float fireDelay = 0.2f;
+    [Range(0, 3)] private int firePosLevel = 0;
 
     public void Start()
     {
@@ -23,6 +22,8 @@ public class WeaponController : MonoBehaviour
 
             bool isFirstInstance = true;
 
+            firePosLevel = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletMultiShoot);
+
             foreach (Transform firePos in firePosList[firePosLevel].firePos)
             {
                 Bullet bullet = PoolManager.Instance.Pop(PoolType.Bullet) as Bullet;
@@ -30,7 +31,7 @@ public class WeaponController : MonoBehaviour
                 isFirstInstance = false;
             }
 
-            yield return new WaitForSeconds(fireDelay);
+            yield return new WaitForSeconds(UpgradeManager.Instance.GetUpgradeValue(UpgradeType.FireRate));
         }
     }
 

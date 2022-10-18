@@ -49,6 +49,14 @@ public static class Utility
         yield return new WaitForSeconds(delay);
         ac();
     }
+    public static Vector3 GetVecByAngle(float degrees, bool isLocalAngle = false, Transform refTrans = null) 
+    { 
+        if (isLocalAngle)
+        { 
+            degrees += refTrans.eulerAngles.y; 
+        }
+        return new Vector3(Mathf.Sin(degrees * Mathf.Deg2Rad), 0, Mathf.Cos(degrees * Mathf.Deg2Rad)); 
+    }
     private static void Error(string errorString)
     {
         Debug.LogError($"Utility : {errorString}");
