@@ -18,17 +18,17 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Execute()
     {
-        stateMachineOwnerClass.TargetLook();
-        Vector3 tar = stateMachineOwnerClass.Target.position;
-        tar.y = stateMachineOwnerClass.transform.position.y;
-        if(Vector3.Distance(stateMachineOwnerClass.transform.position, tar) < stateMachineOwnerClass.AttackDataSO.attackDistance)
-        {
-            stateMachine.ChangeState<MeleeAttack_RushBoss<RushBoss>>();
-        }
 
         if (stateMachine.GetStateDurationTime > _randomTime)
         {
-            stateMachine.ChangeState<Move_RushBoss<RushBoss>>();
+            if (stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.attackDistance)
+            {
+                stateMachine.ChangeState<MeleeAttack_RushBoss<RushBoss>>();
+            }
+            else
+            {
+                stateMachine.ChangeState<Move_RushBoss<RushBoss>>();
+            }
         }
     }
 

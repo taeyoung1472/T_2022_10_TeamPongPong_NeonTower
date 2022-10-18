@@ -14,7 +14,10 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Execute()
     {
+
         stateMachineOwnerClass.TargetLook();
+
+
         stateMachineOwnerClass.Agent.SetDestination(stateMachineOwnerClass.Target.position);
         if (stateMachineOwnerClass.Agent.remainingDistance <= stateMachineOwnerClass.Agent.stoppingDistance)
         {
@@ -25,6 +28,7 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     public override void Exit()
     {
         stateMachineOwnerClass.ModelReset();
+        stateMachineOwnerClass.Agent.ResetPath();
         stateMachineOwnerClass.Animator.SetBool("Run", false);
     }
 }
