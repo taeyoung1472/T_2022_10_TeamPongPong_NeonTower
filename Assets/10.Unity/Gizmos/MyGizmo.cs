@@ -8,6 +8,7 @@ using UnityEngineInternal;
 [AddComponentMenu("Gizmo/MyGizmo")]
 public class MyGizmo : MonoBehaviour
 {
+#if UNITY_EDITOR
     [Tooltip("OnSelected : 오브젝트가 선택되었을떄 그려줌\nAlways : 항상 그려줌")]
     [SerializeField] private GizmoDrawMode drawMode;
     [Tooltip("Wire(선) 형식으로 그릴지\nMesh(꽉찬) 형식으로 그릴지")]
@@ -72,4 +73,5 @@ public class MyGizmo : MonoBehaviour
         OnSelected,
         Always
     }
+#endif
 }

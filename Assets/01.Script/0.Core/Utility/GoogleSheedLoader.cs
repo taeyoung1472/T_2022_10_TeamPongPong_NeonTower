@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public static class GoogleSheedLoader
 {
+#if UNITY_EDITOR
     // edit?~ 는 삭재한다
     // export?format=tsv&range{범위1}:{범위2} 추가한다
     readonly static string sheetURL = "https://docs.google.com/spreadsheets/d/10q0Ioy7eGeFtFkL0dwGrtQRC8uiFHQ69BTswHISNwPE/export?format=tsv&rangeA2:C";
@@ -81,4 +82,5 @@ public static class GoogleSheedLoader
             DestroyImmediate(gameObject);
         }
     }
+#endif
 }

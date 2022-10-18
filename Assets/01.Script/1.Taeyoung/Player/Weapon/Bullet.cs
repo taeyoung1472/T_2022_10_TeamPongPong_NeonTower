@@ -6,6 +6,7 @@ public class Bullet : PoolAbleObject
 {
     // [Get Set 프로퍼티]
     private float Speed { get { return data.bulletSpeed * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletSpeed); } }
+    private float Damage { get { return data.damage + UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletDamage); } }
     private AudioClip FireClip { get { return data.fireClip; } }
     private AudioClip CollisionClip { get { return data.collisionClip; } }
 
@@ -15,8 +16,10 @@ public class Bullet : PoolAbleObject
 
     [Header("[변수]")]
     private Rigidbody rb;
-    private int bounceChance = 3;
-    private bool isCanExplosion = true;
+    private int bounceChance;
+    private bool isCanExplosion;
+    private bool isCanKnockBack;
+    private float knockBackForce = 0f;
     private float explosionRadius = 2.5f;
 
     [Header("[레이어]")]
@@ -45,11 +48,11 @@ public class Bullet : PoolAbleObject
 
                 foreach (var col in cols)
                 {
-                    //처리
+                    col.GetComponent<IDamageable>()?.ApplyDamage(Damage * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion));
                 }
             }
 
-            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(data.damage);
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
             //총알 소멸
             PoolManager.Instance.Push(PoolType, gameObject);
         }
@@ -102,13 +105,16 @@ public class Bullet : PoolAbleObject
 
     public override void Init_Pop()
     {
+        bounceChance = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletBounce);
+        knockBackForce = UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback);
+        isCanExplosion = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion) != 0;
+        isCanKnockBack = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0;
         if (rb == null) rb = GetComponent<Rigidbody>();
     }
 
     public override void Init_Push()
     {
         rb.velocity = Vector3.zero;
-        bounceChance = 3;
     }
 
 }

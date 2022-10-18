@@ -10,7 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222f43c82912acd4a8a436a02b6bf7bb, type: 3}
-  m_Name: Speed
+  m_Name: BulletDamage
   m_EditorClassIdentifier: 
-  upgradeType: 1
-  datas: []
+  upgradeType: 5
+  datas:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10

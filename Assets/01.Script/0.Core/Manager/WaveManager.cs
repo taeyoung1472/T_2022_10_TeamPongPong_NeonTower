@@ -6,13 +6,15 @@ using UnityEngine;
 public class WaveManager : MonoSingleTon<WaveManager>
 {
     [Header("[Data]")]
-    [SerializeField] private int wavePerTime = 30;
+    [SerializeField] private int wavePerTime = 40;
     [SerializeField] private int waveChangeTime = 8;
     private int curWave = 0;
     private int curFloor = 1;
     private float waveTimer = 0;
+    private bool isBossClear = false;
 
     public int CurWave { get { return curWave; } }
+    public bool IsBossClear { get { return isBossClear; } set { isBossClear = value; } }
 
     [Header("[Ref]")]
     private Background[] backgrounds;
@@ -52,9 +54,13 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
             if (curWave % 3 == 0)
             {
+                //isBossClear = false;
+                //yield return new WaitUntil(() => isBossClear);
+                EnemySubject.Instance.NotifyObserver();
+
                 if (curFloor == 6)
                 {
-                    //Ending ·Îµù
+                    GameManager.Instance.LoadEnding();
                 }
 
                 foreach (Background bg in backgrounds) { bg.FloorChange(); }
@@ -70,8 +76,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 seq.AppendInterval(waveChangeTime);
                 seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = true);
                 seq.AppendCallback(() => enemySpawner.IsCanSpawn = true);
-
-                AudioManager.PlayAudio(floorChangeClip);
+                seq.InsertCallback(3, () => AudioManager.PlayAudio(floorChangeClip));
                 #endregion
 
                 floorText.text = $"{curFloor} Ãþ";
