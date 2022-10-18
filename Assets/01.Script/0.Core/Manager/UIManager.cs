@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class UIManager : MonoSingleTon<UIManager>
@@ -8,11 +7,12 @@ public class UIManager : MonoSingleTon<UIManager>
     [Header("[UI Canvas]")]
     [SerializeField] private GameObject _escUI = null;
     [SerializeField] private GameObject _continueUI = null;
-    [SerializeField] private GameObject _upgradeUI = null;
 
     [SerializeField]
     private AudioClip ClickClip = null;
-    [HideInInspector] public bool isActiveContinue;
+    public bool isActiveContinue;
+    private bool isDisplayContinue = true;
+    public bool IsDisplayContinue { get { return isDisplayContinue; } set { isDisplayContinue = value; } }
 
     [Header("HPUI ฐüทร")]
     [SerializeField]
@@ -22,22 +22,27 @@ public class UIManager : MonoSingleTon<UIManager>
     [SerializeField]
     private TextMeshProUGUI _hpText = null;
 
+    private int stackCount;
+
     Stack<IUserInterface> _popupStack = new();
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(_popupStack.Count == 0 && !isActiveContinue)
+            if (_popupStack.Count == 0 && !isActiveContinue)
             {
                 ActiveUI(_escUI);
             }
         }
+        stackCount = _popupStack.Count;
     }
 
     public void ActiveUI(GameObject targetUI)
     {
-        if(_popupStack.Count > 0)
+        IsDisplayContinue = true;
+
+        if (_popupStack.Count > 0)
         {
             _popupStack.Peek().CloseUI();
         }
@@ -48,20 +53,26 @@ public class UIManager : MonoSingleTon<UIManager>
 
     public void DeActiveUI()
     {
-        if(_popupStack.Count > 1)
+        if (_popupStack.Count > 1)
         {
             _popupStack.Pop().CloseUI();
             _popupStack.Peek().OpenUI();
         }
-        else if(_popupStack.Count == 1)
+        else if (_popupStack.Count == 1)
         {
             _popupStack.Pop().CloseUI();
-            _continueUI.GetComponent<IUserInterface>().OpenUI();
+            if (isDisplayContinue)
+            {
+                _continueUI.GetComponent<IUserInterface>().OpenUI();
+            }
             isActiveContinue = true;
         }
-        else if(_popupStack.Count == 0)
+        else if (_popupStack.Count == 0)
         {
-            _continueUI.GetComponent<IUserInterface>().CloseUI();
+            if (isDisplayContinue)
+            {
+                _continueUI.GetComponent<IUserInterface>().CloseUI();
+            }
         }
     }
 

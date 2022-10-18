@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     // [Header("[GetSet 프로퍼티]")]
     public float CurSpeed { get 
         { 
-            return speed * (isDashing ? dashSpeed : 1) * speedFixValue; 
+            return speed // Default
+                * (isDashing ? dashSpeed : 1) // Dash
+                * speedFixValue; // Debuf
         } 
     }
     public float SpeedFixValue
@@ -198,7 +200,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    public void ApplyDamage(int dmg)
+    public void ApplyDamage(float dmg)
     {
         if (isDead) return;
         Debug.Log("아야");

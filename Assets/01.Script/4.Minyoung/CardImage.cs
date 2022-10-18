@@ -71,9 +71,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        rect.DOScale(new Vector2(1.2f, 1.2f), 0.5f);
-        rect.DOScaleX(1.2f, 0.3f);
-        rect.DOScaleY(1.2f, 0.3f);
+        rect.DOScale(new Vector2(1.2f, 1.2f), 0.5f).SetUpdate(true);
         isFocusing = true;
         rotationFlag = Random.Range(0, 2) == 0 ? true : false;
         time = 0;
@@ -84,7 +82,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        rect.DOScale(Vector2.one, 0.5f);
+        rect.DOScale(Vector2.one, 0.5f).SetUpdate(true);
         isFocusing = false;
 
         Debug.Log("Exit");

@@ -1,5 +1,6 @@
 namespace TheDeveloper.ColorChanger
 {
+#if UNITY_EDITOR
     using System.Collections;
     using UnityEngine;
 
@@ -34,4 +35,5 @@ namespace TheDeveloper.ColorChanger
             }
         }
     }
+#endif
 }

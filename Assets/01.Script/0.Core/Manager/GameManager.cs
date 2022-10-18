@@ -32,6 +32,10 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         SceneManager.LoadScene("Tutorial");
     }
+    public void LoadEnding()
+    {
+        SceneManager.LoadScene("Ending");
+    }
 
     public void QuitGame()
     {

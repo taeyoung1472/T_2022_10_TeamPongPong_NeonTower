@@ -28,9 +28,13 @@ public class Boss : MonoBehaviour, IDamageable
     public UnityEvent OnDeathEvent;
     #endregion
 
-    public virtual void ApplyDamage(int dmg)
+    public virtual void ApplyDamage(float dmg)
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up * 2, dmg);
         Debug.Log("나 아야 했어");
+    }
+    public virtual void Die()
+    {
+        WaveManager.Instance.IsBossClear = true;
     }
 }

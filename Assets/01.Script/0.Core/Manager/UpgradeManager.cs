@@ -29,6 +29,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
             upgradeCountDic.Remove(upgradeType);
         }
         UIManager.Instance.DeActiveUI();
+        UIManager.Instance.isActiveContinue = false;
     }
 
     public UpgradeData[] GetRandDataList()

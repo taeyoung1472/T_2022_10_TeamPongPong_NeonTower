@@ -32,6 +32,10 @@ public class EnemyBase<T> : Enemy
         attackRoot = transform.Find("AttackRoot");
         OnDeath.AddListener(() => { PoolManager.Instance.Push(PoolType, gameObject); });
     }
+    protected virtual void Start()
+    {
+        EnemySubject.Instance.RegisterObserver(this);
+    }
     public virtual void FixedUpdate()
     {
         if (dead) return;
@@ -55,8 +59,6 @@ public class EnemyBase<T> : Enemy
     public virtual void Attack()
     {
         Collider[] cols = Physics.OverlapSphere(attackRoot.position, enemyData.attackRadius, whatIsTarget);
-
-        Debug.Log(cols.Length);
 
         foreach (var col in cols)
         {
