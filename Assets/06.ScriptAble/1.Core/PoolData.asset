@@ -49,3 +49,15 @@ MonoBehaviour:
   - poolType: 7
     initCount: 10
     poolAbleObject: {fileID: 1251657419289243018, guid: 83b7246f2a7bf674580b458112efe780, type: 3}
+  - poolType: 12
+    initCount: 100
+    poolAbleObject: {fileID: -3952352680106748503, guid: 55338596ed2eb9a4694d355adca83c73, type: 3}
+  - poolType: 13
+    initCount: 20
+    poolAbleObject: {fileID: -2855662040913159645, guid: e0a7b42acdd6ea64a8d2490279d7ed9c, type: 3}
+  - poolType: 14
+    initCount: 20
+    poolAbleObject: {fileID: 7941654187723858168, guid: df153c9093a08ef4090c64daae98c1ee, type: 3}
+  - poolType: 15
+    initCount: 20
+    poolAbleObject: {fileID: 2488883534195314846, guid: 7eb55e18d3b86184a9cbbb1d9043db15, type: 3}
