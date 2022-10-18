@@ -28,8 +28,8 @@ MonoBehaviour:
     upgradeAbleCount: 2
     upgradeProfile: {fileID: 21300000, guid: f2c452127c76dab439f0c5902ad311a4, type: 3}
     color: {r: 0.39215684, g: 1, b: 0.9570826, a: 1}
-    upgradeName: "\uACF5\uACA9\uC18D\uB3C4"
-    upgradeDesc: "\uACF5\uACA9\uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+    upgradeName: "\uC774\uB3D9 \uC18D\uB3C4"
+    upgradeDesc: "\uC774\uB3D9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4"
   - upgradeType: 2
     upgradeAbleCount: 1
     upgradeProfile: {fileID: 21300000, guid: 7d22db7217af8aa4fabae41784d9a439, type: 3}

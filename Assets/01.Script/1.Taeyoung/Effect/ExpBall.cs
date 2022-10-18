@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEditor.U2D;
 
 public class ExpBall : PoolAbleObject
 {
@@ -11,7 +7,7 @@ public class ExpBall : PoolAbleObject
     {
         speed += Time.deltaTime;
         transform.position = Vector3.Slerp(transform.position, Define.Instance.playerController.transform.position, Time.deltaTime * (2.5f + speed));
-        if(Vector3.Distance(transform.position, Define.Instance.playerController.transform.position) < 1f)
+        if (Vector3.Distance(transform.position, Define.Instance.playerController.transform.position) < 1f)
         {
             EXPManager.Instance.AddExp();
             PoolManager.Instance.Push(PoolType, gameObject);

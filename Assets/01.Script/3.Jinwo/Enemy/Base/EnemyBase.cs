@@ -56,8 +56,6 @@ public class EnemyBase<T> : Enemy
     {
         Collider[] cols = Physics.OverlapSphere(attackRoot.position, enemyData.attackRadius, whatIsTarget);
 
-        Debug.Log(cols.Length);
-
         foreach (var col in cols)
         {
             IDamageable damageable = col.GetComponent<IDamageable>();

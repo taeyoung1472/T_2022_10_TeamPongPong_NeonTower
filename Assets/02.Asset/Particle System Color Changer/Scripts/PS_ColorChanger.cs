@@ -1,5 +1,6 @@
 namespace TheDeveloper.ColorChanger
 {
+#if UNITY_EDITOR
     using UnityEngine;
 
     /**
@@ -116,4 +117,5 @@ namespace TheDeveloper.ColorChanger
         }
         #endregion
     }
+#endif
 }

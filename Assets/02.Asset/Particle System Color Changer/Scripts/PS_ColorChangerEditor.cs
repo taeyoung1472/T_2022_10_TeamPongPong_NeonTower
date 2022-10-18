@@ -1,5 +1,6 @@
 namespace TheDeveloper.ColorChanger
 {
+#if UNITY_EDITOR
     using UnityEngine;
     using UnityEditor;
 
@@ -23,4 +24,5 @@ namespace TheDeveloper.ColorChanger
                 ((PS_ColorChanger)target).SwapCurrentWithNewColors();
         }
     }
+#endif
 }

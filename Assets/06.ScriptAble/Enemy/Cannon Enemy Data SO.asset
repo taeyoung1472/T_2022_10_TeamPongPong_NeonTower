@@ -32,5 +32,5 @@ MonoBehaviour:
   explosionRange: 0
   bulletSpeed: 10
   bulletPrefab: {fileID: 3864542250235844408, guid: 9e7e2e77371d7fa4bb1e55870d7bcf98, type: 3}
-  hitClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: c51e6161b9cf7bb45a11bfe368481797, type: 3}
+  deathClip: {fileID: 8300000, guid: e997e07bb6dbc4d41885b821a540e955, type: 3}

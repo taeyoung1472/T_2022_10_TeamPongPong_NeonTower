@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     // [Header("[GetSet 프로퍼티]")]
     public float CurSpeed { get 
         { 
-            return speed * (isDashing ? dashSpeed : 1) * speedFixValue; 
+            return speed * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.Speed) // Default
+                * (isDashing ? dashSpeed : 1) // Dash
+                * speedFixValue; // Debuf
         } 
     }
     public float SpeedFixValue

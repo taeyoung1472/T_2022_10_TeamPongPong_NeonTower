@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class UIManager : MonoSingleTon<UIManager>
@@ -8,7 +7,6 @@ public class UIManager : MonoSingleTon<UIManager>
     [Header("[UI Canvas]")]
     [SerializeField] private GameObject _escUI = null;
     [SerializeField] private GameObject _continueUI = null;
-    [SerializeField] private GameObject _upgradeUI = null;
 
     [SerializeField]
     private AudioClip ClickClip = null;
@@ -30,7 +28,7 @@ public class UIManager : MonoSingleTon<UIManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(_popupStack.Count == 0 && !isActiveContinue)
+            if (_popupStack.Count == 0 && !isActiveContinue)
             {
                 ActiveUI(_escUI);
             }
@@ -52,12 +50,12 @@ public class UIManager : MonoSingleTon<UIManager>
 
     public void DeActiveUI()
     {
-        if(_popupStack.Count > 1)
+        if (_popupStack.Count > 1)
         {
             _popupStack.Pop().CloseUI();
             _popupStack.Peek().OpenUI();
         }
-        else if(_popupStack.Count == 1)
+        else if (_popupStack.Count == 1)
         {
             _popupStack.Pop().CloseUI();
             if (isDisplayContinue)
@@ -66,7 +64,7 @@ public class UIManager : MonoSingleTon<UIManager>
             }
             isActiveContinue = true;
         }
-        else if(_popupStack.Count == 0)
+        else if (_popupStack.Count == 0)
         {
             if (isDisplayContinue)
             {

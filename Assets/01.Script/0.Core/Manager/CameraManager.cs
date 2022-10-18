@@ -44,7 +44,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
     /// <param name="Èçµé¸± ½Ã°£"></param>
     public void CameraShake(float amplitude, float intensity, float duration)
     {
-        Debug.Log(_currentShakeAmount);
         if (_currentShakeAmount > amplitude)
         {
             return;

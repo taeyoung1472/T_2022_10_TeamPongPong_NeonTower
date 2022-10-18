@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.Events;
-using System.ComponentModel.Design;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Enemy : PoolAbleObject, IDamageable
 {
@@ -59,6 +55,7 @@ public class Enemy : PoolAbleObject, IDamageable
         dead = true;
 
         // onDeath 이벤트에 등록된 메서드가 있다면 실행
+        AudioManager.PlayAudioRandPitch(enemyData.deathClip);
         GameObject obj = PoolManager.Instance.Pop(PoolType.EXPBall).gameObject;
         GameObject dieEffect = PoolManager.Instance.Pop(PoolType.EnemyDeadEffect).gameObject;
         dieEffect.transform.position = transform.position;
@@ -89,8 +86,9 @@ public class Enemy : PoolAbleObject, IDamageable
     public void ApplyDamage(int dmg)
     {
         health -= dmg;
+        AudioManager.PlayAudioRandPitch(enemyData.hitClip);
         DamagePopup.PopupDamage(transform.position, dmg);
-        if(health <= 0)
+        if (health <= 0)
         {
             Die();
         }
