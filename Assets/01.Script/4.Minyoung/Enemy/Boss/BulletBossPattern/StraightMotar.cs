@@ -45,20 +45,21 @@ public class StraightMotar : BossState<BulletBoss>
             //     stateMachineOwnerClass.transform.position) * new Vector3(0f, 0f, i * 6f);
             Vector3 pos = stateMachineOwnerClass.transform.position + dir * (i * 6);
 
-            GameObject obj = DangerZone.DrawCircle(pos, 0.5f, 2f);
+            GameObject obj = DangerZone.DrawCircle(pos, 0.5f, 1f);
 
             obj.transform.rotation = Quaternion.LookRotation
                      (stateMachineOwnerClass.Target.position - stateMachineOwnerClass.transform.position);
 
             obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+            obj.transform.DOMoveY(0.1f, 1f);
 
             circlePositions.Add(pos);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
         
         }
 
-        yield return new WaitForSeconds(bulletBoss.WaringBoomTime);
+        yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i < 5; i++)
         {
@@ -73,10 +74,14 @@ public class StraightMotar : BossState<BulletBoss>
 
             motarBullet.transform.DOScale(new Vector3(2f, 2f, 2f), 2f);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
         circlePositions.Clear();
 
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
+
+
+        stateMachine.ChangeState<BulletBossIdle>();
     }
     public override void Exit()
     {

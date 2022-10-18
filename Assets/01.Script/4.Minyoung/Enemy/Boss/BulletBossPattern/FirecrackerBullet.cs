@@ -60,8 +60,11 @@ public class FirecrackerBullet : BossState<BulletBoss>
             bullets.Add(circleBullet.transform);
         }
         //stateMachineOwnerClass.DestroyObj(circleBullet);
-        yield return new WaitForSeconds(0.5f);
-        
+
+        yield return new WaitForSeconds(0.3f);
+
+        CameraManager.Instance.CameraShake(20f, 30f, 0.25f);
+
         foreach (Transform bulletTrm in bullets)
         {
             for (int i = 0; i < 4; i++)
@@ -72,8 +75,9 @@ public class FirecrackerBullet : BossState<BulletBoss>
             }
             SetBulletInfo(circleBullet, bulletTrm);
         }
-        yield return new WaitForSeconds(1f);
-        //stateMachine.ChangeState<PlayerMotar>();
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
+
+        stateMachine.ChangeState<BulletBossIdle>();
     }
     private void SetBulletInfo(GameObject circleBullet, Transform bulletTrm)
     {

@@ -62,6 +62,35 @@ public class BulletBoss : BossBase<BulletBoss>
     public int ThirdMotarCnt => thirdMotarCnt;
     #endregion
 
+    [Header("스테이트에서 아이들로 넘어가는 시간")]
+    [SerializeField] private float stateToIdleTime = 1f;
+
+    public float StateToIdleTime => stateToIdleTime;
+
+    public List<int> randomIndexList = new List<int>();
+    public List<int> bowlIndexList = new List<int>();
+
+    public int RandomIndex()
+    {
+        int returnValue = 0;
+
+        if(bowlIndexList.Count != 0) //그릇 있다는
+        {
+            int rand = Random.Range(0, bowlIndexList.Count); 
+            returnValue = bowlIndexList[rand]; 
+            bowlIndexList.RemoveAt(rand);
+        }
+        else
+        {
+            bowlIndexList.AddRange(randomIndexList);
+
+            int rand = Random.Range(0, bowlIndexList.Count);
+            returnValue = bowlIndexList[rand];
+            bowlIndexList.RemoveAt(rand);
+        }
+
+        return returnValue;
+    }
     private void Start()
     {
         bossFsm = new BossStateMachine<BulletBoss>(this, new BulletBossIdle());
@@ -70,6 +99,7 @@ public class BulletBoss : BossBase<BulletBoss>
         bossFsm.AddStateList(new FirecrackerBullet());
         bossFsm.AddStateList(new StraightMotar());
         bossFsm.AddStateList(new PlayerMotar());
+
         bossFsm.AddStateList(new CircleMotar());
     }
     public override void LookTarget()
@@ -84,5 +114,5 @@ public class BulletBoss : BossBase<BulletBoss>
     {
         Destroy(obj);
     }
-        
+
 }

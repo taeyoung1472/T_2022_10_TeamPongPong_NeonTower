@@ -23,7 +23,7 @@ public class MotarBullet : MonoBehaviour
         GameObject effect = PoolManager.Instance.Pop(PoolType.BulletBossMortarEffect).gameObject;
         Debug.Log(effect);
         effect.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-        CameraManager.Instance.CameraShake(5f, 30f, 0.2f);
+        CameraManager.Instance.CameraShake(25f, 30f, 0.2f);
         yield return new WaitForSeconds(1f);
     }
 }

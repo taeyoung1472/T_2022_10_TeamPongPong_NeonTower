@@ -25,11 +25,11 @@ public class PlayerMotar : BossState<BulletBoss>
 
         for (int i = 0; i < 5; i++)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
+            Vector3 randomPos = new Vector3(Random.Range(-6f, 6f), 0f, Random.Range(-6f, 6f));
             Vector3 dir = stateMachineOwnerClass.Target.position + randomPos;
 
             randomPositions.Add(dir);
-            GameObject obj = DangerZone.DrawCircle(dir, 0.5f, 2f);
+            GameObject obj = DangerZone.DrawCircle(dir, 0.5f, 1.5f);
             obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
             yield return new WaitForSeconds(0.3f);
         }
@@ -52,7 +52,11 @@ public class PlayerMotar : BossState<BulletBoss>
             yield return new WaitForSeconds(0.1f);
         }
         randomPositions.Clear();
-        stateMachine.ChangeState<StraightMotar>();
+
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
+
+
+        stateMachine.ChangeState<BulletBossIdle>();
 
     }
 

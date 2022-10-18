@@ -29484,23 +29484,26 @@ MonoBehaviour:
   firecrackerBullet: {fileID: -2855662040913159645, guid: e0a7b42acdd6ea64a8d2490279d7ed9c, type: 3}
   motarBullet: {fileID: 7941654187723858168, guid: df153c9093a08ef4090c64daae98c1ee, type: 3}
   rotateTrm: {fileID: 128129370}
-  straightPower: 7
-  interval: 0.3
+  straightPower: 8
+  interval: 0.2
   cycleInterval: 1
   cycleCnt: 3
   fireCnt: 4
-  circlePower: 7
-  fireCircleCnt: 15
+  circlePower: 8
+  fireCircleCnt: 16
   bigBulletDestoryTime: 1.5
   boomCircleCnt: 12
-  boomPower: 7
+  boomPower: 5
   boomCirclePower: 4
   boomDelay: 0.1
-  motarDownPower: 12
-  waringBoomTime: 0.5
+  motarDownPower: 25
+  waringBoomTime: 0.1
   firstMotarCnt: 5
-  secontMotarCnt: 7
-  thirdMotarCnt: 10
+  secontMotarCnt: 9
+  thirdMotarCnt: 14
+  stateToIdleTime: 0.2
+  randomIndexList: 000000000100000002000000030000000400000005000000
+  bowlIndexList: 
 --- !u!1001 &2101309457
 PrefabInstance:
   m_ObjectHideFlags: 0

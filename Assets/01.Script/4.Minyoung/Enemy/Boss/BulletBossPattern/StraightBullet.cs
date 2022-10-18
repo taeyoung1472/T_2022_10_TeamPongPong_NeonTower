@@ -41,10 +41,10 @@ public class StraightBullet : BossState<BulletBoss>
             }
             yield return new WaitForSeconds(bulletBoss.CycleInterval);
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
 
 
-        stateMachine.ChangeState<CircleBullet>();
+        stateMachine.ChangeState<BulletBossIdle>();
     }
     public override void Exit()
     {

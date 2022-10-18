@@ -34,8 +34,9 @@ public class CircleBullet : BossState<BulletBoss>
             rid.AddForce(newBullet.transform.forward * bulletBoss.CirclePower, ForceMode.Impulse);
         }
 
-        yield return new WaitForSeconds(1f);
-        stateMachine.ChangeState<FirecrackerBullet>();
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
+
+        stateMachine.ChangeState<BulletBossIdle>();
     }
     public override void Exit()
     {
