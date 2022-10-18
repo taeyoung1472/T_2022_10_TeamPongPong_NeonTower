@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Explosion Enemy Data SO
   m_EditorClassIdentifier: 
   enemyName: ExplosionEmeny
-  maxHealth: 5
+  maxHealth: 3
   prefab: {fileID: 2130471020164515853, guid: fa76b39734d49ee4cbd095895618abe1, type: 3}
   damage: 1
   attackDelay: 1
@@ -21,6 +21,8 @@ MonoBehaviour:
   attackDistance: 3
   speed: 2
   stoppingDistance: 2
+  turnSmoothTime: 0.1
+  turnSmoothVelocity: 6.397268
   dashDistance: 0
   dashSpeed: 0
   dashDamage: 0

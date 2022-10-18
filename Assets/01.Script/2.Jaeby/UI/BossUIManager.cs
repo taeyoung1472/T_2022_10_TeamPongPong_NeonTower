@@ -15,6 +15,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     private Slider _bossHpSlider = null;
     private Image _bossImage = null;
     private TextMeshProUGUI _bossNameText = null;
+    private TextMeshProUGUI _bossHPText = null;
 
     private Boss _currentBoss = null;
 
@@ -23,6 +24,11 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
     private Sequence _seq = null;
 
+    private Sequence _popupSeq = null;
+    private TextMeshProUGUI _popupText = null;
+    private Vector3 _initPos = Vector3.zero;
+
+    int _popupWeight = 0;
 
     private void Start()
     {
@@ -35,11 +41,14 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossHpSlider = perent?.GetChild(4).GetComponent<Slider>();
         _bossImage = perent?.GetChild(5).Find("Image").GetComponent<Image>();
         _bossNameText = perent?.GetChild(6).GetComponent<TextMeshProUGUI>();
+        _bossHPText = _bossHpSlider.transform.Find("BossHPText").GetComponent<TextMeshProUGUI>();
+        _popupText = perent?.GetChild(7).GetComponent<TextMeshProUGUI>();
 
         if (_dangerUI != null && _bossNameUI != null)
         {
             _dangerOriginPosition = _dangerUI.anchoredPosition;
             _bossNameOriginPosition = _bossNameUI.anchoredPosition;
+            _initPos = _popupText.rectTransform.anchoredPosition;
         }
         else
         {
@@ -52,19 +61,51 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _currentBoss = boss;
         if (_currentBoss == null || _bossHpSlider == null || _bossImage == null) return;
 
+        _currentBoss.OnDeathEvent.AddListener(ExitBoss);
         _bossHpSlider.gameObject.SetActive(true);
         _bossImage.transform.parent.gameObject.SetActive(true);
         _bossNameText.gameObject.SetActive(true);
 
         _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
+        _bossHPText?.SetText($"{Instance._currentBoss.CurHp} / {Instance._currentBoss.Data.maxHp}");
         _bossImage.sprite = _currentBoss.Data.bossProfile;
         _bossNameText?.SetText(_currentBoss.Data.bossName);
     }
 
-    public void BossDamaged()
+    /// <summary>
+    /// 보스 전용 팝업 텍스트 !!
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="time"></param>
+    /// <param name="weight"></param>
+    public void BossPopupText(string text, float time, int weight)
     {
-        if (_currentBoss == null) return;
-        _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
+        if (_popupText == null) return;
+        if (weight < _popupWeight) return;
+        if (_popupSeq != null)
+        {
+            _popupSeq.Kill();
+            weight = 0;
+        }
+
+        _popupWeight = weight;
+        _popupText.SetText(text);
+        _popupText.rectTransform.anchoredPosition = _initPos;
+        _seq = DOTween.Sequence();
+        _seq.Append(_popupText.rectTransform.DOAnchorPosY(-65f, 0.5f));
+        _seq.Append(_popupText.transform.DOShakePosition(time));
+        _seq.Append(_popupText.rectTransform.DOAnchorPosY(_initPos.y, 0.5f));
+        _seq.AppendCallback(() =>
+        {
+            weight = 0;
+        });
+    }
+
+    public static void BossDamaged()
+    {
+        if (Instance._currentBoss == null) return;
+        Instance._bossHpSlider.value = Instance._currentBoss.CurHp / (float)Instance._currentBoss.Data.maxHp;
+        Instance._bossHPText?.SetText($"{Instance._currentBoss.CurHp} / {Instance._currentBoss.Data.maxHp}");
     }
 
     public void ExitBoss()
@@ -90,6 +131,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
         _dangerUI.anchoredPosition = _dangerOriginPosition;
         _bossNameUI.anchoredPosition = _bossNameOriginPosition;
+        _bossNameUI.GetComponent<TextMeshProUGUI>()?.SetText(boss.Data.bossName);
         _upImageUI.anchoredPosition = Vector2.up * -130f;
         _downImageUI.anchoredPosition = Vector2.up * 130f;
         float x = Screen.currentResolution.width;

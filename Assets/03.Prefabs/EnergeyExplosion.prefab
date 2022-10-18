@@ -9769,6 +9769,7 @@ GameObject:
   - component: {fileID: 8561703499851857775}
   - component: {fileID: 8561703499851857774}
   - component: {fileID: 8561703499851857773}
+  - component: {fileID: 1251657419289243018}
   m_Layer: 0
   m_Name: EnergeyExplosion
   m_TagString: Untagged
@@ -14640,6 +14641,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1251657419289243018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561703499851857772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf17fc1feb56a95409f9e0158bfce6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTime: 3
 --- !u!1 &8561703500070683602
 GameObject:
   m_ObjectHideFlags: 0

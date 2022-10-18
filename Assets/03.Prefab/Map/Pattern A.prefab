@@ -1188,24 +1188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7971de066ff384f8aa91d9f3dcff72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern:
-  - patternRoot: {fileID: 8651140877781354742}
-  - patternRoot: {fileID: 8651140876009695592}
-  - patternRoot: {fileID: 8651140877402401539}
-  - patternRoot: {fileID: 8651140877404454503}
-  - patternRoot: {fileID: 8651140876730015371}
-  - patternRoot: {fileID: 8651140876564029532}
-  - patternRoot: {fileID: 8651140876160361266}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
-  - patternRoot: {fileID: 0}
 --- !u!1 &8651140878113049365
 GameObject:
   m_ObjectHideFlags: 0

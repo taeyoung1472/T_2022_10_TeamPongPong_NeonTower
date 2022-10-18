@@ -45,6 +45,7 @@ public class ContinueUI : MonoBehaviour, IUserInterface
         {
             OnCloseUI?.Invoke();
             Time.timeScale = 1f;
+            UIManager.Instance.isActiveContinue = false;
         });
 
     }

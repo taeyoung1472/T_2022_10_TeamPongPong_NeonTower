@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject _player = null;
     [SerializeField]
@@ -198,6 +197,8 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
             enemy.Init(_enemyPos[i].position, _player);
+            if (i == _enemyPos.Length - 1)
+                enemy.OnDeath.AddListener(Test3Clear);
             yield return new WaitForSeconds(1.5f);
         }
     }
@@ -293,16 +294,4 @@ public class TutorialManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            CameraManager.Instance.TargetingBossCameraAnimation(GameObject.Find("Boss_Summoner").GetComponent<Boss>(), 5f, 3f);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            DamagePopup.PopupDamage(transform.position, 10);
-        }
-    }
 }
