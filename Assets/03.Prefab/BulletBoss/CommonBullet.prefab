@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7287220389365212004}
   - component: {fileID: 7206212868434454196}
   - component: {fileID: -3952352680106748503}
+  - component: {fileID: 80452031621694308}
   m_Layer: 0
   m_Name: CommonBullet
   m_TagString: Untagged
@@ -4918,7 +4919,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-3952352680106748503
 MonoBehaviour:
@@ -4933,6 +4934,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolTime: 9999
+--- !u!114 &80452031621694308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341719707533978356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2edcca97566440a4fba5c7dbc48af1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
 --- !u!1 &7342042404687252742
 GameObject:
   m_ObjectHideFlags: 0

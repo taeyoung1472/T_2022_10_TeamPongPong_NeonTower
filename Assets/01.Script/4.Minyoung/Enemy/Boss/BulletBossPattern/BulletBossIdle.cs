@@ -26,35 +26,25 @@ public class BulletBossIdle : BossState<BulletBoss>
             switch (randIdx)
             {
                 case 0:
-            stateMachine.ChangeState<StraightMotar>();
+                    stateMachine.ChangeState<StraightMotar>();
                     break;
-
                 case 1:
-            stateMachine.ChangeState<CircleMotar>();
+                    stateMachine.ChangeState<CircleMotar>();
                     break;
-
                 case 2:
                     stateMachine.ChangeState<PlayerMotar>();
-
                     break;
-
                 case 3:
                     stateMachine.ChangeState<StraightBullet>();
-
                     break;
-
                 case 4:
                     stateMachine.ChangeState<CircleBullet>();
-
                     break;
-
                 case 5:
                     stateMachine.ChangeState<FirecrackerBullet>();
 
                     break;
             }
-            //stateMachine.ChangeState<PlayerMotar>();
-            //stateMachine.ChangeState<CircleMotar>();
         }
     }
 
@@ -62,5 +52,5 @@ public class BulletBossIdle : BossState<BulletBoss>
     {
     }
 
- 
+
 }

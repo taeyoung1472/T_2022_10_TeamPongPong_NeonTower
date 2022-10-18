@@ -4952,6 +4952,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513d84116b63dbd478ffa0f7fbcbc652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  CircleSize: 3.5
 --- !u!1 &1935101228785858681
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,7 +30,6 @@ public class CircleBullet : BossState<BulletBoss>
             Rigidbody rid = newBullet.GetComponent<Rigidbody>();
 
             newBullet.transform.rotation = Quaternion.AngleAxis(i * (360 / bulletBoss.FireCircleCnt), Vector3.up);
-            Debug.Log(newBullet.transform.eulerAngles.y);
             rid.AddForce(newBullet.transform.forward * bulletBoss.CirclePower, ForceMode.Impulse);
         }
 

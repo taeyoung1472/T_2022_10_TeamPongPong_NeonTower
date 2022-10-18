@@ -19386,6 +19386,7 @@ GameObject:
   - component: {fileID: 515879795290681831}
   - component: {fileID: 435130488630673609}
   - component: {fileID: -2855662040913159645}
+  - component: {fileID: 5018094616629876183}
   m_Layer: 0
   m_Name: BigBullet
   m_TagString: Untagged
@@ -24284,10 +24285,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571833232264268643}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-2855662040913159645
 MonoBehaviour:
@@ -24302,6 +24303,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolTime: 9999
+--- !u!114 &5018094616629876183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571833232264268643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c1b4a7a74aeab408e56ac998052176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
 --- !u!1 &571901022547525567
 GameObject:
   m_ObjectHideFlags: 0
