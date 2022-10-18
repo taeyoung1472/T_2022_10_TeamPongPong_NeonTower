@@ -25,9 +25,11 @@ public class StraightBullet : BossState<BulletBoss>
         {
             for (int j = 0; j < bulletBoss.FireCnt; j++)
             {
-                bulletBoss.LookTarget(); 
-                GameObject newbullet = stateMachineOwnerClass.InstantiateObj
-                    (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
+                GameObject newbullet = PoolManager.Instance.Pop(PoolType.BulletBossCommonBullet).gameObject;
+                newbullet.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, Quaternion.identity);
+
+                //GameObject newbullet = stateMachineOwnerClass.InstantiateObj
+                //    (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
 
                 newbullet.transform.rotation = Quaternion.LookRotation
                     (stateMachineOwnerClass.Target.position - stateMachineOwnerClass.transform.position);

@@ -14,31 +14,94 @@ public class CircleMotar : BossState<BulletBoss>
     }
     IEnumerator CircleMotarAtk()
     {
-        int count = 5; //36 10  
+        List<Vector3> circlePostions = new List<Vector3>();
+
         Vector3 normalVec = Vector3.zero;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < bulletBoss.FirstMotarCnt; i++)
         {
-            GameObject obj = DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, 1f, 3f);
-            normalVec = Quaternion.AngleAxis(i * (360 / count), Vector3.up) * Vector3.forward;
-            Debug.Log(normalVec);
-            obj.transform.position = normalVec * 5f;
-            obj.transform.DOScale(new Vector3(1.5f, 1f, 1.5f), 1f);
-            obj.transform.DOMoveY(1f, 1f);
-        }
-        yield return new WaitForSeconds(3f);
+            normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.FirstMotarCnt), Vector3.up) * Vector3.forward;
+            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 5f;
+            GameObject obj = DangerZone.DrawCircle(position, 0.5f, 2f);
 
-        for (int i = 0; i < 7; i++)
+            circlePostions.Add(position);
+
+            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+        }
+        yield return new WaitForSeconds(1.5f);
+
+        for (int i = 0; i < bulletBoss.FirstMotarCnt; i++)
         {
-            
-            GameObject obj = DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, 0.5f, 3f);
-            normalVec = Quaternion.AngleAxis(i * (360 / 7), Vector3.up) * Vector3.forward;
-            Debug.Log(normalVec);
-            obj.transform.position = normalVec * 10f;
-            obj.transform.DOScale(new Vector3(1.5f, 1f, 1.5f), 1f);
-            obj.transform.DOMoveY(1f, 1f);
-        }
+            GameObject motarBullet = PoolManager.Instance.Pop(PoolType.BulletBossMortarBullet).gameObject;
+            motarBullet.transform.SetPositionAndRotation(circlePostions[i], Quaternion.identity);
+            motarBullet.transform.rotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
+            motarBullet.transform.position = new Vector3(motarBullet.transform.position.x, 10f, motarBullet.transform.position.z);
 
+            Rigidbody rid = motarBullet.GetComponent<Rigidbody>();
+
+            rid.AddForce(motarBullet.transform.forward * bulletBoss.MotarDownPower, ForceMode.Impulse);
+
+            motarBullet.transform.DOScale(new Vector3(2f, 2f, 2f), 2f);
+        }
+        circlePostions.Clear();
+
+
+
+        for (int i = 0; i < bulletBoss.SecontMotarCnt; i++)
+        {
+            normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.SecontMotarCnt), Vector3.up) * Vector3.forward;
+            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 10f;
+            GameObject obj = DangerZone.DrawCircle(position, 0.5f, 2f);
+
+            circlePostions.Add(position);
+
+            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+        }
+        yield return new WaitForSeconds(1.5f);
+
+        for (int i = 0; i < bulletBoss.SecontMotarCnt; i++)
+        {
+            GameObject motarBullet = PoolManager.Instance.Pop(PoolType.BulletBossMortarBullet).gameObject;
+            motarBullet.transform.SetPositionAndRotation(circlePostions[i], Quaternion.identity);
+            motarBullet.transform.rotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
+            motarBullet.transform.position = new Vector3(motarBullet.transform.position.x, 10f, motarBullet.transform.position.z);
+
+            Rigidbody rid = motarBullet.GetComponent<Rigidbody>();
+
+            rid.AddForce(motarBullet.transform.forward * bulletBoss.MotarDownPower, ForceMode.Impulse);
+
+            motarBullet.transform.DOScale(new Vector3(2f, 2f, 2f), 2f);
+        }
+        circlePostions.Clear();
+
+
+        for (int i = 0; i < bulletBoss.ThirdMotarCnt; i++)
+        {
+            normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.ThirdMotarCnt), Vector3.up) * Vector3.forward;
+            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 15f;
+            GameObject obj = DangerZone.DrawCircle(position, 0.5f, 2f);
+
+            circlePostions.Add(position);
+
+            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+        }
+        yield return new WaitForSeconds(1.5f);
+
+        for (int i = 0; i < bulletBoss.ThirdMotarCnt; i++)
+        {
+            GameObject motarBullet = PoolManager.Instance.Pop(PoolType.BulletBossMortarBullet).gameObject;
+            motarBullet.transform.SetPositionAndRotation(circlePostions[i], Quaternion.identity);
+            motarBullet.transform.rotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
+            motarBullet.transform.position = new Vector3(motarBullet.transform.position.x, 10f, motarBullet.transform.position.z);
+
+            Rigidbody rid = motarBullet.GetComponent<Rigidbody>();
+
+            rid.AddForce(motarBullet.transform.forward * bulletBoss.MotarDownPower, ForceMode.Impulse);
+
+            motarBullet.transform.DOScale(new Vector3(2f, 2f, 2f), 2f);
+        }
+        circlePostions.Clear();
     }
+
     public override void Execute()
     {
         bulletBoss.LookTarget();

@@ -13,7 +13,7 @@ public abstract class BossBase<T> : Boss
         animator = GetComponentInChildren<Animator>();
     }
 
-    public void LookTarget()
+    public virtual void LookTarget()
     {
         transform.rotation = Quaternion.LookRotation(Target.position - transform.position);
     }

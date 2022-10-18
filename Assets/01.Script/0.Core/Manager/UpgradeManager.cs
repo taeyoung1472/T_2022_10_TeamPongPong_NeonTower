@@ -39,7 +39,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
     public float GetUpgradeValue(UpgradeType type)
     {
-        print((int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]);
+       // print((int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]);
         return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]];
     }
 }

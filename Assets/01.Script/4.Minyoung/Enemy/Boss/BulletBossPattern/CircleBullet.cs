@@ -15,14 +15,17 @@ public class CircleBullet : BossState<BulletBoss>
 
     public override void Execute()
     {
+        bulletBoss.LookTarget(); //보스가 플레이어를 바라본다
     }
     IEnumerator CircleAtk()
     {
 
         for (int i = 0; i < bulletBoss.FireCircleCnt; i++)
         {
-            GameObject newBullet = stateMachineOwnerClass.InstantiateObj
-                (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
+            //GameObject newBullet = stateMachineOwnerClass.InstantiateObj
+            //    (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
+            GameObject newBullet = PoolManager.Instance.Pop(PoolType.BulletBossCommonBullet).gameObject;
+            newBullet.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, Quaternion.identity);
 
             Rigidbody rid = newBullet.GetComponent<Rigidbody>();
 
