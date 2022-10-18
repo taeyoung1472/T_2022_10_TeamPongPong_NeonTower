@@ -12,6 +12,7 @@ public class RushBossAttackDataSO : ScriptableObject
 
     public float attackDistance = 5f;
     public float groundPoundDistance = 2f;
+    public float waveAttackDistance = 8f;
 
     public float[] punchDelays = new float[3];
 }

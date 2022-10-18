@@ -50,6 +50,10 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         {
             stateMachine.ChangeState<GroundPoundAttack_RushBoss<RushBoss>>();
         }
+        else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.waveAttackDistance)
+        {
+            stateMachine.ChangeState<WaveAttack_RushBoss<RushBoss>>();
+        }
         else
         {
             stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
