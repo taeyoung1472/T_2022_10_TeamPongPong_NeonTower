@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             speedFixValue = value;
         }
     }
+    public bool IsDead { get { return isDead; } }
 
     [Header("[타이머]")]
     [SerializeField] private float damageIgnoreTime = 0.2f;
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("[사운드]")]
     [SerializeField] private AudioClip dashClip;
+
+    [Header("[참조]")]
+    [SerializeField] private ParticleSystem dustParticle;
 
     private Animator playerAnim;
     private CharacterController controller;
@@ -92,10 +96,13 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
-        Audio();
-        if (isDead) return;
-        Move();
-        Rotate();
+        if (Time.time > 3)
+        {
+            Audio();
+            if (isDead) return;
+            Move();
+            Rotate();
+        }
     }
 
     private void Move()
@@ -115,6 +122,9 @@ public class PlayerController : MonoBehaviour, IDamageable
             rollingSoundGoal = 0;
 
             playerAnim.transform.localRotation = Quaternion.identity;
+
+            var e = dustParticle.emission;
+            e.enabled = false;
         }
         else
         {
@@ -123,6 +133,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
             Quaternion rot = Quaternion.LookRotation(new Vector3(h, 0, v));
             playerAnim.transform.rotation = rot;
+
+            var e = dustParticle.emission;
+            e.enabled = true;
         }
 
         if (!controller.isGrounded)

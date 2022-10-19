@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitUntil(() => Input.GetKey(KeyCode.Mouse0));
+            yield return new WaitUntil(() => Input.GetKey(KeyCode.Mouse0) && !Define.Instance.playerController.IsDead);
 
             bool isFirstInstance = true;
 

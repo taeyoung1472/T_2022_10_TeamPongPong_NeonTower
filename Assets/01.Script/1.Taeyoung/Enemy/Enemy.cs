@@ -11,6 +11,8 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
 
     public UnityEvent OnDeath; // 사망시 발동할 이벤트
 
+    public float lastAttackTime = 0;
+
     Vector3 baseScale;
 
 
