@@ -30,7 +30,13 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         cardTwoTrm.SetData(so[1]);
         cardThreeTrm.SetData(so[2]);
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            OpenUI();
+        }
+    }
     public void OpenUI()
     {
         UIManager.Instance.IsDisplayContinue = false;
@@ -57,8 +63,14 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         if (_seq != null)
             _seq.Kill();
 
+        CloseCard();
         _seq = DOTween.Sequence();
-        _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
+       // _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
         Time.timeScale = 1f;
     }
-}
+    public void CloseCard()
+    {
+       // cardOneTrm.transform.DOMove()
+        cardOneTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 3f);
+        }
+    }
