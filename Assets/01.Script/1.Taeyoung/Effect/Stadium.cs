@@ -76,6 +76,8 @@ public class Stadium : CubeMap
 #if UNITY_EDITOR
     protected override void OnDrawGizmos()
     {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, new Vector3(50, 5, 50));
         // Do Nothing
     }
 #endif

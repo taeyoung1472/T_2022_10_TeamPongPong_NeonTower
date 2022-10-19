@@ -80,7 +80,7 @@ public class Bullet : PoolAbleObject
             }
 
             //ÃÑ¾Ë ¼Ò¸ê
-            if (bounceChance == 0)
+            else if (bounceChance <= 0)
             {
                 PoolManager.Instance.Push(PoolType, gameObject);
             }
@@ -106,8 +106,9 @@ public class Bullet : PoolAbleObject
     public override void Init_Pop()
     {
         bounceChance = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletBounce);
+        Debug.Log("Bounce Chance : " + (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletBounce));
         knockBackForce = UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback);
-        isCanExplosion = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion) != 0;
+        isCanExplosion = UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion) != 0;
         isCanKnockBack = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0;
         if (rb == null) rb = GetComponent<Rigidbody>();
     }

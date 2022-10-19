@@ -12,26 +12,35 @@ public class SwordIdle<T> : BossState<T> where T : Sword
     private int hashMove = Animator.StringToHash("Move");
     public override void OnAwake()
     {
-        animator = stateMachineOwnerClass.GetComponentInChildren<Animator>();
+        animator = stateMachineOwnerClass.Animator;
 
-        agent = stateMachineOwnerClass.GetComponent<NavMeshAgent>();
+        agent = stateMachineOwnerClass.Agent;
 
         agent.isStopped = true;
 
     }
     public override void Enter()
     {
-        stateMachineOwnerClass.attackCoolTime = stateMachineOwnerClass.Data.patternCoolTime;
+        agent.speed = 0;
+        stateMachineOwnerClass.attackCoolTime = 0;
     }
 
     public override void Execute()
     {
 
+        stateMachineOwnerClass.attackCoolTime += Time.deltaTime;
+        if (stateMachineOwnerClass.attackCoolTime >= stateMachineOwnerClass.Data.patternCoolTime)
+        // ÄðÅ¸ÀÓ ´Ùµ¼
+        {
+            agent.isStopped = false;
+            stateMachineOwnerClass.BossFsm.ChangeState<SwordMove<Sword>>();
+            //stateMachineOwnerClass.ChangeAttack();
+        }
     }
 
     public override void Exit()
     {
-        agent.isStopped = true;
+        
     }
 
 }

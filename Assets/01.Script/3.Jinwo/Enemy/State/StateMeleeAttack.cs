@@ -22,6 +22,7 @@ public class StateMeleeAttack<T> : State<T> where T: EnemyBase<T>
     }
     public override void Enter()
     {
+        stateMachineOwnerClass.lastAttackTime = Time.time;
         animator?.SetTrigger(hashAttack);
     }
     public override void Execute()
@@ -33,7 +34,6 @@ public class StateMeleeAttack<T> : State<T> where T: EnemyBase<T>
         {
             stateMachine.ChangeState<StateMove<T>>();
         }
-
     }
     public override void Exit()
     {
