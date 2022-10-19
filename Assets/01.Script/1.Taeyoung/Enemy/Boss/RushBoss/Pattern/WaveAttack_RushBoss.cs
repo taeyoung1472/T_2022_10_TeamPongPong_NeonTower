@@ -13,18 +13,19 @@ public class WaveAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     private IEnumerator WaveCoroutine()
     {
-        float size = 4f;
+        float size = stateMachineOwnerClass.AttackDataSO.waveAttackSize;
+        float z = stateMachineOwnerClass.AttackDataSO.waveAttackSize;
         Vector3 plus = stateMachineOwnerClass.transform.forward;
 
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * 2f, 4f, 1f);
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f), z, 1f);
         yield return new WaitForSeconds(0.1f);
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * 2f + plus * size, 4f, 1f);
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1f);
         yield return new WaitForSeconds(0.1f);
-        size += 4f;
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * 2f + plus * size, 4f, 1f);
+        size += z;
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1f);
         yield return new WaitForSeconds(0.1f);
-        size += 4f;
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * 2f + plus * size, 4f, 1f);
+        size += z;
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1f);
         yield return new WaitForSeconds(0.3f);
 
         stateMachineOwnerClass.Animator.Play("GroundPound");

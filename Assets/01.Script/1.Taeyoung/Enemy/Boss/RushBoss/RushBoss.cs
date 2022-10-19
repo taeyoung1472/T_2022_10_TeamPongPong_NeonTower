@@ -10,6 +10,9 @@ public class RushBoss : BossBase<RushBoss>
     [SerializeField]
     private GameObject _model = null;
     public GameObject Model => _model;
+    [SerializeField]
+    private GameObject _rushForceField = null;
+    public GameObject RushForceField => _rushForceField;
 
     private SkinnedMeshAfterImage _after = null;
     public SkinnedMeshAfterImage After => _after;

@@ -46,17 +46,17 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         CameraManager.Instance.CameraShake(10f, 30f, 0.23f);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Punch2") == false);
 
-        if(stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.groundPoundDistance)
+        if(stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance)
+        {
+            stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
+        }
+        else if(stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.groundPoundSize)
         {
             stateMachine.ChangeState<GroundPoundAttack_RushBoss<RushBoss>>();
         }
-        else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.waveAttackDistance)
-        {
-            stateMachine.ChangeState<WaveAttack_RushBoss<RushBoss>>();
-        }
         else
         {
-            stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
+            stateMachine.ChangeState<WaveAttack_RushBoss<RushBoss>>();
         }
     }
 

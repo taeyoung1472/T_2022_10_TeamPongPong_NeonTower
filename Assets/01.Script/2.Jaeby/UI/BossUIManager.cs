@@ -28,7 +28,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     private TextMeshProUGUI _popupText = null;
     private Vector3 _initPos = Vector3.zero;
 
-    int _popupWeight = 0;
+    int _popupWeight = -1;
 
     private void Start()
     {
@@ -86,7 +86,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         if (_popupSeq != null)
         {
             _popupSeq.Kill();
-            weight = 0;
+            _popupWeight = -1;
         }
 
         _popupWeight = weight;
@@ -98,7 +98,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _seq.Append(_popupText.rectTransform.DOAnchorPosY(_initPos.y, 0.5f));
         _seq.AppendCallback(() =>
         {
-            weight = 0;
+            _popupWeight = -1;
         });
     }
 
@@ -113,7 +113,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     {
         Destroy(_currentBoss.gameObject);
         _currentBoss = null;
-        _popupWeight = 0;
+        _popupWeight = -1;
         if (_bossHpSlider == null || _bossImage == null) return;
         _bossHpSlider.value = 0f;
         _bossImage.sprite = null;

@@ -11,7 +11,8 @@ public class GroundPoundAttack_RushBoss<T> : BossState<RushBoss> where T : BossB
 
     private IEnumerator WaitAnimation()
     {
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, 8f, 1f);
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.AttackDataSO.groundPoundSize * 2f + 1f, 1f);
+        yield return new WaitForSeconds(0.5f);
         stateMachineOwnerClass.Animator.Play("GroundPound");
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(()=> stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("GroundPound") == false);

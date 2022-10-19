@@ -16,7 +16,10 @@ MonoBehaviour:
   normalSpeed: 8
   rushSpeed: 16
   attackDistance: 5
-  groundPoundDistance: 3
+  groundPoundSize: 4
+  waveAttackSize: 6
+  rushDuration: 5
+  rushDistance: 15
   punchDelays:
   - 1
   - 1
