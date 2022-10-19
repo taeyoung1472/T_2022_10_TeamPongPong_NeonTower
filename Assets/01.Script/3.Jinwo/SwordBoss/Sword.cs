@@ -25,6 +25,7 @@ public class Sword : BossBase<Sword>
 
     public List<IDamageable> lastAttackedTargets = new List<IDamageable>();
 
+
     public bool isApplyDamage = false;
     public Vector3 attackDir = Vector3.zero;
 
@@ -33,6 +34,7 @@ public class Sword : BossBase<Sword>
     public float arcwidth = 0;
 
     public float arcangle = 0;
+
 
 
     [Header("카메라 관련")]
@@ -44,7 +46,6 @@ public class Sword : BossBase<Sword>
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-        //Gizmos.DrawSphere(transform.position, data.attackRange);
 
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, arcangle / 2, arcwidth);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, - arcangle / 2, arcwidth);
@@ -85,16 +86,18 @@ public class Sword : BossBase<Sword>
         
         Debug.Log(bossFsm.GetNowState);
 
-    }
-    protected void FixedUpdate()
-    {
-        if(isApplyDamage && isAttacking)
+        if (isApplyDamage && isAttacking)
         {
             if (currentAttackType == 1 || currentAttackType == 2 || currentAttackType == 6)
                 AttackDamageArc();
             else
                 AttakDamageCircle();
         }
+
+    }
+    protected void FixedUpdate()
+    {
+        
     }
     public int SelectAttackType()
     {
@@ -174,22 +177,25 @@ public class Sword : BossBase<Sword>
     }
     public void AttackDamageArc()
     {
-
+        attackDir = target.position - transform.position;
+        attackDir.y = 0;
         // target과 나 사이의 거리가 radius 보다 작다면
         if (attackDir.magnitude <= radius[currentAttackType])
         {
             // '타겟-나 벡터'와 '내 정면 벡터'를 내적
-            float dot = Vector3.Dot(attackDir.normalized, transform.forward);
+            float dot = Vector3.Dot(transform.forward, attackDir.normalized);
             // 두 벡터 모두 단위 벡터이므로 내적 결과에 cos의 역을 취해서 theta를 구함
             float theta = Mathf.Acos(dot);
             // angleRange와 비교하기 위해 degree로 변환
             float degree = Mathf.Rad2Deg * theta;
 
+            Debug.Log("거리안에 들어왔고 degree: "+ degree);
+
             // 시야각 판별
             if (degree <= arcangle / 2f)
             {
                 Debug.Log("시야각에 있고 처맞은거임");
-                Collider[] col = Physics.OverlapSphere(transform.position, radius[currentAttackType], playerLayer);
+                Collider[] col = Physics.OverlapSphere(transform.position, 14f, playerLayer);
 
                 if (col.Length > 0)
                 {
@@ -201,14 +207,6 @@ public class Sword : BossBase<Sword>
                     }
                 }
             }
-            else
-            {
-                Debug.Log("안 처맞음");
-            }
-        }
-        else
-        {
-            Debug.Log("애초에 거리에 안들음");
         }
     }
     public void EnableEffect()
@@ -217,7 +215,7 @@ public class Sword : BossBase<Sword>
         attackEffect[currentAttackType].gameObject.SetActive(true);
         attackEffect[currentAttackType].Play();
         isAttacking = true;
-        //lastAttackedTargets.Clear();
+        lastAttackedTargets.Clear();
     }
 
     public void DisableEffect()
