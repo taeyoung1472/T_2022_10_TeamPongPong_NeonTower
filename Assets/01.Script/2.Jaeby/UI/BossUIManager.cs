@@ -49,6 +49,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
             _dangerOriginPosition = _dangerUI.anchoredPosition;
             _bossNameOriginPosition = _bossNameUI.anchoredPosition;
             _initPos = _popupText.rectTransform.anchoredPosition;
+            _initPos.x = 0f;
         }
         else
         {
@@ -112,11 +113,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     {
         Destroy(_currentBoss.gameObject);
         _currentBoss = null;
-        if(_popupSeq != null)
-        {
-            _popupSeq.Kill();
-            _popupText.rectTransform.position = new Vector2(_popupText.rectTransform.position.x, _initPos.y);
-        }
+        _popupWeight = 0;
         if (_bossHpSlider == null || _bossImage == null) return;
         _bossHpSlider.value = 0f;
         _bossImage.sprite = null;
@@ -175,6 +172,12 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
         Time.timeScale = 1f;
         ExitBoss();
+        yield return new WaitForSeconds(1f);
+        if (_popupSeq != null)
+        {
+            _popupSeq.Kill();
+            _popupText.rectTransform.anchoredPosition = _initPos;
+        }
     }
 
     private void OnDestroy()
