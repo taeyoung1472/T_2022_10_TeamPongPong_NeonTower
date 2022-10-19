@@ -7649,6 +7649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _testBoss: {fileID: 6602998735807061905, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
+  _testClip: {fileID: 7400000, guid: 4ef7bfef8a72ecb43a84a6098b648968, type: 2}
 --- !u!224 &816716099 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7840497188993050935, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}

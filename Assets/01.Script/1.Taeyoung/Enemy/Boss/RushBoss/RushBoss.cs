@@ -32,13 +32,14 @@ public class RushBoss : BossBase<RushBoss>
         agent.updateRotation = false;
         agent.speed = Data.speed;
 
-        bossFsm = new BossStateMachine<RushBoss>(this, new Idle_RushBoss<RushBoss>());
+        bossFsm = new BossStateMachine<RushBoss>(this, new StartAnimation_RushBoss<RushBoss>());
         bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>()); // 3대 때리기
         bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>()); // 원형 타격
         bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>()); // 겁내 달리기
         bossFsm.AddStateList(new GroundPoundAttack_RushBoss<RushBoss>()); // 바닥 쩜프하며 때리기
         bossFsm.AddStateList(new Move_RushBoss<RushBoss>()); // 그저 움직이기
         bossFsm.AddStateList(new Die_RushBoss<RushBoss>());
+        bossFsm.AddStateList(new Idle_RushBoss<RushBoss>());
 
         //StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
     }
@@ -84,5 +85,33 @@ public class RushBoss : BossBase<RushBoss>
         targetPosition.y = transform.position.y;
 
         return Vector3.Distance(targetPosition, transform.position);
+    }
+}
+
+public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
+{
+    public override void Enter()
+    {
+        stateMachineOwnerClass.After.isMotionTrail = false;
+        stateMachineOwnerClass.Col.enabled = false;
+        stateMachineOwnerClass.StartCoroutine(WaitStartAnimation());
+    }
+
+    private IEnumerator WaitStartAnimation()
+    {
+        stateMachineOwnerClass.Animator.Play("Start");
+        stateMachineOwnerClass.Animator.Update(0);
+        yield return new WaitUntil(() =>
+        stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Start") == false);
+        stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
+    }
+
+    public override void Execute()
+    {
+    }
+
+    public override void Exit()
+    {
+        stateMachineOwnerClass.Col.enabled = true;
     }
 }
