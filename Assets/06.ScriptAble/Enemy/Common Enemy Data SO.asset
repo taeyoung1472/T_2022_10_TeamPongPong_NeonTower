@@ -16,13 +16,13 @@ MonoBehaviour:
   maxHealth: 3
   prefab: {fileID: 6437738306033802312, guid: ba813ee6eb956e54eb0a76da88c99786, type: 3}
   damage: 1
-  attackDelay: 2.5
+  attackDelay: 1
   attackRadius: 1
   attackDistance: 1
   speed: 3
   stoppingDistance: 1
   turnSmoothTime: 0.1
-  turnSmoothVelocity: -7.465469
+  turnSmoothVelocity: -29.040964
   dashDistance: 0
   dashSpeed: 0
   dashDamage: 0
