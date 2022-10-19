@@ -29,14 +29,26 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitUntil(() => IsCanSpawn);
 
-            PoolType generatedType = GenerateEnemy();
-
-            Enemy enemy = PoolManager.Instance.Pop(generatedType) as Enemy;
-            enemy.Init(spawnPosList[spawPosIndex].position, playerTrans.gameObject);
+            StartCoroutine(Spawn(spawnPosList[spawPosIndex]));
 
             spawPosIndex = (spawPosIndex + 1) % spawnPosList.Count;
 
             yield return new WaitForSeconds(spawnData.spawnDelay[WaveManager.Instance.CurWave]);
+        }
+    }
+
+    private IEnumerator Spawn(Transform pos)
+    {
+        PoolType generatedType = GenerateEnemy();
+
+        pos.GetComponentInChildren<ParticleSystem>().Play();
+
+        yield return new WaitForSeconds(0.9f);
+
+        if (IsCanSpawn)
+        {
+            Enemy enemy = PoolManager.Instance.Pop(generatedType) as Enemy;
+            enemy.Init(pos.position, playerTrans.gameObject);
         }
     }
 

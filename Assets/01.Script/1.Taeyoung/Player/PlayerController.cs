@@ -92,14 +92,10 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
+        Audio();
+        if (isDead) return;
         Move();
         Rotate();
-        Audio();
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            DangerZone.DrawArc(transform.position, transform.forward, 2, new Vector3(2, 1, 5), 3);
-        }
     }
 
     private void Move()
@@ -153,6 +149,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Dead()
     {
         isDead = true;
+        FindObjectOfType<DieEffect>().PlayerDieEffect();
     }
 
     private void Audio()

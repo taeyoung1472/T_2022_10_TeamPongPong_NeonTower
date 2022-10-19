@@ -11,6 +11,8 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
 
     public UnityEvent OnDeath; // 사망시 발동할 이벤트
 
+    Vector3 baseScale;
+
 
 
     [SerializeField]
@@ -76,11 +78,12 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     {
         health = enemyData.maxHealth;
         dead = false;
+        baseScale = transform.localScale;
     }
 
     public override void Init_Push()
     {
-
+        transform.localScale = baseScale;
     }
 
     public void ApplyDamage(float dmg)

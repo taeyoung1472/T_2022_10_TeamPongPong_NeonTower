@@ -39,16 +39,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   scanLineJitter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   verticalJump:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   horizontalShake:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   colorDrift:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -191,5 +191,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   intensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
