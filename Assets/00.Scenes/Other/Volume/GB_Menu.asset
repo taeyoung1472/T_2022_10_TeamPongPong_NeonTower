@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   scanLineJitter:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.1
   verticalJump:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.1
   horizontalShake:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.1
   colorDrift:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.1
 --- !u!114 &-8769288106077304271
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -39,8 +39,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   intensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.1
 --- !u!114 &-3580247532454835823
 MonoBehaviour:
   m_ObjectHideFlags: 3

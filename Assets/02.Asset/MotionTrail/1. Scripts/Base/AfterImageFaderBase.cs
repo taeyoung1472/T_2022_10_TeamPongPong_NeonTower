@@ -61,7 +61,7 @@ public abstract class AfterImageFaderBase : MonoBehaviour
     {
         gameObject.SetActive(true);
         SetChildrenColor(color);
-        CurrentAlpha = 1.0f;
+        CurrentAlpha = 0.5f;
 
         for (int i = 0; i < ChildrenTransformList.Count; i++)
         {
@@ -85,7 +85,7 @@ public abstract class AfterImageFaderBase : MonoBehaviour
         foreach (var renderer in ChildrenRendererList)
         {
             renderer.material.SetVector(Data.shaderColorName,
-                new Vector4(color.r, color.g, color.b, 1f));
+                new Vector4(color.r, color.g, color.b, 0.5f));
         }
     }
 
