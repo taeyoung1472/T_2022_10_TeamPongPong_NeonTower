@@ -112,7 +112,7 @@ public class SwordMove<T> : BossState<T> where T : Sword
                 break;
             case 7:
                 DangerZone.DrawArc(dangerzonePos, d, 2, new Vector3(7, 0.1f, 10), 1.75f); //발도 기술
-                stateMachineOwnerClass.arcangle = 45f;
+                stateMachineOwnerClass.arcangle = 40f;
                 break;
         }
         
