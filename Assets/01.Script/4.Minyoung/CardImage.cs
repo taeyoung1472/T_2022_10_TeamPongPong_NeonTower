@@ -9,6 +9,8 @@ using Microsoft.Cci;
 
 public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public UpgradeUI upgradeUI;
+
     private UpgradeData upgradeData;
 
     private RectTransform rect;
@@ -26,24 +28,17 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private List<Image> cornerList = new();
     public Image line;
 
-    private bool isFocusing = false;
-    private bool rotationFlag = false;
-    private float startAngleZ;
-    private float angleZGoal = 0;
-    private float time;
 
     private Sequence _seq = null;
 
-    public Material changematerial;
-    public Material originmaterial;
 
-    public Material a;
-    public Material c;
-    public Image b;
+    public Material defaultCardMat;
+    public Material changeCardMat;
+    public Image lightImage;
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
-        startAngleZ = transform.eulerAngles.z;
+        upgradeUI = GameObject.Find("CardUpgrade").GetComponent<UpgradeUI>();
         //edgeList.AddRange(transform.Find("Edge").GetComponentsInChildren<Image>());
         //cornerList.AddRange(transform.Find("Corner").GetComponentsInChildren<Image>());
     }
@@ -55,77 +50,27 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _ablityNameText.text = data.upgradeName;
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
-
-        //foreach (Image img in edgeList)
-        //{
-        //    img.color = data.color;
-
-        //    //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        //}
-        //foreach (Image img in cornerList)
-        //{
-        //    img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        //}
+        _upgradeBtn.onClick.AddListener(() => upgradeUI.UpgradeCardEffect(gameObject));
     }
 
     private void Start()
     {
-        //StartCoroutine(A());
     }
     private void Update()
     {
-        {
-            //Time.timeScale = 1;
-            //if (isFocusing)
-            //{
-            ////    angleZGoal = Mathf.Sin(time * 3) * 5 * Mathf.Rad2Deg;
-            //  time += Time.deltaTime * (rotationFlag ? 1 : -1);
-            //}
-            //else
-            //{
-            //    angleZGoal = Mathf.Lerp(angleZGoal, 0, Time.deltaTime * 2);
-            //}
-
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleZGoal + startAngleZ));
-        }
     }
 
-//    IEnumerator A()
     public void OnPointerEnter(PointerEventData eventData)
-
     {
         Debug.Log("Enter");
-        //foreach (Image img in cornerList)
-        //{
-        //    img.color = upgradeData.color * new Vector4(1f, 1f, 1f, 1);
-        //}
-        //foreach (Image img in edgeList)
-        //{
-        //    Color color = upgradeData.color;
-        //    changematerial.SetColor("_EmmisionColor", color * 20f);
-        //    Debug.Log(color);
-        //    img.material = changematerial;
-
-        //    //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        //}
-        //line.material = changematerial;
-        b.material = c;
+        lightImage.material = changeCardMat;
         rect.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f).SetUpdate(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //foreach (Image img in cornerList)
-        //{
-        //    img.color = upgradeData.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        //}
-        //foreach (Image img in edgeList)
-        //{
-        //    img.material = originmaterial;
-        //    //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        //}
-        //line.material = originmaterial;
-        b.material = a;
+
+        lightImage.material = defaultCardMat;
 
         rect.DOScale(Vector3.one, 0.5f).SetUpdate(true);
         Debug.Log("Exit");

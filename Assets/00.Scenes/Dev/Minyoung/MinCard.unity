@@ -523,17 +523,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7732181350775838411, guid: 5df354398d350d747b266884f8f36e41, type: 3}
   m_PrefabInstance: {fileID: 72016173}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &72016175 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7732181350775838455, guid: 5df354398d350d747b266884f8f36e41, type: 3}
-  m_PrefabInstance: {fileID: 72016173}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 657dc3930ddc4ef4782dc8c841f87996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &87898656
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,10 +657,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90eeeb1f9f357cd409f9f8a9d15bea09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardOneTrm: {fileID: 5628206742758441906}
-  cardTwoTrm: {fileID: 614408860}
-  cardThreeTrm: {fileID: 1423215122}
+  cardsTrm:
+  - {fileID: 5628206742758441906}
+  - {fileID: 614408860}
+  - {fileID: 1423215122}
+  pointLights: []
   upgradeUI: {fileID: 91074079}
+  dissolveMat: {fileID: 2100000, guid: c9b2b132984ac354a879891fdb813100, type: 2}
+  originMat: {fileID: 0}
+  oneLight: {fileID: 387494222}
+  twoLight: {fileID: 1153193178}
+  threeLight: {fileID: 1698876213}
 --- !u!114 &91074082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3657,17 +3653,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7732181350775838411, guid: 5df354398d350d747b266884f8f36e41, type: 3}
   m_PrefabInstance: {fileID: 516690452}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &516690454 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7732181350775838455, guid: 5df354398d350d747b266884f8f36e41, type: 3}
-  m_PrefabInstance: {fileID: 516690452}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 657dc3930ddc4ef4782dc8c841f87996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &523937688
 GameObject:
   m_ObjectHideFlags: 0
@@ -4175,16 +4160,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657dc3930ddc4ef4782dc8c841f87996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeUI: {fileID: 0}
   _ablityNameText: {fileID: 289420665}
   _profileImage: {fileID: 680767274}
   _descTxt: {fileID: 2015371085}
   _upgradeBtn: {fileID: 614408859}
   line: {fileID: 0}
-  changematerial: {fileID: 2100000, guid: f8790df59d645224b851457152230699, type: 2}
-  originmaterial: {fileID: 0}
-  a: {fileID: 2100000, guid: a066b7979b221864196e2c319f84d33c, type: 2}
-  c: {fileID: 2100000, guid: 9aae6e684ece65748a10bee8dee0ad6c, type: 2}
-  b: {fileID: 18179676}
+  defaultCardMat: {fileID: 2100000, guid: a066b7979b221864196e2c319f84d33c, type: 2}
+  changeCardMat: {fileID: 2100000, guid: 9aae6e684ece65748a10bee8dee0ad6c, type: 2}
+  lightImage: {fileID: 18179676}
 --- !u!114 &614408861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4198,14 +4182,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7b0522a457ad4546b95956bf3d299ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5835,17 +5819,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7732181350775838411, guid: 5df354398d350d747b266884f8f36e41, type: 3}
   m_PrefabInstance: {fileID: 832652498}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &832652500 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7732181350775838455, guid: 5df354398d350d747b266884f8f36e41, type: 3}
-  m_PrefabInstance: {fileID: 832652498}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 657dc3930ddc4ef4782dc8c841f87996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &853370734
 GameObject:
   m_ObjectHideFlags: 0
@@ -8521,10 +8494,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90eeeb1f9f357cd409f9f8a9d15bea09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardOneTrm: {fileID: 832652500}
-  cardTwoTrm: {fileID: 72016175}
-  cardThreeTrm: {fileID: 516690454}
+  cardsTrm: []
+  pointLights: []
   upgradeUI: {fileID: 0}
+  dissolveMat: {fileID: 0}
+  originMat: {fileID: 0}
+  oneLight: {fileID: 0}
+  twoLight: {fileID: 0}
+  threeLight: {fileID: 0}
 --- !u!114 &1258109060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9032,16 +9009,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657dc3930ddc4ef4782dc8c841f87996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeUI: {fileID: 0}
   _ablityNameText: {fileID: 1165161080}
   _profileImage: {fileID: 1271619459}
   _descTxt: {fileID: 1493275326}
   _upgradeBtn: {fileID: 1423215121}
   line: {fileID: 0}
-  changematerial: {fileID: 2100000, guid: f8790df59d645224b851457152230699, type: 2}
-  originmaterial: {fileID: 0}
-  a: {fileID: 2100000, guid: a066b7979b221864196e2c319f84d33c, type: 2}
-  c: {fileID: 2100000, guid: 9aae6e684ece65748a10bee8dee0ad6c, type: 2}
-  b: {fileID: 1179804851}
+  defaultCardMat: {fileID: 2100000, guid: a066b7979b221864196e2c319f84d33c, type: 2}
+  changeCardMat: {fileID: 2100000, guid: 9aae6e684ece65748a10bee8dee0ad6c, type: 2}
+  lightImage: {fileID: 1179804851}
 --- !u!114 &1423215123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9055,14 +9031,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7b0522a457ad4546b95956bf3d299ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14770,16 +14746,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657dc3930ddc4ef4782dc8c841f87996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeUI: {fileID: 0}
   _ablityNameText: {fileID: 5628206743314525953}
   _profileImage: {fileID: 5628206744343299073}
   _descTxt: {fileID: 5628206744085604875}
   _upgradeBtn: {fileID: 5628206742758441905}
   line: {fileID: 5628206744492496938}
-  changematerial: {fileID: 2100000, guid: f8790df59d645224b851457152230699, type: 2}
-  originmaterial: {fileID: 0}
-  a: {fileID: 2100000, guid: a066b7979b221864196e2c319f84d33c, type: 2}
-  c: {fileID: 2100000, guid: 9aae6e684ece65748a10bee8dee0ad6c, type: 2}
-  b: {fileID: 1266850803}
+  defaultCardMat: {fileID: 2100000, guid: a066b7979b221864196e2c319f84d33c, type: 2}
+  changeCardMat: {fileID: 2100000, guid: 9aae6e684ece65748a10bee8dee0ad6c, type: 2}
+  lightImage: {fileID: 1266850803}
 --- !u!1 &5628206742758441916
 GameObject:
   m_ObjectHideFlags: 0
@@ -14794,6 +14769,7 @@ GameObject:
   - component: {fileID: 5628206742758441906}
   - component: {fileID: 5628206742758441905}
   - component: {fileID: 5628206742758441904}
+  - component: {fileID: 5628206742758441920}
   m_Layer: 5
   m_Name: CardOne
   m_TagString: Untagged
@@ -14841,14 +14817,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7b0522a457ad4546b95956bf3d299ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14866,6 +14842,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5628206742758441916}
   m_CullTransparentMesh: 1
+--- !u!95 &5628206742758441920
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5628206742758441916}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7feb9b27a7ee51947ab1905edac92749, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5628206742831995136
 MonoBehaviour:
   m_ObjectHideFlags: 0
