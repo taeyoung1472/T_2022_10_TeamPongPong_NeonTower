@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 5732408649967109686}
   - component: {fileID: 5732408649967109685}
   - component: {fileID: 5633076486948610481}
+  - component: {fileID: 1335608440644775414}
   m_Layer: 11
   m_Name: DashEnemy
   m_TagString: Enemy
@@ -306,14 +307,60 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  lastAttackTime: 0
   enemyData: {fileID: 11400000, guid: 5c83ed690efadcf4f8a46c52bb2d4790, type: 2}
-  target: {fileID: 0}
-  whatIsTarget:
+  motionTrail: {fileID: 0}
+--- !u!114 &1335608440644775414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5732408649967109691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcae18058121ac4c84039eebae777f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMesh: {fileID: 0}
+  _afterImageMaterial: {fileID: 2100000, guid: f8f8405544fe0af48b806e91ee6db566, type: 2}
+  _afterImageGradient:
     serializedVersion: 2
-    m_Bits: 256
-  attackRoot: {fileID: 5732408649769237934}
-  isAttack: 0
-  turnSmoothTime: 0.1
+    key0: {r: 0.525329, g: 1, b: 0, a: 1}
+    key1: {r: 0.68779457, g: 1, b: 0, a: 1}
+    key2: {r: 0.89359, g: 1, b: 0, a: 0}
+    key3: {r: 0.95743537, g: 0.9650629, b: 0, a: 0}
+    key4: {r: 1, g: 0.941771, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16962
+    ctime2: 32768
+    ctime3: 52428
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  _colorUpdateSpeed: 1
+  _bakingCycle: 0.1
+  _data:
+    duration: 0.4
+    shaderColorName: _BaseColor
+    shaderAlphaName: _Alpha
+  _containChildrenMeshes: 1
+  isMotionTrail: 0
 --- !u!1 &7059925634502958846
 GameObject:
   m_ObjectHideFlags: 0

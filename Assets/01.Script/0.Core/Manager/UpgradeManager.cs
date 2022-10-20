@@ -5,6 +5,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 {
     [SerializeField] private UpgradeDataSO UpgradeDataSO;
     private Dictionary<UpgradeType, int> upgradeCountDic = new();
+    [SerializeField] private UpgradeData maxData;
 
     public void Start()
     {
@@ -17,6 +18,10 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
     public void Upgrade(UpgradeType upgradeType)
     {
+        if(upgradeType == UpgradeType.MAX)
+        {
+            return;
+        }
         if(upgradeCountDic[upgradeType] == 0)
         {
             Debug.LogError($"{upgradeType} 의 업그레이드 한도를  넘겼습니다.");
@@ -46,9 +51,25 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         {
             int rand = Random.Range(0, generateAbleList.Count);
             UpgradeType generatedType = generateAbleList[rand];
-            generateAbleList.Remove(generatedType);
+            if(generateAbleList.Count != 0)
+            {
+                if (upgradeCountDic[generatedType] == 0)
+                {
+                    upgradeCountDic.Remove(generatedType);
+                    generateAbleList.Remove(generatedType);
+                    i--;
+                }
+                else
+                {
+                    generateAbleList.Remove(generatedType);
 
-            returnData.Add(UpgradeDataSO.upgradeDataDic[generatedType]);
+                    returnData.Add(UpgradeDataSO.upgradeDataDic[generatedType]);
+                }
+            }
+            else
+            {
+                returnData.Add(maxData);
+            }
         }
 
         return returnData.ToArray();

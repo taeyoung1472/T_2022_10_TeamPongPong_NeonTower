@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("[참조]")]
     [SerializeField] private ParticleSystem dustParticle;
+    [SerializeField] private PlayerHUD hud;
 
     private Animator playerAnim;
     private CharacterController controller;
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         rollingAudioSource = GetComponent<AudioSource>();
 
         cam = Camera.main;
+        hud.HPMaxValue = maxHp;
+        hud.HPValue = maxHp;
     }
 
     void Start()
@@ -96,6 +99,22 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EXPManager.Instance.AddExp();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            EnemySubject.Instance.NotifyObserver();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            FindObjectOfType<EnemySpawner>().IsCanSpawn = false;
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            FindObjectOfType<EnemySpawner>().IsCanSpawn = true;
+        }
         if (Time.time > 3)
         {
             Audio();
@@ -180,6 +199,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             yield return new WaitUntil(() => isDamaged && !isDead);
 
             curHp--;
+            hud.HPValue = curHp;
 
             ColorCanvasEffect.Instance.Active(Color.red);
 
@@ -213,11 +233,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void ApplyDamage(float dmg)
     {
         if (isDead) return;
-        Debug.Log("아야");
+
         isDamaged = true;
-        if(curHp <= 0)
-        {
-            Dead();
-        }
     }
 }

@@ -33,6 +33,7 @@ public class Stadium : CubeMap
         {
             ActiveCube(cube);
         }
+        StadiumManager.Instance.ActivePattern();
     }
     public void ActivePattern(int index)
     {
@@ -55,6 +56,7 @@ public class Stadium : CubeMap
             DeActiveCube(cube);
         }
         this.Invoke(() => gameObject.SetActive(false), 5);
+        this.Invoke(() => StadiumManager.Instance.DeActivePattern(), 5);
     }
     /*class PerinNoiseCube : MonoBehaviour
     {

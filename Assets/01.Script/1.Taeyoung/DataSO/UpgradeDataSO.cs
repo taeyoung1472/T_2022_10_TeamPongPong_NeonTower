@@ -95,5 +95,6 @@ public enum UpgradeType
     GenerateHp,
     HpUp,
 
+    MAX,
     End
 }

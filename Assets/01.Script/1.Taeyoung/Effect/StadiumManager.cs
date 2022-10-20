@@ -4,33 +4,22 @@ using UnityEngine;
 
 public class StadiumManager : MonoSingleTon<StadiumManager>
 {
-    [SerializeField] private StadiumMatch[] stadiumMatches;
-    private Dictionary<BossType, Stadium> stadiumDic = new();
+    [SerializeField] private Stadium[] stadiumMatches;
+    public Stadium[] StadiumMatches { get { return stadiumMatches; } }
 
-    public Stadium GetStadiumByType(BossType key)
+    [SerializeField] private CubeMap[] mapPatterns;
+    public void ActivePattern()
     {
-        if (stadiumDic.Count == 0)
+        foreach (var pattern in mapPatterns)
         {
-            foreach (StadiumMatch match in stadiumMatches)
-            {
-                stadiumDic.Add(match.type, match.stadium);
-            }
+            pattern.gameObject.SetActive(false);
         }
-        return stadiumDic[key];
     }
-
-    [Serializable]
-    public class StadiumMatch
+    public void DeActivePattern()
     {
-        public BossType type;
-        public Stadium stadium;
+        foreach (var pattern in mapPatterns)
+        {
+            pattern.gameObject.SetActive(true);
+        }
     }
-}
-public enum BossType
-{
-    Boss1,
-    Boss2,
-    Boss3,
-    Boss4,
-    Boss5,
 }
