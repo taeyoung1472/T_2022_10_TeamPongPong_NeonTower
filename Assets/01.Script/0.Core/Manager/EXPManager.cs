@@ -59,6 +59,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
             curLevel++;
             LevelUdateText();
             StartCoroutine(RaycastCotroll());
+
             UIManager.Instance.ActiveUI(upgradeUI);
 
             Sequence seq = DOTween.Sequence();

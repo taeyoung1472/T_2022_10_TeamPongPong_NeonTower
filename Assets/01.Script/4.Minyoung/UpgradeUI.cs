@@ -16,6 +16,8 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     public UnityEvent OnOpenUI { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public UnityEvent OnCloseUI { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
+    [SerializeField] private GameObject upgradeUI;
+
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -34,7 +36,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            OpenUI();
+            UIManager.Instance.ActiveUI(upgradeUI);
         }
     }
     public void OpenUI()
@@ -56,21 +58,59 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         });
+        _seq.Append(cardOneTrm.transform.DOLocalMove(new Vector3(-600, 30, 0), 0.6f).SetEase(Ease.OutBounce));
+        _seq.Insert(0.6f, cardOneTrm.GetComponent<CanvasGroup>().DOFade(1f, 0.3f));
+
+        _seq.Insert(0.8f, cardTwoTrm.transform.DOLocalMove(new Vector3(0, 100, 0), 0.6f).SetEase(Ease.OutBounce));
+        _seq.Insert(0.9f, cardTwoTrm.GetComponent<CanvasGroup>().DOFade(1f, 0.3f));
+
+        _seq.Insert(1.3f, cardThreeTrm.transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce));
+        _seq.Insert(1.4f, cardThreeTrm.GetComponent<CanvasGroup>().DOFade(1f, 0.3f));
     }
 
     public void CloseUI()
     {
         if (_seq != null)
             _seq.Kill();
-
-        CloseCard();
+        Debug.Log("´ÙÈû");
+        ///CloseCard();
+        ///
         _seq = DOTween.Sequence();
-       // _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
+        
+        _seq.Append(cardOneTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 1f));
+        _seq.Join(cardTwoTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 1f));
+        _seq.Join(cardThreeTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 1f));
+
+        _seq.Insert(2f, cardOneTrm.transform.DOMove(new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f)), 2f));
+        _seq.Insert(2f, cardTwoTrm.transform.DOMove(new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f)), 2f));
+        _seq.Insert(2f, cardThreeTrm.transform.DOMove(new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f)), 2f));
+
+        //_seq.Append(cardOneTrm.transform.DOMove(new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f)), 2f));
+        //_seq.Append(cardTwoTrm.transform.DOMove(new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f)), 2f));
+        //_seq.Append(cardThreeTrm.transform.DOMove(new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f)), 2f));
+
+        //_seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
+        CloseCard();
+        //InitCardSet();
         Time.timeScale = 1f;
+    }
+    public void InitCardSet()
+    {
+        cardOneTrm.transform.localPosition = new Vector3(-600, 1000, 0);
+        cardTwoTrm.transform.localPosition = new Vector3(-0, 1000, 0);
+        cardThreeTrm.transform.localPosition = new Vector3(600, 1000, 0);
+
+        cardOneTrm.transform.GetComponent<CanvasGroup>().alpha = 0.5f;
+        cardTwoTrm.transform.GetComponent<CanvasGroup>().alpha = 0.5f;
+        cardThreeTrm.transform.GetComponent<CanvasGroup>().alpha = 0.5f;
     }
     public void CloseCard()
     {
-       // cardOneTrm.transform.DOMove()
         cardOneTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 3f);
-        }
+        cardTwoTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 3f);
+        cardThreeTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 3f);
+
+        cardOneTrm.transform.DORotate(new Vector3(0f, Random.Range(-8f, 8f), 0f), 3f);
+
     }
+}

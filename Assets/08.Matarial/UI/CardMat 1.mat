@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CardMat
+  m_Name: CardMat 1
   m_Shader: {fileID: -6465566751694194690, guid: 33b62c15046bcaa46b69c87168127ae6, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -43,7 +43,7 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _AdditionalColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmmisionColor: {r: 10.768509, g: 20, b: 6.6666675, a: 20}
+    - _EmmisionColor: {r: 2.433572, g: 2.3571246, b: 0.54787225, a: 20}
   m_BuildTextureStacks: []
 --- !u!114 &7765650572152821073
 MonoBehaviour:

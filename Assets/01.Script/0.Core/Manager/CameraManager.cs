@@ -65,7 +65,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
         {
             _noise.m_AmplitudeGain = Mathf.Lerp(0, amplitude, time / duration);
             yield return null;
-            time -= Time.deltaTime;
+            time -= Time.unscaledDeltaTime;
         }
         CompletePrevFeedBack();
     }

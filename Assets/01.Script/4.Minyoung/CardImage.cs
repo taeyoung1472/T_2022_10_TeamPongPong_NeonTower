@@ -32,14 +32,20 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private float angleZGoal = 0;
     private float time;
 
+    private Sequence _seq = null;
+
     public Material changematerial;
     public Material originmaterial;
+
+    public Material a;
+    public Material c;
+    public Image b;
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
         startAngleZ = transform.eulerAngles.z;
-        edgeList.AddRange(transform.Find("Edge").GetComponentsInChildren<Image>());
-        cornerList.AddRange(transform.Find("Corner").GetComponentsInChildren<Image>());
+        //edgeList.AddRange(transform.Find("Edge").GetComponentsInChildren<Image>());
+        //cornerList.AddRange(transform.Find("Corner").GetComponentsInChildren<Image>());
     }
     public void SetData(UpgradeData data)
     {
@@ -50,20 +56,22 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
 
-        foreach (Image img in edgeList)
-        {
-            img.color = data.color;
+        //foreach (Image img in edgeList)
+        //{
+        //    img.color = data.color;
 
-            //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-
-        }
-        foreach (Image img in cornerList)
-        {
-            img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        }
+        //    //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
+        //}
+        //foreach (Image img in cornerList)
+        //{
+        //    img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
+        //}
     }
 
-
+    private void Start()
+    {
+        //StartCoroutine(A());
+    }
     private void Update()
     {
         {
@@ -80,43 +88,44 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
             //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleZGoal + startAngleZ));
         }
-
-
     }
 
+//    IEnumerator A()
     public void OnPointerEnter(PointerEventData eventData)
 
     {
         Debug.Log("Enter");
-        foreach (Image img in cornerList)
-        {
-            img.color = upgradeData.color * new Vector4(1f, 1f, 1f, 1);
-        }
-        foreach (Image img in edgeList)
-        {
-            Color color = upgradeData.color;
-            changematerial.SetColor("_EmmisionColor", color * 10f);
-            Debug.Log(color);
-            img.material = changematerial;
+        //foreach (Image img in cornerList)
+        //{
+        //    img.color = upgradeData.color * new Vector4(1f, 1f, 1f, 1);
+        //}
+        //foreach (Image img in edgeList)
+        //{
+        //    Color color = upgradeData.color;
+        //    changematerial.SetColor("_EmmisionColor", color * 20f);
+        //    Debug.Log(color);
+        //    img.material = changematerial;
 
-            //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        }
-        line.material = changematerial;
+        //    //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
+        //}
+        //line.material = changematerial;
+        b.material = c;
         rect.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f).SetUpdate(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        foreach (Image img in cornerList)
-        {
-            img.color = upgradeData.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        }
-        foreach (Image img in edgeList)
-        {
-            img.material = originmaterial;
-            //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        }
-        line.material = originmaterial;
+        //foreach (Image img in cornerList)
+        //{
+        //    img.color = upgradeData.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
+        //}
+        //foreach (Image img in edgeList)
+        //{
+        //    img.material = originmaterial;
+        //    //img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
+        //}
+        //line.material = originmaterial;
+        b.material = a;
 
         rect.DOScale(Vector3.one, 0.5f).SetUpdate(true);
         Debug.Log("Exit");
