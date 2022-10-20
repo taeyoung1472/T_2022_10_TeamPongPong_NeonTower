@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,12 @@ public class RushBoss : BossBase<RushBoss>
     private Collider _col = null;
     public Collider Col => _col;
 
+    public float radius = 0f;
+    public float angle = 0f;
+
+    private GameObject _attackPositionObj = null;
+    public GameObject AttackPositionObj => _attackPositionObj;
+
     protected override void Awake()
     {
         base.Awake();
@@ -27,6 +34,7 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
+        _attackPositionObj = new GameObject("AttackPositionObj");
         CurHp = Data.maxHp;
         _after = GetComponent<SkinnedMeshAfterImage>();
         _col = GetComponent<Collider>();
@@ -89,6 +97,12 @@ public class RushBoss : BossBase<RushBoss>
 
         return Vector3.Distance(targetPosition, transform.position);
     }
+
+    private void OnDrawGizmos()
+    {
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle/2, radius);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle/2, radius);
+    }
 }
 
 public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
@@ -117,4 +131,5 @@ public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase
     {
         stateMachineOwnerClass.Col.enabled = true;
     }
+
 }

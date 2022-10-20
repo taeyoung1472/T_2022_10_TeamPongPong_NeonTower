@@ -9673,6 +9673,10 @@ PrefabInstance:
       propertyPath: dashClip
       value: 
       objectReference: {fileID: 8300000, guid: 189c16f5da7b8e649a1aa5e71ec4ee38, type: 3}
+    - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: dustParticle
+      value: 
+      objectReference: {fileID: 8643800381799612854, guid: 1019cc5e50a22c84fb3720bff4bde8a2, type: 3}
     - target: {fileID: 5410460891526572490, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: m_Name
       value: Player
