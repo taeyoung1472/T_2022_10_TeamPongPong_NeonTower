@@ -53,6 +53,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
         bossFsm.AddStateList(new SummonerSkillSummon());
         bossFsm.AddStateList(new SummonerIdle());
         bossFsm.AddStateList(new SummonerWalk());
+        bossFsm.AddStateList(new SummonerDie());
     }
 
     protected override void Update()
@@ -72,7 +73,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
             Debug.Log("»ç¸Á !!");
             StopAllCoroutines();
             OnDeathEvent?.Invoke();
-            Destroy(gameObject);
+            bossFsm.ChangeState<SummonerDie>();
         }
     }
 

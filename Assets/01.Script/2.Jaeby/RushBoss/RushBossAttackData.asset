@@ -21,6 +21,6 @@ MonoBehaviour:
   rushDuration: 5
   rushDistance: 15
   punchDelays:
-  - 0.65
-  - 0.65
+  - 0.8
+  - 0.8
   - 1
