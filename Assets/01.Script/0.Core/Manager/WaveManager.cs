@@ -20,6 +20,10 @@ public class WaveManager : MonoSingleTon<WaveManager>
     private Background[] backgrounds;
     private EnemySpawner enemySpawner;
 
+    [Header("º¸½º")]
+    [SerializeField] private Boss[] bossList;
+    private int bossIdx = 0;
+
     [Header("[TMP]")]
     [SerializeField] private TextMeshProUGUI nextWaveText;
     [SerializeField] private TextMeshProUGUI floorText;
@@ -54,8 +58,11 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
             if (curWave % 4 == 0)
             {
-                //isBossClear = false;
-                //yield return new WaitUntil(() => isBossClear);
+                isBossClear = false;
+                bossList[bossIdx].gameObject.SetActive(true);
+                CameraManager.Instance.TargetingBossCameraAnimation(bossList[bossIdx], 5);
+                bossIdx++;
+                yield return new WaitUntil(() => isBossClear);
                 EnemySubject.Instance.NotifyObserver();
 
                 if (curFloor == 6)

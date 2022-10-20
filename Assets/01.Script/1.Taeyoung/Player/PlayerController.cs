@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("[참조]")]
     [SerializeField] private ParticleSystem dustParticle;
+    [SerializeField] private PlayerHUD hud;
 
     private Animator playerAnim;
     private CharacterController controller;
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         rollingAudioSource = GetComponent<AudioSource>();
 
         cam = Camera.main;
+        hud.HPMaxValue = maxHp;
+        hud.HPValue = maxHp;
     }
 
     void Start()
@@ -219,6 +222,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (isDead) return;
         Debug.Log("아야");
         isDamaged = true;
+        hud.HPValue = curHp;
         if(curHp <= 0)
         {
             Dead();
