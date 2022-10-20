@@ -28,6 +28,13 @@ public class RushBoss : BossBase<RushBoss>
     private GameObject _attackPositionObj = null;
     public GameObject AttackPositionObj => _attackPositionObj;
 
+    [SerializeField]
+    private ParticleSystem _punchParticle = null;
+    [SerializeField]
+    private ParticleSystem[] _thunderParticle = null;
+
+    private Coroutine co = null;
+
     protected override void Awake()
     {
         base.Awake();
@@ -103,6 +110,43 @@ public class RushBoss : BossBase<RushBoss>
     {
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle/2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle/2, radius);
+    }
+
+    public void PunchParticlePlay()
+    {
+        if (co != null)
+            StopCoroutine(co);
+        co = StartCoroutine(PunchCo());
+    }
+
+    private IEnumerator PunchCo()
+    {
+        _punchParticle.gameObject.SetActive(true);
+        _punchParticle.Play();
+        yield return new WaitForSeconds(2f);
+        _punchParticle.Stop();
+        _punchParticle.gameObject.SetActive(false);
+    }
+
+    public void ThunderParticlePlay()
+    {
+        for(int i = 0; i <_thunderParticle.Length; i++)
+        {
+            _thunderParticle[i].Play();
+        }
+    }
+
+    public void StopParticle()
+    {
+        if (co != null)
+            StopCoroutine(co);
+        _punchParticle.Stop();
+        _punchParticle.gameObject.SetActive(false);
+
+        for (int i = 0; i < _thunderParticle.Length; i++)
+        {
+            _thunderParticle[i].Stop();
+        }
     }
 }
 

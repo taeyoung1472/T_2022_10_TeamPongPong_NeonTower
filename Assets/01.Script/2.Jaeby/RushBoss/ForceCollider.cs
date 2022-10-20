@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ForceCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(other.CompareTag("Player"))
+        {
+            other.GetComponent<IDamageable>()?.ApplyDamage(1);
+        }
     }
 }

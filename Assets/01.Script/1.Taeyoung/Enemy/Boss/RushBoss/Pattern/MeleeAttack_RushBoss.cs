@@ -28,7 +28,8 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(5f, 20f, 0.2f);
-
+        yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f);
+        stateMachineOwnerClass.StopParticle();
 
         stateMachineOwnerClass.LookTarget();
         DangerZone.DrawArc(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.forward, 180f,
@@ -40,9 +41,11 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         CameraManager.Instance.CameraShake(7f, 20f, 0.3f);
         List<Collider> list = EnemyAttackCollisionCheck.CheckArc(stateMachineOwnerClass.AttackPositionObj.transform, 60f, 8.3f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(list, 1);
+        yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f);
+        stateMachineOwnerClass.StopParticle();
+
 
         stateMachineOwnerClass.LookTarget();
-
         DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 6f, stateMachineOwnerClass.transform.rotation,
             new Vector3(4f, 0.1f, 12f), stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
         stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
@@ -54,6 +57,7 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         List<Collider> l2 = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 4f, 12f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(l2, 1);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Punch2") == false);
+        stateMachineOwnerClass.StopParticle();
 
         if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance)
         {

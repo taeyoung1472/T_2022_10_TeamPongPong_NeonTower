@@ -17,21 +17,31 @@ public class WaveAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         float z = stateMachineOwnerClass.AttackDataSO.waveAttackSize;
         Vector3 plus = stateMachineOwnerClass.transform.forward;
 
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f), z, 1f);
-        yield return new WaitForSeconds(0.1f);
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1f);
-        yield return new WaitForSeconds(0.1f);
+        List<Vector3> positions = new List<Vector3>();
+
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f), z, 1.5f);
+        positions.Add(stateMachineOwnerClass.transform.position + plus * (z * 0.5f));
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1.5f);
+        positions.Add(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size);
         size += z;
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1f);
-        yield return new WaitForSeconds(0.1f);
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1.5f);
+        positions.Add(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size);
         size += z;
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1f);
-        yield return new WaitForSeconds(0.3f);
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size, z, 1.5f);
+        positions.Add(stateMachineOwnerClass.transform.position + plus * (z * 0.5f) + plus * size);
+        yield return new WaitForSeconds(0.8f);
 
         stateMachineOwnerClass.Animator.Play("GroundPound");
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("GroundPound") == false);
         CameraManager.Instance.CameraShake(12f, 30f, 0.23f);
+        List<Collider> cols = new List<Collider>();
+        for (int i = 0; i < positions.Count; i++)
+        {
+            cols = EnemyAttackCollisionCheck.CheckSphere(positions[i], z / 2f, 1 << 8);
+            EnemyAttackCollisionCheck.ApplyDamaged(cols, 1);
+            cols.Clear();
+        }
 
         yield return new WaitForSeconds(1f);
         stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();

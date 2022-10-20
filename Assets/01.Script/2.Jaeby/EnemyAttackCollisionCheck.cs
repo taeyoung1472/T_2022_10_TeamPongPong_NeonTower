@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemyAttackCollisionCheck : MonoBehaviour
 {
-    public static List<Collider> CheckSphere(Transform trm, float radius, LayerMask layerMask)
+    public static List<Collider> CheckSphere(Vector3 pos, float radius, LayerMask layerMask)
     {
-        List<Collider> cols = new List<Collider>(Physics.OverlapSphere(trm.position, radius, layerMask));
+        List<Collider> cols = new List<Collider>(Physics.OverlapSphere(pos, radius, layerMask));
 
         return cols;
     }
