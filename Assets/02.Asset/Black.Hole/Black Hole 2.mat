@@ -80,12 +80,12 @@ Material:
     - _CircleMask: 1
     - _Contrast: 1
     - _Culling: 0
-    - _Cutoff: 0
-    - _CutoffSoftness: 0
+    - _Cutoff: 0.394
+    - _CutoffSoftness: 0.519
     - _DisplacementAmount: 1
-    - _InnerRadius: -0.09
+    - _InnerRadius: -1
     - _IntersectionThresholdMax: 1
-    - _OuterRadius: 0.269
+    - _OuterRadius: 0.368
     - _PolarCoords: 1
     - _Power: 1
     - _QueueControl: 0
@@ -96,13 +96,13 @@ Material:
     - _RectSmoothness: 0
     - _RectWidth: 0
     - _SecondTex: 0
-    - _Smoothness: 0.256
+    - _Smoothness: 0.354
     - _SoftBlend: 0
     - _VertexOffset: 0
     - _VertexOffsetAmount: 0
     m_Colors:
-    - _BurnCol: {r: 0.93392944, g: 1, b: 0, a: 1}
-    - _Color: {r: 1, g: 0.031372547, b: 0.0692987, a: 1}
+    - _BurnCol: {r: 1.3199327, g: 1.4142135, b: 0, a: 1}
+    - _Color: {r: 1.7568628, g: 0, b: 2, a: 1}
     - _PanningSpeed: {r: 0.5, g: 0, b: 0, a: 0}
     - _SecondaryPanningSpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
