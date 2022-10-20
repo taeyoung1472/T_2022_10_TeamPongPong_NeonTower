@@ -154468,6 +154468,7 @@ MonoBehaviour:
   - {fileID: 198397784153422482}
   - {fileID: 374485952}
   - {fileID: 622198102}
+  _explosionEffect: {fileID: 2980704002224931946, guid: 3fe64f3e16e17bc4fbceec4627f4ed20, type: 3}
 --- !u!65 &6602998735807061909
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -32,6 +32,8 @@ public class RushBoss : BossBase<RushBoss>
     private ParticleSystem _punchParticle = null;
     [SerializeField]
     private ParticleSystem[] _thunderParticle = null;
+    [SerializeField]
+    private GameObject _explosionEffect = null;
 
     private Coroutine co = null;
 
@@ -147,6 +149,12 @@ public class RushBoss : BossBase<RushBoss>
         {
             _thunderParticle[i].Stop();
         }
+    }
+
+    public void ExplosionEffect(Vector3 pos)
+    {
+        GameObject obj = Instantiate(_explosionEffect, pos, Quaternion.identity);
+        Destroy(obj, 1f);
     }
 }
 

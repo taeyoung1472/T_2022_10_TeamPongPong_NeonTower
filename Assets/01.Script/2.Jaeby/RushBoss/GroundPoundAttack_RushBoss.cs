@@ -18,6 +18,7 @@ public class GroundPoundAttack_RushBoss<T> : BossState<RushBoss> where T : BossB
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(()=> stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("GroundPound") == false);
         CameraManager.Instance.CameraShake(12f, 30f, 0.23f);
+        stateMachineOwnerClass.ExplosionEffect(stateMachineOwnerClass.transform.position);
         List<Collider> l = EnemyAttackCollisionCheck.CheckSphere(stateMachineOwnerClass.AttackPositionObj.transform.position, stateMachineOwnerClass.AttackDataSO.groundPoundSize, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(l, 1);
 

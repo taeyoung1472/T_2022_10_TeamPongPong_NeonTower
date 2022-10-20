@@ -39,6 +39,7 @@ public class WaveAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         for (int i = 0; i < positions.Count; i++)
         {
             cols = EnemyAttackCollisionCheck.CheckSphere(positions[i], z / 2f, 1 << 8);
+            stateMachineOwnerClass.ExplosionEffect(positions[i]);
             EnemyAttackCollisionCheck.ApplyDamaged(cols, 1);
             cols.Clear();
         }
