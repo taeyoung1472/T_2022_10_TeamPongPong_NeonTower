@@ -1,10 +1,9 @@
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class TutorialManager : MonoBehaviour
@@ -106,7 +105,7 @@ public class TutorialManager : MonoBehaviour
         TextPop("오른쪽으로 이동해주세요");
         for (int i = 0; i < _test1Boundarys.Length; i++)
         {
-            _test1Boundarys[i].SetActive(false);
+            _test1Boundarys[i].transform.DOMoveY(-2.05f, 1f);
         }
     }
 
@@ -161,9 +160,13 @@ public class TutorialManager : MonoBehaviour
         TextPop($"엄청 대단하시네요 !!");
         yield return new WaitForSeconds(3f);
         TextPop($"밑으로 내려가주세요");
+        for (int i = 0; i < _test1Boundarys.Length; i++)
+        {
+            _test1Boundarys[i].transform.DOMoveY(0f, 0.6f);
+        }
         for (int i = 0; i < _test2Boundarys.Length; i++)
         {
-            _test2Boundarys[i].SetActive(false);
+            _test2Boundarys[i].transform.DOMoveY(-2.05f, 1f);
         }
     }
 
@@ -215,10 +218,14 @@ public class TutorialManager : MonoBehaviour
         TextPop($"마지막 훈련만 남았습니다.");
         yield return new WaitForSeconds(3f);
         TextPop($"옆으로 가주세요");
-
+        
+        for (int i = 0; i < _test2Boundarys.Length; i++)
+        {
+            _test2Boundarys[i].transform.DOMoveY(0f, 0.6f);
+        }
         for (int i = 0; i < _test3Boundarys.Length; i++)
         {
-            _test3Boundarys[i].SetActive(false);
+            _test3Boundarys[i].transform.DOMoveY(-2.05f, 1f);
         }
     }
 

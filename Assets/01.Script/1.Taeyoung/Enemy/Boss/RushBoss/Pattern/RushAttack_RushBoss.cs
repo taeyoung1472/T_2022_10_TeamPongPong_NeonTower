@@ -7,24 +7,20 @@ public class RushAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
-        stateMachineOwnerClass.ModelReset();
-        stateMachineOwnerClass.Agent.ResetPath();
-        BossUIManager.Instance.BossPopupText("조심하세요! 보스가 돌진합니다!", 1.5f, 1);
-        stateMachineOwnerClass.StartCoroutine(WaitEndRush());
-    }
-
-    private IEnumerator WaitEndRush()
-    {
-        yield return new WaitForSeconds(1f);
-        stateMachineOwnerClass.Animator.SetBool("Run", true);
+        stateMachineOwnerClass.After.isMotionTrail = true;
         stateMachineOwnerClass.Agent.speed = stateMachineOwnerClass.AttackDataSO.rushSpeed;
-        stateMachineOwnerClass.Agent.SetDestination(stateMachineOwnerClass.Target.position);
+        stateMachineOwnerClass.After._bakingCycle = 0.05f;
+        stateMachineOwnerClass.After._data.duration = 0.2f;
+        stateMachineOwnerClass.RushForceField.SetActive(true);
+        stateMachineOwnerClass.Animator.SetBool("Rush", true);
+        BossUIManager.Instance.BossPopupText("조심하세요! 보스가 돌진합니다!", 1.5f, 2);
     }
 
     public override void Execute()
     {
         stateMachineOwnerClass.TargetLook();
-        if(stateMachineOwnerClass.Agent.remainingDistance <= 0f)
+        stateMachineOwnerClass.Agent.SetDestination(stateMachineOwnerClass.Target.position);
+        if(stateMachine.GetStateDurationTime > stateMachineOwnerClass.AttackDataSO.rushDuration)
         {
             stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
         }
@@ -32,9 +28,13 @@ public class RushAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
     public override void Exit()
     {
+        stateMachineOwnerClass.After.isMotionTrail = false;
+        stateMachineOwnerClass.After._bakingCycle = 0.1f;
+        stateMachineOwnerClass.After._data.duration = 0.1f;
         stateMachineOwnerClass.ModelReset();
         stateMachineOwnerClass.Agent.ResetPath();
-        stateMachineOwnerClass.Animator.SetBool("Run", false);
+        stateMachineOwnerClass.Animator.SetBool("Rush", false);
+        stateMachineOwnerClass.RushForceField.SetActive(false);
         stateMachineOwnerClass.Agent.speed = stateMachineOwnerClass.AttackDataSO.normalSpeed;
     }
 }

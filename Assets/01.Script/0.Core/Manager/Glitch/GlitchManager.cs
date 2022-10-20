@@ -50,6 +50,10 @@ namespace Glitch
                 gameUi?.SetActive(false);
                 StartGameCutScene();
             }
+            else if(scene.name == "Jinwo")
+            {
+                ZeroValue();
+            }
 
         }
         void Update()

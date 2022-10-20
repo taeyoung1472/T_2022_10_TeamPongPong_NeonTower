@@ -39,7 +39,9 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
         if (stateMachineOwnerClass.EnemyData.dashDistance != 0) //대쉬 적일떄만
         {
             if (Vector3.Distance(target.position, agent.transform.position) <=
-               stateMachineOwnerClass.EnemyData.dashDistance)
+               stateMachineOwnerClass.EnemyData.dashDistance
+               &&
+               Time.time > stateMachineOwnerClass.lastAttackTime + stateMachineOwnerClass.EnemyData.attackDelay)
             {
                 stateMachineOwnerClass.ChangeAttack();
             }
@@ -51,7 +53,9 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
         else
         {
             if (Vector3.Distance(target.position, agent.transform.position) <=
-               stateMachineOwnerClass.EnemyData.attackDistance)
+               stateMachineOwnerClass.EnemyData.attackDistance
+               &&
+               Time.time > stateMachineOwnerClass.lastAttackTime + stateMachineOwnerClass.EnemyData.attackDelay)
             {
                 stateMachineOwnerClass.ChangeAttack();
 

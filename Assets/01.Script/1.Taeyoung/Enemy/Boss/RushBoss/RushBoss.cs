@@ -10,6 +10,15 @@ public class RushBoss : BossBase<RushBoss>
     [SerializeField]
     private GameObject _model = null;
     public GameObject Model => _model;
+    [SerializeField]
+    private GameObject _rushForceField = null;
+    public GameObject RushForceField => _rushForceField;
+
+    private SkinnedMeshAfterImage _after = null;
+    public SkinnedMeshAfterImage After => _after;
+
+    private Collider _col = null;
+    public Collider Col => _col;
 
     protected override void Awake()
     {
@@ -19,24 +28,27 @@ public class RushBoss : BossBase<RushBoss>
     private void Start()
     {
         CurHp = Data.maxHp;
+        _after = GetComponent<SkinnedMeshAfterImage>();
+        _col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;
         agent.updateRotation = false;
         agent.speed = Data.speed;
 
-        bossFsm = new BossStateMachine<RushBoss>(this, new Idle_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new JumpAttack_RushBoss<RushBoss>());
-        bossFsm.AddStateList(new Move_RushBoss<RushBoss>());
+        bossFsm = new BossStateMachine<RushBoss>(this, new StartAnimation_RushBoss<RushBoss>());
+        bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>()); // 3대 때리기
+        bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>()); // 원형 타격
+        bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>()); // 겁내 달리기
+        bossFsm.AddStateList(new GroundPoundAttack_RushBoss<RushBoss>()); // 바닥 쩜프하며 때리기
+        bossFsm.AddStateList(new Move_RushBoss<RushBoss>()); // 그저 움직이기
+        bossFsm.AddStateList(new Die_RushBoss<RushBoss>());
+        bossFsm.AddStateList(new Idle_RushBoss<RushBoss>());
 
         //StadiumManager.Instance.GetStadiumByType(BossType.Boss2).Active();
     }
 
     protected override void Update()
     {
-        TargetLook();
         base.Update();
     }
 
@@ -50,7 +62,7 @@ public class RushBoss : BossBase<RushBoss>
             Debug.Log("사망 !!");
             StopAllCoroutines();
             OnDeathEvent?.Invoke();
-            Destroy(gameObject);
+            bossFsm.ChangeState<Die_RushBoss<RushBoss>>();
         }
     }
 
@@ -70,20 +82,39 @@ public class RushBoss : BossBase<RushBoss>
         bossFsm.ChangeState<Idle_RushBoss<RushBoss>>();
     }
 
-
-    public void DoPunch(int index)
+    public float GetDistance()
     {
-        switch (index)
-        {
-            case 1:
-                StartCoroutine(PunchCoroutine());
-                break;
-        }
+        Vector3 targetPosition = Target.position;
+        targetPosition.y = transform.position.y;
+
+        return Vector3.Distance(targetPosition, transform.position);
+    }
+}
+
+public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
+{
+    public override void Enter()
+    {
+        stateMachineOwnerClass.After.isMotionTrail = false;
+        stateMachineOwnerClass.Col.enabled = false;
+        stateMachineOwnerClass.StartCoroutine(WaitStartAnimation());
     }
 
-    private IEnumerator PunchCoroutine()
+    private IEnumerator WaitStartAnimation()
     {
-        DangerZone.DrawArc(transform.position, transform.forward, 180f, new Vector3(4f, 0f, 4f), 0.2f);
-        yield return new WaitForSeconds(0.2f);
+        stateMachineOwnerClass.Animator.Play("Start");
+        stateMachineOwnerClass.Animator.Update(0);
+        yield return new WaitUntil(() =>
+        stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Start") == false);
+        stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
+    }
+
+    public override void Execute()
+    {
+    }
+
+    public override void Exit()
+    {
+        stateMachineOwnerClass.Col.enabled = true;
     }
 }

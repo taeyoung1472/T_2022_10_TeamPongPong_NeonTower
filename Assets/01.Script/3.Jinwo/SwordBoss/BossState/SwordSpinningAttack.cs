@@ -4,29 +4,34 @@ using UnityEngine;
 
 public class SwordSpinningAttack<T> : BossState<T> where T : Sword
 {
-    //2¹øÀÓ
     private Animator animator;
     private Transform characterTransform;
 
 
-    private int hashAttack = Animator.StringToHash("Attack");
+    private int hashAttack = Animator.StringToHash("attackType");
 
     public override void OnAwake()
     {
-        animator = stateMachineOwnerClass.GetComponentInChildren<Animator>();
+        animator = stateMachineOwnerClass.Animator;
+
         characterTransform = stateMachineOwnerClass.GetComponent<Transform>();
 
     }
     public override void Enter()
     {
-        animator.SetInteger(hashAttack, 2);
+        animator.SetInteger(hashAttack, stateMachineOwnerClass.currentAttackType + 1);
     }
-
 
     public override void Execute()
     {
         //var size = Physics.SphereCastNonAlloc(attackRoot.position, attackRadius, direction, hits, deltaDistance,
         //       whatIsTarget);
+
+
+        if (!stateMachineOwnerClass.isAttacking)
+        {
+            stateMachineOwnerClass.BossFsm.ChangeState<SwordIdle<Sword>>();
+        }
     }
 
     public override void Exit()
