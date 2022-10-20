@@ -111,13 +111,17 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator TutorialTwoStart()
     {
+        for (int i = 0; i < _test1Boundarys.Length; i++)
+        {
+            _test1Boundarys[i].transform.DOMoveY(0f, 0.5f);
+        }
         TextPop("잘 하셨습니다!");
         yield return new WaitForSeconds(1f);
         TextPop($"<#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>Shift</color> 키를 눌러서 <#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>대시를</color> 사용할 수 있습니다.");
         yield return new WaitForSeconds(3f);
         TextPop($"대시는 여러 번 사용할 수 있는 <#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>충전형 스킬</color>입니다.");
         yield return new WaitForSeconds(3f);
-        TextPop("남은 충전 횟수는 오른쪽 아래의 UI에서 확인하실 수 있습니다.");
+        TextPop("남은 충전 횟수는 왼쪽 아래의 UI에서 확인하실 수 있습니다.");
         yield return new WaitForSeconds(3f);
         TextPop("준비 되셨나요?");
         yield return new WaitForSeconds(1f);
@@ -160,10 +164,6 @@ public class TutorialManager : MonoBehaviour
         TextPop($"엄청 대단하시네요 !!");
         yield return new WaitForSeconds(3f);
         TextPop($"밑으로 내려가주세요");
-        for (int i = 0; i < _test1Boundarys.Length; i++)
-        {
-            _test1Boundarys[i].transform.DOMoveY(0f, 0.6f);
-        }
         for (int i = 0; i < _test2Boundarys.Length; i++)
         {
             _test2Boundarys[i].transform.DOMoveY(-2.05f, 1f);
@@ -178,6 +178,10 @@ public class TutorialManager : MonoBehaviour
     }
     private IEnumerator TutorialThreeStart()
     {
+        for (int i = 0; i < _test2Boundarys.Length; i++)
+        {
+            _test2Boundarys[i].transform.DOMoveY(0f, 0.5f);
+        }
         TextPop("잘 하셨습니다!");
         yield return new WaitForSeconds(1f);
         TextPop($"<#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>마우스 왼쪽</color> 키를 눌러서 <#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>기본공격을</color> 할 수 있습니다.");
@@ -219,10 +223,6 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         TextPop($"옆으로 가주세요");
         
-        for (int i = 0; i < _test2Boundarys.Length; i++)
-        {
-            _test2Boundarys[i].transform.DOMoveY(0f, 0.6f);
-        }
         for (int i = 0; i < _test3Boundarys.Length; i++)
         {
             _test3Boundarys[i].transform.DOMoveY(-2.05f, 1f);
@@ -238,6 +238,10 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator Test4Coroutine()
     {
+        for (int i = 0; i < _test3Boundarys.Length; i++)
+        {
+            _test3Boundarys[i].transform.DOMoveY(0f, 0.5f);
+        }
         TextPop($"정말 훌륭합니다 !!!!");
         yield return new WaitForSeconds(3f);
         TextPop($"이 게임에는 레벨업으로 추가기능을 부여할 수 있습니다.");
