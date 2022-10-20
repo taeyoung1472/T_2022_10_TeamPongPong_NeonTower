@@ -12,6 +12,8 @@ public class SummonerAttackDataSO : ScriptableObject
 
     [Header("레이저 패턴 사용 거리")]
     public float laserAttackDistance = 5f;
+    [Header("레이저 Arc 모양 크기")]
+    public float laserArcSize = 6f;
     [Header("레이저 전조 기간")]
     public float laserAttackDangerInterval = 0.2f;
 

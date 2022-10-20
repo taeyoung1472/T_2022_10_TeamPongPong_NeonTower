@@ -17,7 +17,7 @@ public class SummonerSkillLaser : BossState<SummonerBoss>
 
     private IEnumerator DangerAndLaser()
     {
-        DangerZone.DrawArc(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 0.2f, stateMachineOwnerClass.transform.forward, 130f, Vector3.one * 5f, 0.5f);
+        DangerZone.DrawArc(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 0.2f, stateMachineOwnerClass.transform.forward, 130f, Vector3.one * stateMachineOwnerClass.AttackDataSO.laserArcSize, 0.5f);
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.laserAttackDangerInterval);
         stateMachineOwnerClass.LaserModel.SetActive(true);
         stateMachineOwnerClass.Animator.Play("Laser");
