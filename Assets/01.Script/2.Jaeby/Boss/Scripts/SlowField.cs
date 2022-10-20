@@ -12,18 +12,29 @@ public class SlowField : MonoBehaviour
         set => _slowIntensity = value;
     }
 
+    private PlayerController _target = null;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            _lastSpeed = other.GetComponent<PlayerController>().CurSpeed;
-            //other.GetComponent<PlayerController>().CurSpeed = _lastSpeed * _slowIntensity;
+            _target = other.GetComponent<PlayerController>();
+            _lastSpeed = _target.SpeedFixValue;
+            _target.SpeedFixValue = _lastSpeed * _slowIntensity;
+            Debug.Log(_lastSpeed);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //other.GetComponent<PlayerController>().CurSpeed = _lastSpeed;
+        _target.SpeedFixValue = _lastSpeed;
     }
 
+    private void OnDisable()
+    {
+        if(_lastSpeed > 0f)
+        {
+            _target.SpeedFixValue = _lastSpeed;
+        }
+    }
 }

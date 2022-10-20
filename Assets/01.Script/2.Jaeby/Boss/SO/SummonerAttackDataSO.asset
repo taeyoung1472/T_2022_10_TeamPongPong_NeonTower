@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keepDistance: 4
   randomIdleTime: {x: 0.2, y: 0.5}
-  laserAttackDistance: 5
-  laserAttackDangerInterval: 0.3
+  laserAttackDistance: 5.3
+  laserAttackDangerInterval: 0.8
   summonAttackCooltime: 15
   spawnerRandomCircle: 5
   slowAttackCololtime: 8
