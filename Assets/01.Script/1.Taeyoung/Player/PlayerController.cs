@@ -103,6 +103,18 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             EXPManager.Instance.AddExp();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            EnemySubject.Instance.NotifyObserver();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            FindObjectOfType<EnemySpawner>().IsCanSpawn = false;
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            FindObjectOfType<EnemySpawner>().IsCanSpawn = true;
+        }
         if (Time.time > 3)
         {
             Audio();
@@ -187,6 +199,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             yield return new WaitUntil(() => isDamaged && !isDead);
 
             curHp--;
+            hud.HPValue = curHp;
 
             ColorCanvasEffect.Instance.Active(Color.red);
 
@@ -220,12 +233,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void ApplyDamage(float dmg)
     {
         if (isDead) return;
-        Debug.Log("¾Æ¾ß");
+
         isDamaged = true;
-        hud.HPValue = curHp;
-        if(curHp <= 0)
-        {
-            Dead();
-        }
     }
 }

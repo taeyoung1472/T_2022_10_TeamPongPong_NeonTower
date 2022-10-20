@@ -23,6 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 39f41213e4a1e544fa8a5747679d14fa, type: 2}
   - {fileID: 11400000, guid: 22231357a19007147903ea2ea1b24fae, type: 2}
   - {fileID: 11400000, guid: 2363c9d2d31d16e40bc2aa5c371b812c, type: 2}
+  - {fileID: 11400000, guid: 6b3c086b98b746b4c9215585d60ebcc6, type: 2}
   upgradeDataList:
   - upgradeType: 0
     upgradeAbleCount: 3
@@ -82,7 +83,13 @@ MonoBehaviour:
       \uD68C\uBCF5\uB429\uB2C8\uB2E4"
   - upgradeType: 9
     upgradeAbleCount: 10
-    upgradeProfile: {fileID: 21300000, guid: d600e2ece84bc2a48b452b1551ca6952, type: 3}
+    upgradeProfile: {fileID: 21300000, guid: fea4100eaa7c1564e837f810cc9ba27a, type: 3}
+    color: {r: 0.35835263, g: 1, b: 0.33333337, a: 1}
+    upgradeName: "\uCCB4\uB825 \uC99D\uAC00"
+    upgradeDesc: "\uCD5C\uB300 \uCC44\uB825\uC774 1 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+  - upgradeType: 10
+    upgradeAbleCount: 10
+    upgradeProfile: {fileID: 21300000, guid: fea4100eaa7c1564e837f810cc9ba27a, type: 3}
     color: {r: 0.35835263, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCCB4\uB825 \uC99D\uAC00"
     upgradeDesc: "\uCD5C\uB300 \uCC44\uB825\uC774 1 \uC99D\uAC00\uD569\uB2C8\uB2E4"

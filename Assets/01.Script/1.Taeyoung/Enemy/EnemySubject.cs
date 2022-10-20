@@ -7,7 +7,7 @@ public class EnemySubject : MonoSingleTon<EnemySubject>, ISubject
     
     public void NotifyObserver()
     {
-        // ERROR
+        Debug.Log($"EnemyCount : {observers.Count}");
         foreach (Enemy item in observers)
         {
             item.ObserverUpdate();

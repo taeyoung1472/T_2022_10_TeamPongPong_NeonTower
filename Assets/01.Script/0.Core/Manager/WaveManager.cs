@@ -37,6 +37,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
         backgrounds = FindObjectsOfType<Background>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         StartCoroutine(WaveSystem());
+        BGMChanger.Instance.ActiveAudio(BGMType.Default);
     }
 
     public void Update()
@@ -58,11 +59,21 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
             if (curWave % 4 == 0)
             {
+                #region 보스 처리
                 isBossClear = false;
                 bossList[bossIdx].gameObject.SetActive(true);
                 CameraManager.Instance.TargetingBossCameraAnimation(bossList[bossIdx], 5);
+                EXPManager.Instance.isCanLevelup = false;
+                EnemySubject.Instance.NotifyObserver();
+                Define.Instance.playerController.transform.position = new Vector3(0, 0, -15);
+                StadiumManager.Instance.StadiumMatches[bossIdx].Active();
                 bossIdx++;
+                BGMChanger.Instance.ActiveAudio(BGMType.Boss);
+
                 yield return new WaitUntil(() => isBossClear);
+                BGMChanger.Instance.ActiveAudio(BGMType.Default);
+                #endregion
+                EXPManager.Instance.isCanLevelup = true;
                 EnemySubject.Instance.NotifyObserver();
 
                 if (curFloor == 6)

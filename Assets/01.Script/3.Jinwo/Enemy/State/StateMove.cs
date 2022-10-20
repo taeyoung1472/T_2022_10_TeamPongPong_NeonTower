@@ -30,15 +30,13 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     {   
         animator?.SetBool(hashMove, true);
         //updatePath = CoroutineHelper.StartCoroutine(UpdatePath());
-        
+
     }
     public override void Execute()
     {
-        Transform target = stateMachineOwnerClass.Target.transform;
-
         if (stateMachineOwnerClass.EnemyData.dashDistance != 0) //대쉬 적일떄만
         {
-            if (Vector3.Distance(target.position, agent.transform.position) <=
+            if (Vector3.Distance(stateMachineOwnerClass.Target.transform.position, agent.transform.position) <=
                stateMachineOwnerClass.EnemyData.dashDistance
                &&
                Time.time > stateMachineOwnerClass.lastAttackTime + stateMachineOwnerClass.EnemyData.attackDelay)
@@ -47,12 +45,12 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
             }
             else
             {
-                agent?.SetDestination(target.position);
+                agent?.SetDestination(stateMachineOwnerClass.Target.transform.position);
             }
         }
         else
         {
-            if (Vector3.Distance(target.position, agent.transform.position) <=
+            if (Vector3.Distance(stateMachineOwnerClass.Target.transform.position, agent.transform.position) <=
                stateMachineOwnerClass.EnemyData.attackDistance
                &&
                Time.time > stateMachineOwnerClass.lastAttackTime + stateMachineOwnerClass.EnemyData.attackDelay)
@@ -62,7 +60,7 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
             }
             else
             {
-                agent?.SetDestination(target.position);
+                agent?.SetDestination(stateMachineOwnerClass.Target.transform.position);
             }
         }
         

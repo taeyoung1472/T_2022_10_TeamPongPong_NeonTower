@@ -66,7 +66,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             angleZGoal = Mathf.Lerp(angleZGoal, 0, Time.deltaTime * 2);
         }
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleZGoal + startAngleZ));
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angleZGoal + startAngleZ));
     }
 
     public void OnPointerEnter(PointerEventData eventData)
