@@ -67,7 +67,6 @@ public class Sword : BossBase<Sword>
         bossFsm.AddStateList(new SwordCircleRangeAttack<Sword>());
         bossFsm.AddStateList(new SwordBaldoAttack<Sword>());
 
-        attackCoolTime = data.patternCoolTime;
         currentAttackType = 0;
 
        // motionTrail._data.
@@ -79,6 +78,8 @@ public class Sword : BossBase<Sword>
         animeEvent.startAnime = EnableEffect;
         animeEvent.endAnime = DisableEffect;
         animeEvent.damageEvent = StartApplyDamage;
+
+
     }
     protected override void Update()
     {
