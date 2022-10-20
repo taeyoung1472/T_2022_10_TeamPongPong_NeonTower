@@ -55,7 +55,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
             waveTimer = 0;
             curWave++;
-            curFloor = (curWave / 3) + 1;
+            curFloor = (curWave / 4) + 1;
 
             if (curWave % 4 == 0)
             {

@@ -705,7 +705,7 @@ MonoBehaviour:
   - type: 0
     clip: {fileID: 8300000, guid: 00379ff33019bab4c9495c70aa3c3ff7, type: 3}
   - type: 1
-    clip: {fileID: 8300000, guid: 75ac2da87b2fc5040b6b962252203b0f, type: 3}
+    clip: {fileID: 8300000, guid: d27f07ee512f26745924876a153aad51, type: 3}
 --- !u!82 &92724086
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3250,7 +3250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 8
+  wavePerTime: 40
   waveChangeTime: 8
   bossList:
   - {fileID: 928772313}
