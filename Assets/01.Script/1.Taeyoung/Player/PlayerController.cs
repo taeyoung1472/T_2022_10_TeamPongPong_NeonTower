@@ -96,6 +96,10 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EXPManager.Instance.AddExp();
+        }
         if (Time.time > 3)
         {
             Audio();

@@ -52,7 +52,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
             curWave++;
             curFloor = (curWave / 3) + 1;
 
-            if (curWave % 3 == 0)
+            if (curWave % 4 == 0)
             {
                 //isBossClear = false;
                 //yield return new WaitUntil(() => isBossClear);
