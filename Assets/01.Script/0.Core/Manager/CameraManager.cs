@@ -90,6 +90,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
             yield return null;
             time += Time.deltaTime;
         }
+        _cmVCam.m_Lens.FieldOfView = maxValue;
         Callback?.Invoke();
     }
 
@@ -111,7 +112,8 @@ public class CameraManager : MonoSingleTon<CameraManager>
     /// <param name="얼마나 줌인할 것인지"></param>
     public void TargetingBossCameraAnimation(Boss boss, float idleTime, float zoomAmount = 12f)
     {
-        Transform lastTarget = _cmVCam.Follow;
+        //Transform lastTarget = _cmVCam.Follow;
+        Transform lastTarget = Define.Instance.playerController.transform;
         _cmVCam.Follow = boss.transform;
         float last = _cmVCam.m_Lens.FieldOfView;
         float dangerIdleTime = idleTime - 2f;
@@ -120,7 +122,8 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void TargetingCameraAnimation(Transform target, float idleTime, float zoomAmount = 12f)
     {
-        Transform lastTarget = _cmVCam.Follow;
+        //Transform lastTarget = _cmVCam.Follow;
+        Transform lastTarget = Define.Instance.playerController.transform;
         _cmVCam.Follow = target;
         float last = _cmVCam.m_Lens.FieldOfView;
         StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime,0f, zoomAmount));

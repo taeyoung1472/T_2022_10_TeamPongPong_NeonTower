@@ -28,7 +28,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     private TextMeshProUGUI _popupText = null;
     private Vector3 _initPos = Vector3.zero;
 
-    int _popupWeight = 0;
+    int _popupWeight = -1;
 
     private void Start()
     {
@@ -49,6 +49,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
             _dangerOriginPosition = _dangerUI.anchoredPosition;
             _bossNameOriginPosition = _bossNameUI.anchoredPosition;
             _initPos = _popupText.rectTransform.anchoredPosition;
+            _initPos.x = 0f;
         }
         else
         {
@@ -61,7 +62,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _currentBoss = boss;
         if (_currentBoss == null || _bossHpSlider == null || _bossImage == null) return;
 
-        _currentBoss.OnDeathEvent.AddListener(ExitBoss);
+        _currentBoss.OnDeathEvent.AddListener(BossDieEvent);
         _bossHpSlider.gameObject.SetActive(true);
         _bossImage.transform.parent.gameObject.SetActive(true);
         _bossNameText.gameObject.SetActive(true);
@@ -85,7 +86,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         if (_popupSeq != null)
         {
             _popupSeq.Kill();
-            weight = 0;
+            _popupWeight = -1;
         }
 
         _popupWeight = weight;
@@ -97,7 +98,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _seq.Append(_popupText.rectTransform.DOAnchorPosY(_initPos.y, 0.5f));
         _seq.AppendCallback(() =>
         {
-            weight = 0;
+            _popupWeight = -1;
         });
     }
 
@@ -110,7 +111,9 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
     public void ExitBoss()
     {
+        Destroy(_currentBoss.gameObject);
         _currentBoss = null;
+        _popupWeight = -1;
         if (_bossHpSlider == null || _bossImage == null) return;
         _bossHpSlider.value = 0f;
         _bossImage.sprite = null;
@@ -152,6 +155,29 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
             SetBoss(boss);
         });
         //_seq.Join();
+    }
+
+    public void BossDieEvent()
+    {
+        StartCoroutine(BossDieEventCoroutine());
+    }
+
+    private IEnumerator BossDieEventCoroutine()
+    {
+        Time.timeScale = 0.2f;
+        CameraManager.Instance.TargetingCameraAnimation(_currentBoss.transform, 3f, 1f);
+        _currentBoss.Animator.Play("Die");
+        _currentBoss.Animator.Update(0);
+        yield return new WaitUntil(() => _currentBoss.Animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
+
+        Time.timeScale = 1f;
+        ExitBoss();
+        yield return new WaitForSeconds(1f);
+        if (_popupSeq != null)
+        {
+            _popupSeq.Kill();
+            _popupText.rectTransform.anchoredPosition = _initPos;
+        }
     }
 
     private void OnDestroy()

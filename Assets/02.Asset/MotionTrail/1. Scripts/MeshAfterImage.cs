@@ -12,7 +12,6 @@ public sealed class MeshAfterImage : AfterImageBase
     *                               Fields
     ***********************************************************************/
     #region .
-
     private MeshFilter[] TargetMeshFilterArray { get; set; }
 
     #endregion
