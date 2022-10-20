@@ -64,6 +64,6 @@ Material:
     - _Color: {r: 3.9999995, g: 2.0679193, b: 0, a: 0}
     - _ColorA: {r: 0, g: 5.992157, b: 4.1411767, a: 0}
     - _ColorB: {r: 5.992157, g: 1.4117647, b: 0, a: 0}
-    - _DissolveDirection: {r: 0, g: 1, b: 0, a: 0}
+    - _DissolveDirection: {r: 0, g: 0, b: 1, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
