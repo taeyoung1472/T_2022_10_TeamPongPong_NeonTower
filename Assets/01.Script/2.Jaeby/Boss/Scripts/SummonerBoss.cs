@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,6 +34,8 @@ public class SummonerBoss : BossBase<SummonerBoss>
 
     private Collider _col = null;
     public Collider Col => _col;
+    public float radius = 0f;
+    public float angle = 0f;
 
     private void Start()
     {
@@ -103,6 +106,11 @@ public class SummonerBoss : BossBase<SummonerBoss>
     public void MonoDestroy(GameObject obj, float time)
     {
         Destroy(obj, time);
+    }
+    private void OnDrawGizmos()
+    {
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle / 2, radius);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle / 2, radius);
     }
 }
 
