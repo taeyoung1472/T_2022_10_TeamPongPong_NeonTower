@@ -17,45 +17,49 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     private IEnumerator PunchCoroutine()
     {
         stateMachineOwnerClass.LookTarget();
-        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 3f, stateMachineOwnerClass.transform.rotation, 
+        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 3f, stateMachineOwnerClass.transform.rotation,
             new Vector3(3.5f, 0.1f, 6.5f), stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
+        stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
 
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
+        List<Collider> l = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 3.5f, 6.5f, 1 << 8);
+        EnemyAttackCollisionCheck.ApplyDamaged(l, 1);
+
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(5f, 20f, 0.2f);
 
 
         stateMachineOwnerClass.LookTarget();
-        DangerZone.DrawArc(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.forward, 180f, 
+        DangerZone.DrawArc(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.forward, 180f,
             new Vector3(6.5f, 0.1f, 8.5f), stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
-
         stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(7f, 20f, 0.3f);
         List<Collider> list = EnemyAttackCollisionCheck.CheckArc(stateMachineOwnerClass.AttackPositionObj.transform, 60f, 8.3f, 1 << 8);
-        for(int i = 0; i <list.Count; i++)
-        {
-            list[i].GetComponent<PlayerController>()?.ApplyDamage(0);
-        }
+        EnemyAttackCollisionCheck.ApplyDamaged(list, 1);
 
         stateMachineOwnerClass.LookTarget();
-        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 6f, stateMachineOwnerClass.transform.rotation, 
+
+        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 6f, stateMachineOwnerClass.transform.rotation,
             new Vector3(4f, 0.1f, 12f), stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
+        stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
 
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(10f, 30f, 0.23f);
+        List<Collider> l2 = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 4f, 12f, 1 << 8);
+        EnemyAttackCollisionCheck.ApplyDamaged(l2, 1);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Punch2") == false);
 
         if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance)
         {
             stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
         }
-        else if(stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.groundPoundSize)
+        else if (stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.groundPoundSize)
         {
             stateMachine.ChangeState<GroundPoundAttack_RushBoss<RushBoss>>();
         }

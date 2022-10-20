@@ -11,12 +11,15 @@ public class GroundPoundAttack_RushBoss<T> : BossState<RushBoss> where T : BossB
 
     private IEnumerator WaitAnimation()
     {
+        stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
         DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.AttackDataSO.groundPoundSize * 2f + 1f, 1f);
         yield return new WaitForSeconds(0.5f);
         stateMachineOwnerClass.Animator.Play("GroundPound");
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(()=> stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("GroundPound") == false);
         CameraManager.Instance.CameraShake(12f, 30f, 0.23f);
+        List<Collider> l = EnemyAttackCollisionCheck.CheckSphere(stateMachineOwnerClass.AttackPositionObj.transform, stateMachineOwnerClass.AttackDataSO.groundPoundSize, 1 << 8);
+        EnemyAttackCollisionCheck.ApplyDamaged(l, 1);
 
         yield return new WaitForSeconds(1f);
         stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();

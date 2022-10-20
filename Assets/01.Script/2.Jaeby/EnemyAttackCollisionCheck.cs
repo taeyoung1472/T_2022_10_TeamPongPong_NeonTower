@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class EnemyAttackCollisionCheck : MonoBehaviour
 {
-    public static Collider[] CheckSphere(Vector3 position, float radius, LayerMask layerMask)
+    public static List<Collider> CheckSphere(Transform trm, float radius, LayerMask layerMask)
     {
-        Collider[] cols = Physics.OverlapSphere(position, radius, layerMask);
+        List<Collider> cols = new List<Collider>(Physics.OverlapSphere(trm.position, radius, layerMask));
+
         return cols;
     }
-    public static bool CheckSphereBool(Vector3 position, float radius, LayerMask layerMask)
-    {
-        Collider[] cols = Physics.OverlapSphere(position, radius, layerMask);
-        return cols.Length > 0;
-    }
 
-    public static Collider[] CheckCube(Vector3 center, Vector3 halfExtents, Quaternion orientation, LayerMask layerMask)
+    public static List<Collider> CheckCube(Transform trm, float xSize, float zSize, LayerMask layerMask)
     {
-        Collider[] cols = Physics.OverlapBox(center, halfExtents, orientation, layerMask);
+        Vector3 center = trm.position + trm.forward * (zSize * 0.5f);
+        Vector3 halfSize = new Vector3(xSize, 0f, zSize) * 0.5f;
+        halfSize.y = 3f;
+        List<Collider> cols = new List<Collider>(Physics.OverlapBox(center, halfSize, trm.rotation, layerMask));
+        if(cols.Count > 0)
+        {
+        }
         return cols;
     }
 
@@ -35,7 +37,6 @@ public class EnemyAttackCollisionCheck : MonoBehaviour
             target.y = 0f;
 
             float targetAngle = Vector3.Angle(forward, target);
-            Debug.Log(targetAngle);
             if (targetAngle < angle / 2f)
             {
                 result.Add(cols[i]);
@@ -43,10 +44,16 @@ public class EnemyAttackCollisionCheck : MonoBehaviour
         }
         if (result.Count > 0)
         {
-            Debug.Log("¸ÂÀ½");
         }
 
         return result;
     }
 
+    public static void ApplyDamaged(List<Collider> list, int damage)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].GetComponent<IDamageable>()?.ApplyDamage(damage);
+        }
+    }
 }

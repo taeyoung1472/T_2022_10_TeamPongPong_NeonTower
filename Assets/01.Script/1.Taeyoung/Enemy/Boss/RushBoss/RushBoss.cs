@@ -21,6 +21,7 @@ public class RushBoss : BossBase<RushBoss>
     private Collider _col = null;
     public Collider Col => _col;
 
+
     public float radius = 0f;
     public float angle = 0f;
 
