@@ -23,7 +23,7 @@ public class EnemyBase<T> : Enemy
 
     }
 #endif
-
+    
     protected virtual void Awake()
     {
         health = EnemyData.maxHealth;
@@ -31,10 +31,6 @@ public class EnemyBase<T> : Enemy
         whatIsTarget |= 1 << LayerMask.NameToLayer("Player");
         attackRoot = transform.Find("AttackRoot");
         OnDeath.AddListener(() => { PoolManager.Instance.Push(PoolType, gameObject); });
-    }
-    protected virtual void Start()
-    {
-        EnemySubject.Instance.RegisterObserver(this);
     }
     public virtual void FixedUpdate()
     {
@@ -87,5 +83,13 @@ public class EnemyBase<T> : Enemy
         if (dead) return;
 
         health += newHealth;
+    }
+    public virtual void StartMotionTrail()
+    {
+
+    }
+    public virtual void StopMotionTrail()
+    {
+
     }
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DashEnemy : EnemyBase<DashEnemy>
 {
+    [SerializeField]
+    private MeshAfterImage motionTrail;
     protected override void Awake()
     {
         base.Awake();
+        motionTrail = GetComponent<MeshAfterImage>();
 
         fsmManager = new StateMachine<DashEnemy>(this, new StateMove<DashEnemy>());
 
@@ -17,7 +20,10 @@ public class DashEnemy : EnemyBase<DashEnemy>
         //fsmManager.ReturnDic();
 
     }
-
+    private void Start()
+    {
+        StopMotionTrail();
+    }
     void Update()
     {
         fsmManager.Execute();
@@ -33,5 +39,14 @@ public class DashEnemy : EnemyBase<DashEnemy>
         base.DisableAttack();
         //Debug.Log("change");
         FsmManager.ChangeState<StateMove<DashEnemy>>();
+    }
+    public override void StartMotionTrail()
+    {
+        motionTrail.isMotionTrail = true;
+    }
+    public override void StopMotionTrail()
+    {
+        motionTrail.isMotionTrail = false;
+
     }
 }

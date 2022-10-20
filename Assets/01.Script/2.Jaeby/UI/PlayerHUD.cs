@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-
     [SerializeField]
     private Slider _hpSlider = null;
+    [SerializeField]
+    private TextMeshProUGUI _hpText;
 
     private int _hpMaxValue = 0;
     public int HPMaxValue
@@ -40,6 +41,7 @@ public class PlayerHUD : MonoBehaviour
         {
             _hpValue = value;
             _hpSlider.value = _hpValue;
+            _hpText.SetText($"{_hpValue}/{_hpMaxValue}");
         }
     }
 
@@ -79,5 +81,6 @@ public class PlayerHUD : MonoBehaviour
         HPMinValue = minValue;
         HPMaxValue = maxValue;
         HPValue = Value;
+
     }
 }

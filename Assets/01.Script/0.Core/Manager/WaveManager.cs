@@ -20,6 +20,10 @@ public class WaveManager : MonoSingleTon<WaveManager>
     private Background[] backgrounds;
     private EnemySpawner enemySpawner;
 
+    [Header("보스")]
+    [SerializeField] private Boss[] bossList;
+    private int bossIdx = 0;
+
     [Header("[TMP]")]
     [SerializeField] private TextMeshProUGUI nextWaveText;
     [SerializeField] private TextMeshProUGUI floorText;
@@ -33,6 +37,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
         backgrounds = FindObjectsOfType<Background>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         StartCoroutine(WaveSystem());
+        BGMChanger.Instance.ActiveAudio(BGMType.Default);
     }
 
     public void Update()
@@ -52,10 +57,23 @@ public class WaveManager : MonoSingleTon<WaveManager>
             curWave++;
             curFloor = (curWave / 3) + 1;
 
-            if (curWave % 3 == 0)
+            if (curWave % 4 == 0)
             {
-                //isBossClear = false;
-                //yield return new WaitUntil(() => isBossClear);
+                #region 보스 처리
+                isBossClear = false;
+                bossList[bossIdx].gameObject.SetActive(true);
+                CameraManager.Instance.TargetingBossCameraAnimation(bossList[bossIdx], 5);
+                EXPManager.Instance.isCanLevelup = false;
+                EnemySubject.Instance.NotifyObserver();
+                Define.Instance.playerController.transform.position = new Vector3(0, 0, -15);
+                StadiumManager.Instance.StadiumMatches[bossIdx].Active();
+                bossIdx++;
+                BGMChanger.Instance.ActiveAudio(BGMType.Boss);
+
+                yield return new WaitUntil(() => isBossClear);
+                BGMChanger.Instance.ActiveAudio(BGMType.Default);
+                #endregion
+                EXPManager.Instance.isCanLevelup = true;
                 EnemySubject.Instance.NotifyObserver();
 
                 if (curFloor == 6)

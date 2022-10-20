@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3957f29e6d8ba4b8256bcb6d31da96, type: 3}
-  m_Name: SummonerBossSO
+  m_Script: {fileID: 11500000, guid: 222f43c82912acd4a8a436a02b6bf7bb, type: 3}
+  m_Name: MAX
   m_EditorClassIdentifier: 
-  bossProfile: {fileID: 21300000, guid: bdd6c77f3b6358b4797992581e75bd64, type: 3}
-  bossName: "\uC309\uBC8C\uB808"
-  speed: 5
-  damage: 1
-  maxHp: 75
-  attackRange: 10
-  patternCoolTime: 4
+  upgradeType: 10
+  datas: []

@@ -81,6 +81,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
         health = enemyData.maxHealth;
         dead = false;
         baseScale = transform.localScale;
+        EnemySubject.Instance.RegisterObserver(this);
     }
 
     public override void Init_Push()
@@ -88,7 +89,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
         transform.localScale = baseScale;
     }
 
-    public void ApplyDamage(float dmg)
+    public virtual void ApplyDamage(float dmg)
     {
         health -= dmg;
         AudioManager.PlayAudioRandPitch(enemyData.hitClip);

@@ -40,6 +40,7 @@ public class StateDashAttack<T> : State<T> where T : EnemyBase<T>
         //agent.stoppingDistance = 1;
         yield return new WaitForSeconds(0.5f);
 
+        stateMachineOwnerClass.StartMotionTrail();
         agent.isStopped = false;
         float startTime = Time.time;
 
@@ -52,6 +53,7 @@ public class StateDashAttack<T> : State<T> where T : EnemyBase<T>
 
         agent.speed = stateMachineOwnerClass.EnemyData.speed;
 
+        stateMachineOwnerClass.StopMotionTrail();
         if (Vector3.Distance(target.position, agent.transform.position) <=
                stateMachineOwnerClass.EnemyData.attackDistance)
         {
