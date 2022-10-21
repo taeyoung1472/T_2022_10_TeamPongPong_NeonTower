@@ -8,6 +8,7 @@ public class Die_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     {
         stateMachineOwnerClass.Col.enabled = false;
         stateMachineOwnerClass.Agent.enabled = false;
+        stateMachineOwnerClass.Die();
     }
 
     public override void Execute()
