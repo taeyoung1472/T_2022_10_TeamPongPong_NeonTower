@@ -46,15 +46,24 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         CreateUpgradeCntImage(data);
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
+        _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.GetUpgradeCount(data.upgradeType));
+
         _upgradeBtn.onClick.AddListener(() => upgradeUI.UpgradeCardEffect(gameObject));
     }
     public void CreateUpgradeCntImage(UpgradeData data)
     {
+        int upCnt = UpgradeManager.Instance.GetUpgradeCount(data.upgradeType);
         for (int i = 0; i < (int)data.upgradeAbleCount; i++)
         {
+            
             GameObject cntImage = Instantiate(cntImagePrefab, parentCntTrm.transform);
-
             RectTransform rectTrm = cntImage.GetComponent<RectTransform>();
+
+            if (i < upCnt)
+            {
+                rectTrm.GetComponent<Image>().color = Color.yellow;
+            }
+
             rectTrm.anchoredPosition = new Vector2(15, 35) * i;
             rectTrm.sizeDelta = new Vector2(15, 35);
         }

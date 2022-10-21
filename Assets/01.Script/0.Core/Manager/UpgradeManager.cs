@@ -32,6 +32,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         if (upgradeCountDic[upgradeType] < 0)
         {
             upgradeCountDic.Remove(upgradeType);
+
         }
         UIManager.Instance.DeActiveUI();
         UIManager.Instance.isActiveContinue = false;
@@ -79,10 +80,8 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
     public int GetUpgradeCount(UpgradeType type)
     {
-        return (int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - 
-            (upgradeCountDic.ContainsKey(type)
-            ? upgradeCountDic[type]
-            : 0);
+        return (int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - (upgradeCountDic.ContainsKey(type)
+            ? upgradeCountDic[type] : 0);
     }
 
     public float GetUpgradeValue(UpgradeType type)
