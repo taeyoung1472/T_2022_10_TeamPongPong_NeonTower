@@ -30,6 +30,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     public GameObject oneLight;
     public GameObject twoLight;
     public GameObject threeLight;
+
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -105,8 +106,8 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         }
         cardsTrm[0].transform.localPosition = new Vector3(-600, 1000, 0);
         cardsTrm[1].transform.localPosition = new Vector3(-0, 1000, 0);
-        cardsTrm[2].transform.localPosition = new Vector3(600, 1000, 0);  
-        
+        cardsTrm[2].transform.localPosition = new Vector3(600, 1000, 0);
+
         cardsTrm[0].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 7));
         cardsTrm[1].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         cardsTrm[2].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -7));
@@ -156,6 +157,21 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         {
             InitCardSet();
         });
+
+        foreach (var card in cardsTrm)
+        {
+            RectTransform[] childList = card.parentCntTrm.GetComponentsInChildren<RectTransform>();
+            foreach (RectTransform deleteChilds in childList)
+            {
+                if (deleteChilds == card.parentCntTrm)
+                    continue;
+
+                Debug.Log(deleteChilds.gameObject.name);
+                Destroy(deleteChilds.gameObject);
+            }
+
+        }
+
         Debug.Log($"{selectedObjcet.name} 카드가 눌림");
     }
 
@@ -172,7 +188,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     }
     public IEnumerator DissolveCard()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3.55f);
         _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
     }
 
