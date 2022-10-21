@@ -38,6 +38,7 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
+        stateMachineOwnerClass.ArcAttack();
         CameraManager.Instance.CameraShake(7f, 20f, 0.3f);
         List<Collider> list = EnemyAttackCollisionCheck.CheckArc(stateMachineOwnerClass.AttackPositionObj.transform, 60f, 8.3f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(list, 1);

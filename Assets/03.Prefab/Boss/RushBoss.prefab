@@ -154464,6 +154464,7 @@ MonoBehaviour:
   radius: 5
   angle: 60
   _punchParticle: {fileID: 5378234012064996413}
+  _arcAttackParticle: {fileID: 4650929627309072041, guid: bb94908ed03848f4a91107870812f6d5, type: 3}
   _thunderParticle:
   - {fileID: 198397784153422482}
   - {fileID: 374485952}
