@@ -68,25 +68,17 @@ namespace Glitch
             _analogGlitchFeature.horizontalShake.value = _horizontalShake;
             _analogGlitchFeature.colorDrift.value = _colorDrift;
 
-            if(Input.GetKeyDown(KeyCode.H))
+            if(Input.GetKeyDown(KeyCode.P))
             {
-                GrayValue();
+                ZeroValue();
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                ZeroValue();
+                HitValue();
             }
         }
         public void ZeroValue()
         {
-            //if (cantDoZero) return;
-            //_digitalGlitchFeature.intensity.value = 0;
-
-            //_analogGlitchFeature.scanLineJitter.value = 0;
-            //_analogGlitchFeature.verticalJump.value = 0;
-            //_analogGlitchFeature.horizontalShake.value = 0;
-            //_analogGlitchFeature.colorDrift.value = 0;
-
             _intensity = 0;
 
             _scanLineJitter = 0;
@@ -102,13 +94,10 @@ namespace Glitch
             _verticalJump = 0.025f;
             _horizontalShake = 0.025f;
             _colorDrift = 0.025f;
-
-            //_digitalGlitchFeature.intensity.value = _intensity;
-
-            //_analogGlitchFeature.scanLineJitter.value = _scanLineJitter;
-            //_analogGlitchFeature.verticalJump.value = _verticalJump;
-            //_analogGlitchFeature.horizontalShake.value = _horizontalShake;
-            //_analogGlitchFeature.colorDrift.value = _colorDrift;
+        }
+        public void HitValue()
+        {
+            StartCoroutine(HitCoroutine());
         }
         public void GrayValue()
         {
@@ -132,7 +121,16 @@ namespace Glitch
             _colorDrift = 0.8f;
             StartCoroutine(GameStartCutScene());
         }
+        IEnumerator HitCoroutine()
+        {
+            _intensity = 0.05f;
 
+            _scanLineJitter = 0.1f;
+            _horizontalShake = 0.1f;
+            _colorDrift = 0.1f;
+            yield return new WaitForSeconds(0.25f);
+            ZeroValue();
+        }
         IEnumerator GameStartCutScene()
         {
             while (_intensity > 0.01f)

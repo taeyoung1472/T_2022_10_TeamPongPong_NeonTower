@@ -2155,9 +2155,9 @@ GameObject:
   - component: {fileID: 4934843254725415420}
   - component: {fileID: 6185546173376275349}
   - component: {fileID: 755955018906912393}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: NewCannonEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -83,7 +83,7 @@ Material:
     - _Cutoff: 0.4
     - _CutoffSoftness: 0.4
     - _DisplacementAmount: 1
-    - _InnerRadius: 1.0050004
+    - _InnerRadius: 0.9249999
     - _IntersectionThresholdMax: 1
     - _OuterRadius: 0.368
     - _PolarCoords: 1

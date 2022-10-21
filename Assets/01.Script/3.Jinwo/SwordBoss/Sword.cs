@@ -78,6 +78,7 @@ public class Sword : BossBase<Sword>
         bossFsm.AddStateList(new SwordCircleRangeAttack<Sword>());
         bossFsm.AddStateList(new SwordBaldoAttack<Sword>());
 
+        bossFsm.AddStateList(new SwordDie<Sword>());
         currentAttackType = 0;
 
        // motionTrail._data.
@@ -181,7 +182,7 @@ public class Sword : BossBase<Sword>
         {
             Debug.Log("서클 범위 처맞음");
             var attackTargetEntity = col[0].GetComponent<IDamageable>();
-
+            Glitch.GlitchManager.Instance.HitValue();
             if(!lastAttackedTargets.Contains(attackTargetEntity))
             {
                 lastAttackedTargets.Add(attackTargetEntity);
@@ -216,6 +217,7 @@ public class Sword : BossBase<Sword>
                 if (col.Length > 0)
                 {
                     var attackTargetEntity = col[0].GetComponent<IDamageable>();
+                    Glitch.GlitchManager.Instance.HitValue();
                     if (!lastAttackedTargets.Contains(attackTargetEntity))
                     {
                         lastAttackedTargets.Add(attackTargetEntity);

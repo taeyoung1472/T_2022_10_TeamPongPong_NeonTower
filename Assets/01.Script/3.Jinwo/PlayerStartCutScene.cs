@@ -16,8 +16,7 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     private void Start()
     {
-        
-       // StartCoroutine(StartCutScene());
+        //StartCoroutine(StartCutScene());
     }
     void Update()
     {
@@ -34,8 +33,10 @@ public class PlayerStartCutScene : MonoBehaviour
         progress = 1;
         playerMat.SetFloat("_Progress", progress);
 
-        innerRadius = 1f;
+        innerRadius = 0.5f;
         blackHoleMat.SetFloat("_InnerRadius", innerRadius);
+
+        //블랙홀 생기는 거
         while (true)
         {
             if (innerRadius <= -0.25)
@@ -53,6 +54,7 @@ public class PlayerStartCutScene : MonoBehaviour
         float startTime = Time.time;
         playerMat.SetVector("_TargetPosition", blackHoleTrm.transform.position);
 
+        //플레이어 나오는거
         while (true)
         {
             if(progress <= 0f)
@@ -61,12 +63,13 @@ public class PlayerStartCutScene : MonoBehaviour
                 break;
             }
             Debug.Log(progress);
-            progress -= 0.02f;
+            progress -= 0.01f;
             playerMat.SetFloat("_Progress", progress);
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
 
+        //블랙홀 닫히는거
         while (true)
         {
             if (innerRadius >= 1)

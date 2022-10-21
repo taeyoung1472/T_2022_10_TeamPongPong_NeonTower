@@ -11,14 +11,14 @@ public class SwordEnterState<T> : BossState<T> where T : Sword
 
     private Material mat;
 
-    private int hashStartAnime = Animator.StringToHash("StartAnime");
     private int hashStartPos = Animator.StringToHash("StartPos");
+    private int hashStartAnime = Animator.StringToHash("StartAnime");
 
     private float matValue = 0;
     public override void OnAwake()
     {
         mat = stateMachineOwnerClass.myMat;
-        matValue = 1f;
+        
         animator = stateMachineOwnerClass.Animator;
         agent = stateMachineOwnerClass.Agent;
 
@@ -26,9 +26,11 @@ public class SwordEnterState<T> : BossState<T> where T : Sword
     }
     private IEnumerator StartAnimationCoroutine()
     {
+        matValue = 1f;
         animator.SetTrigger(hashStartPos);
+
         stateMachineOwnerClass.Col.enabled = false;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.7f);
         while (true)
         {
             if(matValue <=0f)
