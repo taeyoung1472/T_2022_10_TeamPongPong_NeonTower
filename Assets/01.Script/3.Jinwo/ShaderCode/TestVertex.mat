@@ -144,6 +144,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Glow: {r: 5.278032, g: 5.0810843, b: 0, a: 0}
+    - _Glow2: {r: 0, g: 0, b: 0, a: 0}
     - _NoiseTile: {r: 1, g: 6, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _VectorTest: {r: 0, g: 0, b: 0, a: 0}

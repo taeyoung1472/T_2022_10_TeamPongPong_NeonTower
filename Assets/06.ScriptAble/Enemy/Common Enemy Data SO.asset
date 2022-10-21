@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Common Enemy Data SO
   m_EditorClassIdentifier: 
   enemyName: CommonEnemy
-  prefab: {fileID: 6437738306033802312, guid: ba813ee6eb956e54eb0a76da88c99786, type: 3}
+  prefab: {fileID: 1232413341595294041, guid: e6c73e6ffcae86a47a24ad718d51f3c9, type: 3}
   floorPerPerformance:
   - maxHp: 2
     atk: 5
