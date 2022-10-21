@@ -9714,6 +9714,7 @@ MonoBehaviour:
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  _explosionEffect: {fileID: 8917420836192593129, guid: 21016f10e5cca524d9fe2696a835fad1, type: 3}
   _speed: 8
   _laserModel: {fileID: 1841665401534506315}
   _summonerAttackDataSO: {fileID: 11400000, guid: a9c6808140046f146adf9230867bdd82, type: 2}

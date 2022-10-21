@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class SummonerBoss : BossBase<SummonerBoss>
 {
+    [SerializeField]
+    private GameObject _explosionEffect = null;
     private readonly string _startAnim = "StartAnimation";
     public string StartAnim => _startAnim;
     [SerializeField]
@@ -111,6 +113,20 @@ public class SummonerBoss : BossBase<SummonerBoss>
     {
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle / 2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle / 2, radius);
+    }
+
+    public void SummonDieEffect()
+    {
+        StartCoroutine(SummonDieEffectCoroutine());
+    }
+
+    private IEnumerator SummonDieEffectCoroutine()
+    {
+        for(int i = 0; i < 2; i++ )
+        {
+            GameObject obj = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
 
