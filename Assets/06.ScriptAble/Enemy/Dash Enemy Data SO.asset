@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: DashEmeny
   maxHealth: 3
-  prefab: {fileID: 5732408649967109691, guid: cc1af5971b08ffe4fbe6f64d8cc4fe8a, type: 3}
+  prefab: {fileID: 3512862090462069099, guid: 71cdd03bd2167b8409cbe30da5580b60, type: 3}
   damage: 2
   attackDelay: 2.5
   attackRadius: 1.5

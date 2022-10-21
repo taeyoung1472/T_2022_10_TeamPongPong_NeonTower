@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: CommonEnemy
   maxHealth: 3
-  prefab: {fileID: 6437738306033802312, guid: ba813ee6eb956e54eb0a76da88c99786, type: 3}
+  prefab: {fileID: 2775428203847713421, guid: 47b2231c97d81664eb0d60390c3778b6, type: 3}
   damage: 1
   attackDelay: 1
   attackRadius: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: CannonEmeny
   maxHealth: 3
-  prefab: {fileID: 4242152534033021666, guid: b11695ab6f1ddd446bc28446015c8b6b, type: 3}
+  prefab: {fileID: 6350341156434258886, guid: 948a0ee5c3829f2498986bc144dc8f05, type: 3}
   damage: 2
   attackDelay: 1.5
   attackRadius: 10
