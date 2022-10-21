@@ -14,13 +14,13 @@ public class Die_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     private IEnumerator SetDissolve()
     {
         float time = 1f;
-        while(time >= -1.5f)
+        while(time >= -2f)
         {
             stateMachineOwnerClass.Mat.SetFloat("_DissolveBeginOffset", time);
             time -= Time.deltaTime * 2.5f;
             yield return null;
         }
-        time = -1.5f;
+        time = -2f;
         stateMachineOwnerClass.Mat.SetFloat("_DissolveBeginOffset", time);
     }
 

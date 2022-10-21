@@ -49,7 +49,7 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
-        Mat.SetFloat("_DissolveBeginOffset", 1f);
+        Mat.SetFloat("_DissolveBeginOffset", 1.5f);
         _attackPositionObj = new GameObject("AttackPositionObj");
         CurHp = Data.maxHp;
         _after = GetComponent<SkinnedMeshAfterImage>();
