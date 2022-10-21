@@ -715,7 +715,7 @@ AudioSource:
   m_GameObject: {fileID: 92724083}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3301142139033742376, guid: 380c3c3c9eadd8348a1e8a10464928f8, type: 2}
+  OutputAudioMixerGroup: {fileID: 1493624251693736319, guid: 380c3c3c9eadd8348a1e8a10464928f8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -3250,7 +3250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 40
+  wavePerTime: 30
   waveChangeTime: 8
   bossList:
   - {fileID: 928772313}
@@ -6705,7 +6705,7 @@ MonoBehaviour:
   UpgradeDataSO: {fileID: 11400000, guid: 4a29cba3b12cfb64a9db26b4079bd769, type: 2}
   maxData:
     upgradeType: 0
-    upgradeAbleCount: 0
+    upgradeAbleCount: 10
     upgradeProfile: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     upgradeName: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC774\uB984"

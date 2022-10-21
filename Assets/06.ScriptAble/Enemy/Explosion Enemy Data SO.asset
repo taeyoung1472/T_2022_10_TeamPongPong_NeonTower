@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Explosion Enemy Data SO
   m_EditorClassIdentifier: 
   enemyName: ExplosionEmeny
-  maxHealth: 3
   prefab: {fileID: 2130471020164515853, guid: fa76b39734d49ee4cbd095895618abe1, type: 3}
-  damage: 1
+  floorPerPerformance:
+  - maxHp: 0
+    atk: 0
+  - maxHp: 0
+    atk: 0
+  - maxHp: 6
+    atk: 15
+  - maxHp: 6
+    atk: 20
   attackDelay: 1
   attackRadius: 3
   attackDistance: 3

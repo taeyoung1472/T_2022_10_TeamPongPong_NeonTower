@@ -11,9 +11,10 @@ public class WaveManager : MonoSingleTon<WaveManager>
     private int curWave = 0;
     private int curFloor = 1;
     private float waveTimer = 0;
-    private bool isBossClear = false;
+    private bool isBossClear = true;
 
     public int CurWave { get { return curWave; } }
+    public int CurFloor { get { return curFloor; } }
     public bool IsBossClear { get { return isBossClear; } set { isBossClear = value; } }
 
     [Header("[Ref]")]
@@ -42,6 +43,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
     public void Update()
     {
+        if (!isBossClear) return;
         nextWaveText.text = $"다음 웨이브 까지 : {wavePerTime - waveTimer:0.0} 초";
         waveTimer += Time.deltaTime;
     }

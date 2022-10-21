@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Cannon Enemy Data SO
   m_EditorClassIdentifier: 
   enemyName: CannonEmeny
-  maxHealth: 3
   prefab: {fileID: 4242152534033021666, guid: b11695ab6f1ddd446bc28446015c8b6b, type: 3}
-  damage: 2
+  floorPerPerformance:
+  - maxHp: 0
+    atk: 0
+  - maxHp: 0
+    atk: 0
+  - maxHp: 0
+    atk: 0
+  - maxHp: 10
+    atk: 15
   attackDelay: 1.5
   attackRadius: 10
   attackDistance: 10

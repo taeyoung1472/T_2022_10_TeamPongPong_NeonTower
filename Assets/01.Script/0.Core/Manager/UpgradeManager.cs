@@ -44,6 +44,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
         foreach (var type in upgradeCountDic.Keys)
         {
+            if (type == maxData.upgradeType) continue;
             generateAbleList.Add(type);
         }
 
@@ -56,7 +57,6 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
                 if (upgradeCountDic[generatedType] == 0)
                 {
                     upgradeCountDic.Remove(generatedType);
-                    generateAbleList.Remove(generatedType);
                     i--;
                 }
                 else
@@ -75,16 +75,8 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         return returnData.ToArray();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G)){
-            Upgrade(UpgradeType.BulletSpeed);
-        }
-    }
-
     public float GetUpgradeValue(UpgradeType type)
     {
-        //print((int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]);
         return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]];
     }
 }

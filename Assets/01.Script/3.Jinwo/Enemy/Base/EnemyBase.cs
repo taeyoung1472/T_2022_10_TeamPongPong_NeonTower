@@ -26,7 +26,7 @@ public class EnemyBase<T> : Enemy
     
     protected virtual void Awake()
     {
-        health = EnemyData.maxHealth;
+        health = EnemyData.floorPerPerformance[WaveManager.Instance.CurFloor - 1].maxHp;
         isAttack = false;
         whatIsTarget |= 1 << LayerMask.NameToLayer("Player");
         attackRoot = transform.Find("AttackRoot");
