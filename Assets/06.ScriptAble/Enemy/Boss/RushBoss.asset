@@ -16,6 +16,6 @@ MonoBehaviour:
   bossName: RushBoss
   speed: 5
   damage: 1
-  maxHp: 10
+  maxHp: 100
   attackRange: 10
   patternCoolTime: 4
