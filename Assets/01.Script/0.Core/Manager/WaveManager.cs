@@ -74,7 +74,10 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
                 yield return new WaitUntil(() => isBossClear);
                 BGMChanger.Instance.ActiveAudio(BGMType.Default);
+
+                yield return new WaitForSeconds(10f);
                 #endregion
+
                 EXPManager.Instance.isCanLevelup = true;
                 EnemySubject.Instance.NotifyObserver();
 
