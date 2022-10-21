@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class RushBoss : BossBase<RushBoss>
 {
     [SerializeField]
+    private Material _mat = null;
+    public Material Mat => _mat;
+    [SerializeField]
     private RushBossAttackDataSO _attackDataSO = null;
     public RushBossAttackDataSO AttackDataSO => _attackDataSO;
     [SerializeField]
@@ -46,6 +49,7 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
+        Mat.SetFloat("_DissolveBeginOffset", 1f);
         _attackPositionObj = new GameObject("AttackPositionObj");
         CurHp = Data.maxHp;
         _after = GetComponent<SkinnedMeshAfterImage>();
