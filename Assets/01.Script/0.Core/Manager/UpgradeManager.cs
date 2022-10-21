@@ -77,6 +77,11 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         return returnData.ToArray();
     }
 
+    public int GetUpgradeCount(UpgradeType type)
+    {
+        return upgradeCountDic[type] - (int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount;
+    }
+
     public float GetUpgradeValue(UpgradeType type)
     {
         return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]];
