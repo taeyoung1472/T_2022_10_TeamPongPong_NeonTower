@@ -9,6 +9,8 @@ using Microsoft.Cci;
 
 public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public UpgradeUI upgradeUI;
+
     private UpgradeData upgradeData;
 
     private RectTransform rect;
@@ -20,21 +22,20 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public TextMeshProUGUI _descTxt;
 
     public Button _upgradeBtn;
-    private List<Image> edgeList = new();
-    private List<Image> cornerList = new();
 
-    private bool isFocusing = false;
-    private bool rotationFlag = false;
-    private float startAngleZ;
-    private float angleZGoal = 0;
-    private float time;
+    private Sequence _seq = null;
 
+    public Material defaultCardMat;
+    public Material changeCardMat;
+    public Image lightImage;
+
+    public Animator animator;
+    public Transform parentCntTrm;
+    public GameObject cntImagePrefab;
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
-        startAngleZ = transform.eulerAngles.z;
-        edgeList.AddRange(transform.Find("Edge").GetComponentsInChildren<Image>());
-        cornerList.AddRange(transform.Find("Corner").GetComponentsInChildren<Image>());
+        upgradeUI = GameObject.Find("CardUpgrade").GetComponent<UpgradeUI>();
     }
     public void SetData(UpgradeData data)
     {
@@ -42,49 +43,38 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _profileImage.sprite = data.upgradeProfile;
         _descTxt.text = data.upgradeDesc;
         _ablityNameText.text = data.upgradeName;
+        CreateUpgradeCntImage(data);
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
-        foreach (Image img in edgeList)
-        {
-            img.color = data.color;
-        }
-        foreach (Image img in cornerList)
-        {
-            img.color = data.color * new Vector4(0.5f, 0.5f, 0.5f, 1);
-        }
+        _upgradeBtn.onClick.AddListener(() => upgradeUI.UpgradeCardEffect(gameObject));
     }
-
-    private void Update()
+    public void CreateUpgradeCntImage(UpgradeData data)
     {
-        if (isFocusing)
+        for (int i = 0; i < (int)data.upgradeAbleCount; i++)
         {
-            angleZGoal = Mathf.Lerp(angleZGoal, Mathf.Sin(time * 3) * 5, Time.deltaTime * 2);
-            time += Time.deltaTime * (rotationFlag ? 1 : -1);
-        }
-        else
-        {
-            angleZGoal = Mathf.Lerp(angleZGoal, 0, Time.deltaTime * 2);
-        }
+            GameObject cntImage = Instantiate(cntImagePrefab, parentCntTrm.transform);
 
-        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angleZGoal + startAngleZ));
+            RectTransform rectTrm = cntImage.GetComponent<RectTransform>();
+            rectTrm.anchoredPosition = new Vector2(15, 35) * i;
+            rectTrm.sizeDelta = new Vector2(15, 35);
+        }
     }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        rect.DOScale(new Vector2(1.2f, 1.2f), 0.5f).SetUpdate(true);
-        isFocusing = true;
-        rotationFlag = Random.Range(0, 2) == 0 ? true : false;
-        time = 0;
-        //강조효과
-
         Debug.Log("Enter");
+        lightImage.material = changeCardMat;
+        animator.Play("updateshiny");
+        _profileImage.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.3f).SetUpdate(true);
+        rect.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f).SetUpdate(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        rect.DOScale(Vector2.one, 0.5f).SetUpdate(true);
-        isFocusing = false;
 
+        lightImage.material = defaultCardMat;
+        animator.Play("Idle");
+        rect.DOScale(Vector3.one, 0.5f).SetUpdate(true);
+        _profileImage.transform.DOScale(Vector3.one, 0.3f).SetUpdate(true);
         Debug.Log("Exit");
     }
 }

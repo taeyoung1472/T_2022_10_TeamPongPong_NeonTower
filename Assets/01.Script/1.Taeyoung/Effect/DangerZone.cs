@@ -26,11 +26,12 @@ public static class DangerZone
         dangerObj.transform.localScale = size;
         MonoHelper._Destroy(dangerObj, duration);
     }
-    public static void DrawCircle(Vector3 startPos, float radius, float duration)
+    public static GameObject DrawCircle(Vector3 startPos, float radius, float duration)
     {
         GameObject dangerObj = MonoHelper._Instantiate(CircleDangerZone, startPos, Quaternion.identity);
         dangerObj.transform.localScale = Vector3.one * radius;
         MonoHelper._Destroy(dangerObj, duration);
+        return dangerObj;
     }
 }
 public class MonoHelper : MonoBehaviour

@@ -7,9 +7,6 @@ public class CannonBall : MonoBehaviour
     [SerializeField]
     private Vector3 targetPos;
 
-    [SerializeField]
-    private LayerMask targetLayer;
-
     private Rigidbody rigid;
 
     public float maxSpeed;
@@ -17,6 +14,9 @@ public class CannonBall : MonoBehaviour
 
     [SerializeField]
     private GameObject bombEffect;
+
+    [SerializeField]
+    private LayerMask targetLayer;
 
     private Collider col;
 

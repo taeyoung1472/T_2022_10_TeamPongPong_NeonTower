@@ -37,6 +37,8 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         UIManager.Instance.isActiveContinue = false;
     }
 
+  
+
     public UpgradeData[] GetRandDataList()
     {
         List<UpgradeData> returnData = new();

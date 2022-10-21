@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,43 +17,67 @@ public class FirecrackerBullet : BossState<BulletBoss>
 
     public override void Execute()
     {
+        bulletBoss.LookTarget();
     }
     IEnumerator BoomAtk()
     {
         List<Transform> bullets = new List<Transform>();
 
-        GameObject newBullet = stateMachineOwnerClass.InstantiateObj(
-            bulletBoss.firecrackerBullet, stateMachineOwnerClass.transform, Quaternion.identity);
-        //ÅÍÁö´Â ÆøÁ× ÆÄÆ¼Å¬
-        //»õ·Î¿î ÃÑ¾Ë
-        yield return new WaitForSeconds(1f);
+        //GameObject newBullet = stateMachineOwnerClass.InstantiateObj(
+        //    bulletBoss.firecrackerBullet, stateMachineOwnerClass.transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+
+        GameObject newBullet = PoolManager.Instance.Pop(PoolType.BulletBossFirecrackerBullet).gameObject;
+        newBullet.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position + new Vector3(0f, 1f, 0f) , Quaternion.identity);
+
+
+        newBullet.transform.DOScale(new Vector3(5f, 5f, 5f), bulletBoss.BigBulletDestoryTime);
+
+        newBullet.transform.rotation = Quaternion.LookRotation
+                   (stateMachineOwnerClass.Target.position - stateMachineOwnerClass.transform.position);
+     
+        Rigidbody rigid = newBullet.GetComponent<Rigidbody>();
+        rigid.AddForce(newBullet.transform.forward * bulletBoss.BoomCirclePower, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(bulletBoss.BigBulletDestoryTime);
+
         stateMachineOwnerClass.DestroyObj(newBullet);
-        int count = 10;
+
+        CameraManager.Instance.CameraShake(15f, 30f, 0.25f);
+
         GameObject circleBullet = null;
-        for (int i = 0; i < count; i++)
+
+        for (int i = 0; i < bulletBoss.BoomCircleCnt; i++)
         {
-             circleBullet = stateMachineOwnerClass.InstantiateObj(bulletBoss.bullet, stateMachineOwnerClass.transform, Quaternion.identity);
+            circleBullet = PoolManager.Instance.Pop(PoolType.BulletBossCommonBullet).gameObject;
+            circleBullet.transform.SetPositionAndRotation(newBullet.transform.position, Quaternion.identity);
+
+            //circleBullet = stateMachineOwnerClass.InstantiateObj(
+            //     bulletBoss.bullet, newBullet.transform.position, Quaternion.identity);
 
             Rigidbody rid = circleBullet.GetComponent<Rigidbody>();
-            circleBullet.transform.rotation = Quaternion.AngleAxis(i * (360 / count), Vector3.up);
-            rid.AddForce(circleBullet.transform.forward * 3f, ForceMode.Impulse);
+            circleBullet.transform.rotation = Quaternion.AngleAxis(i * (360 / bulletBoss.BoomCircleCnt), Vector3.up);
+            rid.AddForce(circleBullet.transform.forward * bulletBoss.BoomPower, ForceMode.Impulse);
             bullets.Add(circleBullet.transform);
         }
+        //stateMachineOwnerClass.DestroyObj(circleBullet);
 
-        yield return new WaitForSeconds(1f);
-        
-        Debug.Log("¿øÁö¿öÁü");
+        yield return new WaitForSeconds(0.3f);
+
+        CameraManager.Instance.CameraShake(20f, 30f, 0.25f);
+
         foreach (Transform bulletTrm in bullets)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 GameObject copyBullet = stateMachineOwnerClass.InstantiateObj(
-                    bulletTrm.gameObject, bulletTrm, bulletTrm.rotation);
+                    bulletTrm.gameObject, bulletTrm.position, bulletTrm.rotation);
                 SetBulletInfo(copyBullet, copyBullet.transform);
             }
             SetBulletInfo(circleBullet, bulletTrm);
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
+
+        stateMachine.ChangeState<BulletBossIdle>();
     }
     private void SetBulletInfo(GameObject circleBullet, Transform bulletTrm)
     {
@@ -66,7 +91,7 @@ public class FirecrackerBullet : BossState<BulletBoss>
         Rigidbody rid = circleBullet.GetComponent<Rigidbody>();
         rid.velocity = Vector3.zero;
         bulletTrm.rotation *= Quaternion.Euler(new Vector3(0, Random.Range(-50f, 50f), 0));
-        rid.AddForce(circleBullet.transform.forward * 3f, ForceMode.Impulse);
+        rid.AddForce(circleBullet.transform.forward * bulletBoss.BoomPower, ForceMode.Impulse);
     }
 
     public override void Exit()

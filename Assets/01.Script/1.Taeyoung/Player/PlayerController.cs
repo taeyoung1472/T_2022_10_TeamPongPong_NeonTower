@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isDead = false;
     private bool isDashing = false;
 
+    public Vector3 MoveDir => moveDir;
+
     [Header("[»ç¿îµå]")]
     [SerializeField] private AudioClip dashClip;
 
