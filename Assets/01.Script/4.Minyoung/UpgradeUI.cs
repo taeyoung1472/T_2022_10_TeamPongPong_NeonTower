@@ -29,7 +29,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     public GameObject twoLight;
     public GameObject threeLight;
 
-    public Action endUpgrade;
+    //public Action endUpgrade;
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -70,14 +70,14 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         });
-        _seq.Append(cardsTrm[0].transform.DOLocalMove(new Vector3(-600, 30, 0), 0.6f).SetEase(Ease.OutBounce));
-        _seq.Insert(0.6f, cardsTrm[0].GetComponent<CanvasGroup>().DOFade(1f, 0.3f));
+        _seq.Append(cardsTrm[0].transform.DOLocalMove(new Vector3(-600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true); 
+        _seq.Insert(0.6f, cardsTrm[0].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
 
-        _seq.Insert(0.8f, cardsTrm[1].transform.DOLocalMove(new Vector3(0, 100, 0), 0.6f).SetEase(Ease.OutBounce));
-        _seq.Insert(0.9f, cardsTrm[1].GetComponent<CanvasGroup>().DOFade(1f, 0.3f));
+        _seq.Insert(0.8f, cardsTrm[1].transform.DOLocalMove(new Vector3(0, 100, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        _seq.Insert(0.9f, cardsTrm[1].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
 
-        _seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce));
-        _seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f));
+        _seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        _seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
     }
 
     public void CloseUI()
@@ -88,7 +88,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         _seq = DOTween.Sequence();
 
         StartCoroutine(DissolveCard());
-        Time.timeScale = 1f;
     }
     public void InitCardSet()
     {
@@ -127,12 +126,12 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             }
         }
 
-        _seq.AppendInterval(0.6f);
+        _seq.AppendInterval(0.6f).SetUpdate(true);
 
-        _seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f));
-        _seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f));
+        _seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true);
+        _seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true);
 
-        _seq.AppendInterval(1f);
+        _seq.AppendInterval(1f).SetUpdate(true);
 
         _seq.AppendCallback(() =>
         {
@@ -141,8 +140,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             DoFade(0.5f, 0.75f, 1f);
         });
 
-        _seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f));
-
+        _seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f)).SetUpdate(true);
 
         _seq.AppendCallback(() =>
         {
@@ -175,12 +173,16 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         DoFade(0.5f, 0.75f, 1f);
         yield return new WaitForSecondsRealtime(0.2f);
-        none.transform.DOLocalMoveY(1000f, 0.34f);
+        none.transform.DOLocalMoveY(1000f, 0.34f).SetUpdate(true);
     }
     public IEnumerator DissolveCard()
     {
-        yield return new WaitForSeconds(3f);
-        _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
+        Debug.Log("ㅁㄴ어ㅑㅕ멍");
+        yield return new WaitForSecondsRealtime(3f);
+        Debug.Log("이히히 병시ㅏㄴ들");
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
+        seq.AppendCallback(() => Time.timeScale = 1);
     }
 
     void DoFade(float start, float dest, float time)
