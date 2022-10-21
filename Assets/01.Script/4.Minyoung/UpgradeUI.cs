@@ -4,15 +4,13 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class UpgradeUI : MonoBehaviour, IUserInterface
 {
     public List<CardImage> cardsTrm;
 
     public List<GameObject> pointLights;
-    //public CardImage cardOneTrm;
-    //public CardImage cardTwoTrm;
-    //public CardImage cardThreeTrm;
 
     private Sequence _seq = null;
 
@@ -31,6 +29,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     public GameObject twoLight;
     public GameObject threeLight;
 
+    public Action endUpgrade;
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -44,10 +43,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         cardsTrm[0].SetData(so[0]);
         cardsTrm[1].SetData(so[1]);
         cardsTrm[2].SetData(so[2]);
-
-        //cardOneTrm.SetData(so[0]);
-        //cardTwoTrm.SetData(so[1]);
-        //cardThreeTrm.SetData(so[2]);
     }
     private void Update()
     {
@@ -93,8 +88,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         _seq = DOTween.Sequence();
 
         StartCoroutine(DissolveCard());
-        //_seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
-        //InitCardSet();
         Time.timeScale = 1f;
     }
     public void InitCardSet()
@@ -145,8 +138,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         {
             selectedObjcet.GetComponent<Image>().material = dissolveMat;
             selectedObjcet.transform.Find("DescArea").GetComponent<Image>().material = dissolveMat;
-            //dissolveMat.SetFloat("_Dissolve", 0f);
-
             DoFade(0.5f, 0.75f, 1f);
         });
 
@@ -188,7 +179,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     }
     public IEnumerator DissolveCard()
     {
-        yield return new WaitForSeconds(3.55f);
+        yield return new WaitForSeconds(3f);
         _seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
     }
 

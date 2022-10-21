@@ -32,6 +32,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Animator animator;
     public Transform parentCntTrm;
     public GameObject cntImagePrefab;
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -45,9 +46,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _ablityNameText.text = data.upgradeName;
         CreateUpgradeCntImage(data);
         _upgradeBtn.onClick.RemoveAllListeners();
-        _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
-        _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.GetUpgradeCount(data.upgradeType));
-
+        _upgradeBtn.onClick.AddListener(() => GameObject.FindObjectOfType<UpgradeUI>().endUpgrade = ()=> UpgradeManager.Instance.Upgrade(data.upgradeType));
         _upgradeBtn.onClick.AddListener(() => upgradeUI.UpgradeCardEffect(gameObject));
     }
     public void CreateUpgradeCntImage(UpgradeData data)

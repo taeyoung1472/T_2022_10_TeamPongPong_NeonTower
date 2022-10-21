@@ -3594,6 +3594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wavePerTime: 40
   waveChangeTime: 8
+  bossList: []
   nextWaveText: {fileID: 1100216376}
   floorText: {fileID: 195840150}
   waveText: {fileID: 1986087493}
@@ -7380,6 +7381,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeDataSO: {fileID: 11400000, guid: 4a29cba3b12cfb64a9db26b4079bd769, type: 2}
+  maxData:
+    upgradeType: 0
+    upgradeAbleCount: 0
+    upgradeProfile: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    upgradeName: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC774\uB984"
+    upgradeDesc: "\uC5C5\uADF8\uB808\uC774\uB4DC \uC124\uBA85"
 --- !u!1 &1020552164
 GameObject:
   m_ObjectHideFlags: 0
