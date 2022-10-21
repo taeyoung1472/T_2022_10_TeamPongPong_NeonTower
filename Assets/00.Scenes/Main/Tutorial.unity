@@ -14606,7 +14606,7 @@ PrefabInstance:
       objectReference: {fileID: 3268072276717826892}
     - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: maxHp
-      value: 999
+      value: 999999999
       objectReference: {fileID: 0}
     - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: dashClip
