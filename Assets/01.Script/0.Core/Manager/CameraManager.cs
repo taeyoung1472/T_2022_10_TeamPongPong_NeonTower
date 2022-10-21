@@ -73,7 +73,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void ZoomCamera(float maxValue, float time, Action Callback = null)
     {
-        CameraReset();
 
         _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time, Callback));
     }
@@ -132,12 +131,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
     {
-        var tr = _cmVCam.GetCinemachineComponent<CinemachineTransposer>();
-        if (isBoss)
-        {
-            //DOTween.To(() => tr.m_FollowOffset, x => tr.m_FollowOffset = x, new Vector3(0f, 9f, 3f), 0.3f);
-            //_cmVCam.transform.DORotate(new Vector3(70f, 0f, 0f), 0.3f);
-        }
 
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
@@ -151,11 +144,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
         {
             if (isBoss)
             {
-                //_cmVCam.transform.DORotate(new Vector3(90f, 0f, 0f), 0.2f).OnComplete(() =>
-                //{
-                //DOTween.To(() => tr.m_FollowOffset, x => tr.m_FollowOffset = x, new Vector3(0f, 9f, 0f), 0.2f);
-                //_cmVCam.Follow = lastTarget;
-                //});
                 _cmVCam.Follow = lastTarget;
             }
             else
