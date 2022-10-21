@@ -44,7 +44,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
         foreach (var type in upgradeCountDic.Keys)
         {
-            if (type == maxData.upgradeType) continue;
+            if (type == UpgradeType.MAX) continue;
             generateAbleList.Add(type);
         }
 

@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    private void Dead()
+    public void Dead()
     {
         isDead = true;
         FindObjectOfType<DieEffect>().PlayerDieEffect();

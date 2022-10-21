@@ -24,7 +24,7 @@ MonoBehaviour:
   - maxHp: 6
     atk: 20
   attackDelay: 1
-  attackRadius: 3
+  attackRadius: 2
   attackDistance: 3
   speed: 2
   stoppingDistance: 2
