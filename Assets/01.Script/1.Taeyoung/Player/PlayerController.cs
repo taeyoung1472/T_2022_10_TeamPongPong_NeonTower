@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("[성능]")]
     [SerializeField] private int maxHp = 5;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private int maxDash = 3;
+    private float dashRechargeDelay = 2f;
+    private int curDash;
+
     private float speedFixValue = 1;
 
     [Header("[성능 <상수> ]")]
@@ -42,6 +46,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
     public bool IsDead { get { return isDead; } }
+    public int CurDash { get { return curDash; } set { curDash = value; hud.SetDashValue(curDash, maxDash); } }
 
     [Header("[타이머]")]
     [SerializeField] private float damageIgnoreTime = 0.2f;
@@ -76,6 +81,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         cam = Camera.main;
         hud.HPMaxValue = maxHp;
         hud.HPValue = maxHp;
+        CurDash = maxDash;
     }
 
     void Start()
@@ -85,6 +91,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         StartCoroutine(DamageSystem());
         StartCoroutine(DashSystem());
+        StartCoroutine(DashCharge());
     }
 
     private void InitData()
@@ -178,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    private void Dead()
+    public void Dead()
     {
         isDead = true;
         FindObjectOfType<DieEffect>().PlayerDieEffect();
@@ -217,7 +224,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         while (true)
         {
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) && curDash > 0);
 
             isDashing = true;
             AudioManager.PlayAudio(dashClip);
@@ -226,7 +233,19 @@ public class PlayerController : MonoBehaviour, IDamageable
 
             isDashing = false;
 
+            CurDash--;
+
             yield return new WaitForSeconds(dashDelay);
+        }
+    }
+
+    IEnumerator DashCharge()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => curDash < maxDash);
+            yield return new WaitForSeconds(dashRechargeDelay);
+            CurDash++;
         }
     }
 

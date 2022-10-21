@@ -6,7 +6,7 @@ public class Bullet : PoolAbleObject
 {
     // [Get Set 프로퍼티]
     private float Speed { get { return data.bulletSpeed * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletSpeed); } }
-    private float Damage { get { return data.damage + UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletDamage); } }
+    private float Damage { get { return UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletDamage); } }
     private AudioClip FireClip { get { return data.fireClip; } }
     private AudioClip CollisionClip { get { return data.collisionClip; } }
 

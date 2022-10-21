@@ -76,6 +76,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
             Debug.Log("»ç¸Á !!");
             StopAllCoroutines();
             OnDeathEvent?.Invoke();
+            
             bossFsm.ChangeState<SummonerDie>();
         }
     }
