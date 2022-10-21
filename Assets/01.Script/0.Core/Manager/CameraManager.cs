@@ -1,4 +1,5 @@
 using Cinemachine;
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -131,6 +132,11 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
     {
+        var tr = _cmVCam.GetCinemachineComponent<CinemachineTransposer>();
+        DOTween.To(() => tr.m_FollowOffset, x => tr.m_FollowOffset = x, new Vector3(0f, 9f, 3f), 0.3f);
+        //tr.m_FollowOffset = new Vector3(0f, 9f, 3f);
+        _cmVCam.transform.DORotate(new Vector3(70f, 0f, 0f), 0.3f);
+
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
         {
@@ -142,6 +148,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
         ZoomCamera(last, 0.2f, () =>
         {
             _cmVCam.Follow = lastTarget;
+            //tr.m_FollowOffset = new Vector3(0f, 9f, 0f);
+            DOTween.To(() => tr.m_FollowOffset, x => tr.m_FollowOffset = x, new Vector3(0f, 9f, 0f), 0.5f);
+            _cmVCam.transform.DORotate(new Vector3(90f, 0f, 0f), 0.2f);
         });
     }
 }
