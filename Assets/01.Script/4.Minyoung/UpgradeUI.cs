@@ -9,10 +9,10 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 {
     public List<CardImage> cardsTrm;
 
-    private Sequence _seq = null;
-
     private Vector2 initPos = Vector2.zero;
     private CanvasGroup _canvasGroup = null;
+
+    public bool isCanUpgrade = true;
 
     public UnityEvent OnOpenUI { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public UnityEvent OnCloseUI { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -40,11 +40,10 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         Make();
 
-        if (_seq != null)
-            _seq.Kill();
-
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
+
+        #region 카드 내려오는 Sequence
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMove(Vector3.zero, 0.5f)).SetUpdate(true);
         seq.AppendCallback(() =>
@@ -60,19 +59,16 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
         seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
+        #endregion
     }
 
     public void CloseUI()
     {
-        if (_seq != null)
-            _seq.Kill();
-
-        _seq = DOTween.Sequence();
-
         StartCoroutine(DissolveCard());
     }
     public void InitCardSet()
     {
+        #region 카드 에니메이션 끝났을때 처리
         cardsTrm[0].transform.localPosition = new Vector3(-600, 1000, 0);
         cardsTrm[1].transform.localPosition = new Vector3(-0, 1000, 0);
         cardsTrm[2].transform.localPosition = new Vector3(600, 1000, 0);
@@ -90,11 +86,17 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         {
             card.GetComponent<Image>().material = null;
         }
+
+        isCanUpgrade = true;
+        #endregion
     }
     public void UpgradeCardEffect(GameObject selectedObjcet)
     {
+        isCanUpgrade = false;
+        //눌리면
         Sequence seq = DOTween.Sequence();
 
+        #region 안선택된거 위로 올리기
         List<GameObject> noneSelectedCards = new List<GameObject>();
         foreach (var item in cardsTrm)
         {
@@ -110,11 +112,12 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
                 t += 0.3f;
             }
         }
+        #endregion
 
         seq.AppendInterval(0.6f).SetUpdate(true);
 
-        seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true);
-        seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true);
+        seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true); // 가운데로 모으고
+        seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true); // 회전 원위치
 
         seq.AppendInterval(1f).SetUpdate(true);
 
@@ -122,15 +125,16 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         {
             selectedObjcet.GetComponent<Image>().material = dissolveMat;
             DoFade(0.485f, 0.57f, 0.5f, selectedObjcet.GetComponent<Image>().material);
-        });
+        }); // 디졸브 시키고
 
-        seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f)).SetUpdate(true);
+        seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f)).SetUpdate(true); // 아레로 내리기
 
         seq.AppendCallback(() =>
         {
             InitCardSet();
         });
 
+        #region 업그레이 겟수 지우기
         foreach (var card in cardsTrm)
         {
             RectTransform[] childList = card.parentCntTrm.GetComponentsInChildren<RectTransform>();
@@ -143,10 +147,10 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             }
 
         }
+        #endregion
 
         Debug.Log($"{selectedObjcet.name} 카드가 눌림");
     }
-
 
     private IEnumerator DissolveAndOut(float time, GameObject none)
     {
