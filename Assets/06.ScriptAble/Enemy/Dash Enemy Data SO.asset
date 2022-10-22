@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyName: DashEnemy
   prefab: {fileID: 7824513024024309752, guid: ee0d8854ab25a3a43a52e77334a16fb4, type: 3}
   floorPerPerformance:
-  - maxHp: 0
-    atk: 0
+  - maxHp: 2
+    atk: 2
   - maxHp: 6
     atk: 8
   - maxHp: 6
@@ -29,7 +29,7 @@ MonoBehaviour:
   speed: 3
   stoppingDistance: 1.5
   turnSmoothTime: 0.1
-  turnSmoothVelocity: -50.360275
+  turnSmoothVelocity: 120.83415
   dashDistance: 5
   dashSpeed: 15
   dashDamage: 3

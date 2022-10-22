@@ -70,7 +70,7 @@ public class SwordMove<T> : BossState<T> where T : Sword
         switch (a)
         {
             case 1:
-                DangerZone.DrawCircle(dangerzonePos, stateMachineOwnerClass.radius[a - 1] *2, 1.5f); // ¿Ü°î Âï±â
+                DangerZone.DrawCircle(dangerzonePos, stateMachineOwnerClass.radius[a - 1] * 2, 1.5f); // ¿Ü°î Âï±â
                 break;
             case 4:
                 DangerZone.DrawCircle(dangerzonePos, stateMachineOwnerClass.radius[a - 1] *2, 1.5f);  //¿¬¼Óº£±â (ÄÞº¸1)
