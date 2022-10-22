@@ -35,7 +35,6 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
-        upgradeUI = GameObject.Find("CardUpgrade").GetComponent<UpgradeUI>();
     }
     public void SetData(UpgradeData data)
     {
