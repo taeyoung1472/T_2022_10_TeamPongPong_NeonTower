@@ -32,7 +32,6 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         if (upgradeCountDic[upgradeType] < 0)
         {
             upgradeCountDic.Remove(upgradeType);
-
         }
         UIManager.Instance.DeActiveUI();
         UIManager.Instance.isActiveContinue = false;
@@ -57,16 +56,25 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
             UpgradeType generatedType = generateAbleList[rand];
             if(generateAbleList.Count != 0)
             {
-                if (upgradeCountDic[generatedType] == 0)
+                if (upgradeCountDic.ContainsKey(generatedType))
                 {
-                    upgradeCountDic.Remove(generatedType);
-                    i--;
+                    if (upgradeCountDic[generatedType] == 0)
+                    {
+                        upgradeCountDic.Remove(generatedType);
+                        generateAbleList.Remove(generatedType);
+                        i--;
+                    }
+                    else
+                    {
+                        generateAbleList.Remove(generatedType);
+
+                        returnData.Add(UpgradeDataSO.upgradeDataDic[generatedType]);
+                    }
                 }
                 else
                 {
                     generateAbleList.Remove(generatedType);
-
-                    returnData.Add(UpgradeDataSO.upgradeDataDic[generatedType]);
+                    i--;
                 }
             }
             else
@@ -86,6 +94,6 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
     public float GetUpgradeValue(UpgradeType type)
     {
-        return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]];
+        return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - (upgradeCountDic.ContainsKey(type) ? upgradeCountDic[type] : 0)];
     }
 }

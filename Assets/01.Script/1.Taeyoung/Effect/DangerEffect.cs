@@ -28,7 +28,7 @@ public class DangerEffect : MonoBehaviour
 
     public void Update()
     {
-        if (isInSector && !isDead)
+        if (isInSector && WaveManager.Instance.IsBossClear && !isDead)
         {
             dangerTmp.text = $"내려가십시오! {time:0.0}";
             time -= Time.deltaTime;
