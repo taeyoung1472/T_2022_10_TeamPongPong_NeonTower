@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class RushBoss : BossBase<RushBoss>
 {
     [SerializeField]
+    private Material _mat = null;
+    public Material Mat => _mat;
+    [SerializeField]
     private RushBossAttackDataSO _attackDataSO = null;
     public RushBossAttackDataSO AttackDataSO => _attackDataSO;
     [SerializeField]
@@ -31,6 +34,8 @@ public class RushBoss : BossBase<RushBoss>
     [SerializeField]
     private ParticleSystem _punchParticle = null;
     [SerializeField]
+    private GameObject _arcAttackParticle = null;
+    [SerializeField]
     private ParticleSystem[] _thunderParticle = null;
     [SerializeField]
     private GameObject _explosionEffect = null;
@@ -44,6 +49,7 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
+        Mat.SetFloat("_DissolveBeginOffset", 1.5f);
         _attackPositionObj = new GameObject("AttackPositionObj");
         CurHp = Data.maxHp;
         _after = GetComponent<SkinnedMeshAfterImage>();
@@ -134,10 +140,10 @@ public class RushBoss : BossBase<RushBoss>
 
     public void ThunderParticlePlay()
     {
-        for(int i = 0; i <_thunderParticle.Length; i++)
-        {
-            _thunderParticle[i].Play();
-        }
+        //for(int i = 0; i <_thunderParticle.Length; i++)
+        //{
+        //    _thunderParticle[i].Play();
+       // }
     }
 
     public void StopParticle()
@@ -157,6 +163,12 @@ public class RushBoss : BossBase<RushBoss>
     {
         GameObject obj = Instantiate(_explosionEffect, pos, Quaternion.identity);
         Destroy(obj, 1f);
+    }
+
+    public void ArcAttack()
+    {
+        GameObject obj = Instantiate(_arcAttackParticle, transform);
+        Destroy(obj, 0.4f);
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -52,28 +53,35 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField]
     private Color _DisableColor = Color.white;
 
+    StringBuilder _sb = null;
+
+    private void Start()
+    {
+        _sb = new StringBuilder();
+    }
+
     public void SetDashValue(int value, int maxValue)
     {
         if (value < 0) return;
 
         print($"Value : {value}, MaxValue : {maxValue}");
 
-        string str = "";
-        str += $"<#{ColorUtility.ToHtmlStringRGBA(_EnableColor)}>";
-        for (int i = value; i < maxValue; i++)
-        {
-            str += "¢Â ";
-        }
-        str += "</color>";
-
-        str += $"<#{ColorUtility.ToHtmlStringRGBA(_DisableColor)}>";
+        _sb.Append($"<#{ColorUtility.ToHtmlStringRGBA(_EnableColor)}>");
         for (int i = 0; i < value; i++)
         {
-            str += "¢Â ";
+            _sb.Append("¢Â");
         }
-        str += "</color>";
+        _sb.Append("</color>");
 
-        _dashText.text = str;
+        _sb.Append($"<#{ColorUtility.ToHtmlStringRGBA(_DisableColor)}>");
+        for (int i = 0; i < maxValue - value; i++)
+        {
+            _sb.Append("¢Â");
+        }
+        _sb.Append("</color>");
+
+        _dashText.text = _sb.ToString();
+        _sb.Clear();
     }
 
     public void HpSliderInit(int minValue, int maxValue, int Value)

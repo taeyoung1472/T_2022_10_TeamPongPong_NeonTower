@@ -9,6 +9,7 @@ public class SwordIdle<T> : BossState<T> where T : Sword
 
     private NavMeshAgent agent;
 
+    
     private int hashMove = Animator.StringToHash("Move");
     public override void OnAwake()
     {
@@ -33,8 +34,8 @@ public class SwordIdle<T> : BossState<T> where T : Sword
         // ÄðÅ¸ÀÓ ´Ùµ¼
         {
             agent.isStopped = false;
-            stateMachineOwnerClass.BossFsm.ChangeState<SwordMove<Sword>>();
-            //stateMachineOwnerClass.ChangeAttack();
+            //stateMachine.ChangeState<SwordDie<T>>();
+            stateMachine.ChangeState<SwordMove<T>>();
         }
     }
 

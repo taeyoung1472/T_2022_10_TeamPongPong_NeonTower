@@ -9,15 +9,16 @@ public class PlayerStartCutScene : MonoBehaviour
     public Material playerMat = null;
     public float progress = 0.1f;
     public float innerRadius = 1f;
+
+    public Material bodyOutlineMat;
     private void Awake()
     {
-        blackHoleTrm.SetActive(false);
         
+        blackHoleTrm.SetActive(false);
     }
     private void Start()
     {
-        
-       // StartCoroutine(StartCutScene());
+        //StartCoroutine(StartCutScene());
     }
     void Update()
     {
@@ -29,13 +30,16 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     public IEnumerator StartCutScene()
     {
+        bodyOutlineMat.SetFloat("_Thickness", 0);
         blackHoleTrm.SetActive(true);
 
         progress = 1;
         playerMat.SetFloat("_Progress", progress);
 
-        innerRadius = 1f;
+        innerRadius = 0.5f;
         blackHoleMat.SetFloat("_InnerRadius", innerRadius);
+
+        //블랙홀 생기는 거
         while (true)
         {
             if (innerRadius <= -0.25)
@@ -43,7 +47,6 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("머임2");
                 break;
             }
-            Debug.Log(progress);
             innerRadius -= 0.005f;
             blackHoleMat.SetFloat("_InnerRadius", innerRadius);
             yield return null;
@@ -53,6 +56,7 @@ public class PlayerStartCutScene : MonoBehaviour
         float startTime = Time.time;
         playerMat.SetVector("_TargetPosition", blackHoleTrm.transform.position);
 
+        //플레이어 나오는거
         while (true)
         {
             if(progress <= 0f)
@@ -60,13 +64,14 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("머임");
                 break;
             }
-            Debug.Log(progress);
-            progress -= 0.02f;
+            progress -= 0.01f;
             playerMat.SetFloat("_Progress", progress);
             yield return null;
         }
+        bodyOutlineMat.SetFloat("_Thickness", 1.2f);
         yield return new WaitForSeconds(0.5f);
 
+        //블랙홀 닫히는거
         while (true)
         {
             if (innerRadius >= 1)
@@ -74,12 +79,11 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("머임2");
                 break;
             }
-            Debug.Log(progress);
             innerRadius += 0.01f;
             blackHoleMat.SetFloat("_InnerRadius", innerRadius);
             yield return null;
         }
-
+        
         blackHoleTrm.SetActive(false);
 
     }

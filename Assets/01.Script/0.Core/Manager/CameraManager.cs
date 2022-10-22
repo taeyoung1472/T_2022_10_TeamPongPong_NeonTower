@@ -1,4 +1,5 @@
 using Cinemachine;
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -72,7 +73,6 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void ZoomCamera(float maxValue, float time, Action Callback = null)
     {
-        CameraReset();
 
         _zoomCoroutine = StartCoroutine(ZoomCoroutine(maxValue, time, Callback));
     }
@@ -126,11 +126,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
         Transform lastTarget = Define.Instance.playerController.transform;
         _cmVCam.Follow = target;
         float last = _cmVCam.m_Lens.FieldOfView;
-        StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime,0f, zoomAmount));
+        StartCoroutine(TargetingCameraCoroutine(false, last, lastTarget, idleTime, 0f, zoomAmount));
     }
 
     private IEnumerator TargetingCameraCoroutine(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
     {
+
         yield return new WaitForSeconds(0.5f);
         if (isBoss)
         {
@@ -141,7 +142,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
         yield return new WaitForSeconds(idleTime);
         ZoomCamera(last, 0.2f, () =>
         {
-            _cmVCam.Follow = lastTarget;
+            if (isBoss)
+            {
+                _cmVCam.Follow = lastTarget;
+            }
+            else
+                _cmVCam.Follow = lastTarget;
         });
     }
 }

@@ -21,8 +21,14 @@ public class StateDashAttack<T> : State<T> where T : EnemyBase<T>
     {
         target = stateMachineOwnerClass.Target.transform;
 
-        
-        CoroutineHelper.StartCoroutine(Dash());
+        if (stateMachineOwnerClass.Dead)
+        {
+            return;
+        }
+        else
+        {
+            stateMachineOwnerClass.StartCoroutine(Dash());
+        }
     }
     public override void Execute()
     {
@@ -34,6 +40,7 @@ public class StateDashAttack<T> : State<T> where T : EnemyBase<T>
     }
     public IEnumerator Dash()
     {
+        
         Debug.Log("대쉬 공격 시작");
 
         agent.isStopped = true;

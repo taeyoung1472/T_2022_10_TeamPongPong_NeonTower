@@ -40,11 +40,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5656658907000705970}
-  - component: {fileID: 7030772278005689543}
   - component: {fileID: 1339275955268214657}
   - component: {fileID: 4759047918680834828}
   - component: {fileID: 3800920093552497262}
-  - component: {fileID: 5009265792035231725}
+  - component: {fileID: 5254640088396319472}
   m_Layer: 11
   m_Name: NewDashEnemy
   m_TagString: Enemy
@@ -68,19 +67,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7030772278005689543
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824513024024309752}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.38339138
-  m_Center: {x: 0, y: 0.06, z: 0.054239273}
 --- !u!195 &1339275955268214657
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -90,7 +76,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7824513024024309752}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -140,58 +126,20 @@ MonoBehaviour:
       m_Calls: []
   lastAttackTime: 0
   enemyData: {fileID: 11400000, guid: 5c83ed690efadcf4f8a46c52bb2d4790, type: 2}
-  motionTrail: {fileID: 5009265792035231725}
---- !u!114 &5009265792035231725
-MonoBehaviour:
+  motionTrail: {fileID: 1477690976269996562}
+--- !u!65 &5254640088396319472
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7824513024024309752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbcae18058121ac4c84039eebae777f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myMesh: {fileID: 0}
-  _afterImageMaterial: {fileID: 2100000, guid: f8f8405544fe0af48b806e91ee6db566, type: 2}
-  _afterImageGradient:
-    serializedVersion: 2
-    key0: {r: 0.13751912, g: 1, b: 0, a: 1}
-    key1: {r: 0.5383165, g: 1, b: 0.2980392, a: 1}
-    key2: {r: 1, g: 0.94259137, b: 0, a: 0}
-    key3: {r: 1, g: 0.92102176, b: 0.2980392, a: 0}
-    key4: {r: 1, g: 0.69612426, b: 0, a: 0}
-    key5: {r: 0.7, g: 0, b: 1, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 16384
-    ctime2: 32768
-    ctime3: 49151
-    ctime4: 65535
-    ctime5: 65535
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 5
-    m_NumAlphaKeys: 2
-  _colorUpdateSpeed: 1
-  _bakingCycle: 0.07
-  _data:
-    duration: 0.7
-    shaderColorName: _BaseColor
-    shaderAlphaName: _Alpha
-  _containChildrenMeshes: 1
-  isMotionTrail: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7895628177358953920
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,8 +151,9 @@ GameObject:
   - component: {fileID: 7895628177358979552}
   - component: {fileID: 7895628177361879488}
   - component: {fileID: 7895628177360880384}
+  - component: {fileID: 1477690976269996562}
   m_Layer: 11
-  m_Name: Dash
+  m_Name: DashEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,6 +204,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c129efd73e3ec814ab7d52f19f20bcac, type: 2}
+  - {fileID: 2100000, guid: 8dff12df40216b94d88bc98bcd4e29bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -276,3 +226,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1477690976269996562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7895628177358953920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcae18058121ac4c84039eebae777f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMesh: {fileID: 0}
+  _afterImageMaterial: {fileID: 2100000, guid: f8f8405544fe0af48b806e91ee6db566, type: 2}
+  _afterImageGradient:
+    serializedVersion: 2
+    key0: {r: 0.13751912, g: 1, b: 0, a: 1}
+    key1: {r: 0.5383165, g: 1, b: 0.2980392, a: 1}
+    key2: {r: 1, g: 0.94259137, b: 0, a: 0}
+    key3: {r: 1, g: 0.92102176, b: 0.2980392, a: 0}
+    key4: {r: 1, g: 0.69612426, b: 0, a: 0}
+    key5: {r: 0.7, g: 0, b: 1, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16384
+    ctime2: 32768
+    ctime3: 49151
+    ctime4: 65535
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  _colorUpdateSpeed: 1
+  _bakingCycle: 0.07
+  _data:
+    duration: 0.7
+    shaderColorName: _BaseColor
+    shaderAlphaName: _Alpha
+  _containChildrenMeshes: 1
+  isMotionTrail: 0

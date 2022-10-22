@@ -5,7 +5,8 @@ using UnityEngine;
 public class CommonEnemy : EnemyBase<CommonEnemy>
 {
 
-
+    [SerializeField]
+    private ParticleSystem particle;
     //protected StateMachine<CommonEnemy> fsmManager;
     //public StateMachine<CommonEnemy> FsmManager => fsmManager;
     protected override void Awake()
@@ -19,7 +20,10 @@ public class CommonEnemy : EnemyBase<CommonEnemy>
         //fsmManager.ReturnDic();
 
     }
-
+    private void Start()
+    {
+        particle.gameObject.SetActive(false);
+    }
     void Update()
     {
         fsmManager.Execute();
@@ -32,7 +36,12 @@ public class CommonEnemy : EnemyBase<CommonEnemy>
         //Debug.Log("자식 실행");
         FsmManager.ChangeState<StateMeleeAttack<CommonEnemy>>();
     }
-
+    public override void EnableAttack()
+    {
+        base.EnableAttack();
+        particle.gameObject.SetActive(true);
+        particle.Play();
+    }
     public override void DisableAttack()
     {
         base.DisableAttack();

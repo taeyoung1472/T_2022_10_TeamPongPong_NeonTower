@@ -74260,7 +74260,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78660c09ff101ea4cb77de408a9527da, type: 2}
+  - {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74606,7 +74606,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78660c09ff101ea4cb77de408a9527da, type: 2}
+  - {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74756,7 +74756,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78660c09ff101ea4cb77de408a9527da, type: 2}
+  - {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75122,7 +75122,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78660c09ff101ea4cb77de408a9527da, type: 2}
+  - {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75554,7 +75554,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78660c09ff101ea4cb77de408a9527da, type: 2}
+  - {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154458,12 +154458,14 @@ MonoBehaviour:
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  _mat: {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   _attackDataSO: {fileID: 11400000, guid: b9d7f4189eceb3841aecb0309238cdf2, type: 2}
   _model: {fileID: 4144664309777154920}
   _rushForceField: {fileID: 513294987}
   radius: 5
   angle: 60
   _punchParticle: {fileID: 5378234012064996413}
+  _arcAttackParticle: {fileID: 4650929627309072041, guid: bb94908ed03848f4a91107870812f6d5, type: 3}
   _thunderParticle:
   - {fileID: 198397784153422482}
   - {fileID: 374485952}

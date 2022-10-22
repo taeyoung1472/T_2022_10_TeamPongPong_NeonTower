@@ -36,6 +36,11 @@ public class Sword : BossBase<Sword>
     public float arcangle = 0;
 
 
+    private Collider _col = null;
+    public Collider Col => _col;
+
+    public Material myMat;
+
 
     [Header("카메라 관련")]
     public float amplitude = 0;
@@ -55,8 +60,14 @@ public class Sword : BossBase<Sword>
     {
         base.Awake();
 
-        bossFsm = new BossStateMachine<Sword>(this, new SwordIdle<Sword>());
+        myMat = transform.GetChild(0).transform.GetChild(0).transform.GetComponent<Renderer>().material;
 
+        myMat.SetFloat("_Singularity", 1);
+        _col = GetComponent<Collider>();
+
+        bossFsm = new BossStateMachine<Sword>(this, new SwordEnterState<Sword>());
+
+        bossFsm.AddStateList(new SwordIdle<Sword>());
         bossFsm.AddStateList(new SwordMove<Sword>());
 
         bossFsm.AddStateList(new SwordSpinningAttack<Sword>());
@@ -67,6 +78,7 @@ public class Sword : BossBase<Sword>
         bossFsm.AddStateList(new SwordCircleRangeAttack<Sword>());
         bossFsm.AddStateList(new SwordBaldoAttack<Sword>());
 
+        bossFsm.AddStateList(new SwordDie<Sword>());
         currentAttackType = 0;
 
        // motionTrail._data.
@@ -74,6 +86,10 @@ public class Sword : BossBase<Sword>
     private void Start()
     {
         isAttacking = false;
+
+        CurHp = Data.maxHp;
+
+        IsDead = false;
         //motionTrail.isMotionTrail = true;
         animeEvent.startAnime = EnableEffect;
         animeEvent.endAnime = DisableEffect;
@@ -166,7 +182,7 @@ public class Sword : BossBase<Sword>
         {
             Debug.Log("서클 범위 처맞음");
             var attackTargetEntity = col[0].GetComponent<IDamageable>();
-
+            Glitch.GlitchManager.Instance.HitValue();
             if(!lastAttackedTargets.Contains(attackTargetEntity))
             {
                 lastAttackedTargets.Add(attackTargetEntity);
@@ -201,6 +217,7 @@ public class Sword : BossBase<Sword>
                 if (col.Length > 0)
                 {
                     var attackTargetEntity = col[0].GetComponent<IDamageable>();
+                    Glitch.GlitchManager.Instance.HitValue();
                     if (!lastAttackedTargets.Contains(attackTargetEntity))
                     {
                         lastAttackedTargets.Add(attackTargetEntity);

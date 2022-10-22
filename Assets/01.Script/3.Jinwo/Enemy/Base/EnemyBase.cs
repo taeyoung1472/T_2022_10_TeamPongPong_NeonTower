@@ -29,7 +29,7 @@ public class EnemyBase<T> : Enemy
         health = EnemyData.floorPerPerformance[WaveManager.Instance.CurFloor - 1].maxHp;
         isAttack = false;
         whatIsTarget |= 1 << LayerMask.NameToLayer("Player");
-        attackRoot = transform.Find("AttackRoot");
+        attackRoot = transform.Find($"{enemyData.enemyName}/AttackRoot");
         OnDeath.AddListener(() => { PoolManager.Instance.Push(PoolType, gameObject); });
     }
     public virtual void FixedUpdate()
