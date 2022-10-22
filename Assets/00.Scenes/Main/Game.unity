@@ -8461,13 +8461,7 @@ MonoBehaviour:
   - {fileID: 7732181349943317021}
   - {fileID: 1308497516}
   - {fileID: 721636672}
-  pointLights: []
-  upgradeUI: {fileID: 0}
-  dissolveMat: {fileID: 0}
-  originMat: {fileID: 0}
-  oneLight: {fileID: 0}
-  twoLight: {fileID: 0}
-  threeLight: {fileID: 0}
+  dissolveMat: {fileID: 2100000, guid: c9b2b132984ac354a879891fdb813100, type: 2}
 --- !u!114 &1258109060
 MonoBehaviour:
   m_ObjectHideFlags: 0
