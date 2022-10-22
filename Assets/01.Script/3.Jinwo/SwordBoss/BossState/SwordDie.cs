@@ -22,13 +22,8 @@ public class SwordDie<T> : BossState<T> where T : Sword
     }
     private IEnumerator StartDieAnime()
     {
-        matValue = 0;
-        mat.SetFloat("_Singularity", matValue);
-        agent.isStopped = true;
-        stateMachineOwnerClass.Col.enabled = false;
-        stateMachineOwnerClass.motionTrail.isMotionTrail = false;
-        animator.SetTrigger(hashDie);
-        yield return new WaitForSeconds(1.5f);
+        
+        yield return new WaitForSeconds(0.7f);
         while (true)
         {
             if (matValue >= 1f)
@@ -40,10 +35,18 @@ public class SwordDie<T> : BossState<T> where T : Sword
             yield return null;
         }
         yield return new WaitForSeconds(1f);
-        stateMachineOwnerClass.Die();
+        //stateMachineOwnerClass.Die();
     }
     public override void Enter()
     {
+        stateMachineOwnerClass.motionTrail.isMotionTrail = false;
+
+        animator.SetTrigger(hashDie);
+        matValue = 0;
+        mat.SetFloat("_Singularity", matValue);
+        agent.enabled = false;
+        stateMachineOwnerClass.Col.enabled = false;
+
         stateMachineOwnerClass.StartCoroutine(StartDieAnime());
     }
 

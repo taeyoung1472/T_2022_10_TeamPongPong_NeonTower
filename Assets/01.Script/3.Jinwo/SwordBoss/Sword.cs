@@ -126,13 +126,13 @@ public class Sword : BossBase<Sword>
         {
             Debug.Log("사망 !!");
             StopAllCoroutines();
-            //OnDeathEvent?.Invoke();
+            OnDeathEvent?.Invoke();
             bossFsm.ChangeState<SwordDie<Sword>>();
         }
     }
     public override void Die()
     {
-        OnDeathEvent?.Invoke();
+        //OnDeathEvent?.Invoke();
     }
     public int SelectAttackType()
     {
@@ -230,11 +230,11 @@ public class Sword : BossBase<Sword>
             if (degree <= arcangle / 2f)
             {
                 Debug.Log("시야각에 있고 처맞은거임");
-                Collider[] col = Physics.OverlapSphere(transform.position, 14f, playerLayer);
+                Collider[] cols = Physics.OverlapSphere(transform.position, 14f, playerLayer);
 
-                if (col.Length > 0)
+                foreach (var col in cols)
                 {
-                    var attackTargetEntity = col[0].GetComponent<IDamageable>();
+                    IDamageable attackTargetEntity = col.GetComponent<IDamageable>();
                     Glitch.GlitchManager.Instance.HitValue();
                     if (!lastAttackedTargets.Contains(attackTargetEntity))
                     {
