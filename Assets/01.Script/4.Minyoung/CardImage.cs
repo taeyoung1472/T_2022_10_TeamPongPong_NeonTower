@@ -47,6 +47,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _upgradeBtn.onClick.RemoveAllListeners();
         //_upgradeBtn.onClick.AddListener(() => FindObjectOfType<UpgradeUI>().endUpgrade = ()=> UpgradeManager.Instance.Upgrade(data.upgradeType));
         _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
+           
         _upgradeBtn.onClick.AddListener(() => upgradeUI.UpgradeCardEffect(gameObject));
     }
     public void CreateUpgradeCntImage(UpgradeData data)
