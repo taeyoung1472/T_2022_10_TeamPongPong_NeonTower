@@ -46,6 +46,7 @@ public class CommonEnemy : EnemyBase<CommonEnemy>
     {
         base.DisableAttack();
         //Debug.Log("change");
+        particle.gameObject.SetActive(false);
         FsmManager.ChangeState<StateMove<CommonEnemy>>();
     }
 }

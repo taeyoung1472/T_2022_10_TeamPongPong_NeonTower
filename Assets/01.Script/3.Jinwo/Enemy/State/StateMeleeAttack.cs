@@ -10,6 +10,7 @@ public class StateMeleeAttack<T> : State<T> where T: EnemyBase<T>
 
     private NavMeshAgent agent;
 
+    Transform target;
     private int hashAttack = Animator.StringToHash("Attack");
 
     public override void OnAwake()
@@ -22,12 +23,13 @@ public class StateMeleeAttack<T> : State<T> where T: EnemyBase<T>
     }
     public override void Enter()
     {
+        target = stateMachineOwnerClass.Target.transform;
         stateMachineOwnerClass.lastAttackTime = Time.time;
         animator?.SetTrigger(hashAttack);
     }
     public override void Execute()
     {
-        Transform target = stateMachineOwnerClass.Target.transform;
+        
 
         if (Vector3.Distance(target.position, agent.transform.position) >
                stateMachineOwnerClass.EnemyData.attackDistance)
