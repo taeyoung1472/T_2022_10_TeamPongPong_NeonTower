@@ -38,19 +38,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 0.5
+    - _Dissolve: 0.55
     - _DissolveBeginOffset: 5
     - _DissolveEndOffset: -5
-    - _EdgeThicknessA: 0.213
+    - _EdgeThicknessA: 0.105
     - _EdgeThicknessB: 0.15
-    - _NoiseScale: 74
+    - _NoiseScale: 70
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _ColorA: {r: 0.7219991, g: 3.0940793, b: 4.666582, a: 0}
     - _ColorB: {r: 7.4248877, g: 5.632359, b: 1.9192629, a: 0}
     - _DissolveDirection: {r: 0, g: 0, b: -1, a: 0}
-    - _TintColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6237294374374452781
 MonoBehaviour:
