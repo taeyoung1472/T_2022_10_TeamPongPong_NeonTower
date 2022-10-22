@@ -114,7 +114,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
             else
             {
                 #region Dotween Ã³¸®
-                waveText.SetText($"{(CurWave + 1) % 5} Wave");
+                waveText.SetText($"{(CurWave % 4) + 1} Wave");
 
                 Sequence seqWave = DOTween.Sequence();
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));

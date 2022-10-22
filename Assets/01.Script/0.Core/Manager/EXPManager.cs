@@ -24,7 +24,11 @@ public class EXPManager : MonoSingleTon<EXPManager>
 
     public Image expSlider;
 
-    [ContextMenu("Init")]
+    public void OnValidate()
+    {
+        Init();
+    }
+
     public void Init()
     {
         expTable = new int[40];
