@@ -7,8 +7,10 @@ public class PlayerStartCutScene : MonoBehaviour
     public GameObject blackHoleTrm = null;
     public Material blackHoleMat = null;
     public Material playerMat = null;
+    public Material playerResurrectionMat = null; //부활할때 쓰는 머티리얼
     public float progress = 0.1f;
     public float innerRadius = 1f;
+    public float singularity = 0f;
 
     public Material bodyOutlineMat;
     private void Awake()
@@ -27,6 +29,63 @@ public class PlayerStartCutScene : MonoBehaviour
             
             StartCoroutine(StartCutScene());
         }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+
+            StartCoroutine(ResurrectionCutScene());
+        }
+    }
+    public IEnumerator ResurrectionCutScene()
+    {
+        bodyOutlineMat.SetFloat("_Thickness", 0);
+        Material[] changeMat = null;
+        Transform[] childTrm = null;
+
+        childTrm = transform.GetComponentsInChildren<Transform>();
+        int i = 0;
+        foreach (Transform child in childTrm)
+        {
+            if (child.gameObject.GetComponent<Material>() != null)
+            {
+                changeMat[i] = child.gameObject.GetComponent<Material>();
+                Debug.Log(changeMat[i]);
+                if (changeMat[i] == playerMat)
+                {
+                    changeMat[i] = playerResurrectionMat;
+                }
+            }
+            i++;
+        }
+        Debug.Log(i);
+        singularity = 0;
+        playerResurrectionMat?.SetFloat("_Singularity", 0);
+        while (true)
+        {
+            if (singularity >= 1f)
+            {
+                Debug.Log("부활");
+                break;
+            }
+            singularity += 0.01f;
+            playerResurrectionMat?.SetFloat("_Singularity", singularity);
+            yield return null;
+        }
+        bodyOutlineMat.SetFloat("_Thickness", 1f);
+
+        //for (int i = 0; i < childTrm.Length; i++)
+        //{
+        //    if (childTrm[i].gameObject.GetComponent<Material>() != null)
+        //    {
+        //        changeMat[i] = childTrm[i].gameObject.GetComponent<Material>();
+
+        //        if (changeMat[i] == playerMat)
+        //        {
+        //            changeMat[i] = playerResurrectionMat;
+        //        }
+        //    }
+        //}
+
+        yield return new WaitForSeconds(1f);
     }
     public IEnumerator StartCutScene()
     {

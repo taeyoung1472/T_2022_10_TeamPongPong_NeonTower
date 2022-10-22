@@ -2113,8 +2113,10 @@ MonoBehaviour:
   blackHoleTrm: {fileID: 357232049}
   blackHoleMat: {fileID: 2100000, guid: a09c241656b98f048a6aa62b7fe2159b, type: 2}
   playerMat: {fileID: 2100000, guid: fa6522317f1f1624b996350a6abc2188, type: 2}
+  playerResurrectionMat: {fileID: 2100000, guid: beeb4e614f85c7f49b8fc7a26d9c8379, type: 2}
   progress: 1
   innerRadius: 0.1
+  singularity: 0
   bodyOutlineMat: {fileID: 2100000, guid: ba5aed97d8889b548ac22a00579fcbe0, type: 2}
 --- !u!1 &393318691
 GameObject:
@@ -13702,6 +13704,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: ba5aed97d8889b548ac22a00579fcbe0, type: 2}
+    - target: {fileID: 5422691813738952415, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: beeb4e614f85c7f49b8fc7a26d9c8379, type: 2}
     - target: {fileID: 5422694180656713911, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -14253,7 +14259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8260929662171237524, guid: 6516167c32cd89b4f8fbec4ebf197fd3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8265688790089494551, guid: 6516167c32cd89b4f8fbec4ebf197fd3, type: 3}
       propertyPath: m_LocalPosition.x

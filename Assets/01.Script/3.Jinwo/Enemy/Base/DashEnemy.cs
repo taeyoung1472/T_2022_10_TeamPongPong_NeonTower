@@ -5,6 +5,8 @@ using UnityEngine;
 public class DashEnemy : EnemyBase<DashEnemy>
 {
     [SerializeField]
+    private ParticleSystem particle;
+    [SerializeField]
     private MeshAfterImage motionTrail;
     protected override void Awake()
     {
@@ -22,6 +24,7 @@ public class DashEnemy : EnemyBase<DashEnemy>
     }
     private void Start()
     {
+        particle.gameObject.SetActive(false);
         StopMotionTrail();
     }
     void Update()
@@ -33,11 +36,17 @@ public class DashEnemy : EnemyBase<DashEnemy>
         FsmManager.ChangeState<StateDashAttack<DashEnemy>>();
     }
 
-
+    public override void EnableAttack()
+    {
+        base.EnableAttack();
+        particle.gameObject.SetActive(true);
+        particle.Play();
+    }
     public override void DisableAttack()
     {
         base.DisableAttack();
         //Debug.Log("change");
+        particle.gameObject.SetActive(false);
         FsmManager.ChangeState<StateMove<DashEnemy>>();
     }
     public override void StartMotionTrail()
