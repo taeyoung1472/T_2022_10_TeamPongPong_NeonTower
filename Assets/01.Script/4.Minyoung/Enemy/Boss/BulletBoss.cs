@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
+
 public class BulletBoss : BossBase<BulletBoss>
 {
     [SerializeField] private PoolAbleObject bullet;
@@ -70,6 +72,9 @@ public class BulletBoss : BossBase<BulletBoss>
     public List<int> randomIndexList = new List<int>();
     public List<int> bowlIndexList = new List<int>();
 
+    [SerializeField] private VisualEffect sparkParticles;
+    [SerializeField] private Animator sparkAnimator;
+    [SerializeField] private GameObject flyDestrotObject;   
     public int RandomIndex()
     {
         int returnValue = 0;
@@ -93,7 +98,11 @@ public class BulletBoss : BossBase<BulletBoss>
     }
     private void Start()
     {
-        bossFsm = new BossStateMachine<BulletBoss>(this, new BulletBossIdle());
+        CurHp = Data.maxHp;
+
+        bossFsm = new BossStateMachine<BulletBoss>(this, new StartWaitState());
+        //bossFsm = new BossStateMachine<BulletBoss>(this, new BulletBossIdle());
+        bossFsm.AddStateList(new BulletBossIdle());
         bossFsm.AddStateList(new CircleBullet());
         bossFsm.AddStateList(new StraightBullet());
         bossFsm.AddStateList(new FirecrackerBullet());
@@ -101,10 +110,38 @@ public class BulletBoss : BossBase<BulletBoss>
         bossFsm.AddStateList(new PlayerMotar());
 
         bossFsm.AddStateList(new CircleMotar());
+        bossFsm.AddStateList(new BulletBossDie());
+    }
+    public override void ApplyDamage(float dmg)
+    {
+        DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
+        CurHp -= dmg;
+        BossUIManager.BossDamaged();
+        if (CurHp <= 0)
+        {
+            Debug.Log("사망 !!");
+            StopAllCoroutines();
+            OnDeathEvent?.Invoke();
+            bossFsm.ChangeState<BulletBossDie>();
+        }
     }
     public override void LookTarget()
     {
         rotateTrm.rotation = Quaternion.LookRotation(Target.position - rotateTrm.position);
+    }
+
+    public void BulletBossDieEffect()
+    {
+        StartCoroutine(BulletBossDieEffectCoroutine());
+    }
+    private IEnumerator BulletBossDieEffectCoroutine()
+    {
+        sparkAnimator.Play("BombExplosion");
+        sparkParticles.Play();
+        flyDestrotObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 3f), 
+            Random.Range(1f, 3f), Random.Range(1f, 3f)), ForceMode.Impulse);
+        Debug.Log("개고생완료");
+        yield return null;
     }
     public GameObject InstantiateObj(GameObject obj, Vector3 pos, Quaternion rot)
     {
