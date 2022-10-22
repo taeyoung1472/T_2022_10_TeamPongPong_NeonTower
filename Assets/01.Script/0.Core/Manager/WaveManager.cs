@@ -14,6 +14,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
     private bool isBossClear = false;
 
     public int CurWave { get { return curWave; } }
+    public int CurFloor { get { return curFloor; } }
     public bool IsBossClear { get { return isBossClear; } set { isBossClear = value; } }
 
     [Header("[Ref]")]
@@ -25,8 +26,6 @@ public class WaveManager : MonoSingleTon<WaveManager>
     private int bossIdx = 0;
 
     [Header("[TMP]")]
-    [SerializeField] private TextMeshProUGUI nextWaveText;
-    [SerializeField] private TextMeshProUGUI floorText;
     [SerializeField] private TextMeshProUGUI waveText;
 
     [Header("[Audio]")]
@@ -50,7 +49,6 @@ public class WaveManager : MonoSingleTon<WaveManager>
         {
             _waveUIManager.NextWaveTextSet(wavePerTime, waveTimer);
         }
-        nextWaveText.text = $"´ÙÀ½ ¿þÀÌºê ±îÁö : {wavePerTime - waveTimer:0.0} ÃÊ";
         waveTimer += Time.deltaTime;
     }
 
@@ -58,15 +56,15 @@ public class WaveManager : MonoSingleTon<WaveManager>
     {
         while (true)
         {
-            floorText.text = $"{curFloor} Ãþ";
             yield return new WaitUntil(() => waveTimer > wavePerTime - 5f);
-            WaveUIManager.Instance.WaveCount(curWave, ((curWave + 1) / 3) + 1);
+            WaveUIManager.Instance.WaveCount(CurFloor, CurWave);
 
             yield return new WaitUntil(() => waveTimer > wavePerTime);
 
             waveTimer = 0;
             curWave++;
-            curFloor = (curWave / 3) + 1;
+            curFloor = (curWave / 4) + 1;
+            WaveUIManager.Instance.SetImage(CurFloor, CurWave);
 
             if (curWave % 4 == 0)
             {
@@ -107,8 +105,6 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 seq.AppendCallback(() => enemySpawner.IsCanSpawn = true);
                 seq.InsertCallback(3, () => AudioManager.PlayAudio(floorChangeClip));
                 #endregion
-
-                floorText.text = $"{curFloor} Ãþ";
             }
             else
             {
