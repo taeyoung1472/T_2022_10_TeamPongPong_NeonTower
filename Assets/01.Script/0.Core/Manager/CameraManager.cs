@@ -148,6 +148,11 @@ public class CameraManager : MonoSingleTon<CameraManager>
             }
             else
                 _cmVCam.Follow = lastTarget;
+
+            if (!isBoss)
+            {
+                WaveManager.Instance.IsBossClear = true;
+            }
         });
     }
 }

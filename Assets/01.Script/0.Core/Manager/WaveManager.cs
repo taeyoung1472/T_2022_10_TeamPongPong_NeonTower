@@ -72,17 +72,22 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 isBossClear = false;
                 bossList[bossIdx].gameObject.SetActive(true);
                 CameraManager.Instance.TargetingBossCameraAnimation(bossList[bossIdx], 5);
-                EXPManager.Instance.isCanLevelup = false;
+                EXPManager.Instance.IsCanLevelUp = false;
+                EnemySpawner.Instance.IsCanSpawn = false;
                 EnemySubject.Instance.NotifyObserver();
                 Define.Instance.playerController.transform.position = new Vector3(0, 0, -15);
                 StadiumManager.Instance.StadiumMatches[bossIdx].Active();
-                bossIdx++;
                 BGMChanger.Instance.ActiveAudio(BGMType.Boss);
 
                 yield return new WaitUntil(() => isBossClear);
+                yield return new WaitForSeconds(0.5f);
+                EnemySpawner.Instance.IsCanSpawn = true;
+                StadiumManager.Instance.StadiumMatches[bossIdx].DeActive();
                 BGMChanger.Instance.ActiveAudio(BGMType.Default);
+                EXPManager.Instance.IsCanLevelUp = true;
+
+                bossIdx++;
                 #endregion
-                EXPManager.Instance.isCanLevelup = true;
                 EnemySubject.Instance.NotifyObserver();
 
                 if (curFloor == 6)
@@ -98,10 +103,10 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 Sequence seq = DOTween.Sequence();
 
                 // Define.Instance.playerController.公利窃荐;
-                seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = false);
+                seq.AppendCallback(() => EXPManager.Instance.IsCanLevelUp = false);
                 seq.AppendCallback(() => enemySpawner.IsCanSpawn = false);
                 seq.AppendInterval(waveChangeTime);
-                seq.AppendCallback(() => EXPManager.Instance.isCanLevelup = true);
+                seq.AppendCallback(() => EXPManager.Instance.IsCanLevelUp = true);
                 seq.AppendCallback(() => enemySpawner.IsCanSpawn = true);
                 seq.InsertCallback(3, () => AudioManager.PlayAudio(floorChangeClip));
                 #endregion
@@ -109,6 +114,8 @@ public class WaveManager : MonoSingleTon<WaveManager>
             else
             {
                 #region Dotween 贸府
+                waveText.SetText($"{(CurWave + 1) % 5} Wave");
+
                 Sequence seqWave = DOTween.Sequence();
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
                 seqWave.AppendInterval(2f);

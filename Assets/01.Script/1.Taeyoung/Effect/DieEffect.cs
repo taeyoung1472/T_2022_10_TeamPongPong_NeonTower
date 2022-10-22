@@ -24,7 +24,7 @@ public class DieEffect : MonoBehaviour
 
     public void PlayerDieEffect()
     {
-        EXPManager.Instance.isCanLevelup = false;
+        EXPManager.Instance.IsCanLevelUp = false;
         particle.Stop();
         particle1.Stop();
         particle2.Stop();

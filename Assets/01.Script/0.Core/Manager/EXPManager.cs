@@ -8,7 +8,8 @@ public class EXPManager : MonoSingleTon<EXPManager>
     //public SlotMachineMg slotMachine;
     //public UIManagerHan han;
     //public SlotMachineManager slotMachineManager;
-    public bool isCanLevelup = true;
+    private bool isCanLevelup = true;
+    public bool IsCanLevelUp { get { return isCanLevelup; } set { isCanLevelup = value; } }
     [SerializeField] private GameObject upgradeUI;
 
     [SerializeField] private GameObject levelUpEffect;
@@ -58,7 +59,6 @@ public class EXPManager : MonoSingleTon<EXPManager>
             curExp = 0;
             curLevel++;
             LevelUdateText();
-            StartCoroutine(RaycastCotroll());
 
             UIManager.Instance.ActiveUI(upgradeUI);
 
@@ -79,11 +79,6 @@ public class EXPManager : MonoSingleTon<EXPManager>
     {
         levelText.text = ($"LV.{curLevel + 1}");
         expSlider.fillAmount = 0f;
-    }
-    IEnumerator RaycastCotroll()
-    {
-        yield return new WaitForSecondsRealtime(4);
-        //slotMachine.gardImage.raycastTarget = false;
     }
 
     public void ExpPercent()

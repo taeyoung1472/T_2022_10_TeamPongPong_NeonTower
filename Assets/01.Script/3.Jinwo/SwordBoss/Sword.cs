@@ -116,6 +116,26 @@ public class Sword : BossBase<Sword>
     {
         
     }
+    public override void ApplyDamage(float dmg)
+    {
+        base.ApplyDamage(dmg);
+
+        DamagePopup.PopupDamage(transform.position + Vector3.up, dmg);
+        CurHp -= dmg;
+        BossUIManager.BossDamaged();
+        if (CurHp <= 0)
+        {
+            Debug.Log("»ç¸Á !!");
+            StopAllCoroutines();
+            OnDeathEvent?.Invoke();
+            bossFsm.ChangeState<SwordDie<Sword>>();
+        }
+    }
+    public override void Die()
+    {
+        base.Die();
+        
+    }
     public int SelectAttackType()
     {
         int attackType = Random.Range(1, 8);
