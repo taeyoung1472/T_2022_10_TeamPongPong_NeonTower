@@ -11,9 +11,9 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 506abd5b11a9e7244ad9a019dad1ccf5, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -38,18 +38,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 1
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 2
     - _Dissolve: 0.57
     - _DissolveBeginOffset: 5
     - _DissolveEndOffset: -5
+    - _DstBlend: 0
     - _EdgeThicknessA: 0.105
     - _EdgeThicknessB: 0.15
     - _NoiseScale: 70
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _ColorA: {r: 0.7219991, g: 3.0940793, b: 4.666582, a: 0}
     - _ColorB: {r: 7.4248877, g: 5.632359, b: 1.9192629, a: 0}
-    - _DissolveDirection: {r: 0, g: 0, b: -1, a: 0}
+    - _DissolveDirection: {r: 0, g: 1, b: 0, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6237294374374452781
