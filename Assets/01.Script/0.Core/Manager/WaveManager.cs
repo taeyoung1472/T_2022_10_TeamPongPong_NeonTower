@@ -32,16 +32,24 @@ public class WaveManager : MonoSingleTon<WaveManager>
     [Header("[Audio]")]
     [SerializeField] private AudioClip floorChangeClip;
 
+    private WaveUIManager _waveUIManager = null;
+
     public void Start()
     {
         backgrounds = FindObjectsOfType<Background>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         StartCoroutine(WaveSystem());
         BGMChanger.Instance.ActiveAudio(BGMType.Default);
+
+        _waveUIManager = WaveUIManager.Instance;
     }
 
     public void Update()
     {
+        if(_waveUIManager != null)
+        {
+            _waveUIManager.NextWaveTextSet(wavePerTime, waveTimer);
+        }
         nextWaveText.text = $"다음 웨이브 까지 : {wavePerTime - waveTimer:0.0} 초";
         waveTimer += Time.deltaTime;
     }
@@ -51,6 +59,9 @@ public class WaveManager : MonoSingleTon<WaveManager>
         while (true)
         {
             floorText.text = $"{curFloor} 층";
+            yield return new WaitUntil(() => waveTimer > wavePerTime - 5f);
+            WaveUIManager.Instance.WaveCount(curWave, ((curWave + 1) / 3) + 1);
+
             yield return new WaitUntil(() => waveTimer > wavePerTime);
 
             waveTimer = 0;
