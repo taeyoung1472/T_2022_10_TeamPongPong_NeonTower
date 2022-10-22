@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using Microsoft.Cci;
+using UnityEngine.UI;
 
 public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -22,8 +19,6 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public TextMeshProUGUI _descTxt;
 
     public Button _upgradeBtn;
-
-    private Sequence _seq = null;
 
     public Material defaultCardMat;
     public Material changeCardMat;
@@ -45,17 +40,15 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _ablityNameText.text = data.upgradeName;
         CreateUpgradeCntImage(data);
         _upgradeBtn.onClick.RemoveAllListeners();
-        //_upgradeBtn.onClick.AddListener(() => FindObjectOfType<UpgradeUI>().endUpgrade = ()=> UpgradeManager.Instance.Upgrade(data.upgradeType));
-        _upgradeBtn.onClick.AddListener(() => UpgradeManager.Instance.Upgrade(data.upgradeType));
-           
-        _upgradeBtn.onClick.AddListener(() => upgradeUI.UpgradeCardEffect(gameObject));
+        _upgradeBtn.onClick.AddListener(() => { if (upgradeUI.isCanUpgrade) { UpgradeManager.Instance.Upgrade(data.upgradeType); } });
+        _upgradeBtn.onClick.AddListener(() => { if (upgradeUI.isCanUpgrade) { upgradeUI.UpgradeCardEffect(gameObject); } });
     }
     public void CreateUpgradeCntImage(UpgradeData data)
     {
         int upCnt = UpgradeManager.Instance.GetUpgradeCount(data.upgradeType);
         for (int i = 0; i < (int)data.upgradeAbleCount; i++)
         {
-            
+
             GameObject cntImage = Instantiate(cntImagePrefab, parentCntTrm.transform);
             RectTransform rectTrm = cntImage.GetComponent<RectTransform>();
 
@@ -70,6 +63,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!upgradeUI.isCanUpgrade) return;
         Debug.Log("Enter");
         lightImage.material = changeCardMat;
         animator.Play("updateshiny");
@@ -79,7 +73,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
+        if (!upgradeUI.isCanUpgrade) return;
         lightImage.material = defaultCardMat;
         animator.Play("Idle");
         rect.DOScale(Vector3.one, 0.5f).SetUpdate(true);
