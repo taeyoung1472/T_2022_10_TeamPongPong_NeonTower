@@ -16,7 +16,6 @@ public class SwordMove<T> : BossState<T> where T : Sword
 
     private Transform characterTrm;
 
-    private bool isTeleport = false;
     public override void OnAwake()
     {
         characterTrm = stateMachineOwnerClass.GetComponent<Transform>();
@@ -33,7 +32,6 @@ public class SwordMove<T> : BossState<T> where T : Sword
 
         agent.speed = stateMachineOwnerClass.dashspeed;
         agent.isStopped = false;
-        isTeleport = false;
         agent.stoppingDistance = 1f;
 
         target = stateMachineOwnerClass.Target.transform.position;
