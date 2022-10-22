@@ -88,8 +88,8 @@ public class WaveUIManager : MonoSingleTon<WaveUIManager>
             lastFloor = floorCnt;
             Sequence seq = DOTween.Sequence();
             _floorsImages[floorIdx].transform.localScale = Vector3.zero;
-            seq.Append(_floorsImages[floorIdx].transform.DOScale(1f, 0.5f));
-            seq.Join(_floorsImages[floorIdx].DOColor(_waveImageColor.enableColor, 0.5f));
+            seq.Append(_floorsImages[floorIdx].transform.DOScale(1f, 1f));
+            seq.Join(_floorsImages[floorIdx].DOColor(_waveImageColor.enableColor, 1f));
             seq.AppendCallback(() =>
             {
                 floorIdx++;
