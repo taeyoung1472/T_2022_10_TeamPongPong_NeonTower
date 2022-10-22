@@ -13,9 +13,11 @@ public class PlayerStartCutScene : MonoBehaviour
     public float singularity = 0f;
 
     public Material bodyOutlineMat;
+
+    public Vector3 blackHolePos = new Vector3(0, 2.24f, 3f);
     private void Awake()
     {
-        
+        blackHoleTrm.transform.position = blackHolePos;
         blackHoleTrm.SetActive(false);
     }
     private void Start()
