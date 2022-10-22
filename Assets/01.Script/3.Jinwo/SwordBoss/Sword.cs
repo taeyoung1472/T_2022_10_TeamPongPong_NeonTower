@@ -118,7 +118,6 @@ public class Sword : BossBase<Sword>
     }
     public override void ApplyDamage(float dmg)
     {
-        base.ApplyDamage(dmg);
 
         DamagePopup.PopupDamage(transform.position + Vector3.up, dmg);
         CurHp -= dmg;
@@ -127,14 +126,13 @@ public class Sword : BossBase<Sword>
         {
             Debug.Log("»ç¸Á !!");
             StopAllCoroutines();
-            OnDeathEvent?.Invoke();
+            //OnDeathEvent?.Invoke();
             bossFsm.ChangeState<SwordDie<Sword>>();
         }
     }
     public override void Die()
     {
-        base.Die();
-        
+        OnDeathEvent?.Invoke();
     }
     public int SelectAttackType()
     {

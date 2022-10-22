@@ -40,16 +40,15 @@ public class PlayerStartCutScene : MonoBehaviour
             }
         }
 
-        
         StartCoroutine(StartCutScene());
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
 
-            StartCoroutine(StartCutScene());
-        }
+        //    StartCoroutine(StartCutScene());
+        //}
         if (Input.GetKeyDown(KeyCode.K))
         {
 
@@ -96,21 +95,24 @@ public class PlayerStartCutScene : MonoBehaviour
     public IEnumerator StartCutScene()
     {
         bodyOutlineMat.SetFloat("_Thickness", 0);
+
+        progress = 1;
+        for (int i = 0; i < allMaterials.Length; i++)
+        {
+            allMaterials[i].SetFloat("_Progress", progress);
+        }
+
         yield return new WaitForSeconds(1.25f);
 
         GameObject go = Instantiate(blackHoleTrm, blackHolePos, Quaternion.Euler(-180, 0, 0));
         go.SetActive(true);
 
-        progress = 1;
+       
         
 
         innerRadius = 0.5f;
         blackHoleMat.SetFloat("_InnerRadius", innerRadius);
 
-        for (int i = 0; i < allMaterials.Length; i++)
-        {
-            allMaterials[i].SetFloat("_Progress", progress);
-        }
 
         //블랙홀 생기는 거
         while (true)
