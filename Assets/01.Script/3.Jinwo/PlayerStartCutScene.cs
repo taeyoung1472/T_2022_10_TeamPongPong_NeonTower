@@ -24,16 +24,16 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
             
-            StartCoroutine(StartCutScene());
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
+        //    StartCoroutine(StartCutScene());
+        //}
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
 
-            StartCoroutine(ResurrectionCutScene());
-        }
+        //    StartCoroutine(ResurrectionCutScene());
+        //}
     }
     public IEnumerator ResurrectionCutScene()
     {
@@ -52,6 +52,7 @@ public class PlayerStartCutScene : MonoBehaviour
                 if (changeMat[i] == playerMat)
                 {
                     changeMat[i] = playerResurrectionMat;
+                    child.gameObject.GetComponent<Renderer>().material = changeMat[i];
                 }
             }
             i++;
