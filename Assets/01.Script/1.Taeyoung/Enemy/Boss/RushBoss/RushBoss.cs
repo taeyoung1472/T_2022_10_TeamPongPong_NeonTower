@@ -42,6 +42,13 @@ public class RushBoss : BossBase<RushBoss>
 
     private Coroutine co = null;
 
+    private bool _isFirst = true;
+    public bool IsFirst
+    {
+        get => _isFirst;
+        set => _isFirst = value;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -49,6 +56,7 @@ public class RushBoss : BossBase<RushBoss>
 
     private void Start()
     {
+
         Mat.SetFloat("_DissolveBeginOffset", 1.5f);
         _attackPositionObj = new GameObject("AttackPositionObj");
         CurHp = Data.maxHp;
@@ -117,8 +125,8 @@ public class RushBoss : BossBase<RushBoss>
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle/2, radius);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle/2, radius);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle / 2, radius);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle / 2, radius);
     }
 #endif
 
@@ -143,7 +151,7 @@ public class RushBoss : BossBase<RushBoss>
         //for(int i = 0; i <_thunderParticle.Length; i++)
         //{
         //    _thunderParticle[i].Play();
-       // }
+        // }
     }
 
     public void StopParticle()
@@ -187,6 +195,7 @@ public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() =>
         stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Start") == false);
+        yield return new WaitForSeconds(1f);
         stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
     }
 

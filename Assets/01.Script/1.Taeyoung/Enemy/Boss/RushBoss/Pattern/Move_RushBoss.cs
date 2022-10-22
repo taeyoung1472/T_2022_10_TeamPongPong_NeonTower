@@ -4,6 +4,9 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
+        if (stateMachineOwnerClass.IsFirst == true)
+            stateMachineOwnerClass.IsFirst = false;
+
         stateMachineOwnerClass.After.isMotionTrail = true;
 
         stateMachineOwnerClass.ModelReset();
@@ -12,6 +15,7 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.SetBool("Run", true);
         stateMachineOwnerClass.Agent.speed = stateMachineOwnerClass.AttackDataSO.normalSpeed;
         stateMachineOwnerClass.Agent.SetDestination(stateMachineOwnerClass.Target.position);
+        Debug.Log("RUN");
     }
 
     public override void Execute()
@@ -21,7 +25,11 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
 
         stateMachineOwnerClass.Agent.SetDestination(stateMachineOwnerClass.Target.position);
-        if (stateMachineOwnerClass.Agent.remainingDistance <= stateMachineOwnerClass.Agent.stoppingDistance)
+        /*if (stateMachineOwnerClass.Agent.remainingDistance <= stateMachineOwnerClass.Agent.stoppingDistance)
+        {
+            stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
+        }*/
+        if (stateMachineOwnerClass.GetDistance() <= stateMachineOwnerClass.AttackDataSO.attackDistance * 0.5f)
         {
             stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
         }

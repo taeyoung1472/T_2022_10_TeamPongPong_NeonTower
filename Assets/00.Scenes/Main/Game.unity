@@ -3424,11 +3424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 40
+  wavePerTime: 3
   waveChangeTime: 8
   bossList:
-  - {fileID: 928772313}
   - {fileID: 1982417183}
+  - {fileID: 928772313}
   - {fileID: 354645995}
   - {fileID: 1262312529}
   waveText: {fileID: 1986087493}

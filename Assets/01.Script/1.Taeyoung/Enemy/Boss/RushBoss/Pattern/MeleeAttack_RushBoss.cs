@@ -7,6 +7,9 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
     public override void Enter()
     {
+        if (stateMachineOwnerClass.IsFirst == true)
+            stateMachineOwnerClass.IsFirst = false;
+
         stateMachineOwnerClass.ModelReset();
         stateMachineOwnerClass.Agent.ResetPath();
         stateMachineOwnerClass.Agent.isStopped = true;
