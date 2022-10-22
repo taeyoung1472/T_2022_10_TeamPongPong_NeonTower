@@ -2933,8 +2933,6 @@ MonoBehaviour:
   wavePerTime: 8
   waveChangeTime: 8
   bossList: []
-  nextWaveText: {fileID: 596906895}
-  floorText: {fileID: 2077681787}
   waveText: {fileID: 879819247}
   floorChangeClip: {fileID: 0}
 --- !u!1 &237865977
@@ -21697,6 +21695,18 @@ PrefabInstance:
     - target: {fileID: 1956878674094806303, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299128, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -173.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299129, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_fontSize
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299129, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96321292fd665342ad2adcdaef880ee, type: 3}

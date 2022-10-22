@@ -9,7 +9,6 @@ public class SummonerDie : BossState<SummonerBoss>
         stateMachineOwnerClass.Agent.velocity = Vector3.zero;
         stateMachineOwnerClass.Agent.enabled = false;
         stateMachineOwnerClass.SummonDieEffect();
-        stateMachineOwnerClass.Die();
     }
 
     public override void Execute()
