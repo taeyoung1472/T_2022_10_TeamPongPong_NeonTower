@@ -39,7 +39,7 @@ public class SwordMove<T> : BossState<T> where T : Sword
         target = stateMachineOwnerClass.Target.transform.position;
         stateMachineOwnerClass.attackCoolTime = 0;
         stateMachineOwnerClass.motionTrail.isMotionTrail = true;
-        CoroutineHelper.StartCoroutine(SwordDash());
+        stateMachineOwnerClass.StartCoroutine(SwordDash());
     }
 
     public override void Execute()

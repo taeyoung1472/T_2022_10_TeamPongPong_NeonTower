@@ -32,9 +32,16 @@ public class Boss : MonoBehaviour, IDamageable
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up * 2, dmg);
         Debug.Log("나 아야 했어");
+
+        CurHp -= dmg;
+        if(CurHp < 0)
+        {
+            Die();
+        }
     }
     public virtual void Die()
     {
         WaveManager.Instance.IsBossClear = true;
+        Destroy(gameObject);
     }
 }

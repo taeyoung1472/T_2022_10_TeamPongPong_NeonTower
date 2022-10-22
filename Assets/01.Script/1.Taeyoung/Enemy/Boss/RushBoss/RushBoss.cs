@@ -114,11 +114,13 @@ public class RushBoss : BossBase<RushBoss>
         return Vector3.Distance(targetPosition, transform.position);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angle/2, radius);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angle/2, radius);
     }
+#endif
 
     public void PunchParticlePlay()
     {

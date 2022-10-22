@@ -34,7 +34,6 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     }
 
     protected LayerMask whatIsTarget; // 추적 대상 레이어
-
     protected Transform attackRoot;
 
     protected bool isAttack = false;
@@ -78,7 +77,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     #region PoolAble
     public override void Init_Pop()
     {
-        health = enemyData.maxHealth;
+        health = enemyData.floorPerPerformance[WaveManager.Instance.CurFloor - 1].maxHp;
         dead = false;
         baseScale = transform.localScale;
         EnemySubject.Instance.RegisterObserver(this);

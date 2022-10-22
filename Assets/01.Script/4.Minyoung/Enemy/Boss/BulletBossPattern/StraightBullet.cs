@@ -16,38 +16,35 @@ public class StraightBullet : BossState<BulletBoss>
     public override void Execute()
     {
         bulletBoss.LookTarget(); //보스가 플레이어를 바라본다
-
     }
 
     IEnumerator StarightAtk()
     {
         Debug.Log("일자어택함");
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < bulletBoss.CycleCnt; i++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < bulletBoss.FireCnt; j++)
             {
-                bulletBoss.LookTarget(); //보스가 플레이어를 바라본다
-                GameObject newbullet = stateMachineOwnerClass.InstantiateObj
-                    (bulletBoss.bullet, stateMachineOwnerClass.transform, Quaternion.identity);
+                GameObject newbullet = PoolManager.Instance.Pop(PoolType.BulletBossCommonBullet).gameObject;
+                newbullet.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, Quaternion.identity);
+
+                //GameObject newbullet = stateMachineOwnerClass.InstantiateObj
+                //    (bulletBoss.bullet, stateMachineOwnerClass.transform.position, Quaternion.identity);
 
                 newbullet.transform.rotation = Quaternion.LookRotation
                     (stateMachineOwnerClass.Target.position - stateMachineOwnerClass.transform.position);
 
-                //newbullet.GetComponent<goFoward>().A();
                 Rigidbody rigid = newbullet.GetComponent<Rigidbody>();
-                rigid.AddForce(newbullet.transform.forward * 7f, ForceMode.Impulse);
+                rigid.AddForce(newbullet.transform.forward * bulletBoss.StraightPower, ForceMode.Impulse);
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(bulletBoss.Interval);
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(bulletBoss.CycleInterval);
         }
-        //GameObject newBullet = bulletBoss.bullet; //불렛 생성 근데 인스턴티에이트가 안됨
+        yield return new WaitForSeconds(bulletBoss.StateToIdleTime);
 
-        //스타트코루틴 들어가자마자 하고
-        // 불렛 따라 so만들어서 스크립트붙여서 update에서 foward방향 이동
-        //불렛을 생성한다
-        yield return new WaitForSeconds(1f);
-        stateMachine.ChangeState<CircleBullet>();
+
+        stateMachine.ChangeState<BulletBossIdle>();
     }
     public override void Exit()
     {

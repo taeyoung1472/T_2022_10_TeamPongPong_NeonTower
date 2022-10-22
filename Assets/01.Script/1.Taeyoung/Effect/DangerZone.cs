@@ -14,23 +14,26 @@ public static class DangerZone
     static GameObject BoxDangerZone { get { if (boxDangerZone == null) { boxDangerZone = Resources.Load("Danger/Box") as GameObject; } return boxDangerZone; } }
     static GameObject CircleDangerZone { get { if (circleDangerZone == null) { circleDangerZone = Resources.Load("Danger/Circle") as GameObject; } return circleDangerZone; } }
 
-    public static void DrawBox(Vector3 startPos, Quaternion rot, Vector3 size, float duration)
+    public static GameObject DrawBox(Vector3 startPos, Quaternion rot, Vector3 size, float duration)
     {
         GameObject dangerObj = MonoHelper._Instantiate(BoxDangerZone, startPos, rot);
         dangerObj.transform.localScale = size;
         MonoHelper._Destroy(dangerObj, duration);
+        return dangerObj;
     }
-    public static void DrawArc(Vector3 startPos, Vector3 normal, float angle, Vector3 size, float duration)
+    public static GameObject DrawArc(Vector3 startPos, Vector3 normal, float angle, Vector3 size, float duration)
     {
         GameObject dangerObj = MonoHelper._Instantiate(ArcDangerZone, startPos, Quaternion.LookRotation(normal));
         dangerObj.transform.localScale = size;
         MonoHelper._Destroy(dangerObj, duration);
+        return dangerObj;
     }
-    public static void DrawCircle(Vector3 startPos, float radius, float duration)
+    public static GameObject DrawCircle(Vector3 startPos, float radius, float duration)
     {
         GameObject dangerObj = MonoHelper._Instantiate(CircleDangerZone, startPos, Quaternion.identity);
         dangerObj.transform.localScale = Vector3.one * radius;
         MonoHelper._Destroy(dangerObj, duration);
+        return dangerObj;
     }
 }
 public class MonoHelper : MonoBehaviour

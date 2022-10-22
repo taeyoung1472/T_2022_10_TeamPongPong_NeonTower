@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,13 @@ public class EnemyDataSO : ScriptableObject
 {
     public string enemyName;
 
-    public int maxHealth = 3;
     public GameObject prefab;
+
+    [Header("층별 성능")]
+    public FloorPerPerformance[] floorPerPerformance;
 
     [Header("[공격 관련]")]
     //공격 관련 데이터
-    public int damage = 1;
     public float attackDelay = 1;
     public float attackRadius = 2f;
     public float attackDistance = 2f;
@@ -50,4 +52,10 @@ public class EnemyDataSO : ScriptableObject
     [Header("[오디오 관련]")]
     public AudioClip hitClip; // 피격시 재생할 소리
     public AudioClip deathClip; // 사망시 재생할 소리
+}
+[Serializable]
+public class FloorPerPerformance
+{
+    public int maxHp;
+    public int atk;
 }

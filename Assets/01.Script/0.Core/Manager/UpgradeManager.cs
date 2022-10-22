@@ -32,10 +32,13 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         if (upgradeCountDic[upgradeType] < 0)
         {
             upgradeCountDic.Remove(upgradeType);
+
         }
         UIManager.Instance.DeActiveUI();
         UIManager.Instance.isActiveContinue = false;
     }
+
+  
 
     public UpgradeData[] GetRandDataList()
     {
@@ -44,6 +47,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
 
         foreach (var type in upgradeCountDic.Keys)
         {
+            if (type == UpgradeType.MAX) continue;
             generateAbleList.Add(type);
         }
 
@@ -56,7 +60,6 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
                 if (upgradeCountDic[generatedType] == 0)
                 {
                     upgradeCountDic.Remove(generatedType);
-                    generateAbleList.Remove(generatedType);
                     i--;
                 }
                 else
@@ -75,16 +78,14 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
         return returnData.ToArray();
     }
 
-    private void Update()
+    public int GetUpgradeCount(UpgradeType type)
     {
-        if (Input.GetKeyDown(KeyCode.G)){
-            Upgrade(UpgradeType.BulletSpeed);
-        }
+        return (int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - (upgradeCountDic.ContainsKey(type)
+            ? upgradeCountDic[type] : 0);
     }
 
     public float GetUpgradeValue(UpgradeType type)
     {
-        //print((int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]);
         return UpgradeDataSO.upgradeDataTableDic[type].datas[(int)UpgradeDataSO.upgradeDataDic[type].upgradeAbleCount - upgradeCountDic[type]];
     }
 }

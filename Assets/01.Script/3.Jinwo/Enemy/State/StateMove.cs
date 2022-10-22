@@ -78,7 +78,7 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     //사망햇을 때 코루틴 멈추기
     public void StopUpdatePath()
     {
-        CoroutineHelper.StopCoroutine(updatePath);
+        stateMachineOwnerClass.StopCoroutine(updatePath);
     }
     public override void Exit()
     {
