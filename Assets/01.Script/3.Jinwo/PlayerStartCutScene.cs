@@ -13,27 +13,29 @@ public class PlayerStartCutScene : MonoBehaviour
     public float singularity = 0f;
 
     public Material bodyOutlineMat;
+
+    public Vector3 blackHolePos = new Vector3(0, 2.24f, 3f);
     private void Awake()
     {
-        
+        blackHoleTrm.transform.position = blackHolePos;
         blackHoleTrm.SetActive(false);
     }
     private void Start()
     {
-        //StartCoroutine(StartCutScene());
+        StartCoroutine(StartCutScene());
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
             
-            StartCoroutine(StartCutScene());
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
+        //    StartCoroutine(StartCutScene());
+        //}
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
 
-            StartCoroutine(ResurrectionCutScene());
-        }
+        //    StartCoroutine(ResurrectionCutScene());
+        //}
     }
     public IEnumerator ResurrectionCutScene()
     {
@@ -52,6 +54,7 @@ public class PlayerStartCutScene : MonoBehaviour
                 if (changeMat[i] == playerMat)
                 {
                     changeMat[i] = playerResurrectionMat;
+                    child.gameObject.GetComponent<Renderer>().material = changeMat[i];
                 }
             }
             i++;
