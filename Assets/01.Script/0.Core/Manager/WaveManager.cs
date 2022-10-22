@@ -75,7 +75,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 EXPManager.Instance.IsCanLevelUp = false;
                 EnemySpawner.Instance.IsCanSpawn = false;
                 EnemySubject.Instance.NotifyObserver();
-                Define.Instance.playerController.transform.position = new Vector3(0, 0, -15);
+                Define.Instance.playerController.transform.position = new Vector3(0, 0, -7);
                 StadiumManager.Instance.StadiumMatches[bossIdx].Active();
                 BGMChanger.Instance.ActiveAudio(BGMType.Boss);
 
