@@ -63,21 +63,21 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
-        _seq = DOTween.Sequence();
-        _seq.Append(transform.DOLocalMove(Vector3.zero, 0.5f)).SetUpdate(true);
-        _seq.AppendCallback(() =>
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMove(Vector3.zero, 0.5f)).SetUpdate(true);
+        seq.AppendCallback(() =>
         {
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         });
-        _seq.Append(cardsTrm[0].transform.DOLocalMove(new Vector3(-600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true); 
-        _seq.Insert(0.6f, cardsTrm[0].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
+        seq.Append(cardsTrm[0].transform.DOLocalMove(new Vector3(-600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        seq.Insert(0.6f, cardsTrm[0].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
 
-        _seq.Insert(0.8f, cardsTrm[1].transform.DOLocalMove(new Vector3(0, 100, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
-        _seq.Insert(0.9f, cardsTrm[1].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
+        seq.Insert(0.8f, cardsTrm[1].transform.DOLocalMove(new Vector3(0, 100, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        seq.Insert(0.9f, cardsTrm[1].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
 
-        _seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
-        _seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
+        seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
     }
 
     public void CloseUI()
@@ -108,9 +108,13 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         cardsTrm[0].transform.GetComponent<CanvasGroup>().alpha = 0.5f;
         cardsTrm[1].transform.GetComponent<CanvasGroup>().alpha = 0.5f;
         cardsTrm[2].transform.GetComponent<CanvasGroup>().alpha = 0.5f;
+
+        dissolveMat.SetFloat("_Dissolve", 0);
     }
     public void UpgradeCardEffect(GameObject selectedObjcet)
     {
+        Sequence seq = DOTween.Sequence();
+
         List<GameObject> noneSelectedCards = new List<GameObject>();
         foreach (var item in cardsTrm)
         {
@@ -126,23 +130,23 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             }
         }
 
-        _seq.AppendInterval(0.6f).SetUpdate(true);
+        seq.AppendInterval(0.6f).SetUpdate(true);
 
-        _seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true);
-        _seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true);
+        seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true);
+        seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true);
 
-        _seq.AppendInterval(1f).SetUpdate(true);
+        seq.AppendInterval(1f).SetUpdate(true);
 
-        _seq.AppendCallback(() =>
+        seq.AppendCallback(() =>
         {
             selectedObjcet.GetComponent<Image>().material = dissolveMat;
             selectedObjcet.transform.Find("DescArea").GetComponent<Image>().material = dissolveMat;
             DoFade(0.5f, 0.75f, 1f);
         });
 
-        _seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f)).SetUpdate(true);
+        seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f)).SetUpdate(true);
 
-        _seq.AppendCallback(() =>
+        seq.AppendCallback(() =>
         {
             InitCardSet();
         });
@@ -171,15 +175,14 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         none.GetComponent<Image>().material = dissolveMat;
         none.transform.Find("DescArea").GetComponent<Image>().material = dissolveMat;
 
-        DoFade(0.5f, 0.75f, 1f);
+
+         DoFade(0.5f, 0.75f, 1f);
         yield return new WaitForSecondsRealtime(0.2f);
         none.transform.DOLocalMoveY(1000f, 0.34f).SetUpdate(true);
     }
     public IEnumerator DissolveCard()
     {
-        Debug.Log("ㅁㄴ어ㅑㅕ멍");
         yield return new WaitForSecondsRealtime(3f);
-        Debug.Log("이히히 병시ㅏㄴ들");
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
         seq.AppendCallback(() => Time.timeScale = 1);

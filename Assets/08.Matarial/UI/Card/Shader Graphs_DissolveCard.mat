@@ -41,9 +41,9 @@ Material:
     - _Dissolve: 0.5
     - _DissolveBeginOffset: 5
     - _DissolveEndOffset: -5
-    - _EdgeThicknessA: 0.136
-    - _EdgeThicknessB: 0.234
-    - _NoiseScale: 50
+    - _EdgeThicknessA: 0.213
+    - _EdgeThicknessB: 0.15
+    - _NoiseScale: 74
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
