@@ -86,6 +86,34 @@ public class Bullet : PoolAbleObject
             }
         }
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        AudioManager.PlayAudioRandPitch(CollisionClip, 1, 0.1f, 0.5f);
+
+        GameObject bulletImpact = PoolManager.Instance.Pop(PoolType.BulletImpact).gameObject;
+        bulletImpact.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (isCanExplosion)
+            {
+                Collider[] cols = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer);
+
+                PoolManager.Instance.Pop(PoolType.BulletExplosionImpact).transform.
+                    SetPositionAndRotation(transform.position, Quaternion.LookRotation(inDir));
+
+                foreach (var col in cols)
+                {
+                    col.GetComponent<IDamageable>()?.ApplyDamage(Damage * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion));
+                }
+            }
+
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
+            //ÃÑ¾Ë ¼Ò¸ê
+            PoolManager.Instance.Push(PoolType, gameObject);
+        }
+        
+    }
 
     public void Init(Vector3 pos, Quaternion rot, bool isFirst)
     {

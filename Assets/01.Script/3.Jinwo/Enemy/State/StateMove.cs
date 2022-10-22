@@ -10,7 +10,6 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     private NavMeshAgent agent;
 
     private int hashMove = Animator.StringToHash("Move");
-    Coroutine updatePath;
 
     // 등록시 초기화
     public override void OnAwake()
@@ -78,7 +77,7 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     //사망햇을 때 코루틴 멈추기
     public void StopUpdatePath()
     {
-        stateMachineOwnerClass.StopCoroutine(updatePath);
+
     }
     public override void Exit()
     {

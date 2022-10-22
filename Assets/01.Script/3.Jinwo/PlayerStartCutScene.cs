@@ -74,14 +74,26 @@ public class PlayerStartCutScene : MonoBehaviour
         {
             if (singularity >= 1f)
             {
-                Debug.Log("부활");
+                Debug.Log("부활1");
                 break;
             }
             singularity += 0.01f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
             yield return null;
         }
-        bodyOutlineMat.SetFloat("_Thickness", 1f);
+        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            if (singularity <= 0f)
+            {
+                Debug.Log("부활2");
+                break;
+            }
+            singularity -= 0.01f;
+            playerResurrectionMat?.SetFloat("_Singularity", singularity);
+            yield return null;
+        }
+        bodyOutlineMat.SetFloat("_Thickness", 1.2f);
 
         for (int i = 0; i < allMaterials.Length; i++)
         {
@@ -115,6 +127,7 @@ public class PlayerStartCutScene : MonoBehaviour
 
 
         //블랙홀 생기는 거
+        
         while (true)
         {
             if (innerRadius <= -0.25)
@@ -131,6 +144,8 @@ public class PlayerStartCutScene : MonoBehaviour
         float startTime = Time.time;
         playerMat.SetVector("_TargetPosition", blackHolePos);
 
+        Glitch.GlitchManager.Instance.GrayValue();
+        CameraManager.Instance.CameraShake(13, 10, 1f);
         //플레이어 나오는거
         while (true)
         {
@@ -149,6 +164,7 @@ public class PlayerStartCutScene : MonoBehaviour
         bodyOutlineMat.SetFloat("_Thickness", 1.2f);
         yield return new WaitForSeconds(0.5f);
 
+        Glitch.GlitchManager.Instance.ZeroValue();
         //블랙홀 닫히는거
         while (true)
         {

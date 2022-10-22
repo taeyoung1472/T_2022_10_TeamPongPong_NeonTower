@@ -756,7 +756,7 @@ MonoBehaviour:
   dashDelay: 0.25
   damageIgnoreTime: 0.2
   dashClip: {fileID: 8300000, guid: 189c16f5da7b8e649a1aa5e71ec4ee38, type: 3}
-  dustParticle: {fileID: 0}
+  dustParticle: {fileID: 8506869634386257549}
   hud: {fileID: 0}
 --- !u!143 &894773788964889520
 CharacterController:
@@ -2117,6 +2117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a77092e0466c4046b962e421834ad73, type: 3}
+--- !u!198 &8506869634386257549 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2870822554203536151, guid: 6a77092e0466c4046b962e421834ad73, type: 3}
+  m_PrefabInstance: {fileID: 5897830104567733658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8410496948652094258
 PrefabInstance:
   m_ObjectHideFlags: 0
