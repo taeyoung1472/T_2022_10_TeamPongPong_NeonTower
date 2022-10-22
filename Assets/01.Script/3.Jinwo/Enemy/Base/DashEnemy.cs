@@ -9,7 +9,7 @@ public class DashEnemy : EnemyBase<DashEnemy>
     protected override void Awake()
     {
         base.Awake();
-        motionTrail = GetComponent<MeshAfterImage>();
+        motionTrail = GetComponentInChildren<MeshAfterImage>();
 
         fsmManager = new StateMachine<DashEnemy>(this, new StateMove<DashEnemy>());
 

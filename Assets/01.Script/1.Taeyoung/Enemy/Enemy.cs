@@ -34,7 +34,6 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     }
 
     protected LayerMask whatIsTarget; // 추적 대상 레이어
-
     protected Transform attackRoot;
 
     protected bool isAttack = false;
