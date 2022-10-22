@@ -45,12 +45,12 @@ public class StraightMotar : BossState<BulletBoss>
             //     stateMachineOwnerClass.transform.position) * new Vector3(0f, 0f, i * 6f);
             Vector3 pos = stateMachineOwnerClass.transform.position + dir * (i * 6);
 
-            GameObject obj = DangerZone.DrawCircle(pos, 0.5f, 1f);
+            GameObject obj = DangerZone.DrawCircle(pos, 4f, 1f);
 
             obj.transform.rotation = Quaternion.LookRotation
                      (stateMachineOwnerClass.Target.position - stateMachineOwnerClass.transform.position);
 
-            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+            obj.transform.DOScale(new Vector3(5f, 4f, 5f), 1f);
             obj.transform.DOMoveY(0.1f, 1f);
 
             circlePositions.Add(pos);

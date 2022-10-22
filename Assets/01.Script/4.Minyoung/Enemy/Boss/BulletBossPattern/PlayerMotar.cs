@@ -29,8 +29,8 @@ public class PlayerMotar : BossState<BulletBoss>
             Vector3 dir = stateMachineOwnerClass.Target.position + randomPos;
 
             randomPositions.Add(dir);
-            GameObject obj = DangerZone.DrawCircle(dir, 0.5f, 1.5f);
-            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+            GameObject obj = DangerZone.DrawCircle(dir, 4f, 1.5f);
+            obj.transform.DOScale(new Vector3(5f, 5f, 5f), 1f);
             yield return new WaitForSeconds(0.3f);
         }
 
