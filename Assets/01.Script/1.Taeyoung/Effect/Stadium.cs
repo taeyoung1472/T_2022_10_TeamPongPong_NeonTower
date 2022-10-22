@@ -7,9 +7,9 @@ public class Stadium : CubeMap
 {
     private Pattern stadium;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        // DoNothing
+        //DoNothing
     }
 
     public void Active()
@@ -55,8 +55,8 @@ public class Stadium : CubeMap
         {
             DeActiveCube(cube);
         }
+        this.Invoke(() => StadiumManager.Instance.DeActivePattern(), 4);
         this.Invoke(() => gameObject.SetActive(false), 5);
-        this.Invoke(() => StadiumManager.Instance.DeActivePattern(), 5);
     }
     /*class PerinNoiseCube : MonoBehaviour
     {

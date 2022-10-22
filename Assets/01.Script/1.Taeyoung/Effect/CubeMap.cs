@@ -11,14 +11,25 @@ public class CubeMap : MonoBehaviour
 
     protected List<Pattern> patternList = new();
     protected int prevIdx = -1;
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        if(patternList.Count == 0)
         {
-            patternList.Add(new Pattern(transform.GetChild(i)));
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                patternList.Add(new Pattern(transform.GetChild(i)));
+            }
         }
 
         StartCoroutine(MapCycle());
+    }
+    protected virtual void OnDisable()
+    {
+        foreach (Transform cube in prevPattern)
+        {
+            cube.gameObject.SetActive(false);
+        }
+        prevPattern.Clear();
     }
     protected virtual IEnumerator MapCycle()
     {

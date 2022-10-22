@@ -135,8 +135,6 @@ MonoBehaviour:
     - {fileID: 1597222959}
     - {fileID: 1821025403}
     - {fileID: 212432013}
-  firePosLevel: 0
-  fireDelay: 0.2
 --- !u!1 &895203462
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +596,7 @@ GameObject:
   - component: {fileID: 894773788964889520}
   - component: {fileID: 111841581}
   - component: {fileID: 111841583}
+  - component: {fileID: 6635628936466944631}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -639,7 +638,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 5
   speed: 5
+  maxDash: 3
+  dashSpeed: 5
+  dashDuration: 0.1
+  dashDelay: 0.25
   damageIgnoreTime: 0.2
+  dashClip: {fileID: 8300000, guid: 189c16f5da7b8e649a1aa5e71ec4ee38, type: 3}
+  dustParticle: {fileID: 8643800381799612854, guid: 1019cc5e50a22c84fb3720bff4bde8a2, type: 3}
+  hud: {fileID: 0}
 --- !u!143 &894773788964889520
 CharacterController:
   m_ObjectHideFlags: 0
@@ -767,6 +773,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6635628936466944631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5410460891526572490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ea7fb79643ef6409b72a3f6e935f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackHoleTrm: {fileID: 0}
+  blackHoleMat: {fileID: 2100000, guid: a09c241656b98f048a6aa62b7fe2159b, type: 2}
+  playerMat: {fileID: 2100000, guid: fa6522317f1f1624b996350a6abc2188, type: 2}
+  playerResurrectionMat: {fileID: 2100000, guid: beeb4e614f85c7f49b8fc7a26d9c8379, type: 2}
+  progress: 1
+  innerRadius: 0.1
+  singularity: 0
+  bodyOutlineMat: {fileID: 2100000, guid: ba5aed97d8889b548ac22a00579fcbe0, type: 2}
 --- !u!1 &5410460891770340589
 GameObject:
   m_ObjectHideFlags: 0
