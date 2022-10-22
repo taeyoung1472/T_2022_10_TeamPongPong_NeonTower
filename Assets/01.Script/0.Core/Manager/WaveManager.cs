@@ -76,11 +76,13 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 EnemySubject.Instance.NotifyObserver();
                 Define.Instance.playerController.transform.position = new Vector3(0, 0, -15);
                 StadiumManager.Instance.StadiumMatches[bossIdx].Active();
-                bossIdx++;
                 BGMChanger.Instance.ActiveAudio(BGMType.Boss);
 
                 yield return new WaitUntil(() => isBossClear);
+                StadiumManager.Instance.StadiumMatches[bossIdx].DeActive();
                 BGMChanger.Instance.ActiveAudio(BGMType.Default);
+
+                bossIdx++;
                 #endregion
                 EXPManager.Instance.isCanLevelup = true;
                 EnemySubject.Instance.NotifyObserver();
@@ -109,6 +111,8 @@ public class WaveManager : MonoSingleTon<WaveManager>
             else
             {
                 #region Dotween Ã³¸®
+                waveText.SetText($"{(CurWave + 1) % 5} Wave");
+
                 Sequence seqWave = DOTween.Sequence();
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
                 seqWave.AppendInterval(2f);
