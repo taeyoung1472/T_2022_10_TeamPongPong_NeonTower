@@ -41,6 +41,8 @@ public class Sword : BossBase<Sword>
 
     public Material myMat;
 
+    public GameObject dangerZone = null;
+
 
     [Header("카메라 관련")]
     public float amplitude = 0;
@@ -83,6 +85,7 @@ public class Sword : BossBase<Sword>
 
        // motionTrail._data.
     }
+
     private void Start()
     {
         isAttacking = false;
@@ -94,7 +97,7 @@ public class Sword : BossBase<Sword>
         animeEvent.startAnime = EnableEffect;
         animeEvent.endAnime = DisableEffect;
         animeEvent.damageEvent = StartApplyDamage;
-
+        animeEvent.dieEvent = DieEvent;
 
     }
     protected override void Update()
@@ -125,11 +128,20 @@ public class Sword : BossBase<Sword>
         if (CurHp <= 0)
         {
             Debug.Log("사망 !!");
+            if (dangerZone != null)
+            {
+                MonoHelper._Destroy(dangerZone, 0.1f);
+            }
+
+            Glitch.GlitchManager.Instance.GrayValue();
+            motionTrail.enabled = false;
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             StopAllCoroutines();
             OnDeathEvent?.Invoke();
             bossFsm.ChangeState<SwordDie<Sword>>();
         }
     }
+    
     public override void Die()
     {
         //OnDeathEvent?.Invoke();
@@ -272,5 +284,8 @@ public class Sword : BossBase<Sword>
         lastAttackedTargets.Clear();
         isApplyDamage = false;
     }
-
+    public void DieEvent()
+    {
+        Glitch.GlitchManager.Instance.ZeroValue();
+    }
 }
