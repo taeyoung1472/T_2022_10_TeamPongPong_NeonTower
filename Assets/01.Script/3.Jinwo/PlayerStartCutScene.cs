@@ -13,7 +13,7 @@ public class PlayerStartCutScene : MonoBehaviour
     public Material bodyOutlineMat;
     private void Awake()
     {
-        bodyOutlineMat.SetFloat("_Thickness", 0);
+        
         blackHoleTrm.SetActive(false);
     }
     private void Start()
@@ -30,6 +30,7 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     public IEnumerator StartCutScene()
     {
+        bodyOutlineMat.SetFloat("_Thickness", 0);
         blackHoleTrm.SetActive(true);
 
         progress = 1;

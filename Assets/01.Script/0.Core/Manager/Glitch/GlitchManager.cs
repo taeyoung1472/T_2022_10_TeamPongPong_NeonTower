@@ -128,7 +128,7 @@ namespace Glitch
             _scanLineJitter = 0.1f;
             _horizontalShake = 0.1f;
             _colorDrift = 0.1f;
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.3f);
             ZeroValue();
         }
         IEnumerator GameStartCutScene()
