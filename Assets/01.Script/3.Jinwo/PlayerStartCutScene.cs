@@ -20,7 +20,7 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     private void Start()
     {
-        //StartCoroutine(StartCutScene());
+        StartCoroutine(StartCutScene());
     }
     void Update()
     {
