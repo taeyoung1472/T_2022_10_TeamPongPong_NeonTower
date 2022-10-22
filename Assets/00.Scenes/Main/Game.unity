@@ -3424,7 +3424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 40
+  wavePerTime: 9
   waveChangeTime: 8
   bossList:
   - {fileID: 928772313}
@@ -6190,6 +6190,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 959809164}
     - target: {fileID: 7874223035767743263, guid: 68fb41cfdf7b8f74e82ee4cb3cb9ecf3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874223035785388398, guid: 68fb41cfdf7b8f74e82ee4cb3cb9ecf3, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -12549,7 +12553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480f247cc90b716409a237bc0fbd4200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCanLevelup: 1
   upgradeUI: {fileID: 1258109056}
   levelUpEffect: {fileID: 0}
   expTable: 0a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d010000140100003f420f00

@@ -108,22 +108,22 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EXPManager.Instance.AddExp();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            EnemySubject.Instance.NotifyObserver();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            FindObjectOfType<EnemySpawner>().IsCanSpawn = false;
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            FindObjectOfType<EnemySpawner>().IsCanSpawn = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    EXPManager.Instance.AddExp();
+        //}
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    EnemySubject.Instance.NotifyObserver();
+        //}
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    FindObjectOfType<EnemySpawner>().IsCanSpawn = false;
+        //}
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    FindObjectOfType<EnemySpawner>().IsCanSpawn = true;
+        //}
         if (Time.time > 3)
         {
             Audio();
