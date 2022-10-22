@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private float dashSpeed = 5f;
     [SerializeField] private float dashDuration = 0.1f;
     [SerializeField] private float dashDelay = 0.25f;
+    [SerializeField] private float idleTime = 5f;
 
     // [Header("[GetSet 프로퍼티]")]
     public float CurSpeed { get 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
     public bool IsDead { get { return isDead; } }
+    public bool IsIdle { get { return isIdle; } }
     public int CurDash { get { return curDash; } set { curDash = value; hud.SetDashValue(curDash, maxDash); } }
 
     [Header("[타이머]")]
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Vector3 moveDir;
     private bool isDead = false;
     private bool isDashing = false;
+    private bool isIdle = true;
 
     public Vector3 MoveDir => moveDir;
 
@@ -88,6 +91,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Start()
     {
+        this.Invoke(() => { isIdle = false; }, idleTime);
         SetLayer();
         InitData();
 
@@ -108,23 +112,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    EXPManager.Instance.AddExp();
-        //}
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    EnemySubject.Instance.NotifyObserver();
-        //}
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    FindObjectOfType<EnemySpawner>().IsCanSpawn = false;
-        //}
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    FindObjectOfType<EnemySpawner>().IsCanSpawn = true;
-        //}
-        if (Time.time > 3)
+        if (!isIdle)
         {
             Audio();
             if (isDead) return;
@@ -197,8 +185,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         float volume = rollingAudioSource.volume;
 
+        rollingSoundGoal = Time.timeScale != 0 ? Mathf.Lerp(volume, rollingSoundGoal, Time.deltaTime * 5) : 0;
         rollingAudioSource.volume = rollingSoundGoal;
-        rollingSoundGoal = Mathf.Lerp(volume, rollingSoundGoal, Time.deltaTime * 5);
     }
 
     IEnumerator DamageSystem()
@@ -226,7 +214,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         while (true)
         {
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) && curDash > 0);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) && curDash > 0 && (moveDir.x != 0 || moveDir.z != 0));
 
             isDashing = true;
             AudioManager.PlayAudio(dashClip);
