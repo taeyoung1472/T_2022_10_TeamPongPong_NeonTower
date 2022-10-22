@@ -11,7 +11,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
     private int curWave = 0;
     private int curFloor = 1;
     private float waveTimer = 0;
-    private bool isBossClear = false;
+    private bool isBossClear = true;
 
     public int CurWave { get { return curWave; } }
     public int CurFloor { get { return curFloor; } }
@@ -45,9 +45,13 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
     public void Update()
     {
-        if(_waveUIManager != null)
+        if(_waveUIManager != null && IsBossClear)
         {
             _waveUIManager.NextWaveTextSet(wavePerTime, waveTimer);
+        }
+        else
+        {
+            _waveUIManager.NextWaveTextSet(0, 0);
         }
         waveTimer += Time.deltaTime;
     }
@@ -114,7 +118,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
             else
             {
                 #region Dotween Ã³¸®
-                waveText.SetText($"{(CurWave % 4) + 1} Wave");
+                waveText.SetText($"{CurWave % 4 + 1} Wave");
 
                 Sequence seqWave = DOTween.Sequence();
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));

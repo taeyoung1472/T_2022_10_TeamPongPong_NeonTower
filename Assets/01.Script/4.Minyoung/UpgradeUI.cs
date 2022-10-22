@@ -119,7 +119,10 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true); // 가운데로 모으고
         seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true); // 회전 원위치
 
-        seq.AppendInterval(1f).SetUpdate(true);
+        seq.Append(selectedObjcet.transform.DOScale(1.25f, 0.5f));
+        seq.Append(selectedObjcet.transform.DOScale(1f, 0.2f));
+
+        seq.AppendInterval(0.2f).SetUpdate(true);
 
         seq.AppendCallback(() =>
         {

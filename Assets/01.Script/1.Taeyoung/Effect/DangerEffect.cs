@@ -7,6 +7,8 @@ public class DangerEffect : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI dangerTmp;
 
+    private Collider col;
+
     GameObject cam;
 
     private float time;
@@ -16,6 +18,7 @@ public class DangerEffect : MonoBehaviour
 
     public void Awake()
     {
+        col = GetComponent<Collider>();
         cam = Camera.main.gameObject;
     }
 
@@ -28,7 +31,16 @@ public class DangerEffect : MonoBehaviour
 
     public void Update()
     {
-        if (isInSector && WaveManager.Instance.IsBossClear && !isDead)
+        if (!WaveManager.Instance.IsBossClear)
+        {
+            col.enabled = false;
+        }
+        else
+        {
+            col.enabled = true;
+        }
+
+        if (isInSector && !isDead)
         {
             dangerTmp.text = $"내려가십시오! {time:0.0}";
             time -= Time.deltaTime;
