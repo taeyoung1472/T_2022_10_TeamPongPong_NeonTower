@@ -122,6 +122,8 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossHpSlider.gameObject.SetActive(false);
         _bossImage.transform.parent.gameObject.SetActive(false);
         _bossNameText.gameObject.SetActive(false);
+
+        WaveManager.Instance.IsBossClear = true;
     }
 
     public void DangerAnimation(float dangerIdleTime, Boss boss)

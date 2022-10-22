@@ -1,16 +1,13 @@
 using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
-using System;
 
 public class UpgradeUI : MonoBehaviour, IUserInterface
 {
     public List<CardImage> cardsTrm;
-
-    public List<GameObject> pointLights;
 
     private Sequence _seq = null;
 
@@ -20,16 +17,8 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     public UnityEvent OnOpenUI { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public UnityEvent OnCloseUI { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    [SerializeField] private GameObject upgradeUI;
-
     public Material dissolveMat;
-    public Material originMat;
 
-    public GameObject oneLight;
-    public GameObject twoLight;
-    public GameObject threeLight;
-
-    //public Action endUpgrade;
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -43,13 +32,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         cardsTrm[0].SetData(so[0]);
         cardsTrm[1].SetData(so[1]);
         cardsTrm[2].SetData(so[2]);
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            UIManager.Instance.ActiveUI(upgradeUI);
-        }
     }
     public void OpenUI()
     {
@@ -69,9 +51,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         {
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
-            //cardsTrm[0].GetComponent<Button>().gameObject.SetActive(false);
-            //cardsTrm[1].GetComponent<Button>().gameObject.SetActive(false);
-            //cardsTrm[2].GetComponent<Button>().gameObject.SetActive(false);
         });
         seq.Append(cardsTrm[0].transform.DOLocalMove(new Vector3(-600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
         seq.Insert(0.6f, cardsTrm[0].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
@@ -81,12 +60,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
         seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
-        _seq.AppendCallback(() =>
-        {
-            dissolveMat.SetFloat("_Dissolve", 0.5f);
-        });
-
-
     }
 
     public void CloseUI()
@@ -100,11 +73,6 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     }
     public void InitCardSet()
     {
-        foreach (var card in cardsTrm)
-        {
-            card.GetComponent<Image>().material = originMat;
-            card.transform.Find("DescArea").GetComponent<Image>().material = originMat;
-        }
         cardsTrm[0].transform.localPosition = new Vector3(-600, 1000, 0);
         cardsTrm[1].transform.localPosition = new Vector3(-0, 1000, 0);
         cardsTrm[2].transform.localPosition = new Vector3(600, 1000, 0);
@@ -113,18 +81,15 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         cardsTrm[1].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         cardsTrm[2].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -7));
 
-
-        cardsTrm[0].transform.GetComponent<CanvasGroup>().alpha = 0.5f;
-        cardsTrm[1].transform.GetComponent<CanvasGroup>().alpha = 0.5f;
-        cardsTrm[2].transform.GetComponent<CanvasGroup>().alpha = 0.5f;
-
-        for (int i = 0; i < 3; i++)
+        foreach (var card in cardsTrm)
         {
-
-            cardsTrm[i].GetComponent<Image>().material = originMat;
+            card.GetComponent<CanvasGroup>().alpha = 0.5f;
         }
-       // dissolveMat.SetFloat("_Dissolve", 0f);
 
+        foreach (var card in cardsTrm)
+        {
+            card.GetComponent<Image>().material = null;
+        }
     }
     public void UpgradeCardEffect(GameObject selectedObjcet)
     {
@@ -141,7 +106,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
             float t = 0;
             foreach (var none in noneSelectedCards)
             {
-                StartCoroutine(DissolveAndOut(t, none, selectedObjcet));
+                StartCoroutine(DissolveAndOut(t, none));
                 t += 0.3f;
             }
         }
@@ -156,13 +121,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         seq.AppendCallback(() =>
         {
             selectedObjcet.GetComponent<Image>().material = dissolveMat;
-            selectedObjcet.transform.Find("DescArea").GetComponent<Image>().material = dissolveMat;
-            DoFade(0.45f, 0.55f, 0.8f);
-            dissolveMat.SetFloat("_Dissolve", 0f);
-
-            //DoFade(0.5f, 0.75f, 1f);
-            //카드가 끝나고실행
-
+            DoFade(0.485f, 0.57f, 0.5f, selectedObjcet.GetComponent<Image>().material);
         });
 
         seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, -1000, 0), 0.76f)).SetUpdate(true);
@@ -189,21 +148,14 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     }
 
 
-    private IEnumerator DissolveAndOut(float time, GameObject none, GameObject selectedObjcet)
+    private IEnumerator DissolveAndOut(float time, GameObject none)
     {
         yield return new WaitForSecondsRealtime(time);
 
         none.GetComponent<Image>().material = dissolveMat;
-        none.transform.Find("DescArea").GetComponent<Image>().material = dissolveMat;
-
-
-        //DoFade(0.5f, 0.75f, 1f);
-
-        Debug.Log("Df");
-        DoFade(0.45f, 0.55f, 0.8f);
-         dissolveMat.SetFloat("_Dissolve", 0f);
-
-        //DoFade(0.45f, 0.55f, 0.5f);
+        
+        DoFade(0.485f, 0.57f, 0.5f, none.GetComponent<Image>().material);
+        
         yield return new WaitForSecondsRealtime(0.2f);
         none.transform.DOLocalMoveY(1000f, 0.34f).SetUpdate(true);
 
@@ -216,25 +168,8 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         seq.AppendCallback(() => Time.timeScale = 1);
     }
 
-  public  void DoFade(float start, float dest, float time)
+    public void DoFade(float start, float dest, float time, Material dissolveMat)
     {
         DOTween.To(() => start, x => { start = x; dissolveMat.SetFloat("_Dissolve", start); }, dest, time).SetUpdate(true);
-        Debug.Log("As");
-        //iTween.ValueTo(gameObject, iTween.Hash("from", start, "to", dest, "time", time, "onupdatetarget", gameObject, "onupdate", "TweenOnUpdate", "oncomplte",
-        //    "TweenOnComplte", "easetype", iTween.EaseType.easeInOutCubic
-        //    ));
     }
-    //void TweenOnUpdate(float value)
-    //{
-    //    dissolveMat.SetFloat("_Dissolve", value);
-    //}
-    //void TweenOnComplte()
-    //{
-    //    for (int i = 0; i < 3; i++)
-    //    {
-
-    //        cardsTrm[i].GetComponent<Image>().material = originMat;
-    //    }
-
-    //}
 }

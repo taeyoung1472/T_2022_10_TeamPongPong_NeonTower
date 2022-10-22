@@ -13,7 +13,6 @@ public class WaveUIManager : MonoSingleTon<WaveUIManager>
     private List<Image> _floorsImages = new List<Image>();
     [SerializeField]
     private List<Image> _waveImages = new List<Image>();
-    [SerializeField]
     private List<Transform> _waveImagesParents = new List<Transform>();
     [SerializeField]
     private TextMeshProUGUI _floorText = null;
@@ -53,13 +52,10 @@ public class WaveUIManager : MonoSingleTon<WaveUIManager>
 
     public void WaveCount(int floorCnt, int waveCnt)
     {
-        _popupText.DoCount(() =>
-        {
-            SetImage(floorCnt, waveCnt);
-        });
+        _popupText.DoCount(null);
     }
 
-    private void SetImage(int floorCnt, int waveCnt)
+    public void SetImage(int floorCnt, int waveCnt)
     {
         SetFloorImage(floorCnt);
         SetWaveImage(waveCnt);

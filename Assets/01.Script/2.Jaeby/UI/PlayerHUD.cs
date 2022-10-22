@@ -55,16 +55,13 @@ public class PlayerHUD : MonoBehaviour
 
     StringBuilder _sb = null;
 
-    private void Start()
-    {
-        _sb = new StringBuilder();
-    }
-
     public void SetDashValue(int value, int maxValue)
     {
         if (value < 0) return;
 
         print($"Value : {value}, MaxValue : {maxValue}");
+
+        if (_sb == null) _sb = new();
 
         _sb.Append($"<#{ColorUtility.ToHtmlStringRGBA(_EnableColor)}>");
         for (int i = 0; i < value; i++)

@@ -42,6 +42,5 @@ public class Boss : MonoBehaviour, IDamageable
     public virtual void Die()
     {
         WaveManager.Instance.IsBossClear = true;
-        Destroy(gameObject);
     }
 }
