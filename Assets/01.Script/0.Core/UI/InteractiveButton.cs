@@ -44,6 +44,15 @@ public class InteractiveButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         image.DOColor(originColor, 0.4f).SetUpdate(true);
     }
 
+    private void OnDisable()
+    {
+        Kill();
+
+        rectTransform.anchoredPosition = new Vector2(originPos, rectTransform.anchoredPosition.y);
+        rectTransform.localScale = Vector3.one;
+        image.color = originColor;
+    }
+
     protected virtual void Kill()
     {
         image.DOKill();

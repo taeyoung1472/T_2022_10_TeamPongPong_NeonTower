@@ -31,13 +31,13 @@ public class WaveCountdown : MonoBehaviour
         for (int i = 5; i > 0; i--)
         {
             _seq.Append(_text.transform.DOShakePosition(1f, 10, 15, 90, false, true));
-            _seq.Join(_text.transform.DOScale(1.5f, 1f).SetUpdate(true));
-            AudioManager.PlayAudio(_countDownClip);
+            _seq.Join(_text.transform.DOScale(1f, 1f));
             _seq.AppendCallback(() =>
             {
+                AudioManager.PlayAudio(_countDownClip);
                 _text.SetText(count.ToString());
                 count--;
-                _text.transform.localScale = Vector3.one;
+                _text.transform.localScale = Vector3.one * 1.5f;
             });
         }
         _seq.AppendCallback(() =>

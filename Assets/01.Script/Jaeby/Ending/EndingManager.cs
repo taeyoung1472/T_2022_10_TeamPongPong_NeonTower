@@ -138,12 +138,14 @@ public class EndingManager : MonoBehaviour
         //seq.AppendInterval(_waveClip.length - 1.5f);
 
         seq.Append(_earthObj.transform.DOMove(_earthPos[j], _waveClip.length - 1.5f));
+
+        seq.Append(_playerObj.transform.DOMoveY(50f, 7f));
         seq.AppendCallback(() =>
         {
             StartCoroutine(OnBoom());
         });
 
-        seq.AppendInterval(2f);
+        seq.AppendInterval(5f);
         seq.Append(_fade.DOFade(1f, 1f));
         seq.AppendCallback(() =>
         {
@@ -154,11 +156,12 @@ public class EndingManager : MonoBehaviour
 
     private IEnumerator OnBoom()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 15; i++)
         {
-            Instantiate(_boomEffect, _playerObj.transform.position + Vector3.forward * 50f + Random.insideUnitSphere * 15f, Quaternion.identity);
+            Vector2 random = Random.insideUnitCircle * 45f;
+            Instantiate(_boomEffect, _playerObj.transform.position + Vector3.forward * 70f + new Vector3(random.x, random.y, 0f), Quaternion.identity);
             AudioManager.PlayAudio(_explosionClip);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

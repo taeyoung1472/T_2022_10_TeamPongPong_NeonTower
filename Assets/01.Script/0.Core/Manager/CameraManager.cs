@@ -150,7 +150,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
             else
                 _cmVCam.Follow = lastTarget;
 
-            if (!isBoss)
+            if (!isBoss && WaveManager.Instance != null)
             {
                 WaveManager.Instance.IsBossClear = true;
             }
