@@ -46,21 +46,10 @@ namespace Glitch
 
             Scene scene = SceneManager.GetActiveScene();
 
-            if(scene.name == "Game")
+            if(scene.name == "Game" || scene.name == "Tutorial")
             {
-                Debug.Log("Game¾À ÀüÈ¯");
                 gameUi?.SetActive(false);
                 StartGameCutScene();
-            }
-            else if(scene.name == "Game 1")
-            {
-                Debug.Log("Game¾À ÀüÈ¯");
-                gameUi?.SetActive(false);
-                StartGameCutScene();
-            }
-            else if(scene.name == "Jinwo")
-            {
-                ZeroValue();
             }
             else if(scene.name == "Menu")
             {
@@ -154,7 +143,7 @@ namespace Glitch
                 yield return new WaitForSeconds(0.02f);
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
 
             while (true)
             {
@@ -180,6 +169,7 @@ namespace Glitch
         }
         IEnumerator GameStartCutScene()
         {
+            fadeOutImage.gameObject.SetActive(true);
             while (_intensity > 0.01f)
             {
                 //if(_intensity < 0.4f)
@@ -196,6 +186,7 @@ namespace Glitch
 
                 yield return new WaitForSeconds(0.05f);
             }
+            fadeOutImage.gameObject.SetActive(false);
             gameUi?.SetActive(true);
             //ZeroValue();
         }

@@ -134,6 +134,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
     {
         Sequence seq = DOTween.Sequence();
         _fadeUI.gameObject.SetActive(true);
+        Glitch.GlitchManager.Instance.LoadGameCutScene();
         seq.Append(_fadeUI.DOFade(1f, 3f));
         seq.AppendCallback(() =>
         {
