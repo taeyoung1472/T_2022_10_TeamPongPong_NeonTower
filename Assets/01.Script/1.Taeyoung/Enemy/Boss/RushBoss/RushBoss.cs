@@ -6,6 +6,17 @@ using UnityEngine.AI;
 public class RushBoss : BossBase<RushBoss>
 {
     [SerializeField]
+    private AudioClip _dashStartClip = null;
+    [SerializeField]
+    private AudioClip _punchClip = null;
+    [SerializeField]
+    private AudioClip _exploClip = null;
+
+    public AudioClip DashStartClip => _dashStartClip;
+    public AudioClip PunchClip => _punchClip;
+    public AudioClip ExploClip => _exploClip;
+
+    [SerializeField]
     private Material _mat = null;
     public Material Mat => _mat;
     [SerializeField]

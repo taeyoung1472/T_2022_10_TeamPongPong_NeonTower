@@ -14,6 +14,7 @@ public class RushAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.RushForceField.SetActive(true);
         stateMachineOwnerClass.Animator.SetBool("Rush", true);
         BossUIManager.Instance.BossPopupText("조심하세요! 보스가 돌진합니다!", 1.5f, 2);
+        AudioManager.PlayAudio(stateMachineOwnerClass.DashStartClip);
     }
 
     public override void Execute()

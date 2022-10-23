@@ -9,6 +9,8 @@ public class SummonerBoss : BossBase<SummonerBoss>
     [SerializeField]
     private AudioClip _slowClip = null;
     [SerializeField]
+    private AudioClip _dieClip = null;
+    [SerializeField]
     private AudioSource _walkSource = null;
 
     public AudioClip SlowClip => _slowClip;
@@ -147,6 +149,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
         for(int i = 0; i < 2; i++ )
         {
             GameObject obj = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+            AudioManager.PlayAudio(_dieClip);
             yield return new WaitForSeconds(0.5f);
         }
     }

@@ -35,6 +35,7 @@ public class WaveAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("GroundPound") == false);
         CameraManager.Instance.CameraShake(12f, 30f, 0.23f);
+        AudioManager.PlayAudio(stateMachineOwnerClass.ExploClip);
         List<Collider> cols = new List<Collider>();
         for (int i = 0; i < positions.Count; i++)
         {

@@ -9716,6 +9716,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _slowClip: {fileID: 8300000, guid: 80d624a2555d4804887b619f52d9a2d2, type: 3}
+  _dieClip: {fileID: 8300000, guid: 994c8815737132042859e98b00d6400e, type: 3}
   _walkSource: {fileID: 5064653740812581835}
   _explosionEffect: {fileID: 8917420836192593129, guid: 21016f10e5cca524d9fe2696a835fad1, type: 3}
   _speed: 8
