@@ -140,6 +140,7 @@ public class PlayerStartCutScene : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         GameObject go = Instantiate(blackHoleTrm, blackHolePos, Quaternion.Euler(-180, 0, 0));
+        AudioManager.PlayAudio(UISoundManager.Instance.data.portalOpenClip);
         go.SetActive(true);
 
 
@@ -170,6 +171,8 @@ public class PlayerStartCutScene : MonoBehaviour
 
         
         CameraManager.Instance.CameraShake(13, 10, 1f);
+        AudioManager.PlayAudio(UISoundManager.Instance.data.portalCloseClip);
+
         //플레이어 나오는거
         while (true)
         {

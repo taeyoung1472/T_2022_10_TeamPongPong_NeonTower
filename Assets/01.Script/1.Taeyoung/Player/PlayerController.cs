@@ -242,6 +242,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
             curHp--;
             hud.HPValue = curHp;
+            AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.playerHitClip);
 
             if (curHp <= 0)
             {

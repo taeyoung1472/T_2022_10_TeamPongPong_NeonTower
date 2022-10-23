@@ -219,6 +219,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayClickClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9760542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3559,6 +3571,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &502538751
 GameObject:
   m_ObjectHideFlags: 0
@@ -4746,6 +4770,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &796567832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4947,6 +4983,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1758656721}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayClickClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6586,6 +6634,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayClickClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &985172408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7174,6 +7234,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayClickClip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1037163544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7316,6 +7388,18 @@ MonoBehaviour:
       - m_Target: {fileID: 150357280}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DeActiveUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13618,6 +13702,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1758656721}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayClickClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
