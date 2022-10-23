@@ -77,7 +77,14 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     #region PoolAble
     public override void Init_Pop()
     {
-        health = enemyData.floorPerPerformance[WaveManager.Instance.CurFloor - 1].maxHp;
+        if (WaveManager.Instance)
+        {
+            health = enemyData.floorPerPerformance[WaveManager.Instance.CurFloor - 1].maxHp;
+        }
+        else
+        {
+            health = 3;
+        }
         dead = false;
         baseScale = transform.localScale;
         EnemySubject.Instance.RegisterObserver(this);
