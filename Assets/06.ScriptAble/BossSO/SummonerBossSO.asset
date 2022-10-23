@@ -16,6 +16,6 @@ MonoBehaviour:
   bossName: "\uC309\uBC8C\uB808"
   speed: 5
   damage: 1
-  maxHp: 300
+  maxHp: 50
   attackRange: 10
   patternCoolTime: 4

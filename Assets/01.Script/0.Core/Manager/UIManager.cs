@@ -7,9 +7,8 @@ public class UIManager : MonoSingleTon<UIManager>
     [Header("[UI Canvas]")]
     [SerializeField] private GameObject _escUI = null;
     [SerializeField] private GameObject _continueUI = null;
+    [SerializeField] private GameObject _gameUI = null;
 
-    [SerializeField]
-    private AudioClip ClickClip = null;
     public bool isActiveContinue;
     private bool isDisplayContinue = true;
     public bool IsDisplayContinue { get { return isDisplayContinue; } set { isDisplayContinue = value; } }
@@ -38,6 +37,7 @@ public class UIManager : MonoSingleTon<UIManager>
 
         _popupStack.Push(targetUI.GetComponent<IUserInterface>());
         _popupStack.Peek().OpenUI();
+        _gameUI.SetActive(false);
     }
 
     public void DeActiveUI()
@@ -55,6 +55,7 @@ public class UIManager : MonoSingleTon<UIManager>
                 _continueUI.GetComponent<IUserInterface>().OpenUI();
             }
             isActiveContinue = true;
+            _gameUI.SetActive(true);
         }
         else if (_popupStack.Count == 0)
         {
@@ -62,13 +63,7 @@ public class UIManager : MonoSingleTon<UIManager>
             {
                 _continueUI.GetComponent<IUserInterface>().CloseUI();
             }
+            _gameUI.SetActive(true);
         }
     }
-
-    #region ClickSound
-    public void ClickSundPlay()
-    {
-        PoolManager.Instance.Pop(PoolType.Sound).GetComponent<AudioPoolObject>().Play(ClickClip);
-    }
-    #endregion
 }

@@ -701,6 +701,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 00379ff33019bab4c9495c70aa3c3ff7, type: 3}
   - type: 1
     clip: {fileID: 8300000, guid: d27f07ee512f26745924876a153aad51, type: 3}
+  - type: 2
+    clip: {fileID: 8300000, guid: 0874160ad79b71046a6cdde9cbeee20d, type: 3}
 --- !u!82 &92724086
 AudioSource:
   m_ObjectHideFlags: 0
@@ -992,7 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _escUI: {fileID: 994438561}
   _continueUI: {fileID: 1944427204}
-  ClickClip: {fileID: 0}
+  _gameUI: {fileID: 871924145}
   isActiveContinue: 0
 --- !u!1 &158365147
 GameObject:
@@ -12612,11 +12614,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 1258109056}
   levelUpEffect: {fileID: 0}
-  expTable: 0a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d010000140100003f420f00
+  expTable: 030000000a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d0100003f420f00
   expPercentText: {fileID: 285960307}
   levelText: {fileID: 1103198005}
   expSlider: {fileID: 297708820}
-  stdExp: 10
+  stdExp: 3
   upExp: 7
 --- !u!1 &1882471761
 GameObject:
@@ -14436,12 +14438,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: resurrectionCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 182315599, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 871924145}
     - target: {fileID: 182315599, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: diePanel
       value: 
-      objectReference: {fileID: 87898656}
+      objectReference: {fileID: 6448704222733311827}
     - target: {fileID: 5410460891526572490, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: m_Name
       value: Player

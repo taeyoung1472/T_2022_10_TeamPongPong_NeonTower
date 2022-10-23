@@ -35,6 +35,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     }
     public void OpenUI()
     {
+        BGMChanger.Instance.ActiveAudio(BGMType.Upgrade);
         UIManager.Instance.IsDisplayContinue = false;
         Time.timeScale = 0f;
 
@@ -158,6 +159,8 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         }
         #endregion
+
+        BGMChanger.Instance.ActiveAudio(BGMType.Default);
 
         Debug.Log($"{selectedObjcet.name} 카드가 눌림");
     }

@@ -34,8 +34,8 @@ public class BGMChanger : MonoSingleTon<BGMChanger>
             while (vol >= 0)
             {
                 bgmSource.volume = vol;
-                vol -= Time.deltaTime;
-                yield return null;
+                vol -= 0.05f;
+                yield return new WaitForSecondsRealtime(0.05f);
             }
         }
         bgmSource.clip = newClip;
@@ -44,8 +44,8 @@ public class BGMChanger : MonoSingleTon<BGMChanger>
         while (vol <= 1)
         {
             bgmSource.volume = vol;
-            vol += Time.deltaTime;
-            yield return null;
+            vol += 0.05f;
+            yield return new WaitForSecondsRealtime(0.05f);
         }
     }
 
@@ -60,4 +60,5 @@ public enum BGMType
 {
     Default,
     Boss,
+    Upgrade,
 }
