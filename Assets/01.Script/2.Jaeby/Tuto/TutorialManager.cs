@@ -39,6 +39,11 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private Color _impactColor = Color.white;
 
+    [SerializeField]
+    private GameObject[] _overlayCanvas = null;
+    [SerializeField]
+    private UIManager _uiManager = null;
+
     private void Start()
     {
         Time.timeScale = 1f;
@@ -197,22 +202,80 @@ public class TutorialManager : MonoBehaviour
         TextPop("1");
         yield return new WaitForSeconds(0.5f);
         TextPop("시작!!");
-        for (int i = 0; i < _enemyPos.Length; i++)
+        for (int i = 0; i < _enemyPos.Length - 2; i++)
         {
             GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPos[i].transform.position, Quaternion.identity);
             effect.transform.localScale = Vector3.one * 0.05f;
             yield return new WaitForSeconds(1f);
             Enemy enemy = PoolManager.Instance.Pop(PoolType.ComonEnemy) as Enemy;
             enemy.Init(_enemyPos[i].position, _player);
-            if (i == _enemyPos.Length - 1)
-                enemy.OnDeath.AddListener(Test3Clear);
+            enemy.OnDeath.AddListener(EnemyDie);
             yield return new WaitForSeconds(1.5f);
+        }
+    }
+
+    int count = 0;
+    public void EnemyDie()
+    {
+        count++;
+        if (count == _enemyPos.Length - 2)
+        {
+            count = 0;
+            Test3Clear();
+        }
+    }
+    public void EnemyDie2()
+    {
+        count++;
+        if (count == _enemyPos.Length - 2)
+        {
+            count = 0;
+            RealTest3Clear();
         }
     }
 
     public void Test3Clear()
     {
+        StartCoroutine(SecondTutorialCoroutine());
+    }
+
+    public void RealTest3Clear()
+    {
         StartCoroutine(Test3ClearCoroutine());
+    }
+
+    private IEnumerator SecondTutorialCoroutine()
+    {
+        TextPop("잘 하셨습니다!");
+        yield return new WaitForSeconds(1f);
+        TextPop("이 게임에는 웨이브 시스템이 있습니다.");
+        yield return new WaitForSeconds(3f);
+        TextPop("오른쪽 위의 UI가 보이나요?");
+        yield return new WaitForSeconds(2f);
+        TextPop("일정 주기마다 웨이브가 올라가게 됩니다.");
+        yield return new WaitForSeconds(3f);
+        TextPop("4웨이브마다 층이 올라가고 보스가 등장하게 됩니다.");
+        yield return new WaitForSeconds(3f);
+        TextPop("그리고 층마다 새로운 적들이 등장합니다.");
+        yield return new WaitForSeconds(3f);
+        TextPop("테스트로 층을 올려보겠습니다.");
+        yield return new WaitForSeconds(2f);
+        TextPop("");
+        WaveUIManager.Instance.WaveCount(2, 1);
+        yield return new WaitForSeconds(5f);
+        WaveUIManager.Instance.SetImage(2, 4);
+        yield return new WaitForSeconds(1f);
+
+        for (int i = 0; i < _enemyPos.Length - 2; i++)
+        {
+            GameObject effect = Instantiate(_spawnEffectPrefab, _enemyPos[i].transform.position, Quaternion.identity);
+            effect.transform.localScale = Vector3.one * 0.05f;
+            yield return new WaitForSeconds(1f);
+            Enemy enemy = PoolManager.Instance.Pop(PoolType.DashEnemy) as Enemy;
+            enemy.Init(_enemyPos[i].position, _player);
+            enemy.OnDeath.AddListener(EnemyDie2);
+            yield return new WaitForSeconds(1.5f);
+        }
     }
 
     private IEnumerator Test3ClearCoroutine()
@@ -222,7 +285,7 @@ public class TutorialManager : MonoBehaviour
         TextPop($"마지막 훈련만 남았습니다.");
         yield return new WaitForSeconds(3f);
         TextPop($"옆으로 가주세요");
-        
+
         for (int i = 0; i < _test3Boundarys.Length; i++)
         {
             _test3Boundarys[i].transform.DOMoveY(-2.05f, 1f);
@@ -248,43 +311,11 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         TextPop($"테스트용으로 경험치를 드릴테니 업그레이드를 해보세요.");
         yield return new WaitForSeconds(3f);
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
-        EXPManager.Instance.AddExp();
+        for(int i = 0; i < _overlayCanvas.Length; i++)
+        {
+            _overlayCanvas[i].SetActive(false);
+        }
+        EXPManager.Instance.AddExp(40);
     }
 
     [SerializeField]
@@ -298,7 +329,9 @@ public class TutorialManager : MonoBehaviour
     private IEnumerator EndingCoroutine()
     {
         TextPop($"잘하셨습니다. 이제 게임을 시작할 준비가 되신 것 같네요.");
+        _uiManager.gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
+        _overlayCanvas[2].SetActive(true);
         _fadeImage.gameObject.SetActive(true);
         _fadeImage.DOFade(1f, 3f);
         yield return new WaitForSeconds(3f);

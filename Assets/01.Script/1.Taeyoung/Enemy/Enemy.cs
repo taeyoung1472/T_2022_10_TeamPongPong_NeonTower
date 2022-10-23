@@ -83,7 +83,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
         }
         else
         {
-            health = 3;
+            health = 2;
         }
         dead = false;
         baseScale = transform.localScale;
