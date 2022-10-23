@@ -24,6 +24,10 @@ public class EXPManager : MonoSingleTon<EXPManager>
 
     public Image expSlider;
 
+    [Header("[경험치 테이블 관련]")]
+    [SerializeField] private int stdExp = 10;
+    [SerializeField] private int upExp = 7;
+
     public void OnValidate()
     {
         Init();
@@ -32,7 +36,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
     public void Init()
     {
         expTable = new int[40];
-        int dif = 1;
+        int dif = stdExp;
         for (int i = 0; i < expTable.Length; i++)
         {
             if (i == 39)
@@ -41,7 +45,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
                 return;
             }
             expTable[i] = dif;
-            dif += 1;
+            dif += upExp;
         }
     }
 

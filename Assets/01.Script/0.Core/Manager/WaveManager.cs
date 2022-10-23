@@ -69,12 +69,12 @@ public class WaveManager : MonoSingleTon<WaveManager>
             waveTimer = 0;
             curWave++;
             curFloor = (curWave / 4) + 1;
-            WaveUIManager.Instance.SetImage(CurFloor, CurWave);
 
             if (curWave % 4 == 0)
             {
                 #region 보스 처리
                 isBossClear = false;
+                WaveUIManager.Instance.SetImage(CurFloor - 1, CurWave - 1);
                 bossList[bossIdx].gameObject.SetActive(true);
                 CameraManager.Instance.TargetingBossCameraAnimation(bossList[bossIdx], 5);
                 EXPManager.Instance.IsCanLevelUp = false;
@@ -86,6 +86,8 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
                 yield return new WaitUntil(() => isBossClear);
                 yield return new WaitForSeconds(0.5f);
+
+                WaveUIManager.Instance.SetImage(CurFloor, CurWave);
                 EnemySpawner.Instance.IsCanSpawn = true;
                 StadiumManager.Instance.StadiumMatches[bossIdx].DeActive();
                 BGMChanger.Instance.ActiveAudio(BGMType.Default);
@@ -132,6 +134,8 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(700, 1f));
                 seqWave.Join(waveCntText.rectTransform.DOAnchorPosY(700, 1f));
                 #endregion
+
+                WaveUIManager.Instance.SetImage(CurFloor, CurWave);
             }
         }
     }

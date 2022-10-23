@@ -105,9 +105,18 @@ namespace Glitch
         {
             StartCoroutine(HitCoroutine());
         }
+        public void OtherValue()
+        {
+            _intensity = 0.01f;
+
+            _scanLineJitter = 0.025f;
+            _verticalJump = 0.025f;
+            _horizontalShake = 0.025f;
+            _colorDrift = 0.025f;
+        }
         public void GrayValue()
         {
-            _intensity = 0.05f;
+            _intensity = 0.03f;
 
             _scanLineJitter = 0.025f;
             _verticalJump = 0.025f;
