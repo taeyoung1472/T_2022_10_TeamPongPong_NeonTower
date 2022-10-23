@@ -51,8 +51,10 @@ public class Bullet : PoolAbleObject
                     col.GetComponent<IDamageable>()?.ApplyDamage(Damage * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion));
                 }
             }
-
-            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
+            else
+            {
+                collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
+            }
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);
         }
@@ -107,8 +109,10 @@ public class Bullet : PoolAbleObject
                     col.GetComponent<IDamageable>()?.ApplyDamage(Damage * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion));
                 }
             }
-
-            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
+            else
+            {
+                collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
+            }
 
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);

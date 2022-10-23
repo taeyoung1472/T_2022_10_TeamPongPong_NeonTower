@@ -3418,9 +3418,9 @@ MonoBehaviour:
   wavePerTime: 30
   waveChangeTime: 8
   bossList:
-  - {fileID: 354645995}
-  - {fileID: 1982417183}
   - {fileID: 928772313}
+  - {fileID: 1982417183}
+  - {fileID: 354645995}
   - {fileID: 1262312529}
   waveText: {fileID: 1986087493}
   waveCntText: {fileID: 1675164767}
@@ -7024,6 +7024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023220590}
   - component: {fileID: 1023220591}
+  - component: {fileID: 1023220592}
   m_Layer: 0
   m_Name: VolumeManager
   m_TagString: Untagged
@@ -7058,10 +7059,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27a5df409c7900469cc095be4eb7e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioMixer: {fileID: 24100000, guid: 380c3c3c9eadd8348a1e8a10464928f8, type: 2}
   _masterSlider: {fileID: 2013401385}
   _bgmSlider: {fileID: 532921808}
   _sfxSlider: {fileID: 717442447}
+--- !u!114 &1023220592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023220589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a2f9135f6522346964965c3359df4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: 380c3c3c9eadd8348a1e8a10464928f8, type: 2}
+  _maxVol: 0
+  _minVol: -30
 --- !u!1 &1037163541
 GameObject:
   m_ObjectHideFlags: 0
@@ -8974,6 +8989,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7971de066ff384f8aa91d9f3dcff72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1491881653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1491881655}
+  - component: {fileID: 1491881654}
+  m_Layer: 0
+  m_Name: UISound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1491881654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491881653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17dc9f6946e1a347b23268681944a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 565204ebf9439074080859c38f5a9209, type: 2}
+  clickClip: {fileID: 8300000, guid: 245c71e7f7966834c818e985e8dc76df, type: 3}
+--- !u!4 &1491881655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491881653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1527527673
 GameObject:
   m_ObjectHideFlags: 0
@@ -12472,6 +12533,8 @@ MonoBehaviour:
   expPercentText: {fileID: 285960307}
   levelText: {fileID: 1103198005}
   expSlider: {fileID: 297708820}
+  stdExp: 10
+  upExp: 7
 --- !u!1 &1882471761
 GameObject:
   m_ObjectHideFlags: 0
@@ -14274,6 +14337,10 @@ PrefabInstance:
     - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: maxHp
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: resurrectionCount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 182315599, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: diePanel

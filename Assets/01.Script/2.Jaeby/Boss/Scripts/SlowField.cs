@@ -27,7 +27,10 @@ public class SlowField : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        _target.SpeedFixValue = _lastSpeed;
+        if (other.CompareTag("Player"))
+        {
+            _target.SpeedFixValue = _lastSpeed;
+        }
     }
 
     private void OnDisable()

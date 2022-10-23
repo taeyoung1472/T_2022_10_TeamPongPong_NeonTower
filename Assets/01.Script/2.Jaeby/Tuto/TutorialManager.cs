@@ -9,6 +9,13 @@ using UnityEngine.UI;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField]
+    private Transform _firstTarget = null;
+    [SerializeField]
+    private Transform _secondTarget = null;
+    [SerializeField]
+    private Transform _thirdTarget = null;
+
+    [SerializeField]
     private GameObject _player = null;
     [SerializeField]
     private TextMeshProUGUI _tutorialText = null;
@@ -44,10 +51,13 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private UIManager _uiManager = null;
 
+    private float _speed = 0f;
+
     private void Start()
     {
         Time.timeScale = 1f;
 
+        _overlayCanvas[2].SetActive(false);
         StartCoroutine(StartTutorial());
     }
 
@@ -101,17 +111,28 @@ public class TutorialManager : MonoBehaviour
         TextPop("1");
         yield return new WaitForSeconds(0.5f);
         TextPop($"<#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>시작!</color>");
+
+        //_speed = Define.Instance.playerController.SpeedFixValue;
+        _speed = 1f;
         _tutorialStart = true;
     }
 
     private IEnumerator GoTutorialTwo()
     {
         yield return new WaitForSeconds(1f);
-        TextPop("오른쪽으로 이동해주세요");
+
+        CameraManager.Instance.TargetingCameraAnimation(_firstTarget, 2f, 2f);
+        Define.Instance.playerController.SpeedFixValue = 0f;
+
+        yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < _test1Boundarys.Length; i++)
         {
             _test1Boundarys[i].transform.DOMoveY(-2.05f, 1f);
         }
+        yield return new WaitForSeconds(2.5f);
+        Define.Instance.playerController.SpeedFixValue = _speed;
+
+        TextPop("오른쪽으로 이동해주세요");
     }
 
     private IEnumerator TutorialTwoStart()
@@ -144,6 +165,7 @@ public class TutorialManager : MonoBehaviour
     private GameObject[] _dashObj = null;
     private int i = 0;
 
+
     public void NextDashObjectEnable()
     {
         i++;
@@ -167,12 +189,18 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         TextPop($"엄청 대단하시네요 !!");
-        yield return new WaitForSeconds(3f);
-        TextPop($"밑으로 내려가주세요");
+        yield return new WaitForSeconds(1.5f);
+
+        CameraManager.Instance.TargetingCameraAnimation(_secondTarget, 2f, 2f);
+        Define.Instance.playerController.SpeedFixValue = 0f;
+        yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < _test2Boundarys.Length; i++)
         {
             _test2Boundarys[i].transform.DOMoveY(-2.05f, 1f);
         }
+        yield return new WaitForSeconds(2.5f);
+        Define.Instance.playerController.SpeedFixValue = _speed;
+        TextPop($"밑으로 내려가주세요");
     }
 
 
@@ -283,13 +311,18 @@ public class TutorialManager : MonoBehaviour
         TextPop($"잘 하셨습니다 !!!");
         yield return new WaitForSeconds(3f);
         TextPop($"마지막 훈련만 남았습니다.");
-        yield return new WaitForSeconds(3f);
-        TextPop($"옆으로 가주세요");
+        yield return new WaitForSeconds(2f);
 
+        CameraManager.Instance.TargetingCameraAnimation(_thirdTarget, 2f, 2f);
+        Define.Instance.playerController.SpeedFixValue = 0f;
+        yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < _test3Boundarys.Length; i++)
         {
             _test3Boundarys[i].transform.DOMoveY(-2.05f, 1f);
         }
+        yield return new WaitForSeconds(2.5f);
+        Define.Instance.playerController.SpeedFixValue = _speed;
+        TextPop($"옆으로 가주세요");
     }
 
 
@@ -331,6 +364,7 @@ public class TutorialManager : MonoBehaviour
         TextPop($"잘하셨습니다. 이제 게임을 시작할 준비가 되신 것 같네요.");
         _uiManager.gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
+        DOTween.KillAll();
         _overlayCanvas[2].SetActive(true);
         _fadeImage.gameObject.SetActive(true);
         _fadeImage.DOFade(1f, 3f);

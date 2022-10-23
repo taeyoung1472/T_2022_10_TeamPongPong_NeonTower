@@ -3,7 +3,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-public class DangerEffect : MonoBehaviour
+public class DangerEffect : MonoSingleTon<DangerEffect>
 {
     [SerializeField] private TextMeshProUGUI dangerTmp;
 
@@ -15,6 +15,7 @@ public class DangerEffect : MonoBehaviour
     private bool isInSector = false;
 
     private bool isDead = false;
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
 
     public void Awake()
     {
@@ -25,7 +26,6 @@ public class DangerEffect : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject != cam) return; 
-        time = 3;
         isInSector = true;
         Glitch.GlitchManager.Instance.GrayValue();
     }
@@ -54,6 +54,7 @@ public class DangerEffect : MonoBehaviour
         else
         {
             dangerTmp.text = "";
+            time = 3;
         }
     }
 
