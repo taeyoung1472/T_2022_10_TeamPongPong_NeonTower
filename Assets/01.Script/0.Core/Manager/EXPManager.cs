@@ -62,7 +62,8 @@ public class EXPManager : MonoSingleTon<EXPManager>
     public void AddExp(int amount = 1)
     {
         curExp += amount;
-        if (curExp >= expTable[curLevel] && isCanLevelup)
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.expUpClip);
+        if (curExp >= expTable[curLevel] && isCanLevelup && WaveManager.Instance.IsBossClear)
         {
             curExp = 0;
             curLevel++;

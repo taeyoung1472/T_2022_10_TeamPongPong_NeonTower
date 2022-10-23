@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerStartCutScene : MonoBehaviour
 {
@@ -20,16 +21,20 @@ public class PlayerStartCutScene : MonoBehaviour
     
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject bombEffect = null;
-    [SerializeField] private GameObject sparkEffect = null;
     [SerializeField] private Animator bombAnimator = null;
+
+    [SerializeField] private VisualEffect purplesparkleEffect = null;
 
     [SerializeField] private Material[] allMaterials = null;
     private Renderer[] allChildRenderers;
     private void Awake()
     {
-        sparkEffect = transform.Find("StyliesdSparkle").gameObject;
-        sparkEffect.SetActive(false);
+        purplesparkleEffect = transform.Find("StyliesdSparkle").gameObject.GetComponent<VisualEffect>();
+        purplesparkleEffect.gameObject.SetActive(false);
+
         bombEffect = transform.Find("PlayerBoom").gameObject;
+
+
         bombAnimator = bombEffect.GetComponent<Animator>();
         bombEffect.SetActive(false);
 
@@ -57,7 +62,7 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     public IEnumerator ResurrectionCutScene(Action callback)
     {
-        //CameraManager.Instance.TargetingCameraAnimation(transform, 4.5f, 22.5f);
+        CameraManager.Instance.TargetingCameraAnimationUnscale(transform, 4f, 22.5f);
 
         Glitch.GlitchManager.Instance.OtherValue();
         yield return new WaitForSecondsRealtime(0.5f);
@@ -73,6 +78,7 @@ public class PlayerStartCutScene : MonoBehaviour
                 allChildRenderers[i].material = playerResurrectionMat;
             }
         }
+        
 
         CameraManager.Instance.CameraShake(7, 7, 1f);
         //여기다가 민영이가 만든 터지는 쉐이더 넣으면 될거 같은디
@@ -104,17 +110,18 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("부활2");
                 break;
             }
-            if(singularity <= 0.4f && !sparkEffect.activeSelf)
+            if(singularity <= 0.4f && !purplesparkleEffect.gameObject.activeSelf)
             {
-                sparkEffect.SetActive(true);
+                callback?.Invoke();
                 bodyOutlineMat.SetFloat("_Thickness", 1.2f);
                 Glitch.GlitchManager.Instance.ZeroValue();
+                purplesparkleEffect.gameObject.SetActive(true);
             }
             singularity -= 0.0025f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
             yield return new WaitForSecondsRealtime(0.001f);
         }
-        sparkEffect.SetActive(false);
+        purplesparkleEffect.gameObject.SetActive(false);
         //원래 머티리얼로 교체
         for (int i = 0; i < allMaterials.Length; i++)
         {
@@ -123,7 +130,6 @@ public class PlayerStartCutScene : MonoBehaviour
         
         yield return new WaitForSecondsRealtime(1f);
 
-        callback?.Invoke();
     }
 
 
@@ -140,6 +146,7 @@ public class PlayerStartCutScene : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         GameObject go = Instantiate(blackHoleTrm, blackHolePos, Quaternion.Euler(-180, 0, 0));
+        AudioManager.PlayAudio(UISoundManager.Instance.data.portalOpenClip);
         go.SetActive(true);
 
 
@@ -170,6 +177,8 @@ public class PlayerStartCutScene : MonoBehaviour
 
         
         CameraManager.Instance.CameraShake(13, 10, 1f);
+        AudioManager.PlayAudio(UISoundManager.Instance.data.portalCloseClip);
+
         //플레이어 나오는거
         while (true)
         {

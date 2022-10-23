@@ -15,6 +15,13 @@ public class SwordAnimeEvent : MonoBehaviour
     public delegate void DieEvent();
     public DieEvent dieEvent;
 
+    public delegate void SoundEvent();
+    public SoundEvent soundEvent;
+
+    public void SoundPlayEvent()
+    {
+        soundEvent();
+    }
     public void EnableEffect()
     {
         startAnime();

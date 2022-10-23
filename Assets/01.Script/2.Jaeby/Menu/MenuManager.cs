@@ -28,10 +28,6 @@ public class MenuManager : MonoSingleTon<MenuManager>
     public bool IsClicked { get => _isClicked; }
 
     [SerializeField]
-    private AudioClip _middleClickClip = null;
-    [SerializeField]
-    private AudioClip _lightClickClip = null;
-    [SerializeField]
     private Image _fadeUI = null;
 
     [SerializeField]
@@ -43,7 +39,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
     {
         Time.timeScale = 1f;
 
-        Glitch.GlitchManager.Instance.StartSceneValue();
+        //Glitch.GlitchManager.Instance.StartSceneValue();
 
         GoFirst();
 
@@ -138,6 +134,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
     {
         Sequence seq = DOTween.Sequence();
         _fadeUI.gameObject.SetActive(true);
+        Glitch.GlitchManager.Instance.LoadGameCutScene();
         seq.Append(_fadeUI.DOFade(1f, 3f));
         seq.AppendCallback(() =>
         {
@@ -162,15 +159,5 @@ public class MenuManager : MonoSingleTon<MenuManager>
     public void IsClick()
     {
         _isClicked = true;
-    }
-
-
-    public void MiddleButtonClick()
-    {
-        AudioManager.PlayAudio(UISoundManager.Instance.data.clickClip);
-    }
-    public void LightButtonClick()
-    {
-        AudioManager.PlayAudio(_lightClickClip);
     }
 }

@@ -12,7 +12,7 @@ public class MotarBullet : MonoBehaviour
     private Collider col;
 
     [SerializeField]
-    private float CircleSize = 3.5f;
+    private float CircleSize = 3f;
 
     private void Start()
     {

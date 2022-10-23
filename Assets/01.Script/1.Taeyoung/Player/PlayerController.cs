@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         isDead = true;
         if(resurrectionCount > 0)
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
             IsIdle = true;
             EXPManager.Instance.IsCanLevelUp = false;
             playerEffect.Resurrection(() =>
@@ -242,6 +242,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
             curHp--;
             hud.HPValue = curHp;
+            AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.playerHitClip);
 
             if (curHp <= 0)
             {
