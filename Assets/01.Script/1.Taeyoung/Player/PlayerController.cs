@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private float dashDuration = 0.1f;
     [SerializeField] private float dashDelay = 0.25f;
     [SerializeField] private float idleTime = 5f;
+    [SerializeField] private int resurrectionCount = 3;
 
     // [Header("[GetSet 프로퍼티]")]
     public float CurSpeed { get 
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("[참조]")]
     [SerializeField] private ParticleSystem dustParticle;
     [SerializeField] private PlayerHUD hud;
+    private PlayerStartCutScene playerEffect;
 
     private Animator playerAnim;
     private CharacterController controller;
@@ -82,6 +84,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         playerAnim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
+        playerEffect = GetComponent<PlayerStartCutScene>();
 
         rollingAudioSource = GetComponent<AudioSource>();
 
@@ -193,7 +196,27 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Dead()
     {
         isDead = true;
-        FindObjectOfType<DieEffect>().PlayerDieEffect();
+        if(resurrectionCount > 0)
+        {
+            Time.timeScale = 0;
+            IsIdle = true;
+            EXPManager.Instance.IsCanLevelUp = false;
+            playerEffect.Resurrection(() =>
+            {
+                Time.timeScale = 1;
+                IsIdle = false;
+                isDead = false;
+                EnemySubject.Instance.NotifyObserver();
+                this.Invoke(() => EXPManager.Instance.IsCanLevelUp = true, 2);
+                curHp = maxHp;
+                hud.HPValue = curHp;
+            });
+            resurrectionCount--;
+        }
+        else
+        {
+            FindObjectOfType<DieEffect>().PlayerDieEffect();
+        }
     }
 
     private void Audio()
@@ -213,11 +236,13 @@ public class PlayerController : MonoBehaviour, IDamageable
             curHp--;
             hud.HPValue = curHp;
 
-            ColorCanvasEffect.Instance.Active(Color.red);
-
             if (curHp <= 0)
             {
                 Dead();
+            }
+            else
+            {
+                ColorCanvasEffect.Instance.Active(Color.red);
             }
 
             yield return new WaitForSeconds(damageIgnoreTime);
