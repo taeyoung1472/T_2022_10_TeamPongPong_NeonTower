@@ -1060,7 +1060,7 @@ RectTransform:
   m_Children:
   - {fileID: 1078383082}
   m_Father: {fileID: 1168854449}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3768,6 +3768,7 @@ MonoBehaviour:
   waveChangeTime: 8
   bossList: []
   waveText: {fileID: 879819247}
+  waveCntText: {fileID: 0}
   floorChangeClip: {fileID: 0}
 --- !u!1001 &235850931
 PrefabInstance:
@@ -16922,11 +16923,11 @@ Transform:
   - {fileID: 1729517009}
   - {fileID: 2036923980}
   - {fileID: 130734505}
+  - {fileID: 58221567}
+  - {fileID: 1713680426}
   - {fileID: 816716099}
   - {fileID: 1482858032}
   - {fileID: 1650446723}
-  - {fileID: 58221567}
-  - {fileID: 1713680426}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18212,7 +18213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 1078383081}
   levelUpEffect: {fileID: 0}
-  expTable: 0a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d010000140100003f420f00
+  expTable: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f00000020000000210000002200000023000000240000002500000026000000270000003f420f00
   expPercentText: {fileID: 237865980}
   levelText: {fileID: 899400766}
   expSlider: {fileID: 2034398802}
@@ -24847,7 +24848,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 30
   m_TargetDisplay: 0
 --- !u!1001 &1713343227
 PrefabInstance:
@@ -24951,7 +24952,7 @@ Transform:
   - {fileID: 1709057085}
   - {fileID: 584629918}
   m_Father: {fileID: 1168854449}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1728698273
 PrefabInstance:
@@ -31061,6 +31062,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1168854449}
     m_Modifications:
+    - target: {fileID: 1908279440, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840497188656606141, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -532.1999
+      objectReference: {fileID: 0}
     - target: {fileID: 7840497188993050930, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
       propertyPath: m_Camera
       value: 
@@ -31156,6 +31165,18 @@ PrefabInstance:
     - target: {fileID: 7840497188993050935, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840497189059803762, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840497189185804242, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -130
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840497190073492918, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 257.39984
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e8702ba7d42e4f4f857edb76276cae9, type: 3}
