@@ -12116,7 +12116,7 @@ MonoBehaviour:
   - {fileID: 1061106145}
   - {fileID: 1459321037}
   - {fileID: 1920553885}
-  _fadeImage: {fileID: 588073578}
+  _fadeImage: {fileID: 1916525884}
 --- !u!1 &752055580
 GameObject:
   m_ObjectHideFlags: 0
@@ -22723,7 +22723,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 121949426}
-  m_PlaneDistance: 0.32
+  m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
