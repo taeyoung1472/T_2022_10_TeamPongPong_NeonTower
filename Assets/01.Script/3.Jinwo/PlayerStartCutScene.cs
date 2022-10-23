@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class PlayerStartCutScene : MonoBehaviour
 {
-    public GameObject blackHoleTrm = null;
-    public Material blackHoleMat = null;
-    public Material playerMat = null;
-    public Material playerResurrectionMat = null; //부활할때 쓰는 머티리얼
-    public float progress = 0.1f;
-    public float innerRadius = 1f;
-    public float singularity = 0f;
+    [SerializeField] private GameObject blackHoleTrm = null;
+    [SerializeField] private Material blackHoleMat = null;
+    [SerializeField] private Material playerMat = null;
+    [SerializeField] private Material playerResurrectionMat = null; //부활할때 쓰는 머티리얼
+    [SerializeField] private float progress = 0.1f;
+    [SerializeField] private float innerRadius = 1f;
+    [SerializeField] private float singularity = 0f;
 
-    public Material bodyOutlineMat;
+    [SerializeField] private Material bodyOutlineMat;
 
-    public Vector3 blackHolePos = new Vector3(0, 2.24f, 3f);
+    [SerializeField] private Vector3 blackHolePos = new Vector3(0, 2.24f, 3f);
 
-    public Material[] allMaterials = null;
+    
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject bombEffect = null;
+    [SerializeField] private GameObject sparkEffect = null;
+    [SerializeField] private Animator bombAnimator = null;
 
+    [SerializeField] private Material[] allMaterials = null;
     private Renderer[] allChildRenderers;
-
-    public GameObject arrow;
     private void Awake()
     {
-        
+        sparkEffect = transform.Find("StyliesdSparkle").gameObject;
+        sparkEffect.SetActive(false);
+        bombEffect = transform.Find("PlayerBoom").gameObject;
+        bombAnimator = bombEffect.GetComponent<Animator>();
+        bombEffect.SetActive(false);
+
     }
     private void Start()
     {
@@ -58,7 +66,7 @@ public class PlayerStartCutScene : MonoBehaviour
     public IEnumerator ResurrectionCutScene()
     {
 
-        CameraManager.Instance.TargetingCameraAnimation(transform, 8.5f, 20f);
+        CameraManager.Instance.TargetingCameraAnimation(transform, 4.5f, 22.5f);
 
         Glitch.GlitchManager.Instance.OtherValue();
         yield return new WaitForSeconds(0.5f);
@@ -68,7 +76,7 @@ public class PlayerStartCutScene : MonoBehaviour
         //모든 머티리얼 부할 이펙트 머티리얼로 교체
         for (int i = 0; i < allMaterials.Length; i++)
         {
-            if (allMaterials[i] != playerMat)
+            if (allMaterials[i] != playerMat && allMaterials[i].name != "SmokeBCG2 (Instance)")
             {
                 //allMaterials[i] = playerResurrectionMat;
                 allChildRenderers[i].material = playerResurrectionMat;
@@ -77,9 +85,9 @@ public class PlayerStartCutScene : MonoBehaviour
 
         CameraManager.Instance.CameraShake(7, 7, 1f);
         //여기다가 민영이가 만든 터지는 쉐이더 넣으면 될거 같은디
-
-
-
+        bombEffect.SetActive(true);
+        bombAnimator.SetTrigger("Bomb");
+        yield return new WaitForSeconds(0.25f);
         //사라졋다가
         singularity = 0;
         playerResurrectionMat?.SetFloat("_Singularity", 0);
@@ -90,13 +98,13 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("부활1");
                 break;
             }
-            singularity += 0.0025f;
+            singularity += 0.0035f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
             yield return new WaitForSeconds(0.001f);
         }
 
-        yield return new WaitForSeconds(0.1f);
-
+        yield return new WaitForSeconds(0.7f);
+        bombEffect.SetActive(false);
         //다시 나옴
         while (true)
         {
@@ -105,20 +113,25 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("부활2");
                 break;
             }
+            if(singularity <= 0.4f && !sparkEffect.activeSelf)
+            {
+                sparkEffect.SetActive(true);
+                bodyOutlineMat.SetFloat("_Thickness", 1.2f);
+                Glitch.GlitchManager.Instance.ZeroValue();
+            }
             singularity -= 0.0025f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
             yield return new WaitForSeconds(0.001f);
         }
-        //아웃라인 주고
-        bodyOutlineMat.SetFloat("_Thickness", 1.2f);
-
+        sparkEffect.SetActive(false);
         //원래 머티리얼로 교체
         for (int i = 0; i < allMaterials.Length; i++)
         {
             allChildRenderers[i].material = allMaterials[i];
         }
-        Glitch.GlitchManager.Instance.ZeroValue();
+        
         yield return new WaitForSeconds(1f);
+        
     }
 
 
@@ -132,7 +145,7 @@ public class PlayerStartCutScene : MonoBehaviour
             allMaterials[i].SetFloat("_Progress", progress);
         }
 
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(2f);
 
         GameObject go = Instantiate(blackHoleTrm, blackHolePos, Quaternion.Euler(-180, 0, 0));
         go.SetActive(true);
