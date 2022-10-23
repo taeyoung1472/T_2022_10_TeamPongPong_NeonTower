@@ -9,7 +9,6 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     
     private NavMeshAgent agent;
 
-    private int hashMove = Animator.StringToHash("Move");
 
     // 등록시 초기화
     public override void OnAwake()
@@ -27,7 +26,6 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
 
     public override void Enter()
     {   
-        animator?.SetBool(hashMove, true);
         //updatePath = CoroutineHelper.StartCoroutine(UpdatePath());
 
     }
@@ -81,7 +79,6 @@ public class StateMove<T> : State<T> where T : EnemyBase<T>
     }
     public override void Exit()
     {
-        animator?.SetBool(hashMove, false);
 
         agent.ResetPath();
     }

@@ -55,6 +55,7 @@ MonoBehaviour:
   particle1: {fileID: 5820008681117863788}
   particle2: {fileID: 4814866164180511725}
   playerTrm: {fileID: 5410460891526572491}
+  gameUI: {fileID: 0}
 --- !u!1 &206271267
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +843,7 @@ MonoBehaviour:
   dashDuration: 0.1
   dashDelay: 0.25
   idleTime: 5
+  resurrectionCount: 2
   damageIgnoreTime: 0.2
   dashClip: {fileID: 8300000, guid: 189c16f5da7b8e649a1aa5e71ec4ee38, type: 3}
   dustParticle: {fileID: 8506869634386257549}
@@ -996,8 +998,8 @@ MonoBehaviour:
   blackHolePos: {x: 0, y: 2.24, z: -4}
   arrow: {fileID: 5410460891885178956}
   bombEffect: {fileID: 0}
-  sparkEffect: {fileID: 0}
   bombAnimator: {fileID: 0}
+  purplesparkleEffect: {fileID: 0}
   allMaterials: []
 --- !u!1 &5410460891770340589
 GameObject:
