@@ -7004,6 +7004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023220590}
   - component: {fileID: 1023220591}
+  - component: {fileID: 1023220592}
   m_Layer: 0
   m_Name: VolumeManager
   m_TagString: Untagged
@@ -7038,10 +7039,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27a5df409c7900469cc095be4eb7e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioMixer: {fileID: 24100000, guid: 380c3c3c9eadd8348a1e8a10464928f8, type: 2}
   _masterSlider: {fileID: 2013401385}
   _bgmSlider: {fileID: 532921808}
   _sfxSlider: {fileID: 717442447}
+--- !u!114 &1023220592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023220589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a2f9135f6522346964965c3359df4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: 380c3c3c9eadd8348a1e8a10464928f8, type: 2}
+  _maxVol: 0
+  _minVol: -30
 --- !u!1 &1037163541
 GameObject:
   m_ObjectHideFlags: 0
@@ -12444,6 +12459,8 @@ MonoBehaviour:
   expPercentText: {fileID: 285960307}
   levelText: {fileID: 1103198005}
   expSlider: {fileID: 297708820}
+  stdExp: 10
+  upExp: 7
 --- !u!1 &1882471761
 GameObject:
   m_ObjectHideFlags: 0
