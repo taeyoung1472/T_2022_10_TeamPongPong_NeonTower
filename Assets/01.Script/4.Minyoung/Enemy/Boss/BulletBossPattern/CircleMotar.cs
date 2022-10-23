@@ -21,11 +21,13 @@ public class CircleMotar : BossState<BulletBoss>
         {
             normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.FirstMotarCnt), Vector3.up) * Vector3.forward;
             Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 5f;
-            GameObject obj = DangerZone.DrawCircle(position, 0.5f, 1.5f);
+            GameObject obj = DangerZone.DrawCircle(position, 4f, 1.5f);
+            //GameObject obj = DangerZone.DrawCircle(position, 0.5f, 1.5f);
 
             circlePostions.Add(position);
 
-            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+            obj.transform.DOScale(new Vector3(5f, 5f, 5f), 1f);
+
         }
 
         yield return new WaitForSeconds(0.7f);
@@ -51,11 +53,12 @@ public class CircleMotar : BossState<BulletBoss>
         {
             normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.SecontMotarCnt), Vector3.up) * Vector3.forward;
             Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 8f;
-            GameObject obj = DangerZone.DrawCircle(position, 0.5f, 1.5f);
+            GameObject obj = DangerZone.DrawCircle(position, 4f, 1.5f);
 
             circlePostions.Add(position);
 
-            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+            obj.transform.DOScale(new Vector3(5f, 5f, 5f), 1f);
+
         }
 
         yield return new WaitForSeconds(0.7f);
@@ -80,11 +83,10 @@ public class CircleMotar : BossState<BulletBoss>
         {
             normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.ThirdMotarCnt), Vector3.up) * Vector3.forward;
             Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 12f;
-            GameObject obj = DangerZone.DrawCircle(position, 0.5f, 1.5f);
-
+            GameObject obj = DangerZone.DrawCircle(position, 4f, 1.5f);
             circlePostions.Add(position);
 
-            obj.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+            obj.transform.DOScale(new Vector3(5f, 5f, 5f), 1f);
         }
 
         yield return new WaitForSeconds(0.5f);
