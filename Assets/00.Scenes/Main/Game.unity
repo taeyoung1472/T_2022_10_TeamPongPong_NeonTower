@@ -982,9 +982,6 @@ MonoBehaviour:
   _continueUI: {fileID: 1944427204}
   ClickClip: {fileID: 0}
   isActiveContinue: 0
-  _damagedColor: {r: 1, g: 0.3764706, b: 0.3764706, a: 1}
-  _normalColor: {r: 0.3764706, g: 1, b: 0.37647057, a: 1}
-  _hpText: {fileID: 0}
 --- !u!1 &158365147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,7 +3346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 40
+  wavePerTime: 10
   waveChangeTime: 8
   bossList:
   - {fileID: 928772313}

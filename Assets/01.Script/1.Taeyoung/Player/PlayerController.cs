@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -118,6 +119,13 @@ public class PlayerController : MonoBehaviour, IDamageable
             if (isDead) return;
             Move();
             Rotate();
+        }
+        if(maxHp < UpgradeManager.Instance.GetUpgradeValue(UpgradeType.HpUp))
+        {
+            maxHp = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.HpUp);
+            hud.HPMaxValue = maxHp;
+            curHp = maxHp;
+            hud.HPValue = curHp;
         }
     }
 
