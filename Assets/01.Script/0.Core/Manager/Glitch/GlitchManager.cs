@@ -53,7 +53,9 @@ namespace Glitch
             }
             else if(scene.name == "Menu")
             {
-                StartCoroutine(MenuCutScene());
+                //StartCoroutine(MenuCutScene());
+                noClickPanel.SetActive(false);
+                StartSceneValue();
             }
 
         }
