@@ -1871,7 +1871,7 @@ MonoBehaviour:
   _animator: {fileID: 1056313473}
   _startAni: {fileID: 7400000, guid: ecb6e102166bfcf47b9206c2f8297fc1, type: 3}
   _button: {fileID: 1106222379}
-  _boomEffect: {fileID: 3123075737211501182, guid: a3f72d5f213bb7d458dfc2c4369e7acf, type: 3}
+  _boomEffect: {fileID: 2080258708368543549, guid: 2a2f5838b8955ca4b825762c0004f667, type: 3}
   _buttonEffect: {fileID: 8561703499851857772, guid: 83b7246f2a7bf674580b458112efe780, type: 3}
   _fade: {fileID: 1798646231}
   _text: {fileID: 688785911}

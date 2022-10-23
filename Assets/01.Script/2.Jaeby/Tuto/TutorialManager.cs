@@ -187,7 +187,7 @@ public class TutorialManager : MonoBehaviour
         TextPop($"<#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>마우스 왼쪽</color> 키를 눌러서 <#{ColorUtility.ToHtmlStringRGBA(_impactColor)}>기본공격을</color> 할 수 있습니다.");
         yield return new WaitForSeconds(3f);
         TextPop("앞에 있는 표적을 때려보세요.");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         TextPop("준비 되셨나요?");
         yield return new WaitForSeconds(1f);
         TextPop("3");
