@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class ApplyAudioSound : MonoSingleTon<ApplyAudioSound>
+public class ApplyAudioSound : MonoBehaviour
 {
     [SerializeField]
     private AudioMixer _audioMixer = null;
@@ -13,9 +13,16 @@ public class ApplyAudioSound : MonoSingleTon<ApplyAudioSound>
     [SerializeField]
     private float _minVol = 0f;
 
+    public float MaxVol => _maxVol;
+    public float MinVol => _minVol;
+
     private readonly string _masterSoundKey = "VOL_MASTER";
     private readonly string _bgmSoundKey = "VOL_BGM";
     private readonly string _sfxSoundKey = "VOL_SFX";
+
+    private readonly string _masterMixerKey = "Master";
+    private readonly string _bgmMixerKey = "BGM";
+    private readonly string _sfxMixerKey = "SFX";
 
     private float _masterSound = 0f;
     private float _bgmSound = 0f;
@@ -33,8 +40,9 @@ public class ApplyAudioSound : MonoSingleTon<ApplyAudioSound>
             }
             else if (_sfxSound <= _minVol)
             {
-                _sfxSound = _minVol;
+                _sfxSound = -80f;
             }
+            _audioMixer.SetFloat(_sfxMixerKey, _sfxSound);
         }
     }
 
@@ -50,8 +58,9 @@ public class ApplyAudioSound : MonoSingleTon<ApplyAudioSound>
             }
             else if (_bgmSound <= _minVol)
             {
-                _bgmSound = _minVol;
+                _bgmSound = -80f;
             }
+            _audioMixer.SetFloat(_bgmMixerKey, _bgmSound);
         }
     }
 
@@ -67,16 +76,16 @@ public class ApplyAudioSound : MonoSingleTon<ApplyAudioSound>
             }
             else if (_masterSound <= _minVol)
             {
-                _masterSound = _minVol;
+                _masterSound = -80f;
             }
+            _audioMixer.SetFloat(_masterMixerKey, _masterSound);
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         Init();
         Apply();
-        DontDestroyOnLoad(Instance);
     }
 
     private void Init()
@@ -100,7 +109,7 @@ public class ApplyAudioSound : MonoSingleTon<ApplyAudioSound>
         PlayerPrefs.SetFloat(_sfxSoundKey, _sfxSound);
     }
 
-    private void OnApplicationQuit()
+    private void OnDestroy()
     {
         Save();
     }
