@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
     public bool IsDead { get { return isDead; } }
-    public bool IsIdle { get { return isIdle; } }
+    public bool IsIdle { get { return isIdle; } set { isIdle = value; } }
     public int CurDash { get { return curDash; } set { curDash = value; hud.SetDashValue(curDash, maxDash); } }
 
     [Header("[Å¸ÀÌ¸Ó]")]
@@ -93,7 +93,12 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Start()
     {
-        this.Invoke(() => { isIdle = false; }, idleTime);
+        EnemySpawner.Instance.IsCanSpawn = false;
+        this.Invoke(() => 
+        { 
+            isIdle = false;
+            EnemySpawner.Instance.IsCanSpawn = true;
+        }, idleTime);
         SetLayer();
         InitData();
 
