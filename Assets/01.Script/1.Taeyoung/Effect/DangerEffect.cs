@@ -24,7 +24,7 @@ public class DangerEffect : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != cam) return;
+        if (other.gameObject != cam) return; 
         time = 3;
         isInSector = true;
         Glitch.GlitchManager.Instance.GrayValue();
