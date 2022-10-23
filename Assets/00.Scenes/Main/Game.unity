@@ -15028,7 +15028,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1758656721}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LoadGame
+        m_MethodName: LoadMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15375,6 +15375,7 @@ GameObject:
   - component: {fileID: 6448704221164171355}
   - component: {fileID: 6448704221164171354}
   - component: {fileID: 6448704221164171353}
+  - component: {fileID: 6448704221164171356}
   m_Layer: 0
   m_Name: ExitBtn (1)
   m_TagString: Untagged
@@ -15497,6 +15498,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6448704221164171351}
   m_CullTransparentMesh: 1
+--- !u!114 &6448704221164171356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448704221164171351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243e4344372848e46b9bc3bf8ddd274e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeColor: {r: 1, g: 1, b: 1, a: 1}
+  activeMoveValue: 0
+  activeSizeValue: 1.1
+  activeClip: {fileID: 8300000, guid: 9665111ac91544947a2abd876450eea9, type: 3}
 --- !u!1 &6448704221352374224
 GameObject:
   m_ObjectHideFlags: 0
@@ -16559,7 +16576,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1758656721}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadMenu
         m_Mode: 1
@@ -16807,7 +16824,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1758656721}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1

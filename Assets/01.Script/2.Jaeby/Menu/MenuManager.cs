@@ -28,10 +28,6 @@ public class MenuManager : MonoSingleTon<MenuManager>
     public bool IsClicked { get => _isClicked; }
 
     [SerializeField]
-    private AudioClip _middleClickClip = null;
-    [SerializeField]
-    private AudioClip _lightClickClip = null;
-    [SerializeField]
     private Image _fadeUI = null;
 
     [SerializeField]
@@ -162,15 +158,5 @@ public class MenuManager : MonoSingleTon<MenuManager>
     public void IsClick()
     {
         _isClicked = true;
-    }
-
-
-    public void MiddleButtonClick()
-    {
-        AudioManager.PlayAudio(_middleClickClip);
-    }
-    public void LightButtonClick()
-    {
-        AudioManager.PlayAudio(_lightClickClip);
     }
 }
