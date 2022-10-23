@@ -210,6 +210,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 this.Invoke(() => EXPManager.Instance.IsCanLevelUp = true, 2);
                 curHp = maxHp;
                 hud.HPValue = curHp;
+                DangerEffect.Instance.IsDead = false;
             });
             resurrectionCount--;
         }
