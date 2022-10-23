@@ -69,6 +69,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         animator.Play("updateshiny");
         _profileImage.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.3f).SetUpdate(true);
         rect.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.5f).SetUpdate(true);
+        AudioManager.PlayAudio(UISoundManager.Instance.data.cardOnMouseSound);
     }
 
     public void OnPointerExit(PointerEventData eventData)
