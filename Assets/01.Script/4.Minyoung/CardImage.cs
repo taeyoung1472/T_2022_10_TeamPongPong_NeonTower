@@ -80,4 +80,12 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _profileImage.transform.DOScale(Vector3.one, 0.3f).SetUpdate(true);
         Debug.Log("Exit");
     }
+
+    public void Init()
+    {
+        lightImage.material = defaultCardMat;
+        animator.Play("Idle");
+        rect.DOScale(Vector3.one, 0f).SetUpdate(true);
+        _profileImage.transform.DOScale(Vector3.one, 0f).SetUpdate(true);
+    }
 }

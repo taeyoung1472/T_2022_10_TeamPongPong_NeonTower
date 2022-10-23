@@ -11,6 +11,7 @@ public class ExplosionEnemy : EnemyBase<ExplosionEnemy>
         fsmManager = new StateMachine<ExplosionEnemy>(this, new StateMove<ExplosionEnemy>());
 
         fsmManager.AddStateList(new StateExplosion<ExplosionEnemy>());
+        fsmManager.AddStateList(new StateKnockback<ExplosionEnemy>());
     }
 
     void Update()
@@ -46,6 +47,10 @@ public class ExplosionEnemy : EnemyBase<ExplosionEnemy>
         health -= dmg;
         AudioManager.PlayAudioRandPitch(enemyData.hitClip);
         DamagePopup.PopupDamage(transform.position, dmg);
+        if ((int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0)
+        {
+            fsmManager.ChangeState<StateKnockback<ExplosionEnemy>>();
+        }
         if (health <= 0)
         {
             Die();

@@ -9,7 +9,6 @@ public sealed class StateMachine<T>
 	private	State<T>	previousState;	// 이전 상태
 	private	State<T>	globalState;    // 전역 상태
 	
-	
 	private Dictionary<Type, State<T>> stateList = new Dictionary<Type, State<T>>();
 
 	public State<T> getNowState => currentState;

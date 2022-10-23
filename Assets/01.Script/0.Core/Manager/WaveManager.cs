@@ -49,12 +49,12 @@ public class WaveManager : MonoSingleTon<WaveManager>
         if(_waveUIManager != null && IsBossClear)
         {
             _waveUIManager.NextWaveTextSet(wavePerTime, waveTimer);
+            waveTimer += Time.deltaTime;
         }
         else
         {
             _waveUIManager.NextWaveTextSet(0, 0);
         }
-        waveTimer += Time.deltaTime;
     }
 
     public IEnumerator WaveSystem()
