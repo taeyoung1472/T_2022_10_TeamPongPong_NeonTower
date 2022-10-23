@@ -102,10 +102,9 @@ namespace Glitch
         {
             _intensity = 0.01f;
 
-            _scanLineJitter = 0.025f;
-            _verticalJump = 0.025f;
-            _horizontalShake = 0.025f;
-            _colorDrift = 0.025f;
+            //_scanLineJitter = 0.1f;
+            //_verticalJump = 0.1f;
+            //_colorDrift = 0.1f;
         }
         public void GrayValue()
         {

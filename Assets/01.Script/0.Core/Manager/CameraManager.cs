@@ -156,4 +156,64 @@ public class CameraManager : MonoSingleTon<CameraManager>
             }
         });
     }
+
+    public void TargetingCameraAnimationUnscale(Transform target, float idleTime, float zoomAmount = 12f)
+    {
+        //Transform lastTarget = _cmVCam.Follow;
+        Transform lastTarget = Define.Instance.playerController.transform;
+        _cmVCam.Follow = target;
+        float last = _cmVCam.m_Lens.FieldOfView;
+        StartCoroutine(TargetingCameraCoroutineUnsacle(false, last, lastTarget, idleTime, 0f, zoomAmount));
+    }
+
+    private IEnumerator TargetingCameraCoroutineUnsacle(bool isBoss, float last, Transform lastTarget, float idleTime, float dangerIdleTime, float zoomAmount, Boss boss = null)
+    {
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        if (isBoss)
+        {
+            BossUIManager.Instance?.DangerAnimation(dangerIdleTime, boss);
+        }
+        ZoomCameraUnscale(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
+
+        yield return new WaitForSecondsRealtime(idleTime);
+        ZoomCameraUnscale(last, 0.2f, () =>
+        {
+            if (isBoss)
+            {
+                _cmVCam.Follow = lastTarget;
+                Define.Instance.playerController.IsIdle = false;
+            }
+            else
+                _cmVCam.Follow = lastTarget;
+
+            if (!isBoss)
+            {
+                WaveManager.Instance.IsBossClear = true;
+            }
+        });
+    }
+
+    public void ZoomCameraUnscale(float maxValue, float time, Action Callback = null)
+    {
+
+        _zoomCoroutine = StartCoroutine(ZoomCoroutineUnscale(maxValue, time, Callback));
+    }
+
+    private IEnumerator ZoomCoroutineUnscale(float maxValue, float duration, Action Callback = null)
+    {
+        float time = 0f;
+        float nextLens = 0f;
+        float currentLens = _cmVCam.m_Lens.FieldOfView;
+
+        while (time <= duration)
+        {
+            nextLens = Mathf.Lerp(currentLens, maxValue, time / duration);
+            _cmVCam.m_Lens.FieldOfView = nextLens;
+            yield return new WaitForSecondsRealtime(0.01f);
+            time += Time.unscaledDeltaTime;
+        }
+        _cmVCam.m_Lens.FieldOfView = maxValue;
+        Callback?.Invoke();
+    }
 }
