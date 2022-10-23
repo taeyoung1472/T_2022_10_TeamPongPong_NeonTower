@@ -97,9 +97,9 @@ public class ApplyAudioSound : MonoBehaviour
 
     private void Apply()
     {
-        _audioMixer.SetFloat("MASTER", _masterSound);
-        _audioMixer.SetFloat("BGM", _bgmSound);
-        _audioMixer.SetFloat("SFX", _sfxSound);
+        _audioMixer.SetFloat(_masterMixerKey, _masterSound);
+        _audioMixer.SetFloat(_bgmMixerKey, _bgmSound);
+        _audioMixer.SetFloat(_sfxMixerKey, _sfxSound);
     }
 
     private void Save()
