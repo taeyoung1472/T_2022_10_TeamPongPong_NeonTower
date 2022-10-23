@@ -57,8 +57,15 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     public IEnumerator ResurrectionCutScene()
     {
+
+        CameraManager.Instance.TargetingCameraAnimation(transform, 8.5f, 20f);
+
+        Glitch.GlitchManager.Instance.OtherValue();
+        yield return new WaitForSeconds(0.5f);
+        //아웃라인 사라짐
         bodyOutlineMat.SetFloat("_Thickness", 0);
 
+        //모든 머티리얼 부할 이펙트 머티리얼로 교체
         for (int i = 0; i < allMaterials.Length; i++)
         {
             if (allMaterials[i] != playerMat)
@@ -68,6 +75,12 @@ public class PlayerStartCutScene : MonoBehaviour
             }
         }
 
+        CameraManager.Instance.CameraShake(7, 7, 1f);
+        //여기다가 민영이가 만든 터지는 쉐이더 넣으면 될거 같은디
+
+
+
+        //사라졋다가
         singularity = 0;
         playerResurrectionMat?.SetFloat("_Singularity", 0);
         while (true)
@@ -77,11 +90,14 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("부활1");
                 break;
             }
-            singularity += 0.01f;
+            singularity += 0.0025f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
-            yield return null;
+            yield return new WaitForSeconds(0.001f);
         }
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(0.1f);
+
+        //다시 나옴
         while (true)
         {
             if (singularity <= 0f)
@@ -89,17 +105,19 @@ public class PlayerStartCutScene : MonoBehaviour
                 Debug.Log("부활2");
                 break;
             }
-            singularity -= 0.01f;
+            singularity -= 0.0025f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
-            yield return null;
+            yield return new WaitForSeconds(0.001f);
         }
+        //아웃라인 주고
         bodyOutlineMat.SetFloat("_Thickness", 1.2f);
 
+        //원래 머티리얼로 교체
         for (int i = 0; i < allMaterials.Length; i++)
         {
             allChildRenderers[i].material = allMaterials[i];
         }
-
+        Glitch.GlitchManager.Instance.ZeroValue();
         yield return new WaitForSeconds(1f);
     }
 
@@ -119,8 +137,9 @@ public class PlayerStartCutScene : MonoBehaviour
         GameObject go = Instantiate(blackHoleTrm, blackHolePos, Quaternion.Euler(-180, 0, 0));
         go.SetActive(true);
 
-       
-        
+
+        Glitch.GlitchManager.Instance.GrayValue();
+        Glitch.GlitchManager.Instance._intensity = 0.01f;
 
         innerRadius = 0.5f;
         blackHoleMat.SetFloat("_InnerRadius", innerRadius);
@@ -144,7 +163,7 @@ public class PlayerStartCutScene : MonoBehaviour
         float startTime = Time.time;
         playerMat.SetVector("_TargetPosition", blackHolePos);
 
-        Glitch.GlitchManager.Instance.GrayValue();
+        
         CameraManager.Instance.CameraShake(13, 10, 1f);
         //플레이어 나오는거
         while (true)
