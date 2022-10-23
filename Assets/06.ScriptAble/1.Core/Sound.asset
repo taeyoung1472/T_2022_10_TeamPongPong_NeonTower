@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71a0cb851c4b444fa90edae323d10e0, type: 3}
+  m_Name: Sound
+  m_EditorClassIdentifier: 
+  clickClip: {fileID: 8300000, guid: 245c71e7f7966834c818e985e8dc76df, type: 3}
+  cardThrowDownSound: {fileID: 8300000, guid: 4efece116314ea94884391d7e21f8f6a, type: 3}
+  cardThrowUpSound: {fileID: 8300000, guid: 79dd5748d40bd564eacbc9bd0371181e, type: 3}
+  cardOnMouseSound: {fileID: 8300000, guid: 5ec341ec6d702ff459b58938becfa64f, type: 3}
+  cardSelectSound: {fileID: 8300000, guid: cbb8b1a8d5359244b9297cf5dbab65cc, type: 3}

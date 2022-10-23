@@ -9018,6 +9018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17dc9f6946e1a347b23268681944a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 565204ebf9439074080859c38f5a9209, type: 2}
   clickClip: {fileID: 8300000, guid: 245c71e7f7966834c818e985e8dc76df, type: 3}
 --- !u!4 &1491881655
 Transform:

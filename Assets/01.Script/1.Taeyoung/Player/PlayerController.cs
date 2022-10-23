@@ -96,11 +96,17 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Start()
     {
-        EnemySpawner.Instance.IsCanSpawn = false;
+        if (EnemySpawner.Instance)
+        {
+            EnemySpawner.Instance.IsCanSpawn = false;
+        }
         this.Invoke(() => 
         { 
             isIdle = false;
-            EnemySpawner.Instance.IsCanSpawn = true;
+            if (EnemySpawner.Instance)
+            {
+                EnemySpawner.Instance.IsCanSpawn = true;
+            }
         }, idleTime);
         SetLayer();
         InitData();

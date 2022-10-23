@@ -46,6 +46,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         #region 카드 내려오는 Sequence
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMove(Vector3.zero, 0.5f)).SetUpdate(true);
+        seq.AppendCallback(() => AudioManager.PlayAudio(UISoundManager.Instance.data.cardThrowDownSound));
         seq.AppendCallback(() =>
         {
             _canvasGroup.interactable = true;
@@ -55,10 +56,14 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         seq.Insert(0.6f, cardsTrm[0].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
 
         seq.Insert(0.8f, cardsTrm[1].transform.DOLocalMove(new Vector3(0, 100, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        seq.AppendCallback(() => AudioManager.PlayAudio(UISoundManager.Instance.data.cardThrowDownSound));
         seq.Insert(0.9f, cardsTrm[1].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
+        seq.AppendCallback(() => AudioManager.PlayAudio(UISoundManager.Instance.data.cardThrowDownSound));
 
         seq.Insert(1.3f, cardsTrm[2].transform.DOLocalMove(new Vector3(600, 30, 0), 0.6f).SetEase(Ease.OutBounce)).SetUpdate(true);
+        seq.AppendCallback(() => AudioManager.PlayAudio(UISoundManager.Instance.data.cardThrowDownSound));
         seq.Insert(1.4f, cardsTrm[2].GetComponent<CanvasGroup>().DOFade(1f, 0.3f)).SetUpdate(true);
+        seq.AppendCallback(() => AudioManager.PlayAudio(UISoundManager.Instance.data.cardThrowDownSound));
         #endregion
     }
 
@@ -119,6 +124,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
 
         seq.Append(selectedObjcet.transform.DOLocalMove(new Vector3(0, 100, 0), 0.44f)).SetUpdate(true); // 가운데로 모으고
         seq.Join(selectedObjcet.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.44f)).SetUpdate(true); // 회전 원위치
+        seq.AppendCallback(() => AudioManager.PlayAudio(UISoundManager.Instance.data.cardSelectSound));
 
         seq.Append(selectedObjcet.transform.DOScale(1.25f, 0.5f));
         seq.Append(selectedObjcet.transform.DOScale(1f, 0.2f));
@@ -166,7 +172,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         
         yield return new WaitForSecondsRealtime(0.2f);
         none.transform.DOLocalMoveY(1000f, 0.34f).SetUpdate(true);
-
+        AudioManager.PlayAudio(UISoundManager.Instance.data.cardThrowUpSound);
     }
     public IEnumerator DissolveCard()
     {
