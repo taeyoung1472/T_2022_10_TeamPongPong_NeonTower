@@ -32,7 +32,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
     public void Init()
     {
         expTable = new int[40];
-        int dif = 10;
+        int dif = 1;
         for (int i = 0; i < expTable.Length; i++)
         {
             if (i == 39)
@@ -41,7 +41,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
                 return;
             }
             expTable[i] = dif;
-            dif += 7;
+            dif += 1;
         }
     }
 

@@ -85,6 +85,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         foreach (var card in cardsTrm)
         {
             card.GetComponent<Image>().material = null;
+            card.GetComponent<CardImage>().Init();
         }
 
         isCanUpgrade = true;

@@ -26,6 +26,8 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
 
         fsmManager.AddStateList(new StateCannonAttack<CannonEnemy>());
 
+        fsmManager.AddStateList(new StateKnockback<CannonEnemy>());
+
         //fsmManager.ReturnDic();
     }
 
@@ -90,4 +92,12 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
         //Destroy(circle, 5f);
     }
 
+    public override void ApplyDamage(float dmg)
+    {
+        base.ApplyDamage(dmg);
+        if((int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0)
+        {
+            fsmManager.ChangeState<StateKnockback<CannonEnemy>>();
+        }
+    }
 }

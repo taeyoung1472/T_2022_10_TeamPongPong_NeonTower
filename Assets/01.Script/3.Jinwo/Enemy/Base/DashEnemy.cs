@@ -17,6 +17,7 @@ public class DashEnemy : EnemyBase<DashEnemy>
 
         fsmManager.AddStateList(new StateDashAttack<DashEnemy>());
         fsmManager.AddStateList(new StateMeleeAttack<DashEnemy>());
+        fsmManager.AddStateList(new StateKnockback<DashEnemy>());
         //fsmManager.AddStateList(new StateMeleeAttack<DashEnemy>());
 
         //fsmManager.ReturnDic();
@@ -57,5 +58,15 @@ public class DashEnemy : EnemyBase<DashEnemy>
     {
         motionTrail.isMotionTrail = false;
 
+    }
+
+    public override void ApplyDamage(float dmg)
+    {
+        base.ApplyDamage(dmg);
+
+        if ((int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0)
+        {
+            fsmManager.ChangeState<StateKnockback<DashEnemy>>();
+        }
     }
 }

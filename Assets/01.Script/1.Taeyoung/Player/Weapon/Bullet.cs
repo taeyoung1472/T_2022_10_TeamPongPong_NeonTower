@@ -109,6 +109,7 @@ public class Bullet : PoolAbleObject
             }
 
             collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
+
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);
         }

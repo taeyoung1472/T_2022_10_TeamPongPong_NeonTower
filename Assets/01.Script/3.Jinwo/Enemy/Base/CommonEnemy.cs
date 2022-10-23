@@ -17,6 +17,8 @@ public class CommonEnemy : EnemyBase<CommonEnemy>
 
         fsmManager.AddStateList(new StateMeleeAttack<CommonEnemy>());
 
+        fsmManager.AddStateList(new StateKnockback<CommonEnemy>());
+
         //fsmManager.ReturnDic();
 
     }
@@ -48,5 +50,14 @@ public class CommonEnemy : EnemyBase<CommonEnemy>
         //Debug.Log("change");
         particle.gameObject.SetActive(false);
         FsmManager.ChangeState<StateMove<CommonEnemy>>();
+    }
+
+    public override void ApplyDamage(float dmg)
+    {
+        base.ApplyDamage(dmg);
+        if ((int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0)
+        {
+            fsmManager.ChangeState<StateKnockback<CommonEnemy>>();
+        }
     }
 }
