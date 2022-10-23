@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,26 +51,16 @@ public class PlayerStartCutScene : MonoBehaviour
 
         StartCoroutine(StartCutScene());
     }
-    void Update()
+    public void Resurrection(Action callback)
     {
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-
-        //    StartCoroutine(StartCutScene());
-        //}
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-
-            StartCoroutine(ResurrectionCutScene());
-        }
+        StartCoroutine(ResurrectionCutScene(callback));
     }
-    public IEnumerator ResurrectionCutScene()
+    public IEnumerator ResurrectionCutScene(Action callback)
     {
-
-        CameraManager.Instance.TargetingCameraAnimation(transform, 4.5f, 22.5f);
+        //CameraManager.Instance.TargetingCameraAnimation(transform, 4.5f, 22.5f);
 
         Glitch.GlitchManager.Instance.OtherValue();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         //아웃라인 사라짐
         bodyOutlineMat.SetFloat("_Thickness", 0);
 
@@ -87,7 +78,7 @@ public class PlayerStartCutScene : MonoBehaviour
         //여기다가 민영이가 만든 터지는 쉐이더 넣으면 될거 같은디
         bombEffect.SetActive(true);
         bombAnimator.SetTrigger("Bomb");
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSecondsRealtime(0.25f);
         //사라졋다가
         singularity = 0;
         playerResurrectionMat?.SetFloat("_Singularity", 0);
@@ -100,10 +91,10 @@ public class PlayerStartCutScene : MonoBehaviour
             }
             singularity += 0.0035f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSecondsRealtime(0.001f);
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSecondsRealtime(0.7f);
         bombEffect.SetActive(false);
         //다시 나옴
         while (true)
@@ -121,7 +112,7 @@ public class PlayerStartCutScene : MonoBehaviour
             }
             singularity -= 0.0025f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSecondsRealtime(0.001f);
         }
         sparkEffect.SetActive(false);
         //원래 머티리얼로 교체
@@ -130,8 +121,9 @@ public class PlayerStartCutScene : MonoBehaviour
             allChildRenderers[i].material = allMaterials[i];
         }
         
-        yield return new WaitForSeconds(1f);
-        
+        yield return new WaitForSecondsRealtime(1f);
+
+        callback?.Invoke();
     }
 
 
