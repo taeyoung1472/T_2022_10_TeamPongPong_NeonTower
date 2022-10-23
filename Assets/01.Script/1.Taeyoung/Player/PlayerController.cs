@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             yield return new WaitUntil(() => (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.GenerateHp) != 0 && curHp < maxHp);
             yield return new WaitForSeconds((int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.GenerateHp));
-            if (curHp < maxHp)
+            if (curHp < maxHp && !isDead)
             {
                 curHp++;
                 hud.HPValue = curHp;
@@ -274,7 +274,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void StealHp()
     {
         hpStealValue += UpgradeManager.Instance.GetUpgradeValue(UpgradeType.StealHp);
-        if (hpStealValue > 1 && curHp < maxHp)
+        if (hpStealValue > 1 && curHp < maxHp && !isDead)
         {
             curHp++;
             hud.HPValue = curHp;
