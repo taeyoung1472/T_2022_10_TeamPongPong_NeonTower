@@ -6,8 +6,7 @@ public class BulletBossDie : BossState<BulletBoss>
 {
     public override void Enter()
     {
-        stateMachineOwnerClass.Agent.velocity = Vector3.zero;
-        stateMachineOwnerClass.Agent.enabled = false;
+        Debug.Log("Á×Àº»óÅÂ");
         stateMachineOwnerClass.BulletBossDieEffect();
         stateMachineOwnerClass.Die();
     }

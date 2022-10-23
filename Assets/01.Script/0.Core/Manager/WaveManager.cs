@@ -27,6 +27,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
     [Header("[TMP]")]
     [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI waveCntText;
 
     [Header("[Audio]")]
     [SerializeField] private AudioClip floorChangeClip;
@@ -114,13 +115,18 @@ public class WaveManager : MonoSingleTon<WaveManager>
             else
             {
                 #region Dotween Ã³¸®
-                waveText.SetText($"{(CurWave + 1) % 5} Wave");
+                waveCntText.SetText($"{(CurWave + 1) % 5}");
+                waveText.SetText("WAVE");
+                //waveText.SetText($"{(CurWave + 1) % 5} WAVE");
 
                 Sequence seqWave = DOTween.Sequence();
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
+                seqWave.Join(waveCntText.rectTransform.DOAnchorPosY(300, 1f));
                 seqWave.AppendInterval(2f);
                 seqWave.Join(waveText.rectTransform.DOShakeAnchorPos(1.5f, 50, 100));
+                seqWave.Join(waveCntText.rectTransform.DOShakeAnchorPos(1.5f, 50, 100));
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(700, 1f));
+                seqWave.Join(waveCntText.rectTransform.DOAnchorPosY(700, 1f));
                 #endregion
             }
         }
