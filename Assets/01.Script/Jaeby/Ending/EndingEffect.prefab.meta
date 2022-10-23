@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/01.Script/Jaeby/Ending/EndingEffect.prefab.meta
 guid: 2a2f5838b8955ca4b825762c0004f667
 PrefabImporter:
+========
+guid: 825e7f96d010dc243ad005945d70a99b
+DefaultImporter:
+>>>>>>>> main:Assets/02.Asset/Feedbacks/NiceVibrations/OlderVersions/v1.7/NiceVibrations-v-1-7.unitypackage.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
