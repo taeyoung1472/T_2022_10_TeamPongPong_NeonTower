@@ -33,6 +33,8 @@ namespace Glitch
         public Image fadeOutImage = null;
 
         public GameObject gameUi = null;
+
+        public GameObject noClickPanel = null;
         private void Awake()
         {
             
@@ -59,6 +61,10 @@ namespace Glitch
             else if(scene.name == "Jinwo")
             {
                 ZeroValue();
+            }
+            else if(scene.name == "Menu")
+            {
+                StartCoroutine(MenuCutScene());
             }
 
         }
@@ -87,12 +93,12 @@ namespace Glitch
         }
         public void StartSceneValue()
         {
-            _intensity = 0.01f;
+            _intensity = 0f;
 
-            _scanLineJitter = 0.025f;
-            _verticalJump = 0.025f;
-            _horizontalShake = 0.025f;
-            _colorDrift = 0.025f;
+            _scanLineJitter = 0.05f;
+            _verticalJump = 0.01f;
+            _horizontalShake = 0.007f;
+            _colorDrift = 0.007f;
         }
         public void HitValue()
         {
@@ -127,6 +133,40 @@ namespace Glitch
             _horizontalShake = 0.8f;
             _colorDrift = 0.8f;
             StartCoroutine(GameStartCutScene());
+        }
+        IEnumerator MenuCutScene()
+        {
+            noClickPanel.SetActive(true);
+            _intensity = 0;
+            _scanLineJitter = 1f;
+            _verticalJump = 1f;
+            _horizontalShake = 1f;
+            _colorDrift = 1f;
+
+            yield return new WaitForSeconds(1.5f);
+
+            while (true)
+            {
+                if (_verticalJump <= 0f)
+                    break;
+                _verticalJump -= 0.02f;
+                _horizontalShake -= 0.02f;
+                yield return new WaitForSeconds(0.02f);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            while (true)
+            {
+                if (_scanLineJitter <= 0f)
+                    break;
+                _scanLineJitter -= 0.02f;
+                _colorDrift -= 0.02f;
+                yield return new WaitForSeconds(0.01f);
+            }
+            noClickPanel.SetActive(false);
+            StartSceneValue();
+
         }
         IEnumerator HitCoroutine()
         {

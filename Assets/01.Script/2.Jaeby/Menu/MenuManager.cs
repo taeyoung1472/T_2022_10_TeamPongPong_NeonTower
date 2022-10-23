@@ -39,7 +39,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
     {
         Time.timeScale = 1f;
 
-        Glitch.GlitchManager.Instance.StartSceneValue();
+        //Glitch.GlitchManager.Instance.StartSceneValue();
 
         GoFirst();
 
