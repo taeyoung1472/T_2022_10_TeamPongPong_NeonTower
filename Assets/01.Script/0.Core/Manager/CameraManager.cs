@@ -145,6 +145,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
             if (isBoss)
             {
                 _cmVCam.Follow = lastTarget;
+                Define.Instance.playerController.IsIdle = false;
             }
             else
                 _cmVCam.Follow = lastTarget;

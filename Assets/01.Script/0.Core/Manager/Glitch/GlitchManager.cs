@@ -74,14 +74,7 @@ namespace Glitch
             _analogGlitchFeature.horizontalShake.value = _horizontalShake;
             _analogGlitchFeature.colorDrift.value = _colorDrift;
 
-            if(Input.GetKeyDown(KeyCode.P))
-            {
-                ZeroValue();
-            }
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                HitValue();
-            }
+
         }
         public void ZeroValue()
         {
@@ -165,7 +158,7 @@ namespace Glitch
                 yield return new WaitForSeconds(0.05f);
             }
             gameUi?.SetActive(true);
-            ZeroValue();
+            //ZeroValue();
         }
         IEnumerator StartCutScene()
         {

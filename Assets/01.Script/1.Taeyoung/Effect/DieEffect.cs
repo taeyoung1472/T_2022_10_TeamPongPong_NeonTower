@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using MoreMountains.Tools;
+
 public class DieEffect : MonoBehaviour
 {
 
@@ -14,6 +16,7 @@ public class DieEffect : MonoBehaviour
     public ParticleSystem particle2;
 
     public Transform playerTrm;
+    public GameObject gameUI;
 
     public void Start()
     {
@@ -44,6 +47,7 @@ public class DieEffect : MonoBehaviour
         //seq.AppendCallback(() => Glitch.GlitchManager.Instance.StartSceneValue());
         //seq.Append(DOTween.To(() => Glitch.GlitchManager.Instance._intensity, x => Glitch.GlitchManager.Instance._intensity = x, 1f, 3f));
         seq.AppendInterval(1f);
+        seq.AppendCallback(() => gameUI.SetActive(false));
         seq.AppendCallback(() => Time.timeScale = 0);
         seq.AppendCallback(() => UIManager.Instance.ActiveUI(diePanel));
     }

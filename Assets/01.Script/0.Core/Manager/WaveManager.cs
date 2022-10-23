@@ -74,6 +74,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
             {
                 #region 보스 처리
                 isBossClear = false;
+                Define.Instance.playerController.IsIdle = true;
                 WaveUIManager.Instance.SetImage(CurFloor - 1, CurWave - 1);
                 bossList[bossIdx].gameObject.SetActive(true);
                 CameraManager.Instance.TargetingBossCameraAnimation(bossList[bossIdx], 5);
