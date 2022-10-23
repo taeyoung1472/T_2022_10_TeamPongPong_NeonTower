@@ -172,6 +172,7 @@ public class PlayerStartCutScene : MonoBehaviour
         
         CameraManager.Instance.CameraShake(13, 10, 1f);
         AudioManager.PlayAudio(UISoundManager.Instance.data.portalCloseClip);
+
         //플레이어 나오는거
         while (true)
         {

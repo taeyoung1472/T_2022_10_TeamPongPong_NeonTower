@@ -48,13 +48,11 @@ public class Bullet : PoolAbleObject
 
                 foreach (var col in cols)
                 {
+                    if (col.gameObject == collision.gameObject) continue;
                     col.GetComponent<IDamageable>()?.ApplyDamage(Damage * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion));
                 }
             }
-            else
-            {
-                collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
-            }
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);
         }
@@ -106,13 +104,11 @@ public class Bullet : PoolAbleObject
 
                 foreach (var col in cols)
                 {
+                    if (col.gameObject == collision.gameObject) continue;
                     col.GetComponent<IDamageable>()?.ApplyDamage(Damage * UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion));
                 }
             }
-            else
-            {
-                collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
-            }
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(Damage);
 
             //ÃÑ¾Ë ¼Ò¸ê
             PoolManager.Instance.Push(PoolType, gameObject);

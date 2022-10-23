@@ -8,4 +8,8 @@ public class UISoundManager : MonoSingleTon<UISoundManager>
     {
         AudioManager.PlayAudio(data.clickClip);
     }
+    public void PlayCloseClip()
+    {
+        AudioManager.PlayAudio(data.closeClip);
+    }
 }

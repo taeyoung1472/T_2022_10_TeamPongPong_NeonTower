@@ -124,6 +124,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 #region Dotween Ã³¸®
                 waveCntText.SetText($"{CurWave % 4 + 1}");
                 waveText.SetText($"Wave");
+                AudioManager.PlayAudio(UISoundManager.Instance.data.waveChangeClip);
 
                 Sequence seqWave = DOTween.Sequence();
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
