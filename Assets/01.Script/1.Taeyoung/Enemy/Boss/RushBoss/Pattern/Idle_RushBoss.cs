@@ -28,7 +28,7 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
             {
                 stateMachine.ChangeState<MeleeAttack_RushBoss<RushBoss>>();
             }
-            else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance)
+            else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance && stateMachineOwnerClass.IsFirst == false)
             {
                 stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
             }

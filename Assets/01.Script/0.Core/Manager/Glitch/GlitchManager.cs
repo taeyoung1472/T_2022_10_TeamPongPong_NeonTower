@@ -50,7 +50,7 @@ namespace Glitch
                 gameUi?.SetActive(false);
                 StartGameCutScene();
             }
-            else if(scene.name == "JinwooGame")
+            else if(scene.name == "Game 1")
             {
                 Debug.Log("Game¾À ÀüÈ¯");
                 gameUi?.SetActive(false);

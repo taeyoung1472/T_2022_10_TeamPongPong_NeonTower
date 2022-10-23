@@ -22,28 +22,32 @@ public class SwordDie<T> : BossState<T> where T : Sword
     }
     private IEnumerator StartDieAnime()
     {
-        matValue = 0;
-        mat.SetFloat("_Singularity", matValue);
-        agent.isStopped = true;
-        stateMachineOwnerClass.Col.enabled = false;
-        stateMachineOwnerClass.motionTrail.isMotionTrail = false;
-        animator.SetTrigger(hashDie);
-        yield return new WaitForSeconds(1.5f);
+        Debug.Log("시작");
+        yield return new WaitForSecondsRealtime(0.2f);
         while (true)
         {
             if (matValue >= 1f)
             {
                 break;
             }
-            matValue += 0.01f;
+            matValue += 0.005f;
             mat.SetFloat("_Singularity", matValue);
-            yield return null;
+            yield return new WaitForSecondsRealtime(0.02f);
         }
+        Glitch.GlitchManager.Instance.ZeroValue();
+        Debug.Log("끝남");
         yield return new WaitForSeconds(1f);
-        stateMachineOwnerClass.Die();
+        //stateMachineOwnerClass.Die();
     }
     public override void Enter()
     {
+        //animator.SetTrigger(hashDie);
+        Debug.Log("값초기화");
+        matValue = 0;
+        mat.SetFloat("_Singularity", matValue);
+        agent.enabled = false;
+        stateMachineOwnerClass.Col.enabled = false;
+
         stateMachineOwnerClass.StartCoroutine(StartDieAnime());
     }
 

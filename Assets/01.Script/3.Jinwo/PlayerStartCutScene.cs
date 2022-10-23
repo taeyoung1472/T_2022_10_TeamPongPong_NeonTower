@@ -15,93 +15,119 @@ public class PlayerStartCutScene : MonoBehaviour
     public Material bodyOutlineMat;
 
     public Vector3 blackHolePos = new Vector3(0, 2.24f, 3f);
+
+    public Material[] allMaterials = null;
+
+    private Renderer[] allChildRenderers;
+
+    public GameObject arrow;
     private void Awake()
     {
-        blackHoleTrm.transform.position = blackHolePos;
-        blackHoleTrm.SetActive(false);
+        
     }
     private void Start()
     {
+        arrow.SetActive(false);
+
+        allChildRenderers = GetComponentsInChildren<Renderer>();
+        allMaterials = new Material[allChildRenderers.Length];
+
+        for (int j = 0; j < allChildRenderers.Length; j++)
+        {
+            if(allChildRenderers[j].material != null)
+            {
+                allMaterials[j] = allChildRenderers[j].material;
+            }
+        }
+
         StartCoroutine(StartCutScene());
     }
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.L))
         //{
-            
+
         //    StartCoroutine(StartCutScene());
         //}
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
+        if (Input.GetKeyDown(KeyCode.K))
+        {
 
-        //    StartCoroutine(ResurrectionCutScene());
-        //}
+            StartCoroutine(ResurrectionCutScene());
+        }
     }
     public IEnumerator ResurrectionCutScene()
     {
         bodyOutlineMat.SetFloat("_Thickness", 0);
-        Material[] changeMat = null;
-        Transform[] childTrm = null;
 
-        childTrm = transform.GetComponentsInChildren<Transform>();
-        int i = 0;
-        foreach (Transform child in childTrm)
+        for (int i = 0; i < allMaterials.Length; i++)
         {
-            if (child.gameObject.GetComponent<Material>() != null)
+            if (allMaterials[i] != playerMat)
             {
-                changeMat[i] = child.gameObject.GetComponent<Material>();
-                Debug.Log(changeMat[i]);
-                if (changeMat[i] == playerMat)
-                {
-                    changeMat[i] = playerResurrectionMat;
-                    child.gameObject.GetComponent<Renderer>().material = changeMat[i];
-                }
+                //allMaterials[i] = playerResurrectionMat;
+                allChildRenderers[i].material = playerResurrectionMat;
             }
-            i++;
         }
-        Debug.Log(i);
+
         singularity = 0;
         playerResurrectionMat?.SetFloat("_Singularity", 0);
         while (true)
         {
             if (singularity >= 1f)
             {
-                Debug.Log("부활");
+                Debug.Log("부활1");
                 break;
             }
             singularity += 0.01f;
             playerResurrectionMat?.SetFloat("_Singularity", singularity);
             yield return null;
         }
-        bodyOutlineMat.SetFloat("_Thickness", 1f);
+        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            if (singularity <= 0f)
+            {
+                Debug.Log("부활2");
+                break;
+            }
+            singularity -= 0.01f;
+            playerResurrectionMat?.SetFloat("_Singularity", singularity);
+            yield return null;
+        }
+        bodyOutlineMat.SetFloat("_Thickness", 1.2f);
 
-        //for (int i = 0; i < childTrm.Length; i++)
-        //{
-        //    if (childTrm[i].gameObject.GetComponent<Material>() != null)
-        //    {
-        //        changeMat[i] = childTrm[i].gameObject.GetComponent<Material>();
-
-        //        if (changeMat[i] == playerMat)
-        //        {
-        //            changeMat[i] = playerResurrectionMat;
-        //        }
-        //    }
-        //}
+        for (int i = 0; i < allMaterials.Length; i++)
+        {
+            allChildRenderers[i].material = allMaterials[i];
+        }
 
         yield return new WaitForSeconds(1f);
     }
+
+
     public IEnumerator StartCutScene()
     {
         bodyOutlineMat.SetFloat("_Thickness", 0);
-        blackHoleTrm.SetActive(true);
 
         progress = 1;
-        playerMat.SetFloat("_Progress", progress);
+        for (int i = 0; i < allMaterials.Length; i++)
+        {
+            allMaterials[i].SetFloat("_Progress", progress);
+        }
+
+        yield return new WaitForSeconds(1.25f);
+
+        GameObject go = Instantiate(blackHoleTrm, blackHolePos, Quaternion.Euler(-180, 0, 0));
+        go.SetActive(true);
+
+       
+        
 
         innerRadius = 0.5f;
         blackHoleMat.SetFloat("_InnerRadius", innerRadius);
 
+
         //블랙홀 생기는 거
+        
         while (true)
         {
             if (innerRadius <= -0.25)
@@ -116,8 +142,10 @@ public class PlayerStartCutScene : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
         float startTime = Time.time;
-        playerMat.SetVector("_TargetPosition", blackHoleTrm.transform.position);
+        playerMat.SetVector("_TargetPosition", blackHolePos);
 
+        Glitch.GlitchManager.Instance.GrayValue();
+        CameraManager.Instance.CameraShake(13, 10, 1f);
         //플레이어 나오는거
         while (true)
         {
@@ -127,12 +155,16 @@ public class PlayerStartCutScene : MonoBehaviour
                 break;
             }
             progress -= 0.01f;
-            playerMat.SetFloat("_Progress", progress);
+            for (int i = 0; i < allMaterials.Length; i++)
+            {
+                allMaterials[i].SetFloat("_Progress", progress);
+            }
             yield return null;
         }
         bodyOutlineMat.SetFloat("_Thickness", 1.2f);
         yield return new WaitForSeconds(0.5f);
 
+        Glitch.GlitchManager.Instance.ZeroValue();
         //블랙홀 닫히는거
         while (true)
         {
@@ -145,8 +177,7 @@ public class PlayerStartCutScene : MonoBehaviour
             blackHoleMat.SetFloat("_InnerRadius", innerRadius);
             yield return null;
         }
-        
-        blackHoleTrm.SetActive(false);
-
+        arrow.SetActive(true);
+        Destroy(go);
     }
 }

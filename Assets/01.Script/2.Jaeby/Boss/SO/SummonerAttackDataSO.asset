@@ -21,7 +21,7 @@ MonoBehaviour:
   spawnerRandomCircle: 5
   slowAttackCololtime: 8
   slowAttackDuration: 6
-  slowIntensity: 0.5
+  slowIntensity: 0.1
   immPlayer: 1
   slowRandomCircle: 4
   slowScale: 5
