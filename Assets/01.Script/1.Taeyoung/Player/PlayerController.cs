@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void ApplyDamage(float dmg)
     {
-        if (true) return;
+        //if (true) return;
         if (isDead) return;
 
         isDamaged = true;
