@@ -7,6 +7,13 @@ using UnityEngine.AI;
 public class SummonerBoss : BossBase<SummonerBoss>
 {
     [SerializeField]
+    private AudioClip _slowClip = null;
+    [SerializeField]
+    private AudioSource _walkSource = null;
+
+    public AudioClip SlowClip => _slowClip;
+
+    [SerializeField]
     private GameObject _explosionEffect = null;
     private readonly string _startAnim = "StartAnimation";
     public string StartAnim => _startAnim;
@@ -66,6 +73,18 @@ public class SummonerBoss : BossBase<SummonerBoss>
         base.Update();
         _slowCooltime += Time.deltaTime;
         _summonCooltime += Time.deltaTime;  
+
+        if(agent.velocity == Vector3.zero)
+        {
+            _walkSource.Stop();
+        }
+        else
+        {
+            if (_walkSource.isPlaying)
+                return;
+            else
+                _walkSource.Play();
+        }
     }
 
     public override void ApplyDamage(float dmg)

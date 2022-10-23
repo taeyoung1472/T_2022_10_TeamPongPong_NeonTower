@@ -167,7 +167,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
 
     public void MiddleButtonClick()
     {
-        AudioManager.PlayAudio(_middleClickClip);
+        AudioManager.PlayAudio(UISoundManager.Instance.data.clickClip);
     }
     public void LightButtonClick()
     {

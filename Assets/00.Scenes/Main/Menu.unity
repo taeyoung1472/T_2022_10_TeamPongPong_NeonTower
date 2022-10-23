@@ -1644,7 +1644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 565204ebf9439074080859c38f5a9209, type: 2}
-  clickClip: {fileID: 8300000, guid: 245c71e7f7966834c818e985e8dc76df, type: 3}
 --- !u!4 &315620743
 Transform:
   m_ObjectHideFlags: 0
@@ -5900,7 +5899,7 @@ MonoBehaviour:
   _tutorialButton: {fileID: 1256033043}
   _exitButton: {fileID: 113756470}
   _textParent: {fileID: 157914894}
-  _middleClickClip: {fileID: 8300000, guid: 74021ed222da73a4a83caf31d8554b1d, type: 3}
+  _middleClickClip: {fileID: 8300000, guid: d2da16a30f6c2442886600bf4e663541, type: 3}
   _lightClickClip: {fileID: 8300000, guid: 9665111ac91544947a2abd876450eea9, type: 3}
   _fadeUI: {fileID: 1846189093}
   _menuObjects:

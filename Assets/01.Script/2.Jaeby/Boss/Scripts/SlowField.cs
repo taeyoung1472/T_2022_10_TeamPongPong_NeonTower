@@ -19,9 +19,16 @@ public class SlowField : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             _target = other.GetComponent<PlayerController>();
-            _lastSpeed = _target.SpeedFixValue;
-            _target.SpeedFixValue = _lastSpeed * _slowIntensity;
-            Debug.Log(_lastSpeed);
+            _lastSpeed = 1f;
+            _target.SpeedFixValue = _slowIntensity;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _target.SpeedFixValue = _slowIntensity;
         }
     }
 
