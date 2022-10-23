@@ -2523,6 +2523,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299128, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.9990001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299128, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299128, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299128, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299129, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_fontSize
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639927660617299129, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 125
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96321292fd665342ad2adcdaef880ee, type: 3}
 --- !u!1001 &406725908
@@ -13985,6 +14009,10 @@ PrefabInstance:
       propertyPath: hud
       value: 
       objectReference: {fileID: 871924147}
+    - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: maxHp
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 182315599, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: diePanel
       value: 

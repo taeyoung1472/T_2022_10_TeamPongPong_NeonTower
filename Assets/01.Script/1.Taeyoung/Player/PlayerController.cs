@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     #endregion
 
     [Header("[¼º´É]")]
-    [SerializeField] private int maxHp = 5;
+    [SerializeField] private int maxHp = 3;
     [SerializeField] private float speed = 10f;
     [SerializeField] private int maxDash = 3;
     private float dashRechargeDelay = 2f;
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isDead = false;
     private bool isDashing = false;
     private bool isIdle = true;
+    private float hpStealValue = 0;
 
     public Vector3 MoveDir => moveDir;
 
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         StartCoroutine(DamageSystem());
         StartCoroutine(DashSystem());
         StartCoroutine(DashCharge());
+        StartCoroutine(GenerateHp());
     }
 
     private void InitData()
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-
+         
         Vector3 inputDir = new Vector3(h, 0, v).normalized;
         h = inputDir.x;
         v = inputDir.z;
@@ -247,11 +249,35 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
+    IEnumerator GenerateHp()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.GenerateHp) != 0 && curHp < maxHp);
+            yield return new WaitForSeconds((int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.GenerateHp));
+            if (curHp < maxHp)
+            {
+                curHp++;
+                hud.HPValue = curHp;
+            }
+        }
+    }  
+     
     public void ApplyDamage(float dmg)
     {
         if (true) return;
         if (isDead) return;
 
         isDamaged = true;
+    }
+
+    public void StealHp()
+    {
+        hpStealValue += UpgradeManager.Instance.GetUpgradeValue(UpgradeType.StealHp);
+        if (hpStealValue > 1 && curHp < maxHp)
+        {
+            curHp++;
+            hud.HPValue = curHp;
+        }
     }
 }

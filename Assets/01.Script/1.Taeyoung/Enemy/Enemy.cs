@@ -37,6 +37,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     protected Transform attackRoot;
 
     protected bool isAttack = false;
+
     public bool IsAttack { get { return isAttack; } set { isAttack = value; } }
 
     protected const float minTimeBetDamaged = 0.1f;
@@ -58,6 +59,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
         dead = true;
 
         // onDeath 이벤트에 등록된 메서드가 있다면 실행
+        Define.Instance.playerController.StealHp();
         AudioManager.PlayAudioRandPitch(enemyData.deathClip);
         GameObject obj = PoolManager.Instance.Pop(PoolType.EXPBall).gameObject;
         GameObject dieEffect = PoolManager.Instance.Pop(PoolType.EnemyDeadEffect).gameObject;

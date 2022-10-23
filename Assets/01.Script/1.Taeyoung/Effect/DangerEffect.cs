@@ -27,6 +27,7 @@ public class DangerEffect : MonoBehaviour
         if (other.gameObject != cam) return;
         time = 3;
         isInSector = true;
+        Glitch.GlitchManager.Instance.GrayValue();
     }
 
     public void Update()
@@ -60,5 +61,6 @@ public class DangerEffect : MonoBehaviour
     {
         if (other.gameObject != cam) return;
         isInSector = false;
+        Glitch.GlitchManager.Instance.ZeroValue();
     }
 }
