@@ -34,11 +34,18 @@ public class MenuManager : MonoSingleTon<MenuManager>
     [SerializeField]
     private Image _fadeUI = null;
 
+    [SerializeField]
+    private GameObject[] _menuObjects = null;
+    [SerializeField]
+    private GameObject[] _startObjects = null;
+
     private void Start()
     {
         Time.timeScale = 1f;
 
         Glitch.GlitchManager.Instance.StartSceneValue();
+
+        GoFirst();
 
         for (int i = 0; i < _texts.Length; i++)
         {
@@ -53,7 +60,33 @@ public class MenuManager : MonoSingleTon<MenuManager>
         }
     }
 
-    public void FadeButton()
+    public void GoFirst()
+    {
+        _isClicked = false;
+        for (int i = 0; i < _startObjects.Length; i++)
+        {
+            _startObjects[i].SetActive(false);
+        }
+        for (int i = 0; i < _menuObjects.Length; i++)
+        {
+            _menuObjects[i].SetActive(true);
+        }
+    }
+
+    public void GoSecond()
+    {
+        _isClicked = false;
+        for (int i = 0; i < _menuObjects.Length; i++)
+        {
+            _menuObjects[i].SetActive(false);
+        }
+        for (int i = 0; i < _startObjects.Length; i++)
+        {
+            _startObjects[i].SetActive(true);
+        }
+    }
+
+    public void FadeButton(int value)
     {
         Sequence seq = DOTween.Sequence();
 
@@ -61,10 +94,14 @@ public class MenuManager : MonoSingleTon<MenuManager>
         _tutorialButton.DOKill();
         _exitButton.DOKill();
 
-        seq.Append(_startButton.DOAnchorPosX(-800f, 0.2f));
-        seq.Append(_tutorialButton.DOAnchorPosX(-800f, 0.2f));
-        seq.Append(_exitButton.DOAnchorPosX(-800f, 0.2f));
-        seq.AppendCallback(() => StartInit());
+        for(int i = 0; i <_startObjects.Length; i ++)
+        {
+            seq.Append(_startObjects[i].GetComponent<RectTransform>().DOAnchorPosX(-800f, 0.2f));
+        }
+        //seq.Append(_startButton.DOAnchorPosX(-800f, 0.2f));
+        //seq.Append(_tutorialButton.DOAnchorPosX(-800f, 0.2f));
+        //seq.Append(_exitButton.DOAnchorPosX(-800f, 0.2f));
+        seq.AppendCallback(() => StartInit(value));
     }
 
     private void OnDestroy()
@@ -72,8 +109,9 @@ public class MenuManager : MonoSingleTon<MenuManager>
         DOTween.KillAll();
     }
 
-    public void StartInit()
+    public void StartInit(int value)
     {
+        PlayerPrefs.SetInt("resurrectionCount", value);
         //StartCoroutine(LightDown());
 
         Sequence seq = DOTween.Sequence();
@@ -88,7 +126,7 @@ public class MenuManager : MonoSingleTon<MenuManager>
             _fadeUI.DOFade(1f, 2f);
         });
         seq.AppendInterval(1.5f);
-        
+
         seq.AppendCallback(() =>
         {
             //Glitch.GlitchManager.Instance.StartSceneValue();
