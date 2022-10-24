@@ -130,6 +130,7 @@ public class PlayerStartCutScene : MonoBehaviour
         
         yield return new WaitForSecondsRealtime(1f);
 
+        Define.Instance.playerController.IsResurrection = false;
     }
 
 

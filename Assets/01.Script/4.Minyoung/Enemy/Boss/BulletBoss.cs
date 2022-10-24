@@ -16,9 +16,11 @@ public class BulletBoss : BossBase<BulletBoss>
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private AudioClip smallFireClip;
     [SerializeField] private AudioClip bigFireClip;
+    [SerializeField] private AudioClip boomClip;
 
     public AudioClip SmallFireClip => smallFireClip;
     public AudioClip BigFireClip => bigFireClip;
+    public AudioClip BoomClip => boomClip;
 
     # region 직선 공격 변수
     [Header("직선 공격 변수들")]
@@ -110,17 +112,17 @@ public class BulletBoss : BossBase<BulletBoss>
     {
         CurHp = Data.maxHp;
 
-        bossFsm = new BossStateMachine<BulletBoss>(this, new StartWaitState());
+        bossFsm = new BossStateMachine<BulletBoss>(this, new StartWaitState()); //상태로 가기전에 기다리는 상태
         //bossFsm = new BossStateMachine<BulletBoss>(this, new BulletBossIdle());
-        bossFsm.AddStateList(new BulletBossIdle());
-        bossFsm.AddStateList(new CircleBullet());
-        bossFsm.AddStateList(new StraightBullet());
-        bossFsm.AddStateList(new FirecrackerBullet());
-        bossFsm.AddStateList(new StraightMotar());
-        bossFsm.AddStateList(new PlayerMotar());
+        bossFsm.AddStateList(new BulletBossIdle()); //기본상태
+        bossFsm.AddStateList(new CircleBullet()); // 원으로 공격 일반 총알 원으로 발사 
+        bossFsm.AddStateList(new StraightBullet());// 직선 공격 일반총알 4발씩 3번
+        bossFsm.AddStateList(new FirecrackerBullet()); //폭죽 공격 큰 총알하나 터져서 원으로 또 터져서 원 더 나오기
+        bossFsm.AddStateList(new StraightMotar()); //직선 박격포 공격 1 2 3 4 5 원으로 위험표시 박격포
+        bossFsm.AddStateList(new PlayerMotar()); //플레이어쪽으로 랜덤 발 박격포 공격
 
-        bossFsm.AddStateList(new CircleMotar());
-        bossFsm.AddStateList(new BulletBossDie());
+        bossFsm.AddStateList(new CircleMotar()); //원으로 1 2 3 박격포 공격
+        bossFsm.AddStateList(new BulletBossDie()); //죽었을때 상태
     }
     public override void ApplyDamage(float dmg)
     {
