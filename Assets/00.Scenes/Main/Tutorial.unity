@@ -1314,7 +1314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8144323897468771512, guid: 955b74f49f20dfd4d8265dc78505b653, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 6
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 8144323897468771512, guid: 955b74f49f20dfd4d8265dc78505b653, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1348,6 +1348,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8144323898547564809, guid: 955b74f49f20dfd4d8265dc78505b653, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 4dea93f23b92f8640a982c0231ad0885, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 955b74f49f20dfd4d8265dc78505b653, type: 3}
 --- !u!224 &36098378 stripped
@@ -14110,7 +14114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -532.19995, y: -100}
+  m_AnchoredPosition: {x: -532.1999, y: -100}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &663719374
@@ -17799,7 +17803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 257.3999, y: -250}
+  m_AnchoredPosition: {x: 257.39984, y: -250}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &861624541
@@ -32512,6 +32516,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3250798348424907959, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
+      propertyPath: m_Spacing
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250798348424907959, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
       propertyPath: m_ChildScaleHeight
       value: 0
       objectReference: {fileID: 0}
@@ -42541,6 +42549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38324e6ba4bf0f248ae4eefbbb2479b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a: {fileID: 0}
 --- !u!1 &2006760646
 GameObject:
   m_ObjectHideFlags: 0

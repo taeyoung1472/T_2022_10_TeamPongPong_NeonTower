@@ -104,6 +104,8 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
             _popupWeight = -1;
         }
 
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.tickClip);
+
         _popupWeight = weight;
         _popupText.SetText(text);
         _popupText.rectTransform.anchoredPosition = _initPos;
@@ -123,7 +125,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         if (Instance.IsSliderAnimation == false)
         {
             Instance._bossHpSlider.value = (float)Instance._currentBoss.CurHp;
-            Instance._bossHPText?.SetText($"{Instance._currentBoss.CurHp:0.0} / {Instance._currentBoss.Data.maxHp}");
+            Instance._bossHPText?.SetText($"{Mathf.Clamp(Instance._currentBoss.CurHp, 0, 5000):0.0} / {Instance._currentBoss.Data.maxHp}");
         }
     }
 

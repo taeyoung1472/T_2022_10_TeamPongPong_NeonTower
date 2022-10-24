@@ -128,7 +128,7 @@ public class PlayerStartCutScene : MonoBehaviour
             allChildRenderers[i].material = allMaterials[i];
         }
         
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSeconds(1f);
 
         Define.Instance.playerController.IsResurrection = false;
     }

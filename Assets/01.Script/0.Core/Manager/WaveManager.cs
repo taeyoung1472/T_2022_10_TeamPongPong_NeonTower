@@ -97,7 +97,7 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 #endregion
                 EnemySubject.Instance.NotifyObserver();
 
-                if (curFloor == 6)
+                if (curFloor == 5)
                 {
                     GameManager.Instance.LoadEnding();
                 }

@@ -45,7 +45,7 @@ public class EnemySpawner : MonoSingleTon<EnemySpawner>
 
         yield return new WaitForSeconds(0.9f);
 
-        if (IsCanSpawn)
+        if (IsCanSpawn && Enemy.enemyStackCount < 50)
         {
             Enemy enemy = PoolManager.Instance.Pop(generatedType) as Enemy;
             enemy.Init(pos.position, playerTrans.gameObject);

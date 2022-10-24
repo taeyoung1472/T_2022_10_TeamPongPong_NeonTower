@@ -93,6 +93,7 @@ namespace Glitch
         }
         public void HitValue()
         {
+            //AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             StartCoroutine(HitCoroutine());
         }
         public void OtherValue()
@@ -118,6 +119,7 @@ namespace Glitch
         }
         public void StartGameCutScene()
         {
+            
             _intensity = 0.8f;
             _scanLineJitter = 0.8f;
             _verticalJump = 0.8f;
@@ -127,6 +129,7 @@ namespace Glitch
         }
         IEnumerator MenuCutScene()
         {
+            AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             fadeOutImage.gameObject.SetActive(true);
             fadeOutImage.color = new Vector4(0,0,0,1f);
             fadeOutImage?.DOFade(0f, 3f);
@@ -175,6 +178,7 @@ namespace Glitch
         }
         IEnumerator GameStartCutScene()
         {
+            AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             fadeOutImage.gameObject.SetActive(true);
             while (_intensity > 0.01f)
             {
@@ -198,6 +202,7 @@ namespace Glitch
         }
         IEnumerator StartCutScene()
         {
+            AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             while (_intensity < 1f)
             {
                 if(_scanLineJitter > 0.3f)

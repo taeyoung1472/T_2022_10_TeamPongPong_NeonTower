@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class Enemy : PoolAbleObject, IDamageable, IObserver
 {
+    public static int enemyStackCount = 0;
+
     protected float health;// 현재 체력
     protected bool dead = false; // 사망 상태
     public float Health { get => health; set => health = value; } // 현재 체력
@@ -79,6 +81,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     #region PoolAble
     public override void Init_Pop()
     {
+        enemyStackCount++;
         if (WaveManager.Instance)
         {
             health = enemyData.floorPerPerformance[WaveManager.Instance.CurFloor - 1].maxHp;
@@ -94,6 +97,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
 
     public override void Init_Push()
     {
+        enemyStackCount--;
         transform.localScale = baseScale;
     }
 

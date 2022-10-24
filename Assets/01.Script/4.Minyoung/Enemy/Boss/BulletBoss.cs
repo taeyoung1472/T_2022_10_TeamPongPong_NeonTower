@@ -86,6 +86,7 @@ public class BulletBoss : BossBase<BulletBoss>
     [SerializeField] private VisualEffect sparkParticles;
     [SerializeField] private Animator sparkAnimator;
     [SerializeField] private GameObject flyDestrotObject;
+    [SerializeField] private GameObject destroySPHERE;
     [SerializeField] private GameObject sparkObj;
     public int RandomIndex()
     {
@@ -155,6 +156,8 @@ public class BulletBoss : BossBase<BulletBoss>
         yield return new WaitForSecondsRealtime(1f);
         flyDestrotObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 3f),
             Random.Range(1f, 3f), Random.Range(1f, 3f)), ForceMode.Impulse);
+        yield return new WaitForSeconds(1f);
+       //Destroy(GameManager.Instance.a);
         Debug.Log("개고생완료");
     }
     public GameObject InstantiateObj(GameObject obj, Vector3 pos, Quaternion rot)

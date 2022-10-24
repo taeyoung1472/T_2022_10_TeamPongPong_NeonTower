@@ -10,6 +10,11 @@ public class UISoundData : ScriptableObject
     [Header("[효과음]")]
     public AudioClip waveChangeClip;
     public AudioClip bossEnterClip;
+    public AudioClip glitchClip;
+    public AudioClip popClip;
+    public AudioClip tickClip;
+    public AudioClip blockUpClip;
+    public AudioClip blockDownClip;
 
     [Header("[카드]")]
     public AudioClip cardThrowDownSound;

@@ -17,7 +17,7 @@ public class UIManager : MonoSingleTon<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !Define.Instance.playerController.IsIdle)
         {
             if (_popupStack.Count == 0 && !isActiveContinue)
             {
