@@ -38,10 +38,10 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     {
         Transform perent = GameObject.Find("BossCanvas").transform;
         _dangerUI = perent?.Find("BossDangerText").GetComponent<RectTransform>();
-        _bossNameUI = perent?.Find("BossDangerNameText").GetComponent<RectTransform>();
+        _bossNameUI = perent?.Find("BossDangerNameText").GetComponent<RectTransform>();                                                         
         _upImageUI = perent?.Find("UpImage").GetComponent<RectTransform>();
         _downImageUI = perent?.Find("DownImage").GetComponent<RectTransform>();
-
+            
         _bossHpSlider = perent?.Find("BossHPSlider").GetComponent<Slider>();
         _fireImage = perent?.Find("FireImage").gameObject;
         _bossImage = perent?.Find("BossImage").GetComponent<Image>();
