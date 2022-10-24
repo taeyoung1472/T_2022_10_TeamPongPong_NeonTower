@@ -8,6 +8,8 @@ public class MotarBullet : MonoBehaviour
 
     [SerializeField]
     private LayerMask targetLayer;
+    [SerializeField]
+    private AudioClip boomClip;
 
     private Collider col;
 
@@ -30,6 +32,7 @@ public class MotarBullet : MonoBehaviour
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, CircleSize, targetLayer);
 
+        AudioManager.PlayAudio(boomClip);
         foreach (var col in cols)
         {
             IDamageable damageable = col.GetComponent<IDamageable>();

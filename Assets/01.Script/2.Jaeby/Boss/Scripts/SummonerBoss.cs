@@ -12,8 +12,11 @@ public class SummonerBoss : BossBase<SummonerBoss>
     private AudioClip _dieClip = null;
     [SerializeField]
     private AudioSource _walkSource = null;
+    [SerializeField]
+    private AudioClip _hitClip = null;
 
     public AudioClip SlowClip => _slowClip;
+    public AudioClip HitClip => _hitClip;
 
     [SerializeField]
     private GameObject _explosionEffect = null;
@@ -96,6 +99,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
         CurHp -= dmg;
+        AudioManager.PlayAudioRandPitch(HitClip);
         BossUIManager.BossDamaged();
         if (CurHp <= 0)
         {
