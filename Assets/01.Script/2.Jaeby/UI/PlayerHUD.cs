@@ -52,7 +52,7 @@ public class PlayerHUD : MonoBehaviour
         if (hpRoot.childCount < maxHp)
         {
             int temp = (maxHp - hpRoot.childCount) > 10 ? 10 : maxHp - hpRoot.childCount;
-            for (int i = 0; i < temp; i++)
+            for (int i = hpRoot.childCount; i < temp; i++)
             {
                 Image hpObj = Instantiate(hpImage, hpRoot);
                 hpObj.color = hpDisableColor;

@@ -2458,7 +2458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 8
+  wavePerTime: 30
   waveChangeTime: 8
   bossList:
   - {fileID: 928772313}
