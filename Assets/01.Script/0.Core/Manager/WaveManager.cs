@@ -130,6 +130,13 @@ public class WaveManager : MonoSingleTon<WaveManager>
                 seqWave.Append(waveText.rectTransform.DOAnchorPosY(300, 1f));
                 seqWave.Join(waveCntText.rectTransform.DOAnchorPosY(300, 1f));
                 seqWave.AppendInterval(2f);
+                //seqWave.Join(waveText.rectTransform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1f));
+                //seqWave.Join(waveCntText.rectTransform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1f));
+
+                //seqWave.AppendInterval(1f);
+
+                //seqWave.Join(waveText.rectTransform.DOScale(new Vector3(1, 1f, 1f), 1f));
+                //seqWave.Join(waveCntText.rectTransform.DOScale(new Vector3(1f, 1f, 1f), 1f));
                 seqWave.Join(waveText.rectTransform.DOShakeAnchorPos(1.5f, 50, 100));
                 seqWave.Join(waveCntText.rectTransform.DOShakeAnchorPos(1.5f, 50, 100));
 
