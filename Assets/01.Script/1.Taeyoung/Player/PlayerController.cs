@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         rollingAudioSource = GetComponent<AudioSource>();
 
         cam = Camera.main;
-        hud.HPMaxValue = maxHp;
-        hud.HPValue = maxHp;
+        curHp = maxHp;
+        hud.SetHpUI(curHp, maxHp);
         CurDash = maxDash;
     }
 
@@ -109,17 +109,11 @@ public class PlayerController : MonoBehaviour, IDamageable
             }
         }, idleTime);
         SetLayer();
-        InitData();
 
         StartCoroutine(DamageSystem());
         StartCoroutine(DashSystem());
         StartCoroutine(DashCharge());
         StartCoroutine(GenerateHp());
-    }
-
-    private void InitData()
-    {
-        curHp = maxHp;
     }
 
     private void SetLayer()
@@ -139,9 +133,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         if(maxHp < UpgradeManager.Instance.GetUpgradeValue(UpgradeType.HpUp))
         {
             maxHp = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.HpUp);
-            hud.HPMaxValue = maxHp;
             curHp = maxHp;
-            hud.HPValue = curHp;
+            hud.SetHpUI(curHp, maxHp);
         }
     }
 
@@ -215,7 +208,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 EnemySubject.Instance.NotifyObserver();
                 this.Invoke(() => EXPManager.Instance.IsCanLevelUp = true, 2);
                 curHp = maxHp;
-                hud.HPValue = curHp;
+                hud.SetHpUI(curHp, maxHp);
                 DangerEffect.Instance.IsDead = false;
             });
             resurrectionCount--;
@@ -241,7 +234,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             yield return new WaitUntil(() => isDamaged && !isDead);
 
             curHp--;
-            hud.HPValue = curHp;
+            hud.SetHpUI(curHp, maxHp);
             AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.playerHitClip);
 
             if (curHp <= 0)
@@ -296,7 +289,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             if (curHp < maxHp && !isDead)
             {
                 curHp++;
-                hud.HPValue = curHp;
+                hud.SetHpUI(curHp, maxHp);
             }
         }
     }  
@@ -315,7 +308,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (hpStealValue > 1 && curHp < maxHp && !isDead)
         {
             curHp++;
-            hud.HPValue = curHp;
+            hud.SetHpUI(curHp, maxHp);
         }
     }
 }
