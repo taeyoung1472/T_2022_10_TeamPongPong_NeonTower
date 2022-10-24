@@ -48,10 +48,13 @@ public class SummonerBoss : BossBase<SummonerBoss>
     public float radius = 0f;
     public float angle = 0f;
 
+    [SerializeField]
+    private Animator _realAnimator = null;
+
     private void Start()
     {
         _col = GetComponent<Collider>();
-        animator = transform.GetChild(0).Find("Model").GetComponent<Animator>();
+        animator = _realAnimator;
         CurHp = Data.maxHp;
         _laserModel.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
