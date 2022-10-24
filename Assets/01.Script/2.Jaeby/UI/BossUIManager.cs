@@ -15,6 +15,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     private Slider _bossHpSlider = null;
     private Image _bossImage = null;
     private TextMeshProUGUI _bossNameText = null;
+    private GameObject _fireImage = null;
     private TextMeshProUGUI _bossHPText = null;
 
     private Boss _currentBoss = null;
@@ -30,19 +31,23 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
     int _popupWeight = -1;
 
+    private bool _isSliderAnimation = false;
+    public bool IsSliderAnimation => _isSliderAnimation;
+
     private void Start()
     {
         Transform perent = GameObject.Find("BossCanvas").transform;
-        _dangerUI = perent?.GetChild(0).GetComponent<RectTransform>();
-        _bossNameUI = perent?.GetChild(1).GetComponent<RectTransform>();
-        _upImageUI = perent?.GetChild(2).GetComponent<RectTransform>();
-        _downImageUI = perent?.GetChild(3).GetComponent<RectTransform>();
+        _dangerUI = perent?.Find("BossDangerText").GetComponent<RectTransform>();
+        _bossNameUI = perent?.Find("BossDangerNameText").GetComponent<RectTransform>();
+        _upImageUI = perent?.Find("UpImage").GetComponent<RectTransform>();
+        _downImageUI = perent?.Find("DownImage").GetComponent<RectTransform>();
 
-        _bossHpSlider = perent?.GetChild(4).GetComponent<Slider>();
-        _bossImage = perent?.GetChild(5).Find("Image").GetComponent<Image>();
-        _bossNameText = perent?.GetChild(6).GetComponent<TextMeshProUGUI>();
+        _bossHpSlider = perent?.Find("BossHPSlider").GetComponent<Slider>();
+        _fireImage = perent?.Find("FireImage").gameObject;
+        _bossImage = perent?.Find("BossImage").GetComponent<Image>();
+        _bossNameText = perent?.Find("BossNameText").GetComponent<TextMeshProUGUI>();
         _bossHPText = _bossHpSlider.transform.Find("BossHPText").GetComponent<TextMeshProUGUI>();
-        _popupText = perent?.GetChild(7).GetComponent<TextMeshProUGUI>();
+        _popupText = perent?.Find("BossPopupText").GetComponent<TextMeshProUGUI>();
 
         if (_dangerUI != null && _bossNameUI != null)
         {
@@ -64,13 +69,26 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
 
         _currentBoss.OnDeathEvent.AddListener(BossDieEvent);
         _bossHpSlider.gameObject.SetActive(true);
-        _bossImage.transform.parent.gameObject.SetActive(true);
+        //_bossImage.transform.parent.gameObject.SetActive(true);
+        _bossImage.gameObject.SetActive(true);
+        _fireImage.SetActive(true);
         _bossNameText.gameObject.SetActive(true);
 
-        _bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
-        _bossHPText?.SetText($"{Instance._currentBoss.CurHp} / {Instance._currentBoss.Data.maxHp}");
-        _bossImage.sprite = _currentBoss.Data.bossProfile;
+        //_bossHpSlider.value = _currentBoss.CurHp / (float)_currentBoss.Data.maxHp;
+        _bossHPText?.SetText($"0 / {Instance._currentBoss.Data.maxHp}");
+        //_bossImage.sprite = _currentBoss.Data.bossProfile;
         _bossNameText?.SetText(_currentBoss.Data.bossName);
+
+        _bossHpSlider.maxValue = _currentBoss.Data.maxHp;
+        _bossHpSlider.minValue = 0f;
+        _bossHpSlider.value = _bossHpSlider.minValue;
+        _isSliderAnimation = true;
+        DOTween.To(() => _bossHpSlider.value, x => 
+        { 
+            _bossHpSlider.value = x;
+            _bossHPText?.SetText($"{_bossHpSlider.value:0.0} / {Instance._currentBoss.Data.maxHp}");
+        }, _bossHpSlider.maxValue, 1.5f)
+            .OnComplete(() => _isSliderAnimation = false);
     }
 
     /// <summary>
@@ -105,8 +123,11 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     public static void BossDamaged()
     {
         if (Instance._currentBoss == null) return;
-        Instance._bossHpSlider.value = Instance._currentBoss.CurHp / (float)Instance._currentBoss.Data.maxHp;
-        Instance._bossHPText?.SetText($"{Instance._currentBoss.CurHp} / {Instance._currentBoss.Data.maxHp}");
+        if(Instance.IsSliderAnimation == false)
+        {
+            Instance._bossHpSlider.value = (float)Instance._currentBoss.CurHp;
+            Instance._bossHPText?.SetText($"{Instance._currentBoss.CurHp:0.0} / {Instance._currentBoss.Data.maxHp}");
+        }
     }
 
     public void ExitBoss()
@@ -120,8 +141,10 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossNameText?.SetText("");
 
         _bossHpSlider.gameObject.SetActive(false);
+        _bossHpSlider.value = 0f;
         _bossImage.transform.parent.gameObject.SetActive(false);
         _bossNameText.gameObject.SetActive(false);
+        _fireImage.SetActive(false);
     }
 
     public void DangerAnimation(float dangerIdleTime, Boss boss)
