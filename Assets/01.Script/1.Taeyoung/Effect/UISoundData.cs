@@ -9,6 +9,7 @@ public class UISoundData : ScriptableObject
 
     [Header("[효과음]")]
     public AudioClip waveChangeClip;
+    public AudioClip bossEnterClip;
 
     [Header("[카드]")]
     public AudioClip cardThrowDownSound;
