@@ -8,6 +8,8 @@ public class SummonerSkillSlow : BossState<SummonerBoss>
     {
         stateMachineOwnerClass.ModelReset();
         BossUIManager.Instance.BossPopupText("느려지는 장판을 소환합니다 !", 1.5f, 1);
+        AudioManager.PlayAudio(stateMachineOwnerClass.SlowClip);
+
         stateMachineOwnerClass.SlowCooltime = 0f;
         stateMachineOwnerClass.StartCoroutine(SlowAnimationEndWaiting());
     }

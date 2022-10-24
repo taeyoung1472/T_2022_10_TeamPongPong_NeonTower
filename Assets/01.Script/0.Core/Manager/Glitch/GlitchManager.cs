@@ -33,6 +33,8 @@ namespace Glitch
         public Image fadeOutImage = null;
 
         public GameObject gameUi = null;
+
+        public GameObject noClickPanel = null;
         private void Awake()
         {
             
@@ -44,21 +46,16 @@ namespace Glitch
 
             Scene scene = SceneManager.GetActiveScene();
 
-            if(scene.name == "Game")
+            if(scene.name == "Game" || scene.name == "Tutorial")
             {
-                Debug.Log("Game¾À ÀüÈ¯");
                 gameUi?.SetActive(false);
                 StartGameCutScene();
             }
-            else if(scene.name == "Game 1")
+            else if(scene.name == "Menu")
             {
-                Debug.Log("Game¾À ÀüÈ¯");
-                gameUi?.SetActive(false);
-                StartGameCutScene();
-            }
-            else if(scene.name == "Jinwo")
-            {
-                ZeroValue();
+                //StartCoroutine(MenuCutScene());
+                noClickPanel.SetActive(false);
+                StartSceneValue();
             }
 
         }
@@ -87,12 +84,12 @@ namespace Glitch
         }
         public void StartSceneValue()
         {
-            _intensity = 0.01f;
+            _intensity = 0f;
 
-            _scanLineJitter = 0.025f;
-            _verticalJump = 0.025f;
-            _horizontalShake = 0.025f;
-            _colorDrift = 0.025f;
+            _scanLineJitter = 0.05f;
+            _verticalJump = 0.01f;
+            _horizontalShake = 0.007f;
+            _colorDrift = 0.007f;
         }
         public void HitValue()
         {
@@ -102,10 +99,9 @@ namespace Glitch
         {
             _intensity = 0.01f;
 
-            _scanLineJitter = 0.025f;
-            _verticalJump = 0.025f;
-            _horizontalShake = 0.025f;
-            _colorDrift = 0.025f;
+            //_scanLineJitter = 0.1f;
+            //_verticalJump = 0.1f;
+            //_colorDrift = 0.1f;
         }
         public void GrayValue()
         {
@@ -129,6 +125,40 @@ namespace Glitch
             _colorDrift = 0.8f;
             StartCoroutine(GameStartCutScene());
         }
+        IEnumerator MenuCutScene()
+        {
+            noClickPanel.SetActive(true);
+            _intensity = 0;
+            _scanLineJitter = 1f;
+            _verticalJump = 1f;
+            _horizontalShake = 1f;
+            _colorDrift = 1f;
+
+            yield return new WaitForSeconds(1.5f);
+
+            while (true)
+            {
+                if (_verticalJump <= 0f)
+                    break;
+                _verticalJump -= 0.02f;
+                _horizontalShake -= 0.02f;
+                yield return new WaitForSeconds(0.02f);
+            }
+
+            yield return new WaitForSeconds(0.25f);
+
+            while (true)
+            {
+                if (_scanLineJitter <= 0f)
+                    break;
+                _scanLineJitter -= 0.02f;
+                _colorDrift -= 0.02f;
+                yield return new WaitForSeconds(0.01f);
+            }
+            noClickPanel.SetActive(false);
+            StartSceneValue();
+
+        }
         IEnumerator HitCoroutine()
         {
             _intensity = 0.05f;
@@ -141,6 +171,7 @@ namespace Glitch
         }
         IEnumerator GameStartCutScene()
         {
+            fadeOutImage.gameObject.SetActive(true);
             while (_intensity > 0.01f)
             {
                 //if(_intensity < 0.4f)
@@ -157,6 +188,7 @@ namespace Glitch
 
                 yield return new WaitForSeconds(0.05f);
             }
+            fadeOutImage.gameObject.SetActive(false);
             gameUi?.SetActive(true);
             //ZeroValue();
         }

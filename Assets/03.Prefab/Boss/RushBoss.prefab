@@ -154458,6 +154458,9 @@ MonoBehaviour:
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  _dashStartClip: {fileID: 8300000, guid: fc9e52dbd25860b4fa831f1674d4883b, type: 3}
+  _punchClip: {fileID: 8300000, guid: b2dd94247ebb7344fa5c362f9b8e0bf9, type: 3}
+  _exploClip: {fileID: 8300000, guid: 994c8815737132042859e98b00d6400e, type: 3}
   _mat: {fileID: 2100000, guid: c7cdfa32bc02e8549bb1fe290c3526fb, type: 2}
   _attackDataSO: {fileID: 11400000, guid: b9d7f4189eceb3841aecb0309238cdf2, type: 2}
   _model: {fileID: 4144664309777154920}

@@ -22,7 +22,7 @@ public class WaveCountdown : MonoBehaviour
     {
         if (_seq != null)
             _seq.Kill();
-        _text.transform.localScale = Vector3.one;
+        _text.transform.localScale = Vector3.one * 1.5f;
         _seq = DOTween.Sequence();
 
         _text.SetText("5");

@@ -34,6 +34,7 @@ public class SwordDie<T> : BossState<T> where T : Sword
             mat.SetFloat("_Singularity", matValue);
             yield return new WaitForSecondsRealtime(0.02f);
         }
+        AudioManager.PlayAudioRandPitch(stateMachineOwnerClass.dieBossClip);
         Glitch.GlitchManager.Instance.ZeroValue();
         Debug.Log("³¡³²");
         yield return new WaitForSeconds(1f);
@@ -47,6 +48,7 @@ public class SwordDie<T> : BossState<T> where T : Sword
         mat.SetFloat("_Singularity", matValue);
         agent.enabled = false;
         stateMachineOwnerClass.Col.enabled = false;
+        
 
         stateMachineOwnerClass.StartCoroutine(StartDieAnime());
     }

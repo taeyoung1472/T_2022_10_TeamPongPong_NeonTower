@@ -31,6 +31,7 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(5f, 20f, 0.2f);
+        AudioManager.PlayAudio(stateMachineOwnerClass.PunchClip);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f);
         stateMachineOwnerClass.StopParticle();
 
@@ -43,6 +44,7 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.Update(0);
         stateMachineOwnerClass.ArcAttack();
         CameraManager.Instance.CameraShake(7f, 20f, 0.3f);
+        AudioManager.PlayAudio(stateMachineOwnerClass.PunchClip);
         List<Collider> list = EnemyAttackCollisionCheck.CheckArc(stateMachineOwnerClass.AttackPositionObj.transform, 60f, 8.3f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(list, 1);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f);
@@ -58,6 +60,7 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(10f, 30f, 0.23f);
+        AudioManager.PlayAudio(stateMachineOwnerClass.PunchClip);
         List<Collider> l2 = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 4f, 12f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(l2, 1);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Punch2") == false);

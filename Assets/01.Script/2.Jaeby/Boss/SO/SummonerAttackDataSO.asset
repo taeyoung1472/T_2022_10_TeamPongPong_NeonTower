@@ -19,9 +19,9 @@ MonoBehaviour:
   laserAttackDangerInterval: 0.85
   summonAttackCooltime: 15
   spawnerRandomCircle: 5
-  slowAttackCololtime: 8
-  slowAttackDuration: 6
-  slowIntensity: 0.6
+  slowAttackCololtime: 7
+  slowAttackDuration: 6.5
+  slowIntensity: 0.5
   immPlayer: 1
   slowRandomCircle: 4
   slowScale: 5

@@ -44,6 +44,14 @@ public class Sword : BossBase<Sword>
     public GameObject dangerZone = null;
 
 
+    public AudioClip startBossClip;
+    public AudioClip dieBossClip;
+
+    public AudioClip hitClip;
+
+    public AudioClip[] attackAudioClips;
+    public int attackAudioidx = 0;
+
     [Header("카메라 관련")]
     public float amplitude = 0;
     public float intensity = 0;
@@ -98,6 +106,7 @@ public class Sword : BossBase<Sword>
         animeEvent.endAnime = DisableEffect;
         animeEvent.damageEvent = StartApplyDamage;
         animeEvent.dieEvent = DieEvent;
+        animeEvent.soundEvent = SwordAttackSoundEvent;
 
     }
     protected override void Update()
@@ -125,6 +134,7 @@ public class Sword : BossBase<Sword>
         DamagePopup.PopupDamage(transform.position + Vector3.up, dmg);
         CurHp -= dmg;
         BossUIManager.BossDamaged();
+        AudioManager.PlayAudioRandPitch(hitClip);
         if (CurHp <= 0)
         {
             Debug.Log("사망 !!");
@@ -150,7 +160,15 @@ public class Sword : BossBase<Sword>
     {
         int attackType = Random.Range(1, 8);
         currentAttackType = attackType - 1;
-        
+
+        if(attackType == 7 || attackType == 1)
+        {
+            attackAudioidx = 3;
+        }
+        else 
+        {
+            attackAudioidx = Random.Range(0, 3); // 0~2
+        }
 
         return attackType;
     }
@@ -287,5 +305,10 @@ public class Sword : BossBase<Sword>
     public void DieEvent()
     {
         Glitch.GlitchManager.Instance.ZeroValue();
+    }
+
+    public void SwordAttackSoundEvent()
+    {
+        AudioManager.PlayAudioRandPitch(attackAudioClips[attackAudioidx]);
     }
 }

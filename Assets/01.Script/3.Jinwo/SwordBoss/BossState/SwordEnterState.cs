@@ -47,6 +47,7 @@ public class SwordEnterState<T> : BossState<T> where T : Sword
     }
     public override void Enter()
     {
+        AudioManager.PlayAudioRandPitch(stateMachineOwnerClass.startBossClip);
         stateMachineOwnerClass.StartCoroutine(StartAnimationCoroutine());
     }
 
