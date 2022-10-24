@@ -4,54 +4,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
+using UnityEditor.UIElements;
+using DG.Tweening;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField]
-    private Slider _hpSlider = null;
-    [SerializeField]
-    private TextMeshProUGUI _hpText;
+    [Header("[HP 관련]")]
+    [SerializeField] private Transform hpRoot;
+    [SerializeField] private Image hpImage;
+    [SerializeField] private Color hpEnableColor = Color.white;
+    [SerializeField] private Color hpDisableColor = Color.white;
+    private List<Image> hpImageList = new();
 
-    private int _hpMaxValue = 0;
-    public int HPMaxValue
-    {
-        get => _hpMaxValue;
-        set
-        {
-            _hpMaxValue = value;
-            _hpSlider.maxValue = _hpMaxValue;
-        }
-    }
-
-    private int _hpMinValue = 0;
-    public int HPMinValue
-    {
-        get => _hpMinValue;
-        set
-        {
-            _hpMinValue = value;
-            _hpSlider.minValue = _hpMinValue;
-        }
-    }
-
-    private int _hpValue = 0;
-    public int HPValue
-    {
-        get => _hpValue;
-        set
-        {
-            _hpValue = value;
-            _hpSlider.value = _hpValue;
-            _hpText.SetText($"{_hpValue}/{_hpMaxValue}");
-        }
-    }
-
-    [SerializeField]
-    private TextMeshProUGUI _dashText = null;
-    [SerializeField]
-    private Color _EnableColor = Color.white;
-    [SerializeField]
-    private Color _DisableColor = Color.white;
+    [Header("[DASH 관련]")]
+    [SerializeField] private TextMeshProUGUI _dashText = null;
+    [SerializeField] private Color _EnableColor = Color.white;
+    [SerializeField] private Color _DisableColor = Color.white;
 
     StringBuilder _sb = null;
 
@@ -81,11 +49,32 @@ public class PlayerHUD : MonoBehaviour
         _sb.Clear();
     }
 
-    public void HpSliderInit(int minValue, int maxValue, int Value)
+    public void SetHpUI(int curHp, int maxHp)
     {
-        HPMinValue = minValue;
-        HPMaxValue = maxValue;
-        HPValue = Value;
+        if(hpRoot.childCount < maxHp)
+        {
+            int temp = maxHp - hpRoot.childCount;
+            for (int i = 0; i < temp; i++)
+            {
+                Image hpObj = Instantiate(hpImage, hpRoot);
+                hpObj.color = hpDisableColor;
+                hpImageList.Add(hpObj);
+            }
+        }
 
+        int idx = 0;
+        foreach (Image hpImage in hpImageList)
+        {
+            if(idx < curHp)
+            {
+                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpEnableColor, 1f).SetUpdate(true);
+            }
+            else
+            {
+                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f).SetUpdate(true);
+            }
+
+            idx++;
+        }
     }
 }
