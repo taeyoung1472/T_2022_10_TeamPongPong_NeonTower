@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Start()
     {
+        BGMChanger.Instance.ActiveAudio(BGMType.Default);
         if (EnemySpawner.Instance)
         {
             EnemySpawner.Instance.IsCanSpawn = false;
