@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,10 +37,10 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     {
         Transform perent = GameObject.Find("BossCanvas").transform;
         _dangerUI = perent?.Find("BossDangerText").GetComponent<RectTransform>();
-        _bossNameUI = perent?.Find("BossDangerNameText").GetComponent<RectTransform>();                                                         
+        _bossNameUI = perent?.Find("BossDangerNameText").GetComponent<RectTransform>();
         _upImageUI = perent?.Find("UpImage").GetComponent<RectTransform>();
         _downImageUI = perent?.Find("DownImage").GetComponent<RectTransform>();
-            
+
         _bossHpSlider = perent?.Find("BossHPSlider").GetComponent<Slider>();
         _fireImage = perent?.Find("FireImage").gameObject;
         _bossImage = perent?.Find("BossImage").GetComponent<Image>();
@@ -83,8 +82,8 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossHpSlider.minValue = 0f;
         _bossHpSlider.value = _bossHpSlider.minValue;
         _isSliderAnimation = true;
-        DOTween.To(() => _bossHpSlider.value, x => 
-        { 
+        DOTween.To(() => _bossHpSlider.value, x =>
+        {
             _bossHpSlider.value = x;
             _bossHPText?.SetText($"{_bossHpSlider.value:0.0} / {Instance._currentBoss.Data.maxHp}");
         }, _bossHpSlider.maxValue, 1.5f)
@@ -123,7 +122,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
     public static void BossDamaged()
     {
         if (Instance._currentBoss == null) return;
-        if(Instance.IsSliderAnimation == false)
+        if (Instance.IsSliderAnimation == false)
         {
             Instance._bossHpSlider.value = (float)Instance._currentBoss.CurHp;
             Instance._bossHPText?.SetText($"{Instance._currentBoss.CurHp:0.0} / {Instance._currentBoss.Data.maxHp}");
