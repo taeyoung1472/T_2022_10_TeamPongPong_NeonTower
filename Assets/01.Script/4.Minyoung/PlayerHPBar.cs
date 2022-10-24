@@ -5,44 +5,60 @@ using UnityEngine.UI;
 
 public class PlayerHPBar : MonoBehaviour
 {
-    public Slider hpBar;
     public float maxHP;
     public float currentHP;
     public GameObject HpLineFolder;
-    public float unitHp = 1f;
-        // Start is called before the first frame update
+    public List<Image> hpImageList;
+
+    [SerializeField] private Image hpImage;
     void Start()
     {
-        
+        CreateHPImage();
+        UpdateHpUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        hpBar.value = currentHP / maxHP;
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UpdateHpUI();
+        }
+        //hpBar.value = currentHP / maxHP;
     }
-    public void GetHpBoost()
+    public void CreateHPImage()
     {
-        maxHP += 1f;
-        float scaleX = (5f / unitHp) / (maxHP / unitHp);
-        HpLineFolder.GetComponent<HorizontalLayoutGroup>().gameObject.SetActive(false);
-        foreach (Transform child in HpLineFolder.transform)
+        for (int i = 0; i < maxHP; i++)
         {
-            child.gameObject.transform.localScale = new Vector3(scaleX, 1, 1);
+            Debug.Log("민영이에요");
+            Image hpObj = Instantiate(hpImage, transform.position, Quaternion.identity);
+            hpObj.transform.SetParent(HpLineFolder.transform);
+            hpImageList.Add(hpObj);
+            Debug.Log(hpObj);
+            Debug.Log(hpImageList); //이게 찍혀
         }
-        HpLineFolder.GetComponent<HorizontalLayoutGroup>().gameObject.SetActive(true);
+        Debug.Log("안녕하세요");
     }
-    public void MinusHpBoost()
+    public void UpdateHpUI()
+    {
+        int a = HpLineFolder.transform.childCount;
+        Debug.Log(a);
 
+        //maxhp만큼 image를 생성하고
+
+        for (int i = 0; i < a; i++)//현재 hp만큼 켜라 
         {
-        maxHP -= 1f;
-        float scaleX = (5f / unitHp) / (maxHP / unitHp);
-        HpLineFolder.GetComponent<HorizontalLayoutGroup>().gameObject.SetActive(false);
-        foreach (Transform child in HpLineFolder.transform)
-        {
-            child.gameObject.transform.localScale = new Vector3(scaleX, 1, 1);
+            if (i >= currentHP)
+            {
+                hpImageList[i].transform.gameObject.SetActive(false);
+            }
+            else
+            {
+
+                hpImageList[i].transform.gameObject.SetActive(true);
+            }
         }
-        HpLineFolder.GetComponent<HorizontalLayoutGroup>().gameObject.SetActive(true);
-
     }
+    // 3 9
+    // 포이치로 자식의 갯수를 세어놔
+    //이게 hp가 바뀔때 그 자신의 현재 hp만큼 foreach에서 셋엣틱브를 하는거지
 }
