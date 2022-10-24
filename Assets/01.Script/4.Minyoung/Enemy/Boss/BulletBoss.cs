@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,14 @@ public class BulletBoss : BossBase<BulletBoss>
     [SerializeField] private PoolAbleObject motarBullet;
 
     public Transform rotateTrm;
+
+    [Header("[사운드]")]
+    [SerializeField] private AudioClip hitClip;
+    [SerializeField] private AudioClip smallFireClip;
+    [SerializeField] private AudioClip bigFireClip;
+
+    public AudioClip SmallFireClip => smallFireClip;
+    public AudioClip BigFireClip => bigFireClip;
 
     # region 직선 공격 변수
     [Header("직선 공격 변수들")]
@@ -74,16 +83,16 @@ public class BulletBoss : BossBase<BulletBoss>
 
     [SerializeField] private VisualEffect sparkParticles;
     [SerializeField] private Animator sparkAnimator;
-    [SerializeField] private GameObject flyDestrotObject;   
-    [SerializeField] private GameObject sparkObj;   
+    [SerializeField] private GameObject flyDestrotObject;
+    [SerializeField] private GameObject sparkObj;
     public int RandomIndex()
     {
         int returnValue = 0;
 
-        if(bowlIndexList.Count != 0) //그릇 있다는
+        if (bowlIndexList.Count != 0) //그릇 있다는
         {
-            int rand = Random.Range(0, bowlIndexList.Count); 
-            returnValue = bowlIndexList[rand]; 
+            int rand = Random.Range(0, bowlIndexList.Count);
+            returnValue = bowlIndexList[rand];
             bowlIndexList.RemoveAt(rand);
         }
         else
@@ -117,6 +126,7 @@ public class BulletBoss : BossBase<BulletBoss>
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up * 1.3f, dmg);
         CurHp -= dmg;
+        AudioManager.PlayAudioRandPitch(hitClip);
         BossUIManager.BossDamaged();
         if (CurHp <= 0)
         {
@@ -141,7 +151,7 @@ public class BulletBoss : BossBase<BulletBoss>
         sparkAnimator.Play("BombExplosion");
         sparkParticles.Play();
         yield return new WaitForSecondsRealtime(1f);
-        flyDestrotObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 3f), 
+        flyDestrotObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 3f),
             Random.Range(1f, 3f), Random.Range(1f, 3f)), ForceMode.Impulse);
         Debug.Log("개고생완료");
     }

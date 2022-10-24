@@ -37,6 +37,8 @@ public class StraightBullet : BossState<BulletBoss>
                 Rigidbody rigid = newbullet.GetComponent<Rigidbody>();
                 rigid.AddForce(newbullet.transform.forward * bulletBoss.StraightPower, ForceMode.Impulse);
 
+                AudioManager.PlayAudioRandPitch(stateMachineOwnerClass.SmallFireClip);
+
                 yield return new WaitForSeconds(bulletBoss.Interval);
             }
             yield return new WaitForSeconds(bulletBoss.CycleInterval);
