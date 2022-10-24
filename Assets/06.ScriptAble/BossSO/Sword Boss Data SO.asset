@@ -16,6 +16,6 @@ MonoBehaviour:
   bossName: SwordBoss
   speed: 3
   damage: 0
-  maxHp: 1600
+  maxHp: 800
   attackRange: 10
   patternCoolTime: 1.5

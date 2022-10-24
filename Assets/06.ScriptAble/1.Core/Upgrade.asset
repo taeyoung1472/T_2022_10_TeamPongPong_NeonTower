@@ -30,64 +30,68 @@ MonoBehaviour:
     upgradeProfile: {fileID: 21300000, guid: 02704493379768547b2e157e87803af0, type: 3}
     color: {r: 0.8597595, g: 0.4666667, b: 1, a: 1}
     upgradeName: "\uCD1D\uC54C \uBC18\uC0AC"
-    upgradeDesc: "\uBC18\uC0AC \uD684\uC218 + 1"
+    upgradeDesc: "\uCD1D\uC54C\uC774 \uBCBD\uC5D0 \uBC18\uC0AC\uB418\uB294 \uD69F\uC218\uAC00
+      \uC99D\uAC00\uB41C\uB2E4"
   - upgradeType: 1
     upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: c28094a7a9c0d0b4d968202b30f5a6c2, type: 3}
     color: {r: 1, g: 0.47743908, b: 0.39215684, a: 1}
     upgradeName: "\uD3ED\uD314\uD0C4"
-    upgradeDesc: "\uD3ED\uD314\uD558\uC5EC \uAD11\uC5ED \uB370\uBBF8\uC9C0\uB97C
-      \uC90C\n\uACF5\uACA9\uB825\uC774 \uB0AE\uC544\uC9D0"
+    upgradeDesc: "\uCD1D\uC54C\uC774 \uD3ED\uBC1C\uD558\uC5EC \uC8FC\uBCC0\uC5D0
+      \uAC19\uC740 \uB370\uBBF8\uC9C0 \uC785\uD78C\uB2E4 / \uCD1D\uC54C \uB370\uBBF8\uC9C0
+      \uAC10\uC18C"
   - upgradeType: 2
     upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: a9db68c1736a1c8478fa0593663b5381, type: 3}
     color: {r: 1, g: 0.37254906, b: 0.98451203, a: 1}
     upgradeName: "\uCD1D\uC54C \uACBD\uC9C1"
-    upgradeDesc: "\uACF5\uACA9\uC744 \uBC1B\uC740 \uC801\uC774 \uC7A0\uC2DC \uBA48\uCDA4"
+    upgradeDesc: "\uCD1D\uC54C\uC5D0 \uB9DE\uC740 \uC801\uC774 \uC7A0\uC2DC \uBA48\uCD98\uB2E4"
   - upgradeType: 3
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: d600e2ece84bc2a48b452b1551ca6952, type: 3}
     color: {r: 0.99412775, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCD1D\uC54C\uC18D\uB3C4"
-    upgradeDesc: "\uCC3D\uC54C\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9D0"
+    upgradeDesc: "\uCD1D\uC54C\uC774 \uB0A0\uC544\uAC00\uB294 \uC18D\uB3C4\uAC00
+      \uC99D\uAC00\uB41C\uB2E4"
   - upgradeType: 4
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: 6c0934af22d97b0479ea0c5f8393e2aa, type: 3}
     color: {r: 1, g: 0.41450846, b: 0.33333337, a: 1}
     upgradeName: "\uB2E4\uBC29\uBA74 \uBC1C\uC0AC"
-    upgradeDesc: "\uCD1D\uC54C\uC744 \uD55C\uBC88\uC5D0 \uC5EC\uB7EC\uBC1C \uBC1C\uC0AC\uD568"
+    upgradeDesc: "\uD55C\uBC88\uC5D0 \uBC1C\uC0AC\uB418\uB294 \uCD1D\uC54C\uC758
+      \uC218\uAC00 \uC99D\uAC00\uB41C\uB2E4."
   - upgradeType: 5
     upgradeAbleCount: 10
     upgradeProfile: {fileID: 21300000, guid: 6bee52cd35d845a4fb39461e3e50921d, type: 3}
     color: {r: 1, g: 0.33333337, b: 0.3576667, a: 1}
     upgradeName: "\uB370\uBBF8\uC9C0"
-    upgradeDesc: "\uCD1D\uC54C\uC774 \uB354\uC6B1 \uAC15\uB825\uD574\uC9D1\uB2C8\uB2E4"
+    upgradeDesc: "\uCD1D\uC54C\uC758 \uB370\uBBF8\uC9C0\uAC00 \uC99D\uAC00\uD55C\uB2E4"
   - upgradeType: 6
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: f2c452127c76dab439f0c5902ad311a4, type: 3}
     color: {r: 1, g: 0.33333337, b: 0.339421, a: 1}
     upgradeName: "\uBC1C\uC0AC\uC18D\uB3C4 \uC99D\uAC00"
-    upgradeDesc: "\uCD1D\uC54C\uC744 \uBC1C\uC0AC\uD558\uB294 \uC18D\uB3C4\uAC00
-      \uBE68\uB77C\uC9D1\uB2C8\uB2E4"
+    upgradeDesc: "\uCD1D\uC54C \uBC1C\uC0AC \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD55C\uB2E4"
   - upgradeType: 7
     upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: 1a3a3104b8a58394faad7b5aaaccd6f3, type: 3}
     color: {r: 0.50969887, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCCB4\uB825 \uD761\uC218"
-    upgradeDesc: "\uC801\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD569\uB2C8\uB2E4"
+    upgradeDesc: "\uC801\uC744 \uC77C\uC815 \uC218\uB9CC\uD07C \uC8FD\uC774\uBA74
+      \uCCB4\uB825\uC774 1 \uD68C\uBCF5\uB41C\uB2E4"
   - upgradeType: 8
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: 7d22db7217af8aa4fabae41784d9a439, type: 3}
     color: {r: 0.53842545, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uC790\uB3D9\uD68C\uBCF5"
-    upgradeDesc: "\uC77C\uC815\uD55C \uC2DC\uAC04\uB9C8\uB2E4 \uCCB4\uB825\uC774
-      \uD68C\uBCF5\uB429\uB2C8\uB2E4"
+    upgradeDesc: "\uCCB4\uB825\uC774 \uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 1 \uD68C\uBCF5\uB41C\uB2E4"
   - upgradeType: 9
-    upgradeAbleCount: 10
+    upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: fea4100eaa7c1564e837f810cc9ba27a, type: 3}
     color: {r: 0.35835263, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCCB4\uB825 \uC99D\uAC00"
-    upgradeDesc: "\uCD5C\uB300 \uCC44\uB825\uC774 1 \uC99D\uAC00\uD569\uB2C8\uB2E4"
+    upgradeDesc: "\uCD5C\uB300 \uCCB4\uB825\uC774 \uC99D\uAC00\uD55C\uACE0 \uCCB4\uB825\uC774
+      \uCC39\uB2C8\uB2E4"
   - upgradeType: 10
     upgradeAbleCount: 10
     upgradeProfile: {fileID: 21300000, guid: 29afbc2e1e86f4bb7beebc0822be2840, type: 3}

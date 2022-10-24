@@ -18,7 +18,7 @@ MonoBehaviour:
   cardThrowDownSound: {fileID: 8300000, guid: 4efece116314ea94884391d7e21f8f6a, type: 3}
   cardThrowUpSound: {fileID: 8300000, guid: 79dd5748d40bd564eacbc9bd0371181e, type: 3}
   cardOnMouseSound: {fileID: 8300000, guid: 5ec341ec6d702ff459b58938becfa64f, type: 3}
-  cardSelectSound: {fileID: 8300000, guid: cbb8b1a8d5359244b9297cf5dbab65cc, type: 3}
+  cardSelectSound: {fileID: 8300000, guid: a292464895c6517478880f1559647087, type: 3}
   portalOpenClip: {fileID: 8300000, guid: 30c5917f50e146a45bdcc031aa6515e6, type: 3}
   portalCloseClip: {fileID: 8300000, guid: bb92f3ff0235a0d4981df47a31699c43, type: 3}
   playerHitClip: {fileID: 8300000, guid: 62dfb5b087b53434e87fa682a86dc68b, type: 3}
