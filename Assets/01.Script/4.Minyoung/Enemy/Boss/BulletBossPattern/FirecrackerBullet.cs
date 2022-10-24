@@ -12,6 +12,7 @@ public class FirecrackerBullet : BossState<BulletBoss>
     {
         Debug.Log("ÆøÁ× °ø°Ý½ÃÀÛ");
         bulletBoss = stateMachineOwnerClass as BulletBoss;
+        AudioManager.PlayAudioRandPitch(stateMachineOwnerClass.BigFireClip);
         bulletBoss.StartCoroutine(BoomAtk());
     }
 
@@ -46,6 +47,7 @@ public class FirecrackerBullet : BossState<BulletBoss>
 
         GameObject circleBullet = null;
 
+        AudioManager.PlayAudio(stateMachineOwnerClass.BoomClip);
         for (int i = 0; i < bulletBoss.BoomCircleCnt; i++)
         {
             circleBullet = PoolManager.Instance.Pop(PoolType.BulletBossCommonBullet).gameObject;
@@ -62,6 +64,7 @@ public class FirecrackerBullet : BossState<BulletBoss>
         //stateMachineOwnerClass.DestroyObj(circleBullet);
 
         yield return new WaitForSeconds(0.3f);
+        AudioManager.PlayAudio(stateMachineOwnerClass.BoomClip, 1, 1.25f);
 
         CameraManager.Instance.CameraShake(20f, 30f, 0.25f);
 

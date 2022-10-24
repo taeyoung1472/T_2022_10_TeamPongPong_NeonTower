@@ -30,7 +30,7 @@ public class CircleMotar : BossState<BulletBoss>
 
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < bulletBoss.FirstMotarCnt; i++)
         {
@@ -61,7 +61,7 @@ public class CircleMotar : BossState<BulletBoss>
 
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < bulletBoss.SecontMotarCnt; i++)
         {
@@ -89,7 +89,7 @@ public class CircleMotar : BossState<BulletBoss>
             obj.transform.DOScale(new Vector3(5f, 5f, 5f), 1f);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
 
         for (int i = 0; i < bulletBoss.ThirdMotarCnt; i++)
