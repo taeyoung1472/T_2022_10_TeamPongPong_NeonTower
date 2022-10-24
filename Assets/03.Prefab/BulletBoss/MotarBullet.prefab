@@ -4955,6 +4955,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  boomClip: {fileID: 8300000, guid: 994c8815737132042859e98b00d6400e, type: 3}
   CircleSize: 3.5
 --- !u!1 &1935101228785858681
 GameObject:

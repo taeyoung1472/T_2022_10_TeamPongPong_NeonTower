@@ -1981,6 +1981,7 @@ MonoBehaviour:
   firecrackerBullet: {fileID: -2855662040913159645, guid: e0a7b42acdd6ea64a8d2490279d7ed9c, type: 3}
   motarBullet: {fileID: 7941654187723858168, guid: df153c9093a08ef4090c64daae98c1ee, type: 3}
   rotateTrm: {fileID: 354645993}
+  hitClip: {fileID: 8300000, guid: 3694b608973de5a499e8074e6f6bde90, type: 3}
   straightPower: 8
   interval: 0.2
   cycleInterval: 1
@@ -2457,9 +2458,9 @@ MonoBehaviour:
   wavePerTime: 8
   waveChangeTime: 8
   bossList:
+  - {fileID: 354645995}
   - {fileID: 928772313}
   - {fileID: 1982417183}
-  - {fileID: 354645995}
   - {fileID: 1262312529}
   waveText: {fileID: 1986087493}
   waveCntText: {fileID: 1675164767}
@@ -3914,6 +3915,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1840284044957577920, guid: 389583bf85b6cd1448a9a17b3edfdfbb, type: 3}
+      propertyPath: _hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3694b608973de5a499e8074e6f6bde90, type: 3}
     - target: {fileID: 1840284044957577934, guid: 389583bf85b6cd1448a9a17b3edfdfbb, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -10446,6 +10451,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6602998735807061904, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
+      propertyPath: _hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3694b608973de5a499e8074e6f6bde90, type: 3}
     - target: {fileID: 6602998735807061905, guid: 79874d4bf728fc041a5c4efcbf32117d, type: 3}
       propertyPath: m_Name
       value: RushBoss

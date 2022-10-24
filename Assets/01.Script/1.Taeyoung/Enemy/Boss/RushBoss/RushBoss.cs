@@ -11,10 +11,13 @@ public class RushBoss : BossBase<RushBoss>
     private AudioClip _punchClip = null;
     [SerializeField]
     private AudioClip _exploClip = null;
+    [SerializeField]
+    private AudioClip _hitClip = null;
 
     public AudioClip DashStartClip => _dashStartClip;
     public AudioClip PunchClip => _punchClip;
     public AudioClip ExploClip => _exploClip;
+    public AudioClip HitClip => _hitClip;
 
     [SerializeField]
     private Material _mat = null;
@@ -99,6 +102,7 @@ public class RushBoss : BossBase<RushBoss>
     {
         DamagePopup.PopupDamage(transform.position + Vector3.up, dmg);
         CurHp -= dmg;
+        AudioManager.PlayAudioRandPitch(HitClip);
         BossUIManager.BossDamaged();
         if (CurHp <= 0)
         {
