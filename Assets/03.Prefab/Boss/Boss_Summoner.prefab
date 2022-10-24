@@ -9724,6 +9724,7 @@ MonoBehaviour:
   _summonerAttackDataSO: {fileID: 11400000, guid: a9c6808140046f146adf9230867bdd82, type: 2}
   radius: 0
   angle: 0
+  _realAnimator: {fileID: 1840284045173406084}
 --- !u!195 &1840284044957577921
 NavMeshAgent:
   m_ObjectHideFlags: 0
