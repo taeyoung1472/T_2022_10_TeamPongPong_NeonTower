@@ -1,11 +1,9 @@
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Text;
-using UnityEditor.UIElements;
-using DG.Tweening;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -51,9 +49,9 @@ public class PlayerHUD : MonoBehaviour
 
     public void SetHpUI(int curHp, int maxHp)
     {
-        if(hpRoot.childCount < maxHp)
+        if (hpRoot.childCount < maxHp)
         {
-            int temp = maxHp - hpRoot.childCount;
+            int temp = (maxHp - hpRoot.childCount) > 10 ? 10 : maxHp - hpRoot.childCount;
             for (int i = 0; i < temp; i++)
             {
                 Image hpObj = Instantiate(hpImage, hpRoot);
@@ -65,13 +63,13 @@ public class PlayerHUD : MonoBehaviour
         int idx = 0;
         foreach (Image hpImage in hpImageList)
         {
-            if(idx < curHp)
+            if (idx < curHp)
             {
                 DOTween.To(() => hpImage.color, x => hpImage.color = x, hpEnableColor, 1f).SetUpdate(true);
             }
             else
             {
-                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f).SetUpdate(true);
+                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f);
             }
 
             idx++;

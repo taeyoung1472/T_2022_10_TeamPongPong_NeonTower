@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -96,6 +97,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Start()
     {
+        BGMChanger.Instance.ActiveAudio(BGMType.Default);
+        resurrectionCount = PlayerPrefs.GetInt("resurrectionCount");
         if (EnemySpawner.Instance)
         {
             EnemySpawner.Instance.IsCanSpawn = false;

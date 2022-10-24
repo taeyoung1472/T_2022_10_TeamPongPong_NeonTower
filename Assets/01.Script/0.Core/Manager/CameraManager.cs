@@ -136,6 +136,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
         if (isBoss)
         {
             BossUIManager.Instance?.DangerAnimation(dangerIdleTime, boss);
+            AudioManager.PlayAudio(UISoundManager.Instance.data.bossEnterClip);
         }
         ZoomCamera(_cmVCam.m_Lens.FieldOfView - zoomAmount, 0.5f);
 
@@ -150,9 +151,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
             else
                 _cmVCam.Follow = lastTarget;
 
-            if (!isBoss && WaveManager.Instance != null)
+            if(WaveManager.Instance != null)
             {
-                WaveManager.Instance.IsBossClear = true;
+                if (!isBoss && WaveManager.Instance != null)
+                {
+                    WaveManager.Instance.IsBossClear = true;
+                }
             }
         });
     }

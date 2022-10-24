@@ -15,6 +15,7 @@ MonoBehaviour:
   clickClip: {fileID: 8300000, guid: 245c71e7f7966834c818e985e8dc76df, type: 3}
   closeClip: {fileID: 8300000, guid: 0e87e89e7b94bc5479ffe9f829b08b9d, type: 3}
   waveChangeClip: {fileID: 8300000, guid: fd8a41096e1a9ac4f9b7e5609b1ad010, type: 3}
+  bossEnterClip: {fileID: 8300000, guid: 33f8a081e5b0bd84f8e9fbdd73443094, type: 3}
   cardThrowDownSound: {fileID: 8300000, guid: 4efece116314ea94884391d7e21f8f6a, type: 3}
   cardThrowUpSound: {fileID: 8300000, guid: 79dd5748d40bd564eacbc9bd0371181e, type: 3}
   cardOnMouseSound: {fileID: 8300000, guid: 5ec341ec6d702ff459b58938becfa64f, type: 3}

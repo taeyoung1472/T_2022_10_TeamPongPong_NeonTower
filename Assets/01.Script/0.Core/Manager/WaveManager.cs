@@ -39,7 +39,6 @@ public class WaveManager : MonoSingleTon<WaveManager>
         backgrounds = FindObjectsOfType<Background>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         StartCoroutine(WaveSystem());
-        BGMChanger.Instance.ActiveAudio(BGMType.Default);
 
         _waveUIManager = WaveUIManager.Instance;
     }
