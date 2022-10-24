@@ -53,9 +53,9 @@ namespace Glitch
             }
             else if(scene.name == "Menu")
             {
-                //StartCoroutine(MenuCutScene());
+                StartCoroutine(MenuCutScene());
                 noClickPanel.SetActive(false);
-                StartSceneValue();
+                //StartSceneValue();
             }
 
         }
@@ -127,25 +127,28 @@ namespace Glitch
         }
         IEnumerator MenuCutScene()
         {
+            fadeOutImage.gameObject.SetActive(true);
+            fadeOutImage.color = new Vector4(0,0,0,1f);
+            fadeOutImage?.DOFade(0f, 3f);
             noClickPanel.SetActive(true);
             _intensity = 0;
-            _scanLineJitter = 1f;
-            _verticalJump = 1f;
-            _horizontalShake = 1f;
-            _colorDrift = 1f;
-
-            yield return new WaitForSeconds(1.5f);
+            _scanLineJitter = 0.4f;
+            _verticalJump = 0.4f;
+            _horizontalShake = 0.4f;
+            _colorDrift = 0.4f;
+            yield return new WaitForSeconds(1f);
 
             while (true)
             {
                 if (_verticalJump <= 0f)
                     break;
+                
                 _verticalJump -= 0.02f;
                 _horizontalShake -= 0.02f;
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(0.01f);
             }
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.2f);
 
             while (true)
             {
@@ -155,6 +158,7 @@ namespace Glitch
                 _colorDrift -= 0.02f;
                 yield return new WaitForSeconds(0.01f);
             }
+            fadeOutImage.gameObject.SetActive(false);
             noClickPanel.SetActive(false);
             StartSceneValue();
 
