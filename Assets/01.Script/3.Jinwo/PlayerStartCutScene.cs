@@ -62,7 +62,7 @@ public class PlayerStartCutScene : MonoBehaviour
     }
     public IEnumerator ResurrectionCutScene(Action callback)
     {
-        CameraManager.Instance.TargetingCameraAnimationUnscale(transform, 4f, 22.5f);
+        CameraManager.Instance.TargetingCameraAnimationUnscale(transform, 3f, 22.5f);
 
         Glitch.GlitchManager.Instance.OtherValue();
         yield return new WaitForSecondsRealtime(0.5f);
@@ -128,7 +128,7 @@ public class PlayerStartCutScene : MonoBehaviour
             allChildRenderers[i].material = allMaterials[i];
         }
         
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSeconds(2f);
 
         Define.Instance.playerController.IsResurrection = false;
     }

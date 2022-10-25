@@ -20,7 +20,6 @@ public class CircleBullet : BossState<BulletBoss>
     }
     IEnumerator CircleAtk()
     {
-
         for (int i = 0; i < bulletBoss.FireCircleCnt; i++)
         {
             //GameObject newBullet = stateMachineOwnerClass.InstantiateObj

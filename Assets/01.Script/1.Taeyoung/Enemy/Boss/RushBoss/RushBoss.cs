@@ -73,7 +73,7 @@ public class RushBoss : BossBase<RushBoss>
 
         Mat.SetFloat("_DissolveBeginOffset", 1.5f);
         _attackPositionObj = new GameObject("AttackPositionObj");
-        CurHp = Data.maxHp;
+        CurHp = Data.maxHp[Define.Instance.Difficulty];
         _after = GetComponent<SkinnedMeshAfterImage>();
         _col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();

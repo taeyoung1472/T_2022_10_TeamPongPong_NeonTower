@@ -15,7 +15,12 @@ MonoBehaviour:
   clickClip: {fileID: 8300000, guid: 245c71e7f7966834c818e985e8dc76df, type: 3}
   closeClip: {fileID: 8300000, guid: 0e87e89e7b94bc5479ffe9f829b08b9d, type: 3}
   waveChangeClip: {fileID: 8300000, guid: fd8a41096e1a9ac4f9b7e5609b1ad010, type: 3}
-  bossEnterClip: {fileID: 8300000, guid: 33f8a081e5b0bd84f8e9fbdd73443094, type: 3}
+  bossEnterClip: {fileID: 8300000, guid: 9e2794a3c6e50b943bb7861a55147565, type: 3}
+  glitchClip: {fileID: 8300000, guid: a00a7504208eead4b81b9f9b9a635941, type: 3}
+  popClip: {fileID: 8300000, guid: e997e07bb6dbc4d41885b821a540e955, type: 3}
+  tickClip: {fileID: 8300000, guid: 67c159a09ebf6bb45920ed582364cecb, type: 3}
+  blockUpClip: {fileID: 8300000, guid: f60e05a04fb2b2142a6c6ff0d6f47c76, type: 3}
+  blockDownClip: {fileID: 8300000, guid: f60e05a04fb2b2142a6c6ff0d6f47c76, type: 3}
   cardThrowDownSound: {fileID: 8300000, guid: 4efece116314ea94884391d7e21f8f6a, type: 3}
   cardThrowUpSound: {fileID: 8300000, guid: 79dd5748d40bd564eacbc9bd0371181e, type: 3}
   cardOnMouseSound: {fileID: 8300000, guid: 5ec341ec6d702ff459b58938becfa64f, type: 3}

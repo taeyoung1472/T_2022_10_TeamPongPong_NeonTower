@@ -13,6 +13,6 @@ public class ColorCanvasEffect : MonoSingleTon<ColorCanvasEffect>
         color.a = intencity;
 
         colorPanel.color = color;
-        colorPanel.DOFade(0, duration);
+        colorPanel.DOFade(0, duration).SetUpdate(true);
     }
 }

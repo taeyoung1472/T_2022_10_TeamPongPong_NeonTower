@@ -81,6 +81,7 @@ public class EndingManager : MonoBehaviour
 
     private void Start()
     {
+        Glitch.GlitchManager.Instance.StartGameCutScene();
         _originSpeed = _textSpeed;
 
         Sequence seq = DOTween.Sequence();

@@ -19,10 +19,6 @@ public class PlayerHPBar : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UpdateHpUI();
-        }
         //hpBar.value = currentHP / maxHP;
     }
     public void CreateHPImage()
