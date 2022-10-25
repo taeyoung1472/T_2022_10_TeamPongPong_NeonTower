@@ -310,9 +310,14 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void StealHp()
     {
         hpStealValue += UpgradeManager.Instance.GetUpgradeValue(UpgradeType.StealHp);
+        if(curHp == maxHp)
+        {
+            hpStealValue = 0;
+        }
         if (hpStealValue > 1 && curHp < maxHp && !isDead)
         {
             curHp++;
+            hpStealValue = 0;
             hud.SetHpUI(curHp, maxHp);
         }
     }

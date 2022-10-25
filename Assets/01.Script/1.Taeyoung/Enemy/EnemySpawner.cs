@@ -48,7 +48,7 @@ public class EnemySpawner : MonoSingleTon<EnemySpawner>
         if (IsCanSpawn && Enemy.enemyStackCount < 50)
         {
             Enemy enemy = PoolManager.Instance.Pop(generatedType) as Enemy;
-            enemy.Init(pos.position, playerTrans.gameObject);
+            enemy.Init(pos.position + new Vector3(Random.Range(-0.5f,0.5f), 0, Random.Range(-0.5f, 0.5f)), playerTrans.gameObject);
         }
     }
 
