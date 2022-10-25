@@ -73,17 +73,17 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _fireImage.SetActive(true);
         _bossNameText.gameObject.SetActive(true);
 
-        _bossHPText?.SetText($"0 / {Instance._currentBoss.Data.maxHp}");
+        _bossHPText?.SetText($"0 / {Instance._currentBoss.Data.maxHp[Define.Instance.Difficulty]}");
         _bossNameText?.SetText(_currentBoss.Data.bossName);
 
-        _bossHpSlider.maxValue = _currentBoss.Data.maxHp;
+        _bossHpSlider.maxValue = _currentBoss.Data.maxHp[Define.Instance.Difficulty];
         _bossHpSlider.minValue = 0f;
         _bossHpSlider.value = _bossHpSlider.minValue;
         _isSliderAnimation = true;
         DOTween.To(() => _bossHpSlider.value, x =>
         {
             _bossHpSlider.value = x;
-            _bossHPText?.SetText($"{_bossHpSlider.value:0.0} / {Instance._currentBoss.Data.maxHp}");
+            _bossHPText?.SetText($"{_bossHpSlider.value:0.0} / {Instance._currentBoss.Data.maxHp[Define.Instance.Difficulty]}");
         }, _bossHpSlider.maxValue, 1.5f)
             .OnComplete(() => _isSliderAnimation = false);
     }
@@ -125,7 +125,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         if (Instance.IsSliderAnimation == false)
         {
             Instance._bossHpSlider.value = (float)Instance._currentBoss.CurHp;
-            Instance._bossHPText?.SetText($"{Mathf.Clamp(Instance._currentBoss.CurHp, 0, 5000):0.0} / {Instance._currentBoss.Data.maxHp}");
+            Instance._bossHPText?.SetText($"{Mathf.Clamp(Instance._currentBoss.CurHp, 0, 5000):0.0} / {Instance._currentBoss.Data.maxHp[Define.Instance.Difficulty]}");
         }
     }
 

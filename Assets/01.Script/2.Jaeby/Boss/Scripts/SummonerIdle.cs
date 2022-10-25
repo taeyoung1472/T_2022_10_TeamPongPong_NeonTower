@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class SummonerIdle : BossState<SummonerBoss>
 {
-    private float _randomIdleTime = 0f;
     private Vector3 _targetPos = Vector3.zero;
 
     public override void Enter()
     {
         Debug.Log("Idle State");
-        _randomIdleTime = Random.Range(
-            stateMachineOwnerClass.AttackDataSO.randomIdleTime.x, 
-            stateMachineOwnerClass.AttackDataSO.randomIdleTime.y
-            );
         stateMachineOwnerClass.TargetLook();
     }
 
@@ -22,7 +17,7 @@ public class SummonerIdle : BossState<SummonerBoss>
     {
         stateMachineOwnerClass.TargetLook();
 
-        if (stateMachine.GetStateDurationTime > _randomIdleTime)
+        if (stateMachine.GetStateDurationTime > stateMachineOwnerClass.Data.patternCoolTime[Define.Instance.Difficulty])
         {
 
 

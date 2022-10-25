@@ -51,7 +51,7 @@ namespace Glitch
                 gameUi?.SetActive(false);
                 StartGameCutScene();
             }
-            else if(scene.name == "Menu")
+            else if(scene.name == "Menu" || scene.name == "Ending")
             {
                 StartCoroutine(MenuCutScene());
                 noClickPanel.SetActive(false);
@@ -132,8 +132,8 @@ namespace Glitch
             AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             fadeOutImage.gameObject.SetActive(true);
             fadeOutImage.color = new Vector4(0,0,0,1f);
-            fadeOutImage?.DOFade(0f, 3f);
             noClickPanel.SetActive(true);
+            fadeOutImage?.DOFade(0f, 3f);
             _intensity = 0;
             _scanLineJitter = 0.4f;
             _verticalJump = 0.4f;

@@ -1,8 +1,10 @@
 using MoreMountains.Tools;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 public class BulletBoss : BossBase<BulletBoss>
 {
@@ -88,6 +90,8 @@ public class BulletBoss : BossBase<BulletBoss>
     [SerializeField] private GameObject flyDestrotObject;
     [SerializeField] private GameObject destroySPHERE;
     [SerializeField] private GameObject sparkObj;
+
+    [SerializeField] private bool isDie;
     public int RandomIndex()
     {
         int returnValue = 0;
@@ -111,7 +115,7 @@ public class BulletBoss : BossBase<BulletBoss>
     }
     private void Start()
     {
-        CurHp = Data.maxHp;
+        CurHp = Data.maxHp[Define.Instance.Difficulty];
 
         bossFsm = new BossStateMachine<BulletBoss>(this, new StartWaitState()); //상태로 가기전에 기다리는 상태
         //bossFsm = new BossStateMachine<BulletBoss>(this, new BulletBossIdle());
@@ -150,12 +154,17 @@ public class BulletBoss : BossBase<BulletBoss>
     }
     private IEnumerator BulletBossDieEffectCoroutine()
     {
+        if (isDie)
+        {
+            yield break;
+        }
         sparkObj.SetActive(true);
-        sparkAnimator.Play("BombExplosion");
-        sparkParticles.Play();
-        yield return new WaitForSecondsRealtime(1f);
         flyDestrotObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 3f),
             Random.Range(1f, 3f), Random.Range(1f, 3f)), ForceMode.Impulse);
+        sparkAnimator.Play("BombExplosion");
+        isDie = true;
+        sparkParticles.Play();
+        yield return new WaitForSecondsRealtime(1f);
         yield return new WaitForSeconds(1f);
        //Destroy(GameManager.Instance.a);
         Debug.Log("개고생완료");

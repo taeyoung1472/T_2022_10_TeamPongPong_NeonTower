@@ -6,6 +6,7 @@ public class UISoundManager : MonoSingleTon<UISoundManager>
 
     public void PlayClickClip()
     {
+        print("Å¬¸¯");
         AudioManager.PlayAudio(data.clickClip);
     }
     public void PlayCloseClip()

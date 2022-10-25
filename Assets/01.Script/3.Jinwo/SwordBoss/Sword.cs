@@ -98,7 +98,7 @@ public class Sword : BossBase<Sword>
     {
         isAttacking = false;
 
-        CurHp = Data.maxHp;
+        CurHp = Data.maxHp[Define.Instance.Difficulty];
 
         IsDead = false;
         //motionTrail.isMotionTrail = true;

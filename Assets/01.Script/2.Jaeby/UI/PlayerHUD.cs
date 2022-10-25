@@ -69,7 +69,7 @@ public class PlayerHUD : MonoBehaviour
             }
             else
             {
-                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f);
+                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f).SetUpdate(true);
             }
 
             idx++;

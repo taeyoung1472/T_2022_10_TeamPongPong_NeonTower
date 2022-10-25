@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: upgradeUI
       value: 
       objectReference: {fileID: 1258109059}
+    - target: {fileID: 8321129202120596397, guid: 5df354398d350d747b266884f8f36e41, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df354398d350d747b266884f8f36e41, type: 3}
 --- !u!224 &72016174 stripped
@@ -837,6 +841,7 @@ MonoBehaviour:
   _continueUI: {fileID: 1944427204}
   _gameUI: {fileID: 1835324103}
   isActiveContinue: 0
+  isupgrading: 0
 --- !u!1 &158365147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,6 +2015,7 @@ MonoBehaviour:
   flyDestrotObject: {fileID: 354645996}
   destroySPHERE: {fileID: 1850728887}
   sparkObj: {fileID: 1850728887}
+  isDie: 0
 --- !u!1 &354645996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3137063402161702829, guid: 4b44046b0d1c5094eb26210c60e7167f, type: 3}
@@ -2568,6 +2574,10 @@ PrefabInstance:
       propertyPath: upgradeUI
       value: 
       objectReference: {fileID: 1258109059}
+    - target: {fileID: 8321129202120596397, guid: 5df354398d350d747b266884f8f36e41, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df354398d350d747b266884f8f36e41, type: 3}
 --- !u!224 &516690453 stripped
@@ -3597,6 +3607,10 @@ PrefabInstance:
       propertyPath: upgradeUI
       value: 
       objectReference: {fileID: 1258109059}
+    - target: {fileID: 8321129202120596397, guid: 5df354398d350d747b266884f8f36e41, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df354398d350d747b266884f8f36e41, type: 3}
 --- !u!1 &840076930
@@ -4622,7 +4636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5149,7 +5163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5312,7 +5326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -10196,12 +10210,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 1258109056}
   levelUpEffect: {fileID: 0}
-  expTable: 030000000a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d0100003f420f00
+  expTable: 03000000080000000d00000012000000170000001c00000021000000260000002b00000030000000350000003a0000003f00000044000000490000004e00000053000000580000005d00000062000000670000006c00000071000000760000007b00000080000000850000008a0000008f00000094000000990000009e000000a3000000a8000000ad000000b2000000b7000000bc000000c10000003f420f00
   expPercentText: {fileID: 285960307}
   levelText: {fileID: 1103198005}
   expSlider: {fileID: 297708820}
   stdExp: 3
-  upExp: 7
+  upExp: 5
 --- !u!1 &1882471761
 GameObject:
   m_ObjectHideFlags: 0
@@ -12068,7 +12082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -12490,7 +12504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -12524,6 +12538,18 @@ MonoBehaviour:
       - m_Target: {fileID: 150357280}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DeActiveUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13496,7 +13522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13618,7 +13644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13866,7 +13892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15307,7 +15333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15341,6 +15367,18 @@ MonoBehaviour:
       - m_Target: {fileID: 150357280}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DeActiveUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

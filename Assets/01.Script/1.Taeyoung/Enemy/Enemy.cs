@@ -99,6 +99,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
     {
         enemyStackCount--;
         transform.localScale = baseScale;
+        StopAllCoroutines();
     }
 
     public virtual void ApplyDamage(float dmg)

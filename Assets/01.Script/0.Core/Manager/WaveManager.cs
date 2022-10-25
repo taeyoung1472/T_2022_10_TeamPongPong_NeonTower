@@ -99,6 +99,10 @@ public class WaveManager : MonoSingleTon<WaveManager>
 
                 if (curFloor == 5)
                 {
+                    foreach (Background bg in backgrounds) { bg.FloorChange(); }
+                    yield return new WaitForSeconds(1f);
+                    Glitch.GlitchManager.Instance.LoadGameCutScene();
+                    yield return new WaitForSeconds(2f);
                     GameManager.Instance.LoadEnding();
                 }
 

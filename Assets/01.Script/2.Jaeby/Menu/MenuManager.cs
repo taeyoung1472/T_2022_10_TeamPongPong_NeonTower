@@ -39,8 +39,6 @@ public class MenuManager : MonoSingleTon<MenuManager>
     {
         Time.timeScale = 1f;
 
-        //Glitch.GlitchManager.Instance.StartSceneValue();
-
         GoFirst();
 
         for (int i = 0; i < _texts.Length; i++)

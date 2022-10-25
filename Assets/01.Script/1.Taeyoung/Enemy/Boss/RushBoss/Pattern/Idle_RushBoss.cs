@@ -6,23 +6,18 @@ using Random = UnityEngine.Random;
 
 public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 {
-    float _randomTime = 0f;
-
     public override void Enter()
     {
         stateMachineOwnerClass.After.isMotionTrail = false;
 
-
         Debug.Log("¾ÆÀÌµé");
         stateMachineOwnerClass.ModelReset();
-        _randomTime = Random.Range(stateMachineOwnerClass.AttackDataSO.randomIdleTime.x,
-            stateMachineOwnerClass.AttackDataSO.randomIdleTime.y);
     }
 
     public override void Execute()
     {
 
-        if (stateMachine.GetStateDurationTime > _randomTime)
+        if (stateMachine.GetStateDurationTime > stateMachineOwnerClass.Data.patternCoolTime[Define.Instance.Difficulty])
         {
             if (stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.attackDistance)
             {
