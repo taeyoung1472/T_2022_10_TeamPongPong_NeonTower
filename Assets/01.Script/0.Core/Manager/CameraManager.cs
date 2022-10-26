@@ -153,7 +153,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
             if(WaveManager.Instance != null)
             {
-                if (!isBoss && WaveManager.Instance != null)
+                if (!isBoss && WaveManager.Instance != null && !Define.Instance.playerController.IsResurrection)
                 {
                     WaveManager.Instance.IsBossClear = true;
                 }
@@ -191,7 +191,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
             else
                 _cmVCam.Follow = lastTarget;
 
-            if (!isBoss)
+            if (!isBoss && !Define.Instance.playerController.IsResurrection)
             {
                 WaveManager.Instance.IsBossClear = true;
             }

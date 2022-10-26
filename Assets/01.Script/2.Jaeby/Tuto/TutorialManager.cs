@@ -68,6 +68,7 @@ public class TutorialManager : MonoBehaviour
 
         Instantiate(_colEffect, col.transform.position, Quaternion.identity);
         col.gameObject.SetActive(false);
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.popClip);
 
         _amount++;
         if (_amount >= 4)
@@ -89,6 +90,7 @@ public class TutorialManager : MonoBehaviour
         if (_seq != null)
             _seq.Kill();
 
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.tickClip);
         _tutorialText.SetText(text);
         _tutorialText.rectTransform.anchoredPosition = _initPos;
         _seq = DOTween.Sequence();
@@ -125,6 +127,7 @@ public class TutorialManager : MonoBehaviour
         Define.Instance.playerController.SpeedFixValue = 0f;
 
         yield return new WaitForSeconds(1.5f);
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.blockDownClip);
         for (int i = 0; i < _test1Boundarys.Length; i++)
         {
             _test1Boundarys[i].transform.DOMoveY(-2.05f, 1f);
@@ -137,6 +140,7 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator TutorialTwoStart()
     {
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.blockUpClip, 1, 0.1f, 0.5f);
         for (int i = 0; i < _test1Boundarys.Length; i++)
         {
             _test1Boundarys[i].transform.DOMoveY(0f, 0.5f);
@@ -182,6 +186,7 @@ public class TutorialManager : MonoBehaviour
     public void DashObjectCollision(Collider col)
     {
         Instantiate(_colEffect, col.transform.position, Quaternion.identity);
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.popClip);
         col.gameObject.SetActive(false);
     }
 
@@ -194,6 +199,7 @@ public class TutorialManager : MonoBehaviour
         CameraManager.Instance.TargetingCameraAnimation(_secondTarget, 2f, 2f);
         Define.Instance.playerController.SpeedFixValue = 0f;
         yield return new WaitForSeconds(1.5f);
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.blockDownClip);
         for (int i = 0; i < _test2Boundarys.Length; i++)
         {
             _test2Boundarys[i].transform.DOMoveY(-2.05f, 1f);
@@ -211,6 +217,7 @@ public class TutorialManager : MonoBehaviour
     }
     private IEnumerator TutorialThreeStart()
     {
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.blockUpClip, 1, 0.1f, 0.5f);
         for (int i = 0; i < _test2Boundarys.Length; i++)
         {
             _test2Boundarys[i].transform.DOMoveY(0f, 0.5f);
@@ -316,6 +323,7 @@ public class TutorialManager : MonoBehaviour
         CameraManager.Instance.TargetingCameraAnimation(_thirdTarget, 2f, 2f);
         Define.Instance.playerController.SpeedFixValue = 0f;
         yield return new WaitForSeconds(1.5f);
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.blockDownClip);
         for (int i = 0; i < _test3Boundarys.Length; i++)
         {
             _test3Boundarys[i].transform.DOMoveY(-2.05f, 1f);
@@ -334,6 +342,7 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator Test4Coroutine()
     {
+        AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.blockUpClip, 1, 0.1f, 0.5f);
         for (int i = 0; i < _test3Boundarys.Length; i++)
         {
             _test3Boundarys[i].transform.DOMoveY(0f, 0.5f);

@@ -51,11 +51,11 @@ namespace Glitch
                 gameUi?.SetActive(false);
                 StartGameCutScene();
             }
-            else if(scene.name == "Menu")
+            else if(scene.name == "Menu" || scene.name == "Ending")
             {
-                //StartCoroutine(MenuCutScene());
+                StartCoroutine(MenuCutScene());
                 noClickPanel.SetActive(false);
-                StartSceneValue();
+                //StartSceneValue();
             }
 
         }
@@ -93,6 +93,7 @@ namespace Glitch
         }
         public void HitValue()
         {
+            //AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             StartCoroutine(HitCoroutine());
         }
         public void OtherValue()
@@ -118,6 +119,7 @@ namespace Glitch
         }
         public void StartGameCutScene()
         {
+            
             _intensity = 0.8f;
             _scanLineJitter = 0.8f;
             _verticalJump = 0.8f;
@@ -127,25 +129,29 @@ namespace Glitch
         }
         IEnumerator MenuCutScene()
         {
+            AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
+            fadeOutImage.gameObject.SetActive(true);
+            fadeOutImage.color = new Vector4(0,0,0,1f);
             noClickPanel.SetActive(true);
+            fadeOutImage?.DOFade(0f, 3f);
             _intensity = 0;
-            _scanLineJitter = 1f;
-            _verticalJump = 1f;
-            _horizontalShake = 1f;
-            _colorDrift = 1f;
-
-            yield return new WaitForSeconds(1.5f);
+            _scanLineJitter = 0.4f;
+            _verticalJump = 0.4f;
+            _horizontalShake = 0.4f;
+            _colorDrift = 0.4f;
+            yield return new WaitForSeconds(1f);
 
             while (true)
             {
                 if (_verticalJump <= 0f)
                     break;
+                
                 _verticalJump -= 0.02f;
                 _horizontalShake -= 0.02f;
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(0.01f);
             }
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.2f);
 
             while (true)
             {
@@ -155,6 +161,7 @@ namespace Glitch
                 _colorDrift -= 0.02f;
                 yield return new WaitForSeconds(0.01f);
             }
+            fadeOutImage.gameObject.SetActive(false);
             noClickPanel.SetActive(false);
             StartSceneValue();
 
@@ -171,6 +178,7 @@ namespace Glitch
         }
         IEnumerator GameStartCutScene()
         {
+            AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             fadeOutImage.gameObject.SetActive(true);
             while (_intensity > 0.01f)
             {
@@ -194,6 +202,7 @@ namespace Glitch
         }
         IEnumerator StartCutScene()
         {
+            AudioManager.PlayAudio(UISoundManager.Instance.data.glitchClip);
             while (_intensity < 1f)
             {
                 if(_scanLineJitter > 0.3f)

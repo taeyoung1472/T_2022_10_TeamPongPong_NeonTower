@@ -13,7 +13,6 @@ public class BulletBossIdle : BossState<BulletBoss>
     {
         bulletBoss = stateMachineOwnerClass as BulletBoss;
         randIdx = stateMachineOwnerClass.RandomIndex();
-        randTime = Random.Range(1, 2);
         //아이들 애니메이션 실행
     }
 
@@ -21,7 +20,7 @@ public class BulletBossIdle : BossState<BulletBoss>
     {
         bulletBoss.LookTarget();
 
-        if (stateMachine.GetStateDurationTime > randTime)
+        if (stateMachine.GetStateDurationTime > stateMachineOwnerClass.Data.patternCoolTime[Define.Instance.Difficulty])
         {
             switch (randIdx)
             {

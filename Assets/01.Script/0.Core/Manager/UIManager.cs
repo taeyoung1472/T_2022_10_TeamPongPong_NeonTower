@@ -10,6 +10,7 @@ public class UIManager : MonoSingleTon<UIManager>
     [SerializeField] private GameObject _gameUI = null;
 
     public bool isActiveContinue;
+    public bool isupgrading = false;
     private bool isDisplayContinue = true;
     public bool IsDisplayContinue { get { return isDisplayContinue; } set { isDisplayContinue = value; } }
 
@@ -17,7 +18,7 @@ public class UIManager : MonoSingleTon<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !Define.Instance.playerController.IsIdle && !isupgrading)
         {
             if (_popupStack.Count == 0 && !isActiveContinue)
             {

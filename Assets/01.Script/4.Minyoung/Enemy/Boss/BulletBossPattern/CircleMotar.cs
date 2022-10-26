@@ -20,7 +20,7 @@ public class CircleMotar : BossState<BulletBoss>
         for (int i = 0; i < bulletBoss.FirstMotarCnt; i++)
         {
             normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.FirstMotarCnt), Vector3.up) * Vector3.forward;
-            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 5f;
+            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 4.5f;
             GameObject obj = DangerZone.DrawCircle(position, 4f, 1.5f);
             //GameObject obj = DangerZone.DrawCircle(position, 0.5f, 1.5f);
 
@@ -30,7 +30,7 @@ public class CircleMotar : BossState<BulletBoss>
 
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < bulletBoss.FirstMotarCnt; i++)
         {
@@ -52,7 +52,7 @@ public class CircleMotar : BossState<BulletBoss>
         for (int i = 0; i < bulletBoss.SecontMotarCnt; i++)
         {
             normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.SecontMotarCnt), Vector3.up) * Vector3.forward;
-            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 8f;
+            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 7.5f;
             GameObject obj = DangerZone.DrawCircle(position, 4f, 1.5f);
 
             circlePostions.Add(position);
@@ -61,7 +61,7 @@ public class CircleMotar : BossState<BulletBoss>
 
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < bulletBoss.SecontMotarCnt; i++)
         {
@@ -82,14 +82,14 @@ public class CircleMotar : BossState<BulletBoss>
         for (int i = 0; i < bulletBoss.ThirdMotarCnt; i++)
         {
             normalVec = Quaternion.AngleAxis(i * (360 / bulletBoss.ThirdMotarCnt), Vector3.up) * Vector3.forward;
-            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 12f;
+            Vector3 position = stateMachineOwnerClass.transform.position + normalVec * 10f;
             GameObject obj = DangerZone.DrawCircle(position, 4f, 1.5f);
             circlePostions.Add(position);
 
             obj.transform.DOScale(new Vector3(5f, 5f, 5f), 1f);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
 
         for (int i = 0; i < bulletBoss.ThirdMotarCnt; i++)

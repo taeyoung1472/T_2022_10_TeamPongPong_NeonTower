@@ -30,7 +30,7 @@ public class SwordIdle<T> : BossState<T> where T : Sword
     {
 
         stateMachineOwnerClass.attackCoolTime += Time.deltaTime;
-        if (stateMachineOwnerClass.attackCoolTime >= stateMachineOwnerClass.Data.patternCoolTime)
+        if (stateMachineOwnerClass.attackCoolTime >= stateMachineOwnerClass.Data.patternCoolTime[Define.Instance.Difficulty])
         // ÄðÅ¸ÀÓ ´Ùµ¼
         {
             agent.isStopped = false;

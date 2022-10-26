@@ -49,7 +49,7 @@ public class PlayerHUD : MonoBehaviour
 
     public void SetHpUI(int curHp, int maxHp)
     {
-        if (hpRoot.childCount < maxHp)
+        if (hpRoot.childCount < maxHp && hpRoot.childCount < 10)
         {
             int temp = (maxHp - hpRoot.childCount) > 10 ? 10 : maxHp - hpRoot.childCount;
             for (int i = 0; i < temp; i++)
@@ -69,7 +69,7 @@ public class PlayerHUD : MonoBehaviour
             }
             else
             {
-                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f);
+                DOTween.To(() => hpImage.color, x => hpImage.color = x, hpDisableColor, 1f).SetUpdate(true);
             }
 
             idx++;

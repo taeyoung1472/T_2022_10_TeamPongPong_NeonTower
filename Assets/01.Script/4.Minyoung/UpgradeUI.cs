@@ -35,6 +35,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
     }
     public void OpenUI()
     {
+        UIManager.Instance.isupgrading = true;
         BGMChanger.Instance.ActiveAudio(BGMType.Upgrade);
         UIManager.Instance.IsDisplayContinue = false;
         Time.timeScale = 0f;
@@ -183,6 +184,7 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMove(initPos, 0.3f)).SetUpdate(true);
         seq.AppendCallback(() => Time.timeScale = 1);
+        seq.AppendCallback(() => UIManager.Instance.isupgrading = false);
     }
 
     public void DoFade(float start, float dest, float time, Material dissolveMat)

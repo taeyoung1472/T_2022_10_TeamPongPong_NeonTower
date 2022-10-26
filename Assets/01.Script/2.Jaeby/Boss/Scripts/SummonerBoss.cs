@@ -58,7 +58,7 @@ public class SummonerBoss : BossBase<SummonerBoss>
     {
         _col = GetComponent<Collider>();
         animator = _realAnimator;
-        CurHp = Data.maxHp;
+        CurHp = Data.maxHp[Define.Instance.Difficulty];
         _laserModel.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = true;

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolDatas:
   - poolType: 0
-    initCount: 10
+    initCount: 125
     poolAbleObject: {fileID: 4444814747640977973, guid: 525c90525e6ee084cbed760854a9bbfd, type: 3}
   - poolType: 1
-    initCount: 50
+    initCount: 75
     poolAbleObject: {fileID: 3158507072879525921, guid: 15f74ed8109bd0348b43eecb881ada6d, type: 3}
   - poolType: 2
-    initCount: 10
+    initCount: 50
     poolAbleObject: {fileID: -7086736458700717465, guid: 3f5c99416485b9a42bf2f39592fb6968, type: 3}
   - poolType: 4
     initCount: 10
@@ -29,16 +29,16 @@ MonoBehaviour:
     initCount: 10
     poolAbleObject: {fileID: 794494922934898944, guid: 5dc70d75a161c074f9e210090c4e0814, type: 3}
   - poolType: 8
-    initCount: 10
+    initCount: 50
     poolAbleObject: {fileID: 1120004623409423067, guid: e6c73e6ffcae86a47a24ad718d51f3c9, type: 3}
   - poolType: 9
-    initCount: 10
+    initCount: 50
     poolAbleObject: {fileID: 3800920093552497262, guid: ee0d8854ab25a3a43a52e77334a16fb4, type: 3}
   - poolType: 10
-    initCount: 10
+    initCount: 50
     poolAbleObject: {fileID: 755955018906912393, guid: 7f6f0949cbcea1c4fbc6c27cf76cead8, type: 3}
   - poolType: 11
-    initCount: 10
+    initCount: 50
     poolAbleObject: {fileID: 8167337994214217113, guid: 238018aebb8ded844bb8c57716f84a62, type: 3}
   - poolType: 5
     initCount: 10

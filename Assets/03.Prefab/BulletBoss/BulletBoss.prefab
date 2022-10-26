@@ -523,4 +523,34 @@ MonoBehaviour:
       m_Calls: []
   bullet: {fileID: 6274670234408716251, guid: 99b1588aa9cc9b547b502ed9910ee146, type: 3}
   firecrackerBullet: {fileID: 6274670234408716251, guid: bc5df0670e49d914aa2360d2331ae334, type: 3}
-  backBullet: {fileID: 3716398474997527372, guid: 74ea67c8698e4db479b951ee1f18527c, type: 3}
+  motarBullet: {fileID: 0}
+  rotateTrm: {fileID: 0}
+  hitClip: {fileID: 0}
+  smallFireClip: {fileID: 0}
+  bigFireClip: {fileID: 0}
+  boomClip: {fileID: 0}
+  straightPower: 7
+  interval: 0.3
+  cycleInterval: 1
+  cycleCnt: 3
+  fireCnt: 4
+  circlePower: 4
+  fireCircleCnt: 15
+  bigBulletDestoryTime: 3
+  boomCircleCnt: 12
+  boomPower: 7
+  boomCirclePower: 5
+  boomDelay: 0.5
+  motarDownPower: 8
+  waringBoomTime: 0.5
+  firstMotarCnt: 5
+  secontMotarCnt: 7
+  thirdMotarCnt: 10
+  stateToIdleTime: 1
+  randomIndexList: 
+  bowlIndexList: 
+  sparkParticles: {fileID: 0}
+  sparkAnimator: {fileID: 0}
+  flyDestrotObject: {fileID: 0}
+  destroySPHERE: {fileID: 0}
+  sparkObj: {fileID: 0}

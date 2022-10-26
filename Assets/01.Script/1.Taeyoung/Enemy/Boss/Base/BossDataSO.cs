@@ -10,7 +10,7 @@ public class BossDataSO : ScriptableObject
     [Header("성능 정보")]
     public float speed = 5;
     public float damage = 1;
-    public float maxHp = 100;
     public float attackRange = 10;
-    public float patternCoolTime = 4;
+    public float[] patternCoolTime;
+    public float[] maxHp;
 }

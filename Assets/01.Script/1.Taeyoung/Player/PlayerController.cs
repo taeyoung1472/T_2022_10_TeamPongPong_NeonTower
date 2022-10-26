@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     public bool IsDead { get { return isDead; } }
     public bool IsIdle { get { return isIdle; } set { isIdle = value; } }
+    public bool IsResurrection { get { return isResurrection; } set { isResurrection = value; } }
     public int CurDash { get { return curDash; } set { curDash = value; hud.SetDashValue(curDash, maxDash); } }
 
     [Header("[Å¸ÀÌ¸Ó]")]
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isDead = false;
     private bool isDashing = false;
     private bool isIdle = true;
+    private bool isResurrection = false;
     private float hpStealValue = 0;
 
     public Vector3 MoveDir => moveDir;
@@ -197,9 +199,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        isDead = true;
         if(resurrectionCount > 0)
         {
+            isResurrection = true;
             Time.timeScale = 0f;
             IsIdle = true;
             EXPManager.Instance.IsCanLevelUp = false;
@@ -207,7 +209,6 @@ public class PlayerController : MonoBehaviour, IDamageable
             {
                 Time.timeScale = 1;
                 IsIdle = false;
-                isDead = false;
                 EnemySubject.Instance.NotifyObserver();
                 this.Invoke(() => EXPManager.Instance.IsCanLevelUp = true, 2);
                 curHp = maxHp;
@@ -218,6 +219,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         else
         {
+            isDead = true;
             FindObjectOfType<DieEffect>().PlayerDieEffect();
         }
     }
@@ -308,9 +310,14 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void StealHp()
     {
         hpStealValue += UpgradeManager.Instance.GetUpgradeValue(UpgradeType.StealHp);
+        if(curHp == maxHp)
+        {
+            hpStealValue = 0;
+        }
         if (hpStealValue > 1 && curHp < maxHp && !isDead)
         {
             curHp++;
+            hpStealValue = 0;
             hud.SetHpUI(curHp, maxHp);
         }
     }

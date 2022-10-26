@@ -9,6 +9,7 @@ public class CircleBullet : BossState<BulletBoss>
     public override void Enter()
     {
         Debug.Log("원형 공격시작");
+        AudioManager.PlayAudio(stateMachineOwnerClass.BoomClip);
         bulletBoss = stateMachineOwnerClass as BulletBoss;
         bulletBoss.StartCoroutine(CircleAtk());
     }
@@ -19,7 +20,6 @@ public class CircleBullet : BossState<BulletBoss>
     }
     IEnumerator CircleAtk()
     {
-
         for (int i = 0; i < bulletBoss.FireCircleCnt; i++)
         {
             //GameObject newBullet = stateMachineOwnerClass.InstantiateObj

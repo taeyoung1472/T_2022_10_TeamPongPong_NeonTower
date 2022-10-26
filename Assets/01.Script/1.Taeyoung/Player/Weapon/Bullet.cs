@@ -22,12 +22,23 @@ public class Bullet : PoolAbleObject
     private float knockBackForce = 0f;
     private float explosionRadius = 2.5f;
 
+    private float bulletDuration = 2.5f;
+    private float bulletDurationTarget;
+
     [Header("[·¹ÀÌ¾î]")]
     private LayerMask enemyLayer;
 
     public void Start()
     {
         enemyLayer |= LayerMask.GetMask("Enemy");
+    }
+
+    public void Update()
+    {
+        if(Time.time > bulletDurationTarget)
+        {
+            PoolManager.Instance.Push(PoolType, gameObject);
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -140,11 +151,13 @@ public class Bullet : PoolAbleObject
         isCanExplosion = UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion) != 0;
         isCanKnockBack = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0;
         if (rb == null) rb = GetComponent<Rigidbody>();
+        bulletDurationTarget = Time.time + bulletDuration;
     }
 
     public override void Init_Push()
     {
         rb.velocity = Vector3.zero;
+        bulletDuration = 2.5f;
     }
 
 }

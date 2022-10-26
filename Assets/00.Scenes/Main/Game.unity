@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.1
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.033333335
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: upgradeUI
       value: 
       objectReference: {fileID: 1258109059}
+    - target: {fileID: 8321129202120596397, guid: 5df354398d350d747b266884f8f36e41, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df354398d350d747b266884f8f36e41, type: 3}
 --- !u!224 &72016174 stripped
@@ -837,6 +841,7 @@ MonoBehaviour:
   _continueUI: {fileID: 1944427204}
   _gameUI: {fileID: 1835324103}
   isActiveContinue: 0
+  isupgrading: 0
 --- !u!1 &158365147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,18 +1266,6 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3250798347640562366, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250798347640562366, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250798347640562366, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250798347640562366, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1282,7 +1275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250798347640562366, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 129.00003
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: 3250798347640562366, guid: 6adb3f1f5bbb121438196ed64aed9f3b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1994,8 +1987,9 @@ MonoBehaviour:
   motarBullet: {fileID: 7941654187723858168, guid: df153c9093a08ef4090c64daae98c1ee, type: 3}
   rotateTrm: {fileID: 354645993}
   hitClip: {fileID: 8300000, guid: 3694b608973de5a499e8074e6f6bde90, type: 3}
-  smallFireClip: {fileID: 0}
-  bigFireClip: {fileID: 0}
+  smallFireClip: {fileID: 8300000, guid: 1ee787b380fa97847b1eeb49fc971d5c, type: 3}
+  bigFireClip: {fileID: 8300000, guid: dc491454358965045b70ec514051ddca, type: 3}
+  boomClip: {fileID: 8300000, guid: 994c8815737132042859e98b00d6400e, type: 3}
   straightPower: 8
   interval: 0.2
   cycleInterval: 1
@@ -2011,15 +2005,17 @@ MonoBehaviour:
   motarDownPower: 25
   waringBoomTime: 0.1
   firstMotarCnt: 5
-  secontMotarCnt: 9
-  thirdMotarCnt: 14
+  secontMotarCnt: 7
+  thirdMotarCnt: 11
   stateToIdleTime: 0.2
   randomIndexList: 000000000100000002000000030000000400000005000000
   bowlIndexList: 
   sparkParticles: {fileID: 1850728889}
   sparkAnimator: {fileID: 1850728888}
   flyDestrotObject: {fileID: 354645996}
+  destroySPHERE: {fileID: 1850728887}
   sparkObj: {fileID: 1850728887}
+  isDie: 0
 --- !u!1 &354645996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3137063402161702829, guid: 4b44046b0d1c5094eb26210c60e7167f, type: 3}
@@ -2469,12 +2465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc546b354abb59743b0254c0586a9ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePerTime: 8
+  wavePerTime: 30
   waveChangeTime: 8
   bossList:
-  - {fileID: 354645995}
   - {fileID: 928772313}
   - {fileID: 1982417183}
+  - {fileID: 354645995}
   - {fileID: 1262312529}
   waveText: {fileID: 1986087493}
   waveCntText: {fileID: 1675164767}
@@ -2578,6 +2574,10 @@ PrefabInstance:
       propertyPath: upgradeUI
       value: 
       objectReference: {fileID: 1258109059}
+    - target: {fileID: 8321129202120596397, guid: 5df354398d350d747b266884f8f36e41, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df354398d350d747b266884f8f36e41, type: 3}
 --- !u!224 &516690453 stripped
@@ -3607,6 +3607,10 @@ PrefabInstance:
       propertyPath: upgradeUI
       value: 
       objectReference: {fileID: 1258109059}
+    - target: {fileID: 8321129202120596397, guid: 5df354398d350d747b266884f8f36e41, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df354398d350d747b266884f8f36e41, type: 3}
 --- !u!1 &840076930
@@ -4632,7 +4636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5159,7 +5163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5322,7 +5326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -9647,6 +9651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38324e6ba4bf0f248ae4eefbbb2479b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a: {fileID: 1850728887}
 --- !u!1 &1788631107
 GameObject:
   m_ObjectHideFlags: 0
@@ -10086,6 +10091,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4890473051377402524, guid: c8472ddabcd717f4fbc884b6ec02ec3a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4890473051620590104, guid: c8472ddabcd717f4fbc884b6ec02ec3a, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -10201,12 +10210,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 1258109056}
   levelUpEffect: {fileID: 0}
-  expTable: 030000000a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d0100003f420f00
+  expTable: 03000000080000000d00000012000000170000001c00000021000000260000002b00000030000000350000003a0000003f00000044000000490000004e00000053000000580000005d00000062000000670000006c00000071000000760000007b00000080000000850000008a0000008f00000094000000990000009e000000a3000000a8000000ad000000b2000000b7000000bc000000c10000003f420f00
   expPercentText: {fileID: 285960307}
   levelText: {fileID: 1103198005}
   expSlider: {fileID: 297708820}
   stdExp: 3
-  upExp: 7
+  upExp: 5
 --- !u!1 &1882471761
 GameObject:
   m_ObjectHideFlags: 0
@@ -11511,7 +11520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111841580, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: resurrectionCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 182315599, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: gameUI
@@ -12073,7 +12082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -12495,7 +12504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -12529,6 +12538,18 @@ MonoBehaviour:
       - m_Target: {fileID: 150357280}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DeActiveUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13501,7 +13522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13623,7 +13644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13871,7 +13892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15312,7 +15333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15346,6 +15367,18 @@ MonoBehaviour:
       - m_Target: {fileID: 150357280}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DeActiveUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491881654}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: PlayCloseClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
