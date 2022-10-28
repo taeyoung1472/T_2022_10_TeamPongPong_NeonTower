@@ -92,6 +92,8 @@ public class BulletBoss : BossBase<BulletBoss>
     [SerializeField] private GameObject sparkObj;
 
     [SerializeField] private bool isDie;
+
+    [SerializeField] private Collider collider;
     public int RandomIndex()
     {
         int returnValue = 0;
@@ -154,20 +156,18 @@ public class BulletBoss : BossBase<BulletBoss>
     }
     private IEnumerator BulletBossDieEffectCoroutine()
     {
-        if (isDie)
-        {
-            yield break;
-        }
+    
         sparkObj.SetActive(true);
         flyDestrotObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 3f),
             Random.Range(1f, 3f), Random.Range(1f, 3f)), ForceMode.Impulse);
         sparkAnimator.Play("BombExplosion");
-        isDie = true;
         sparkParticles.Play();
+       // Debug.Log(collider.enabled);
+
+        collider.enabled = false;
+      //  Debug.Log(collider.enabled);
         yield return new WaitForSecondsRealtime(1f);
-        yield return new WaitForSeconds(1f);
        //Destroy(GameManager.Instance.a);
-        Debug.Log("개고생완료");
     }
     public GameObject InstantiateObj(GameObject obj, Vector3 pos, Quaternion rot)
     {

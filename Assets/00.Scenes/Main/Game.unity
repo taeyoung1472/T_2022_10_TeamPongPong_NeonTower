@@ -2016,6 +2016,7 @@ MonoBehaviour:
   destroySPHERE: {fileID: 1850728887}
   sparkObj: {fileID: 1850728887}
   isDie: 0
+  collider: {fileID: 354645994}
 --- !u!1 &354645996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3137063402161702829, guid: 4b44046b0d1c5094eb26210c60e7167f, type: 3}
