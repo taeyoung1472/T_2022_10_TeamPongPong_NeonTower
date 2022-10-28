@@ -164,7 +164,6 @@ public class PlayerStartCutScene : MonoBehaviour
         {
             if (innerRadius <= -0.25)
             {
-                Debug.Log("머임2");
                 break;
             }
             innerRadius -= 0.005f;
@@ -185,7 +184,6 @@ public class PlayerStartCutScene : MonoBehaviour
         {
             if(progress <= 0f)
             {
-                Debug.Log("머임");
                 break;
             }
             progress -= 0.01f;
@@ -204,7 +202,6 @@ public class PlayerStartCutScene : MonoBehaviour
         {
             if (innerRadius >= 1)
             {
-                Debug.Log("머임2");
                 break;
             }
             innerRadius += 0.01f;

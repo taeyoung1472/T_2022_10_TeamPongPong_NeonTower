@@ -29,6 +29,9 @@ public class EnemyDataSO : ScriptableObject
     [Range(0.01f, 2f)] public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
 
+    [Header("[기타]")]
+    public int expValue;
+
     [Header("[대시 관련]")]
     //대쉬 관련
     public float dashDistance = 3.5f;

@@ -15,8 +15,6 @@ MonoBehaviour:
   upgradeType: 7
   datas:
   - 0
-  - 0.02
+  - 0.0125
+  - 0.017
   - 0.025
-  - 0.03
-  - 0.04
-  - 0.05

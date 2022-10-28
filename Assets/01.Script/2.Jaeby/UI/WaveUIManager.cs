@@ -134,7 +134,6 @@ public class WaveUIManager : MonoSingleTon<WaveUIManager>
                         targets[count].localScale = Vector3.one * 1.4f;
                         targets[count].GetChild(0).localScale = Vector3.one * 1.4f;
                     }
-                    Debug.Log(count);
                     count++;
                 });
             }

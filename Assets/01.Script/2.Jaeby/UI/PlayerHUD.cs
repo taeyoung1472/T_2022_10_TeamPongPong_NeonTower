@@ -25,8 +25,6 @@ public class PlayerHUD : MonoBehaviour
     {
         if (value < 0) return;
 
-        print($"Value : {value}, MaxValue : {maxValue}");
-
         if (_sb == null) _sb = new();
 
         _sb.Append($"<#{ColorUtility.ToHtmlStringRGBA(_EnableColor)}>");
