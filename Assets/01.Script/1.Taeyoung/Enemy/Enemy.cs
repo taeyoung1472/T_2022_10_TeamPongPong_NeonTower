@@ -67,6 +67,7 @@ public class Enemy : PoolAbleObject, IDamageable, IObserver
         GameObject dieEffect = PoolManager.Instance.Pop(PoolType.EnemyDeadEffect).gameObject;
         dieEffect.transform.position = transform.position;
         obj.transform.position = transform.position;
+        obj.GetComponent<ExpBall>().SetExpValue(EnemyData.expValue);
         if (OnDeath != null) OnDeath?.Invoke();
     }
 

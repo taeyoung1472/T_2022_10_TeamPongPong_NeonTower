@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 130}
+  m_AnchoredPosition: {x: 0, y: 129.99998}
   m_SizeDelta: {x: 0, y: 130}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &27057831
@@ -5688,7 +5688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -130}
+  m_AnchoredPosition: {x: 0, y: -129.99998}
   m_SizeDelta: {x: 0, y: 130}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1127639922
@@ -6248,7 +6248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 22}
+  m_AnchoredPosition: {x: 0, y: 21.999985}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281012706
@@ -6394,7 +6394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -532.1999, y: -100}
+  m_AnchoredPosition: {x: -532.19995, y: -100}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1314585301
@@ -7117,7 +7117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 257.39984, y: -250}
+  m_AnchoredPosition: {x: 257.39987, y: -250}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597222347
@@ -10211,12 +10211,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 1258109056}
   levelUpEffect: {fileID: 0}
-  expTable: 03000000080000000d00000012000000170000001c00000021000000260000002b00000030000000350000003a0000003f00000044000000490000004e00000053000000580000005d00000062000000670000006c00000071000000760000007b00000080000000850000008a0000008f00000094000000990000009e000000a3000000a8000000ad000000b2000000b7000000bc000000c10000003f420f00
+  expTable: 0a00000011000000180000001f000000260000002d000000340000003b000000420000004900000050000000570000005e000000650000006c000000730000007a00000081000000880000008f000000960000009d000000a4000000ab000000b2000000b9000000c0000000c7000000ce000000d5000000dc000000e3000000ea000000f1000000f8000000ff000000060100000d010000140100003f420f00
   expPercentText: {fileID: 285960307}
   levelText: {fileID: 1103198005}
   expSlider: {fileID: 297708820}
-  stdExp: 3
-  upExp: 5
+  stdExp: 10
+  upExp: 7
 --- !u!1 &1882471761
 GameObject:
   m_ObjectHideFlags: 0
@@ -11523,6 +11523,10 @@ PrefabInstance:
       propertyPath: resurrectionCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 111841581, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 182315599, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: gameUI
       value: 
@@ -11531,6 +11535,10 @@ PrefabInstance:
       propertyPath: diePanel
       value: 
       objectReference: {fileID: 6448704222733311827}
+    - target: {fileID: 894773788964889520, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5410460891526572490, guid: 8d85f561236e6794b9f30263f7a51080, type: 3}
       propertyPath: m_Name
       value: Player
