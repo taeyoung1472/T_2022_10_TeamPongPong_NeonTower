@@ -21,7 +21,7 @@ MonoBehaviour:
     atk: 0
   - maxHp: 50
     atk: 15
-  - maxHp: 60
+  - maxHp: 64
     atk: 20
   attackDelay: 1
   attackRadius: 2
@@ -30,7 +30,7 @@ MonoBehaviour:
   stoppingDistance: 2
   turnSmoothTime: 0.1
   turnSmoothVelocity: 50.0727
-  expValue: 9
+  expValue: 1
   dashDistance: 0
   dashSpeed: 0
   dashDamage: 0

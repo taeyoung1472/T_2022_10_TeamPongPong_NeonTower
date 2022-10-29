@@ -17,11 +17,11 @@ MonoBehaviour:
   floorPerPerformance:
   - maxHp: 10
     atk: 5
-  - maxHp: 20
+  - maxHp: 24
     atk: 7
-  - maxHp: 30
+  - maxHp: 38
     atk: 9
-  - maxHp: 40
+  - maxHp: 52
     atk: 11
   attackDelay: 1
   attackRadius: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
   stoppingDistance: 1
   turnSmoothTime: 0.1
   turnSmoothVelocity: -29.040964
-  expValue: 5
+  expValue: 1
   dashDistance: 0
   dashSpeed: 0
   dashDamage: 0
