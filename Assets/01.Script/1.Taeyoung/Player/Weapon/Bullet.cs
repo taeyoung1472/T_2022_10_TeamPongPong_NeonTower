@@ -146,7 +146,6 @@ public class Bullet : PoolAbleObject
     public override void Init_Pop()
     {
         bounceChance = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletBounce);
-        Debug.Log("Bounce Chance : " + (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletBounce));
         knockBackForce = UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback);
         isCanExplosion = UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletExplosion) != 0;
         isCanKnockBack = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0;

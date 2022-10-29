@@ -80,6 +80,7 @@ public class BossUIManager : MonoSingleTon<BossUIManager>
         _bossHpSlider.minValue = 0f;
         _bossHpSlider.value = _bossHpSlider.minValue;
         _isSliderAnimation = true;
+        
         DOTween.To(() => _bossHpSlider.value, x =>
         {
             _bossHpSlider.value = x;

@@ -5,15 +5,20 @@ using UnityEngine;
 public class ParticlePool : PoolAbleObject
 {
     [SerializeField] private float poolTime;
+    ParticleSystem particle = null;
     public override void Init_Pop()
     {
-        GetComponent<ParticleSystem>().Play();
+        if(particle == null)
+        {
+            particle = GetComponent<ParticleSystem>();
+        }
+        particle.Play();
         StartCoroutine(Wait());
     }
 
     public override void Init_Push()
     {
-
+        particle.Stop();
     }
 
     public void Set(Vector3 pos, Quaternion rot)

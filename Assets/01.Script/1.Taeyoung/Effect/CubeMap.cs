@@ -1,5 +1,5 @@
 using DG.Tweening;
-using System;
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +13,7 @@ public class CubeMap : MonoBehaviour
     protected int prevIdx = -1;
     protected virtual void OnEnable()
     {
-        if(patternList.Count == 0)
+        if (patternList.Count == 0)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -30,6 +30,86 @@ public class CubeMap : MonoBehaviour
             cube.gameObject.SetActive(false);
         }
         prevPattern.Clear();
+    }
+    [ContextMenu("GenerateSeed")]
+    public void GenerateSeed()
+    {
+        if (patternList.Count == 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                patternList.Add(new Pattern(transform.GetChild(i)));
+            }
+        }
+        for (int i = 0; i < patternList.Count; i++)
+        {
+            Pattern targetPattern = patternList[i];
+            List<Transform> seedTargets = new();
+            List<Transform> totalIndex = new();
+
+            Debug.Log(targetPattern.Cubes.Length);
+            //큐브들 집어넣기
+            for (int j = 0; j < targetPattern.Cubes.Length; j++)
+            {
+                totalIndex.Add(targetPattern.Cubes[j]);
+                targetPattern.Cubes[j].gameObject.SetActive(true);
+                targetPattern.Cubes[j].transform.localScale = Vector3.one;
+            }
+
+            //셔플
+            int n = totalIndex.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = Random.Range(0, n);
+                Transform value = totalIndex[k];
+                totalIndex[k] = totalIndex[n];
+                totalIndex[n] = value;
+            }
+
+            //SEED 만들기
+            for (int j = 0; j < 10; j++)
+            {
+                GameObject seed = new GameObject();
+                seed.name = $"SEED {j}";
+                seed.transform.SetParent(targetPattern.PatternRoot);
+                seed.transform.localScale = new Vector3(1, 1, 1);
+                seed.gameObject.SetActive(false);
+                seedTargets.Add(seed.transform);
+            }
+
+            //SEED 수 만큼
+            int count = targetPattern.Cubes.Length / 10;
+            for (int j = 0; j < 10; j++)
+            {
+                List<Transform> seedInputs = new();
+                if (j == 9)
+                {
+                    count = totalIndex.Count;
+                    Debug.Log($"마무리 : {count}");
+                    for (int l = 0; l < count; l++)
+                    {
+                        seedInputs.Add(totalIndex[0]);
+                        totalIndex.Remove(totalIndex[0]);
+                    }
+                }
+                else
+                {
+                    Debug.Log($"프로그래스 : {count}, Total Count : {totalIndex.Count}");
+                    for (int l = 0; l < count; l++)
+                    {
+                        seedInputs.Add(totalIndex[0]);
+                        totalIndex.Remove(totalIndex[0]);
+                    }
+                }
+
+                for (int k = 0; k < seedInputs.Count; k++)
+                {
+                    seedInputs[k].transform.SetParent(seedTargets[j]);
+                }
+                Debug.Log("--------------------");
+            }
+        }
     }
     protected virtual IEnumerator MapCycle()
     {
@@ -63,13 +143,10 @@ public class CubeMap : MonoBehaviour
     protected virtual void ActiveCube(Transform cube)
     {
         Sequence seq = DOTween.Sequence();
-        MeshRenderer renderer = cube.GetComponent<MeshRenderer>();
         seq.AppendCallback(() => cube.gameObject.SetActive(true));
         seq.Append(cube.DOScaleY(0.1f + Random.Range(0, 0.1f), 1.5f));
-        seq.Join(DOTween.To(() => renderer.material.color, x => renderer.material.color = x, Color.red, 0.75f));
         seq.Join(cube.DOShakePosition(1.5f, 0.1f));
         seq.Append(cube.DOScaleY(3 + Random.Range(0, 2f), 1f));
-        seq.Join(DOTween.To(() => renderer.material.color, x => renderer.material.color = x, Color.yellow, 1));
     }
     protected virtual void DeActiveCube(Transform cube)
     {
@@ -100,8 +177,8 @@ public class CubeMap : MonoBehaviour
         private Transform patternRoot;
         public Transform PatternRoot { get { return patternRoot; } set { patternRoot = value; } }
         private List<Transform> cubes = new();
-        public Transform[] Cubes 
-        { 
+        public Transform[] Cubes
+        {
             get
             {
                 if (cubes.Count == 0)
