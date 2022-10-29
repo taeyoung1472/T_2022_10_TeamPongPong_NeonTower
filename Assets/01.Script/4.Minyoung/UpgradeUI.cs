@@ -119,7 +119,9 @@ public class UpgradeUI : MonoBehaviour, IUserInterface
                 StartCoroutine(DissolveAndOut(t, none));
                 t += 0.3f;
             }
+            item.GetComponent<CardImage>().focusText.gameObject.SetActive(false);
         }
+        
         #endregion
 
         seq.AppendInterval(0.6f).SetUpdate(true);

@@ -56,6 +56,7 @@ public class UpgradeData
 {
     [Header("[Enum]")]
     public UpgradeType upgradeType;
+    public UpgradeTier upgradeTier;
     public UpgradeAbleCount upgradeAbleCount;
 
     [Header("[Á¤º¸]")]
@@ -97,4 +98,11 @@ public enum UpgradeType
 
     MAX,
     End
+}
+
+public enum UpgradeTier
+{
+    Tier1,
+    Tier2,
+    Tier3,
 }
