@@ -28,24 +28,26 @@ public class JumpAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") == false);
         stateMachineOwnerClass.Col.enabled = false;
-        originPosY = stateMachineOwnerClass.Model.transform.position.y;
-        stateMachineOwnerClass.Model.transform.DOMoveY(20f, 0.5f);
-        yield return new WaitForSeconds(0.5f);
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, 12f, stateMachineOwnerClass.AttackDataSO.jumpidleTime + 0.3f);
-        yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.jumpidleTime);
+        originPosY = stateMachineOwnerClass.Model.transform.localPosition.y;
+        stateMachineOwnerClass.Model.transform.DOLocalMoveY(20f, 0.5f);
+        yield return new WaitForSeconds(0.5f + stateMachineOwnerClass.AttackDataSO.jumpidleTime);
+        stateMachineOwnerClass.Agent.enabled = false;
 
-        Vector3 playerPos = stateMachineOwnerClass.Target.position;
-        stateMachineOwnerClass.transform.position = new Vector3(playerPos.x, 20f, playerPos.z);
-        stateMachineOwnerClass.Model.transform.DOMoveY(originPosY, 0.5f);
+        Vector3 targetPosition = Define.Instance.playerController.transform.position;
+
+        stateMachineOwnerClass.transform.position = targetPosition;
+        DangerZone.DrawCircle(targetPosition, 12f, stateMachineOwnerClass.AttackDataSO.fallTime);
+        stateMachineOwnerClass.Model.transform.DOLocalMoveY(originPosY, stateMachineOwnerClass.AttackDataSO.fallTime);
         stateMachineOwnerClass.Animator.SetBool("Fall", true);
-        stateMachineOwnerClass.Animator.Update(0);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.fallTime);
+        stateMachineOwnerClass.Agent.enabled = true;
 
         stateMachineOwnerClass.Animator.SetBool("Fall", false);
         stateMachineOwnerClass.Col.enabled = true;
         AudioManager.PlayAudio(stateMachineOwnerClass.ExploClip);
-        stateMachineOwnerClass.ExplosionEffect(stateMachineOwnerClass.transform.position);
-        List<Collider> cols = EnemyAttackCollisionCheck.CheckSphere(stateMachineOwnerClass.transform.position, 12f, 1 << 8);
+        GameObject obj = stateMachineOwnerClass.ExplosionEffect(targetPosition);
+        obj.transform.localScale = Vector3.one * 2f;
+        List<Collider> cols = EnemyAttackCollisionCheck.CheckSphere(stateMachineOwnerClass.transform.position, 6f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(cols, 1);
 
         stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();

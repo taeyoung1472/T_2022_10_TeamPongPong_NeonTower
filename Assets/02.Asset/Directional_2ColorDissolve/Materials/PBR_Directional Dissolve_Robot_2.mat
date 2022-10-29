@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissolve: 0
-    - _DissolveBeginOffset: -1.6902211
+    - _DissolveBeginOffset: 1.5
     - _DissolveEndOffset: -5
     - _EdgeThickness: 0.1
     - _EdgeThicknessA: 0.1

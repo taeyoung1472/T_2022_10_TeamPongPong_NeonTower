@@ -183,10 +183,11 @@ public class RushBoss : BossBase<RushBoss>
         }
     }
 
-    public void ExplosionEffect(Vector3 pos)
+    public GameObject ExplosionEffect(Vector3 pos)
     {
         GameObject obj = Instantiate(_explosionEffect, pos, Quaternion.identity);
         Destroy(obj, 1f);
+        return obj;
     }
 
     public void ArcAttack()
@@ -211,7 +212,7 @@ public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() =>
         stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Start") == false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
     }
 

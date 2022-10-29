@@ -25,11 +25,14 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
             }
             else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance && stateMachineOwnerClass.IsFirst == false)
             {
-                stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
-            }
-            else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.jumpDistance && stateMachineOwnerClass.IsFirst == false)
-            {
-                stateMachine.ChangeState<JumpAttack_RushBoss<RushBoss>>();
+                if(Random.Range(0,2) == 0)
+                {
+                    stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
+                }
+                else
+                {
+                    stateMachine.ChangeState<JumpAttack_RushBoss<RushBoss>>();
+                }
             }
             else
             {
