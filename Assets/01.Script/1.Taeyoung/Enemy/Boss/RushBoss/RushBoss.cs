@@ -85,6 +85,7 @@ public class RushBoss : BossBase<RushBoss>
         bossFsm.AddStateList(new MeleeAttack_RushBoss<RushBoss>()); // 3대 때리기
         bossFsm.AddStateList(new WaveAttack_RushBoss<RushBoss>()); // 원형 타격
         bossFsm.AddStateList(new RushAttack_RushBoss<RushBoss>()); // 겁내 달리기
+        bossFsm.AddStateList(new JumpAttack_RushBoss<RushBoss>()); // 겁내 달리기
         bossFsm.AddStateList(new GroundPoundAttack_RushBoss<RushBoss>()); // 바닥 쩜프하며 때리기
         bossFsm.AddStateList(new Move_RushBoss<RushBoss>()); // 그저 움직이기
         bossFsm.AddStateList(new Die_RushBoss<RushBoss>());
@@ -182,10 +183,11 @@ public class RushBoss : BossBase<RushBoss>
         }
     }
 
-    public void ExplosionEffect(Vector3 pos)
+    public GameObject ExplosionEffect(Vector3 pos)
     {
         GameObject obj = Instantiate(_explosionEffect, pos, Quaternion.identity);
         Destroy(obj, 1f);
+        return obj;
     }
 
     public void ArcAttack()
@@ -210,7 +212,7 @@ public class StartAnimation_RushBoss<T> : BossState<RushBoss> where T : BossBase
         stateMachineOwnerClass.Animator.Update(0);
         yield return new WaitUntil(() =>
         stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Start") == false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
     }
 

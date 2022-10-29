@@ -25,10 +25,6 @@ public class Move_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
 
         stateMachineOwnerClass.Agent.SetDestination(stateMachineOwnerClass.Target.position);
-        /*if (stateMachineOwnerClass.Agent.remainingDistance <= stateMachineOwnerClass.Agent.stoppingDistance)
-        {
-            stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();
-        }*/
         if (stateMachineOwnerClass.GetDistance() <= stateMachineOwnerClass.AttackDataSO.attackDistance * 0.5f)
         {
             stateMachine.ChangeState<Idle_RushBoss<RushBoss>>();

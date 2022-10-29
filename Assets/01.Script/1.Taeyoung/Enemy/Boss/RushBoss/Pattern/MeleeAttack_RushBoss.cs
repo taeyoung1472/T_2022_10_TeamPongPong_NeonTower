@@ -20,12 +20,12 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
     private IEnumerator PunchCoroutine()
     {
         stateMachineOwnerClass.LookTarget();
-        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 3f, stateMachineOwnerClass.transform.rotation,
-            new Vector3(3.5f, 0.1f, 6.5f), stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
+        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 5f, stateMachineOwnerClass.transform.rotation,
+            new Vector3(4f, 0.1f, 9f), stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
         stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
 
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[0]);
-        List<Collider> l = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 3.5f, 6.5f, 1 << 8);
+        List<Collider> l = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 4f, 9.5f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(l, 1);
 
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
@@ -37,7 +37,7 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
 
         stateMachineOwnerClass.LookTarget();
         DangerZone.DrawArc(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.forward, 180f,
-            new Vector3(6.5f, 0.1f, 8.5f), stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
+            new Vector3(6.5f, 0.1f, 14f), stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
         stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[1]);
         stateMachineOwnerClass.Animator.SetTrigger("Punch");
@@ -45,15 +45,15 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.ArcAttack();
         CameraManager.Instance.CameraShake(7f, 20f, 0.3f);
         AudioManager.PlayAudio(stateMachineOwnerClass.PunchClip);
-        List<Collider> list = EnemyAttackCollisionCheck.CheckArc(stateMachineOwnerClass.AttackPositionObj.transform, 60f, 8.3f, 1 << 8);
+        List<Collider> list = EnemyAttackCollisionCheck.CheckArc(stateMachineOwnerClass.AttackPositionObj.transform, 40f, 12.5f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(list, 1);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f);
         stateMachineOwnerClass.StopParticle();
 
 
         stateMachineOwnerClass.LookTarget();
-        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 6f, stateMachineOwnerClass.transform.rotation,
-            new Vector3(4f, 0.1f, 12f), stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
+        DangerZone.DrawBox(stateMachineOwnerClass.transform.position + stateMachineOwnerClass.transform.forward * 8f, stateMachineOwnerClass.transform.rotation,
+            new Vector3(4.5f, 0.1f, 17f), stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
         stateMachineOwnerClass.AttackPositionObj.transform.SetPositionAndRotation(stateMachineOwnerClass.transform.position, stateMachineOwnerClass.transform.rotation);
 
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.punchDelays[2]);
@@ -61,16 +61,12 @@ public class MeleeAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         stateMachineOwnerClass.Animator.Update(0);
         CameraManager.Instance.CameraShake(10f, 30f, 0.23f);
         AudioManager.PlayAudio(stateMachineOwnerClass.PunchClip);
-        List<Collider> l2 = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 4f, 12f, 1 << 8);
+        List<Collider> l2 = EnemyAttackCollisionCheck.CheckCube(stateMachineOwnerClass.AttackPositionObj.transform, 4.5f, 16.5f, 1 << 8);
         EnemyAttackCollisionCheck.ApplyDamaged(l2, 1);
         yield return new WaitUntil(() => stateMachineOwnerClass.Animator.GetCurrentAnimatorStateInfo(0).IsName("Punch2") == false);
         stateMachineOwnerClass.StopParticle();
 
-        if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.rushDistance)
-        {
-            stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
-        }
-        else if (stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.groundPoundSize)
+        if (stateMachineOwnerClass.GetDistance() < stateMachineOwnerClass.AttackDataSO.groundPoundSize)
         {
             stateMachine.ChangeState<GroundPoundAttack_RushBoss<RushBoss>>();
         }
