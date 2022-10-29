@@ -31,9 +31,11 @@ public class JumpAttack_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
         originPosY = stateMachineOwnerClass.Model.transform.position.y;
         stateMachineOwnerClass.Model.transform.DOMoveY(20f, 0.5f);
         yield return new WaitForSeconds(0.5f);
-        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, 12f, stateMachineOwnerClass.AttackDataSO.jumpidleTime);
+        DangerZone.DrawCircle(stateMachineOwnerClass.transform.position, 12f, stateMachineOwnerClass.AttackDataSO.jumpidleTime + 0.3f);
         yield return new WaitForSeconds(stateMachineOwnerClass.AttackDataSO.jumpidleTime);
 
+        Vector3 playerPos = stateMachineOwnerClass.Target.position;
+        stateMachineOwnerClass.transform.position = new Vector3(playerPos.x, 20f, playerPos.z);
         stateMachineOwnerClass.Model.transform.DOMoveY(originPosY, 0.5f);
         stateMachineOwnerClass.Animator.SetBool("Fall", true);
         stateMachineOwnerClass.Animator.Update(0);

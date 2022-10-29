@@ -15,12 +15,12 @@ MonoBehaviour:
   randomIdleTime: {x: 0.3, y: 0.5}
   normalSpeed: 8
   rushSpeed: 16
-  attackDistance: 8
+  attackDistance: 14
   groundPoundSize: 4
   waveAttackSize: 6
   rushDuration: 5
-  rushDistance: 8
-  jumpDistance: 15
+  rushDistance: 14
+  jumpDistance: 20
   jumpidleTime: 1.5
   punchDelays:
   - 0.8
