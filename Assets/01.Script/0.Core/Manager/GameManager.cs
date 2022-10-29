@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleTon<GameManager>
 {
-    public GameObject a;
     public void Awake()
     {
         JsonManager.Load();

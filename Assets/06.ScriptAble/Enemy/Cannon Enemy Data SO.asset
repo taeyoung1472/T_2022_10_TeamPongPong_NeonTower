@@ -15,13 +15,13 @@ MonoBehaviour:
   enemyName: CannonEnemy
   prefab: {fileID: 7777495553705998887, guid: 7f6f0949cbcea1c4fbc6c27cf76cead8, type: 3}
   floorPerPerformance:
-  - maxHp: 1
+  - maxHp: 60
     atk: 0
-  - maxHp: 0
+  - maxHp: 60
     atk: 0
-  - maxHp: 0
+  - maxHp: 60
     atk: 0
-  - maxHp: 10
+  - maxHp: 60
     atk: 15
   attackDelay: 2.5
   attackRadius: 10
@@ -30,6 +30,7 @@ MonoBehaviour:
   stoppingDistance: 10
   turnSmoothTime: 0.1
   turnSmoothVelocity: 45.31096
+  expValue: 11
   dashDistance: 0
   dashSpeed: 0
   dashDamage: 0

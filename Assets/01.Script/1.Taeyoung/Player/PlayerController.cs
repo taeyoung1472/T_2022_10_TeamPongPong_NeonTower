@@ -262,13 +262,14 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) && curDash > 0 && (moveDir.x != 0 || moveDir.z != 0));
 
+            IgnoreEnemyCollider();
             isDashing = true;
             AudioManager.PlayAudio(dashClip);
 
             yield return new WaitForSeconds(dashDuration);
 
             isDashing = false;
-
+            DeIgnoreEnemyColider();
             CurDash--;
 
             yield return new WaitForSeconds(dashDelay);
@@ -302,7 +303,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void ApplyDamage(float dmg)
     {
         //if (true) return;
-        if (isDead) return;
+        if (isDead || isDashing) return;
 
         isDamaged = true;
     }
@@ -320,5 +321,15 @@ public class PlayerController : MonoBehaviour, IDamageable
             hpStealValue = 0;
             hud.SetHpUI(curHp, maxHp);
         }
+    }
+
+    private void IgnoreEnemyCollider()
+    {
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+    }
+
+    private void DeIgnoreEnemyColider()
+    {
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
     }
 }
