@@ -24,6 +24,12 @@ public class RushBossAttackDataSO : ScriptableObject
     [Header("돌진으로 넘어가는 최소 거리")]
     public float rushDistance = 15f;
 
+
+    [Header("점프 패턴으로 넘어가는 최소 거리")]
+    public float jumpDistance = 20f;
+    [Header("점프 패턴에서 멈춰있는 시간")]
+    public float jumpidleTime = 1.2f;
+
     [Header("근접 범위 공격 대기 시간")]
     public float[] punchDelays = new float[3];
 }

@@ -27,6 +27,10 @@ public class Idle_RushBoss<T> : BossState<RushBoss> where T : BossBase<T>
             {
                 stateMachine.ChangeState<RushAttack_RushBoss<RushBoss>>();
             }
+            else if (stateMachineOwnerClass.GetDistance() > stateMachineOwnerClass.AttackDataSO.jumpDistance && stateMachineOwnerClass.IsFirst == false)
+            {
+                stateMachine.ChangeState<JumpAttack_RushBoss<RushBoss>>();
+            }
             else
             {
                 stateMachine.ChangeState<Move_RushBoss<RushBoss>>();

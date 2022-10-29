@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f4b16bf9f85fd5f45b6c5c0b4439e614
+guid: f176ee7876afa264c813e533a61e991b
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
@@ -39,7 +39,7 @@ ModelImporter:
       name: Jump
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
+      firstFrame: 48
       lastFrame: 52
       wrapMode: 0
       orientationOffsetY: 0
