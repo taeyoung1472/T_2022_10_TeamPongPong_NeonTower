@@ -26,12 +26,6 @@ public class CommonEnemy : EnemyBase<CommonEnemy>
     {
         particle.gameObject.SetActive(false);
     }
-    void Update()
-    {
-        fsmManager.Execute();
-        //Debug.Log(fsmManager.getNowState.ToString());
-
-    }
 
     public override void ChangeAttack()
     {

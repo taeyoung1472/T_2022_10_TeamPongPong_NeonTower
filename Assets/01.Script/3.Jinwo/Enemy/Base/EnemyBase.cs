@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyBase<T> : Enemy
@@ -91,5 +91,20 @@ public class EnemyBase<T> : Enemy
     public virtual void StopMotionTrail()
     {
 
+    }
+
+    public override void Init_Pop()
+    {
+        base.Init_Pop();
+        StartCoroutine(ExcuteCor());
+    }
+
+    private IEnumerator ExcuteCor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.15f);
+            fsmManager.Execute();
+        }
     }
 }
