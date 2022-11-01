@@ -26,6 +26,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b3c086b98b746b4c9215585d60ebcc6, type: 2}
   upgradeDataList:
   - upgradeType: 0
+    upgradeTier: 1
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: 02704493379768547b2e157e87803af0, type: 3}
     color: {r: 0.8597595, g: 0.4666667, b: 1, a: 1}
@@ -33,19 +34,22 @@ MonoBehaviour:
     upgradeDesc: "\uCD1D\uC54C\uC774 \uBCBD\uC5D0 \uBC18\uC0AC\uB418\uB294 \uD69F\uC218\uAC00
       \uC99D\uAC00\uB41C\uB2E4"
   - upgradeType: 1
-    upgradeAbleCount: 3
+    upgradeTier: 0
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: c28094a7a9c0d0b4d968202b30f5a6c2, type: 3}
     color: {r: 1, g: 0.47743908, b: 0.39215684, a: 1}
     upgradeName: "\uD3ED\uD314\uD0C4"
     upgradeDesc: "\uCD1D\uC54C\uC774 \uD3ED\uBC1C\uD558\uC5EC \uC8FC\uBCC0\uC5D0
       \uB370\uBBF8\uC9C0\uB97C \uC785\uD78C\uB2E4"
   - upgradeType: 2
+    upgradeTier: 2
     upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: a9db68c1736a1c8478fa0593663b5381, type: 3}
     color: {r: 1, g: 0.37254906, b: 0.98451203, a: 1}
     upgradeName: "\uCD1D\uC54C \uACBD\uC9C1"
     upgradeDesc: "\uCD1D\uC54C\uC5D0 \uB9DE\uC740 \uC801\uC774 \uC7A0\uC2DC \uBA48\uCD98\uB2E4"
   - upgradeType: 3
+    upgradeTier: 1
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: d600e2ece84bc2a48b452b1551ca6952, type: 3}
     color: {r: 0.99412775, g: 1, b: 0.33333337, a: 1}
@@ -53,6 +57,7 @@ MonoBehaviour:
     upgradeDesc: "\uCD1D\uC54C\uC774 \uB0A0\uC544\uAC00\uB294 \uC18D\uB3C4\uAC00
       \uC99D\uAC00\uB41C\uB2E4"
   - upgradeType: 4
+    upgradeTier: 0
     upgradeAbleCount: 3
     upgradeProfile: {fileID: 21300000, guid: 6c0934af22d97b0479ea0c5f8393e2aa, type: 3}
     color: {r: 1, g: 0.41450846, b: 0.33333337, a: 1}
@@ -60,38 +65,44 @@ MonoBehaviour:
     upgradeDesc: "\uD55C\uBC88\uC5D0 \uBC1C\uC0AC\uB418\uB294 \uCD1D\uC54C\uC758
       \uC218\uAC00 \uC99D\uAC00\uB41C\uB2E4."
   - upgradeType: 5
+    upgradeTier: 0
     upgradeAbleCount: 10
     upgradeProfile: {fileID: 21300000, guid: 6bee52cd35d845a4fb39461e3e50921d, type: 3}
     color: {r: 1, g: 0.33333337, b: 0.3576667, a: 1}
     upgradeName: "\uB370\uBBF8\uC9C0"
     upgradeDesc: "\uCD1D\uC54C\uC758 \uB370\uBBF8\uC9C0\uAC00 \uC99D\uAC00\uD55C\uB2E4"
   - upgradeType: 6
-    upgradeAbleCount: 3
+    upgradeTier: 0
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: f2c452127c76dab439f0c5902ad311a4, type: 3}
     color: {r: 1, g: 0.33333337, b: 0.339421, a: 1}
     upgradeName: "\uBC1C\uC0AC\uC18D\uB3C4 \uC99D\uAC00"
     upgradeDesc: "\uCD1D\uC54C \uBC1C\uC0AC \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD55C\uB2E4"
   - upgradeType: 7
-    upgradeAbleCount: 3
+    upgradeTier: 0
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: 1a3a3104b8a58394faad7b5aaaccd6f3, type: 3}
     color: {r: 0.50969887, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCCB4\uB825 \uD761\uC218"
     upgradeDesc: "\uC801\uC744 \uC77C\uC815 \uC218\uB9CC\uD07C \uC8FD\uC774\uBA74
       \uCCB4\uB825\uC774 1 \uD68C\uBCF5\uB41C\uB2E4"
   - upgradeType: 8
-    upgradeAbleCount: 3
+    upgradeTier: 1
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: 7d22db7217af8aa4fabae41784d9a439, type: 3}
     color: {r: 0.53842545, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uC790\uB3D9\uD68C\uBCF5"
     upgradeDesc: "\uCCB4\uB825\uC774 \uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 1 \uD68C\uBCF5\uB41C\uB2E4"
   - upgradeType: 9
-    upgradeAbleCount: 3
+    upgradeTier: 0
+    upgradeAbleCount: 5
     upgradeProfile: {fileID: 21300000, guid: fea4100eaa7c1564e837f810cc9ba27a, type: 3}
     color: {r: 0.35835263, g: 1, b: 0.33333337, a: 1}
     upgradeName: "\uCCB4\uB825 \uC99D\uAC00"
-    upgradeDesc: "\uCD5C\uB300 \uCCB4\uB825\uC774 \uC99D\uAC00\uD55C\uACE0 \uCCB4\uB825\uC774
+    upgradeDesc: "\uCD5C\uB300 \uCCB4\uB825\uC774 \uC99D\uAC00\uD558\uACE0 \uCCB4\uB825\uC774
       \uCC39\uB2C8\uB2E4"
   - upgradeType: 10
+    upgradeTier: 2
     upgradeAbleCount: 10
     upgradeProfile: {fileID: 21300000, guid: 29afbc2e1e86f4bb7beebc0822be2840, type: 3}
     color: {r: 1, g: 0.33333337, b: 0.85950345, a: 1}

@@ -43,6 +43,7 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
     {
         List<UpgradeData> returnData = new();
         List<UpgradeType> generateAbleList = new();
+        List<UpgradeTier> generatedTier = new();
 
         foreach (var type in upgradeCountDic.Keys)
         {
@@ -66,9 +67,16 @@ public class UpgradeManager : MonoSingleTon<UpgradeManager>
                     }
                     else
                     {
-                        generateAbleList.Remove(generatedType);
-
-                        returnData.Add(UpgradeDataSO.upgradeDataDic[generatedType]);
+                        if(i == 2 && !generatedTier.Contains(UpgradeTier.Tier1) && UpgradeDataSO.upgradeDataDic[generatedType].upgradeTier != UpgradeTier.Tier1)
+                        {
+                            i--;
+                            continue;
+                        }
+                        else
+                        {
+                            generateAbleList.Remove(generatedType);
+                            returnData.Add(UpgradeDataSO.upgradeDataDic[generatedType]);
+                        }
                     }
                 }
                 else

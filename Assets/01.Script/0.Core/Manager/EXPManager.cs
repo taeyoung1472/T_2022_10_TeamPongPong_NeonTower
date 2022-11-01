@@ -54,15 +54,11 @@ public class EXPManager : MonoSingleTon<EXPManager>
         LevelUdateText();
     }
 
-    public void Update()
-    {
-        ExpPercent();
-    }
-
     public void AddExp(int amount = 1)
     {
         curExp += amount;
         AudioManager.PlayAudioRandPitch(UISoundManager.Instance.data.expUpClip);
+        ExpPercent();
         if (curExp >= expTable[curLevel] && isCanLevelup)
         {
             if(WaveManager.Instance != null)
@@ -75,18 +71,6 @@ public class EXPManager : MonoSingleTon<EXPManager>
             LevelUdateText();
 
             UIManager.Instance.ActiveUI(upgradeUI);
-
-            Sequence seq = DOTween.Sequence();
-
-            GameObject e = null;
-
-            seq.AppendInterval(0.25f);
-
-            seq.AppendCallback(() => e = Instantiate(levelUpEffect, Define.Instance.playerController.transform.position, Quaternion.identity));
-
-            seq.AppendCallback(() => Destroy(e, 6));
-
-            //Define.Instance.controller.GodMode(2f);
         }
     }
     public void LevelUdateText()
@@ -99,10 +83,8 @@ public class EXPManager : MonoSingleTon<EXPManager>
     {
 
         float expPer = ((float)curExp / (float)expTable[curLevel]) * 100;
-        Sequence sequence = DOTween.Sequence();
-        float a = expPer / 100f;
 
-        DOTween.To(() => expSlider.fillAmount, x => expSlider.fillAmount = x, expPer / 100f, 0.3f).SetUpdate(true);
+        expSlider.fillAmount = expPer / 100f;
         expPercentText.text = ($"{Mathf.Ceil(expPer)}");
     }
 }

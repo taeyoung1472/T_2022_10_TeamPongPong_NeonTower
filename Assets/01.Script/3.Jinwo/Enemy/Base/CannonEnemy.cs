@@ -31,12 +31,6 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
         //fsmManager.ReturnDic();
     }
 
-    void Update()
-    {
-        fsmManager.Execute();
-        //Debug.Log(fsmManager.getNowState.ToString());
-
-    }
     public override void FixedUpdate()
     {
         if (Dead) return;
@@ -55,8 +49,6 @@ public class CannonEnemy : EnemyBase<CannonEnemy>
     }
     public override void ChangeAttack()
     {
-        //Debug.Log("자식 실행");
-
         fsmManager.ChangeState<StateCannonAttack<CannonEnemy>>();
     }
 

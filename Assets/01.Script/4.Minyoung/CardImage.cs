@@ -28,6 +28,8 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Transform parentCntTrm;
     public GameObject cntImagePrefab;
 
+    public GameObject focusText;
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -42,6 +44,14 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _upgradeBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.AddListener(() => { if (upgradeUI.isCanUpgrade) { UpgradeManager.Instance.Upgrade(data.upgradeType); } });
         _upgradeBtn.onClick.AddListener(() => { if (upgradeUI.isCanUpgrade) { upgradeUI.UpgradeCardEffect(gameObject); } });
+        if(data.upgradeTier == UpgradeTier.Tier1)
+        {
+            focusText.SetActive(true);
+        }
+        else
+        {
+            focusText.SetActive(false);
+        }
     }
     public void CreateUpgradeCntImage(UpgradeData data)
     {

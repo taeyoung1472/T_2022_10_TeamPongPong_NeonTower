@@ -4014,7 +4014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &157371940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12524,7 +12524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &541273933
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36562,6 +36562,7 @@ MonoBehaviour:
   UpgradeDataSO: {fileID: 11400000, guid: 4a29cba3b12cfb64a9db26b4079bd769, type: 2}
   maxData:
     upgradeType: 10
+    upgradeTier: 0
     upgradeAbleCount: 10
     upgradeProfile: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -44150,7 +44151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38324e6ba4bf0f248ae4eefbbb2479b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: {fileID: 0}
 --- !u!1 &2006760646
 GameObject:
   m_ObjectHideFlags: 0
@@ -44779,7 +44779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!225 &2043857398
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ MonoBehaviour:
   upgradeType: 9
   datas:
   - 3
+  - 4
   - 5
+  - 6
   - 7
-  - 9
+  - 8
