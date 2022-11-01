@@ -25,6 +25,8 @@ public class Bullet : PoolAbleObject
     private float bulletDuration = 2.5f;
     private float bulletDurationTarget;
 
+    private bool isInit = false;
+
     [Header("[·¹ÀÌ¾î]")]
     private LayerMask enemyLayer;
 
@@ -35,7 +37,7 @@ public class Bullet : PoolAbleObject
 
     public void Update()
     {
-        if(Time.time > bulletDurationTarget)
+        if(Time.time > bulletDurationTarget && isInit)
         {
             PoolManager.Instance.Push(PoolType, gameObject);
         }
@@ -151,12 +153,14 @@ public class Bullet : PoolAbleObject
         isCanKnockBack = (int)UpgradeManager.Instance.GetUpgradeValue(UpgradeType.BulletKnockback) != 0;
         if (rb == null) rb = GetComponent<Rigidbody>();
         bulletDurationTarget = Time.time + bulletDuration;
+        isInit = true;
     }
 
     public override void Init_Push()
     {
         rb.velocity = Vector3.zero;
         bulletDuration = 2.5f;
+        isInit = false;
     }
 
 }

@@ -28,10 +28,6 @@ public class DashEnemy : EnemyBase<DashEnemy>
         particle.gameObject.SetActive(false);
         StopMotionTrail();
     }
-    void Update()
-    {
-        fsmManager.Execute();
-    }
     public override void ChangeAttack()
     {
         FsmManager.ChangeState<StateDashAttack<DashEnemy>>();

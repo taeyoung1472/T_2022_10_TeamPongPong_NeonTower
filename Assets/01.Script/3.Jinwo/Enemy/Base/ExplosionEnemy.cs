@@ -16,8 +16,6 @@ public class ExplosionEnemy : EnemyBase<ExplosionEnemy>
 
     void Update()
     {
-        fsmManager.Execute();
-
         if(Dead && isAttack)
         {
             Attack();

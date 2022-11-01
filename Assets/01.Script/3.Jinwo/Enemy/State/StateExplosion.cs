@@ -23,7 +23,7 @@ public class StateExplosion<T> : State<T> where T : EnemyBase<T>
     public override void Enter()
     {
         animator?.SetTrigger(hashAttack);
-
+        stateMachine.ChangeState<StateMove<T>>();
     }
     public override void Execute()
     {

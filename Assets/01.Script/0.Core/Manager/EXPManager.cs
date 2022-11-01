@@ -84,7 +84,7 @@ public class EXPManager : MonoSingleTon<EXPManager>
 
         float expPer = ((float)curExp / (float)expTable[curLevel]) * 100;
 
-        expSlider.fillAmount = expPer;
+        expSlider.fillAmount = expPer / 100f;
         expPercentText.text = ($"{Mathf.Ceil(expPer)}");
     }
 }

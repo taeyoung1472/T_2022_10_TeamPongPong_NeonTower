@@ -58,23 +58,6 @@ public class Stadium : CubeMap
         this.Invoke(() => StadiumManager.Instance.DeActivePattern(), 4);
         this.Invoke(() => gameObject.SetActive(false), 5);
     }
-    /*class PerinNoiseCube : MonoBehaviour
-    {
-        MeshRenderer meshRenderer;
-        float perinValue;
-        private void Start()
-        {
-            meshRenderer = GetComponent<MeshRenderer>();
-        }
-        private void Update()
-        {
-            perinValue = Mathf.PerlinNoise((transform.position.x + Time.time * 5) * 0.1f, (transform.position.z + Time.time * 5) * 0.1f);
-
-            transform.localScale = new Vector3(1, Mathf.Lerp(transform.localScale.y, 3 + perinValue * 2.5f, Time.deltaTime * 5), 1);
-            meshRenderer.material.color = Color.Lerp(Color.white, Color.black, perinValue);
-        }
-    }*/
-
 #if UNITY_EDITOR
     protected override void OnDrawGizmos()
     {
