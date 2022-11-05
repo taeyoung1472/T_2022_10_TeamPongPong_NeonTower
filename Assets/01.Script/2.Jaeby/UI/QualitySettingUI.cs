@@ -27,27 +27,27 @@ public class QualitySettingUI : MonoBehaviour
         string str = "";
         switch (_qualityIndex)
         {
+            //case 0:
+            //    str = "품질:최하";
+            //    break;
             case 0:
-                str = "품질:최하";
-                break;
-            case 1:
                 str = "품질:하";
                 break;
-            case 2:
-                str = "품질:중하";
-                break;
-            case 3:
+            //case 2:
+            //    str = "품질:중하";
+            //    break;
+            case 1:
                 str = "품질:중";
                 break;
-            case 4:
-                str = "품질:중상";
-                break;
-            case 5:
+            //case 4:
+            //    str = "품질:중상";
+            //    break;
+            case 2:
                 str = "품질:상";
                 break;
-            case 6:
-                str = "품질:최상";
-                break;
+            //case 6:
+            //    str = "품질:최상";
+            //    break;
         }
         _qualitySettingText.SetText(str);
     }
